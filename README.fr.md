@@ -7,11 +7,11 @@
 **Graphiques en temps réel, indicateurs, scripts et alertes — toujours dans ta poche.**
 Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, avec un design noir absolu inspiré des orbites.
 
-[English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français**
+[English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v0.43.2-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v0.44.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
-![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR-22ab94?style=for-the-badge)
+![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
 
 </div>
@@ -59,11 +59,18 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 | 🔔 **De vraies alertes** | Notifications push même quand l'app est fermée |
 | 📱 **Comme une vraie app** | Plein écran, vibration au toucher, animations fluides, pas de barres du navigateur |
 | 🔄 **Toujours à jour** | À chaque ouverture tu as la dernière version, automatiquement |
-| 🌍 **4 langues · 2 thèmes** | Italien, anglais, espagnol, français · Sombre et clair |
+| 🌍 **5 langues · 2 thèmes** | Italien, anglais, espagnol, français, allemand · Sombre et clair |
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 0.43.0 — Connexion Design 3.0
+### 🆕 Nouveautés de la 0.44.0 — Allemand
+
+- 🇩🇪 L'**allemand** est la cinquième langue de l'app : connexion, écrans de bienvenue, watchlist, graphique, indicateurs, éditeur de scripts, alertes, profil et guide d'installation.
+- 🔢 Nombres et dates au **format allemand** (par exemple 1.234,56).
+- 🪐 Le **menu des langues en orbite** a maintenant cinq drapeaux ronds.
+- 📲 Le bouton **Installer** des écrans de connexion n'affiche plus que son icône, sur tous les appareils et dans toutes les langues, de la même taille que le drapeau.
+
+### Auparavant, dans la 0.43.0 — Connexion Design 3.0
 
 - 🔐 **Nouvel écran de connexion**, fait exactement comme le prototype Design 3.0 : logo en orbite, scanner Face ID, champs style console et boutons or et bleu avec un anneau en pointillés qui tourne.
 - 🔢 **Code d'accès en 8 cases** (4 + 4) : chaque caractère tombe dans sa case et les huit segments autour du logo s'allument un par un. Un code erroné devient rouge et tremble.
@@ -293,7 +300,7 @@ Pas encore : ils restent sur l'appareil où tu les as créés.
 | ✅ | 42 indicateurs intégrés, favoris, réglages des indicateurs |
 | ✅ | Moteur compatible Pine Script™ et éditeur de scripts |
 | ✅ | Alertes de prix avec notifications push |
-| ✅ | 4 langues, thème sombre et clair |
+| ✅ | 5 langues (allemand depuis la 0.44.0), thème sombre et clair |
 | ✅ | Design 3.0 : écrans de bienvenue, animation du logo, menu des langues en orbite |
 | ✅ | Connexion Design 3.0 : logo en orbite, code en 8 cases, drapeaux ronds |
 | 🔜 | Chargement des données plus rapide |

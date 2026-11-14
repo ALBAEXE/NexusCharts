@@ -7,11 +7,11 @@
 **Real-time charts, indicators, scripts and alerts — right in your pocket.**
 A fast, beautiful charting app for iPhone, Android and desktop, with a pure-black, orbit-inspired design.
 
-**English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md)
+**English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v0.43.2-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v0.44.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
-![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR-22ab94?style=for-the-badge)
+![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
 
 </div>
@@ -59,11 +59,18 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 | 🔔 **Real alerts** | Push notifications even when the app is closed |
 | 📱 **Native feel** | Full screen, haptic feedback, smooth animations, no browser bars |
 | 🔄 **Always updated** | Every time you open it you get the latest version automatically |
-| 🌍 **4 languages · 2 themes** | Italian, English, Spanish, French · Dark and light |
+| 🌍 **5 languages · 2 themes** | Italian, English, Spanish, French, German · Dark and light |
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 0.43.0 — Design 3.0 sign-in
+### 🆕 New in 0.44.0 — German
+
+- 🇩🇪 **German** is the fifth language of the app: sign-in, welcome screens, watchlist, chart, indicators, script editor, alerts, profile and install guide.
+- 🔢 Numbers and dates in **German format** (for example 1.234,56).
+- 🪐 The **orbit language menu** now has five round flags.
+- 📲 The **Install** button on the sign-in screens now shows only its icon, on every device and in every language, the same size as the flag.
+
+### Previously in 0.43.0 — Design 3.0 sign-in
 
 - 🔐 **New sign-in screen**, built exactly like the Design 3.0 prototype: orbit logo, Face ID scanner, console-style fields and gold and blue buttons with a rotating dashed ring.
 - 🔢 **Access code in 8 boxes** (4 + 4): each character drops into its box and the eight segments around the logo light up one by one. A wrong code turns red and shakes.
@@ -293,7 +300,7 @@ Not yet: they're saved on the device where you made them.
 | ✅ | 42 built-in indicators, favorites, indicator settings |
 | ✅ | Pine Script™-compatible engine and script editor |
 | ✅ | Price alerts with push notifications |
-| ✅ | 4 languages, dark and light theme |
+| ✅ | 5 languages (German added in 0.44.0), dark and light theme |
 | ✅ | Design 3.0: welcome screens, logo animation, orbit language menu |
 | ✅ | Design 3.0 sign-in: orbit logo, 8-box access code, round flags |
 | 🔜 | Faster data loading |

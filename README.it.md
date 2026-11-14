@@ -7,11 +7,11 @@
 **Grafici in tempo reale, indicatori, script e alert — sempre in tasca.**
 Un'app di grafici veloce e bella per iPhone, Android e computer, con un design nero assoluto ispirato alle orbite.
 
-[English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md)
+[English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v0.43.2-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v0.44.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
-![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR-22ab94?style=for-the-badge)
+![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
 
 </div>
@@ -59,11 +59,18 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 | 🔔 **Alert veri** | Notifiche push anche ad app chiusa |
 | 📱 **Come un'app vera** | Tutto schermo, vibrazione al tocco, animazioni fluide, niente barre del browser |
 | 🔄 **Sempre aggiornata** | Ogni volta che la apri hai l'ultima versione, in automatico |
-| 🌍 **4 lingue · 2 temi** | Italiano, inglese, spagnolo, francese · Scuro e chiaro |
+| 🌍 **5 lingue · 2 temi** | Italiano, inglese, spagnolo, francese, tedesco · Scuro e chiaro |
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 0.43.0 — Accesso Design 3.0
+### 🆕 Novità della 0.44.0 — Tedesco
+
+- 🇩🇪 Il **tedesco** è la quinta lingua dell'app: accesso, schermate di benvenuto, watchlist, grafico, indicatori, editor degli script, alert, profilo e guida all'installazione.
+- 🔢 Numeri e date nel **formato tedesco** (per esempio 1.234,56).
+- 🪐 Il **menu lingue a orbita** ora ha cinque bandiere rotonde.
+- 📲 Il tasto **Installa** nelle schermate di accesso ora mostra solo l'icona, su tutti i dispositivi e in tutte le lingue, grande quanto la bandiera.
+
+### In precedenza, nella 0.43.0 — Accesso Design 3.0
 
 - 🔐 **Nuova schermata di accesso**, fatta esattamente come il prototipo Design 3.0: logo a orbite, scanner del Face ID, campi in stile console e pulsanti oro e blu con l'anello tratteggiato che gira.
 - 🔢 **Codice di accesso in 8 caselle** (4 + 4): ogni carattere cade nella sua casella e gli otto segmenti intorno al logo si accendono uno alla volta. Se il codice è sbagliato diventano rossi e tremano.
@@ -293,7 +300,7 @@ Non ancora: restano sul dispositivo dove li hai creati.
 | ✅ | 42 indicatori integrati, preferiti, impostazioni indicatore |
 | ✅ | Motore compatibile con Pine Script™ ed editor script |
 | ✅ | Alert sul prezzo con notifiche push |
-| ✅ | 4 lingue, tema scuro e chiaro |
+| ✅ | 5 lingue (tedesco dalla 0.44.0), tema scuro e chiaro |
 | ✅ | Design 3.0: schermate di benvenuto, animazione del logo, menu lingue a orbita |
 | ✅ | Accesso Design 3.0: logo a orbite, codice in 8 caselle, bandiere rotonde |
 | 🔜 | Caricamento dati più veloce |
