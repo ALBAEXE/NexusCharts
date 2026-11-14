@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v0.43.1-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v0.43.2-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -71,6 +71,7 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🏳️ **Banderas de idioma redondas** en toda la app.
 - 🧹 **Acceso más limpio**: *Restablecer la app* ahora está solo en Perfil › Ajustes.
 - 🖤 **0.43.1**: pantalla de inicio negra y sin el antiguo logo brillante al abrir, el nuevo logo limpio en toda la app, sin fondo amarillo cuando el iPhone rellena tu email y contraseña, y el campo Servidor vacío muestra solo el punto verde.
+- 📲 **0.43.2**: vuelve el botón **Instalar** en las pantallas de acceso (arriba a la derecha), con estilo Design 3.0 y la guía paso a paso para iPhone y Android.
 
 <details>
 <summary>Anteriormente, en la 0.42.0</summary>
@@ -173,6 +174,8 @@ Selecciona un dibujo para moverlo, cambiarle el color o eliminarlo.
 ### 💻 Ordenador (Chrome / Edge)
 1. Abre el enlace de NexusCharts.
 2. Haz clic en el **icono de instalar** de la barra de direcciones, o úsala en una pestaña normal.
+
+> 💡 La misma guía está dentro de la app: toca **Instalar** arriba a la derecha en la pantalla de acceso (aparece solo cuando la app se abre desde el navegador).
 
 ---
 
