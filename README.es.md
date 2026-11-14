@@ -7,11 +7,11 @@
 **Gráficos en tiempo real, indicadores, scripts y alertas — siempre en tu bolsillo.**
 Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un diseño negro absoluto inspirado en las órbitas.
 
-[English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md)
+[English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v0.43.2-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v0.44.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
-![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR-22ab94?style=for-the-badge)
+![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
 
 </div>
@@ -59,11 +59,18 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 | 🔔 **Alertas de verdad** | Notificaciones push incluso con la app cerrada |
 | 📱 **Como una app nativa** | Pantalla completa, vibración al tocar, animaciones fluidas, sin barras del navegador |
 | 🔄 **Siempre actualizada** | Cada vez que la abres tienes la última versión, automáticamente |
-| 🌍 **4 idiomas · 2 temas** | Italiano, inglés, español, francés · Oscuro y claro |
+| 🌍 **5 idiomas · 2 temas** | Italiano, inglés, español, francés, alemán · Oscuro y claro |
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 0.43.0 — Acceso Design 3.0
+### 🆕 Novedades de la 0.44.0 — Alemán
+
+- 🇩🇪 El **alemán** es el quinto idioma de la app: acceso, pantallas de bienvenida, watchlist, gráfico, indicadores, editor de scripts, alertas, perfil y guía de instalación.
+- 🔢 Números y fechas en **formato alemán** (por ejemplo 1.234,56).
+- 🪐 El **menú de idiomas en órbita** ahora tiene cinco banderas redondas.
+- 📲 El botón **Instalar** de las pantallas de acceso ahora muestra solo el icono, en todos los dispositivos y en todos los idiomas, del mismo tamaño que la bandera.
+
+### Anteriormente, en la 0.43.0 — Acceso Design 3.0
 
 - 🔐 **Nueva pantalla de acceso**, hecha exactamente como el prototipo Design 3.0: logo de órbitas, escáner de Face ID, campos estilo consola y botones dorado y azul con un anillo discontinuo que gira.
 - 🔢 **Código de acceso en 8 casillas** (4 + 4): cada carácter cae en su casilla y los ocho segmentos alrededor del logo se encienden uno a uno. Si el código es incorrecto se ponen rojos y tiemblan.
@@ -293,7 +300,7 @@ Todavía no: se quedan en el dispositivo donde los creaste.
 | ✅ | 42 indicadores integrados, favoritos, ajustes de indicador |
 | ✅ | Motor compatible con Pine Script™ y editor de scripts |
 | ✅ | Alertas de precio con notificaciones push |
-| ✅ | 4 idiomas, tema oscuro y claro |
+| ✅ | 5 idiomas (alemán desde la 0.44.0), tema oscuro y claro |
 | ✅ | Design 3.0: pantallas de bienvenida, animación del logo, menú de idiomas en órbita |
 | ✅ | Acceso Design 3.0: logo de órbitas, código en 8 casillas, banderas redondas |
 | 🔜 | Carga de datos más rápida |
