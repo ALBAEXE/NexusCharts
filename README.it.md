@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md)
 
-[![Versione](https://img.shields.io/badge/versione-v0.43.1-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v0.43.2-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -71,6 +71,7 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🏳️ **Bandiere delle lingue rotonde** in tutta l'app.
 - 🧹 **Accesso più pulito**: *Ripristina l'app* ora è solo in Profilo › Impostazioni.
 - 🖤 **0.43.1**: schermata di avvio nera e niente più vecchio logo luminoso all'apertura, logo nuovo e pulito in tutta l'app, niente sfondo giallo quando iPhone inserisce email e password, e il campo Server vuoto mostra solo il pallino verde.
+- 📲 **0.43.2**: torna il tasto **Installa** nelle schermate di accesso (in alto a destra), in stile Design 3.0, con la guida passo passo per iPhone e Android.
 
 <details>
 <summary>In precedenza, nella 0.42.0</summary>
@@ -173,6 +174,8 @@ Seleziona un disegno per spostarlo, cambiargli colore o eliminarlo.
 ### 💻 Computer (Chrome / Edge)
 1. Apri il link di NexusCharts.
 2. Clicca l'**icona di installazione** nella barra degli indirizzi, oppure usala in una normale scheda.
+
+> 💡 La stessa guida è dentro l'app: tocca **Installa** in alto a destra nella schermata di accesso (compare solo quando l'app è aperta dal browser).
 
 ---
 

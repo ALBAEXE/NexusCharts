@@ -1,4 +1,4 @@
-const VERSION='0.43.1';
+const VERSION='0.43.2';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -9413,4 +9413,85 @@ else{
   var st=document.createElement('style');st.id='d3fix6css';st.textContent=css;document.head.appendChild(st);
   /* il campo Server vuoto non mostra nessun suggerimento: solo il pallino verde */
   var sv=$('server');if(sv)sv.placeholder='';
+})();
+/* =====================================================================
+   0.43.2: tasto INSTALLA e guida all'installazione in stile DESIGN 3.0
+   Stessa logica di prima: il tasto compare solo se l'app NON e' gia' installata
+   (aperta da Safari o da un browser) e apre la stessa guida iPhone/Android.
+   ===================================================================== */
+(function(){
+  if(window.D3INST)return;window.D3INST=1;
+  var P='body.d3l:not(.inapp) ';
+  var MONO="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Roboto Mono','Liberation Mono',monospace";
+  var KNOB="url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E\")";
+  var G='body:not(.inapp) #sheet.guide';
+  var css=[
+  /* ---------- tasto in alto a destra, simmetrico alla bandiera ---------- */
+  P+'#top #gdbtn:not([hidden]){display:flex!important;position:fixed!important;top:calc(env(safe-area-inset-top,0px) + 12px)!important;right:calc(env(safe-area-inset-right,0px) + 12px)!important;left:auto!important;margin:0!important;z-index:20;height:40px!important;padding:0 14px 0 5px!important;gap:8px!important;align-items:center;border-radius:999px!important;border:1px solid #1d1d1d!important;background:#050505!important;color:#f2f2f2!important;box-shadow:none!important;width:auto!important;-webkit-tap-highlight-color:transparent;transition:transform .16s ease,border-color .2s}',
+  P+'#top #gdbtn:not([hidden]):active{transform:scale(.94);border-color:#3a3a3a!important}',
+  P+'#top #gdbtn .gdi3{position:relative;width:30px;height:30px;flex:0 0 30px;border-radius:50%;display:grid;place-items:center}',
+  P+'#top #gdbtn .gdi3::before{content:"";position:absolute;inset:0;border-radius:50%;border:1px dashed #cfa551;opacity:.55;animation:nx3-spin 9s linear infinite}',
+  P+'#top #gdbtn svg{width:17px!important;height:17px!important;color:#cfa551!important;position:relative}',
+  P+'#top #gdbtn #gdbtx{font-family:'+MONO+';font-size:10.5px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#f2f2f2;white-space:nowrap}',
+  /* schermi stretti: solo l'icona, per non toccare il cerchio del logo */
+  /* se la scritta toccherebbe il cerchio del logo resta solo l'icona rotonda */
+  P+'#top #gdbtn.ico:not([hidden]){width:40px!important;padding:0!important;justify-content:center}'+P+'#top #gdbtn.ico #gdbtx{display:none}'+P+'#top #gdbtn.ico .gdi3{width:38px;height:38px;flex-basis:38px}',
+  '@media (prefers-reduced-motion:reduce){'+P+'#top #gdbtn .gdi3::before{animation:none}}',
+  /* ---------- guida all'installazione ---------- */
+  G+'{background:#050505!important;border:1px solid #1d1d1d!important;border-radius:28px!important;color:#f2f2f2!important;box-shadow:0 30px 80px rgba(0,0,0,.6)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding:10px 0 calc(env(safe-area-inset-bottom,0px) + 18px)!important}',
+  G+' .gdhead{padding:14px 22px 6px!important}',
+  G+' .gdhead .gdlogo{position:relative;width:52px;height:52px;margin:6px auto 22px;display:block}',
+  G+' .gdhead .gdlogo img{width:52px!important;height:52px!important;margin:0!important;filter:none!important;position:relative;z-index:1}',
+  G+' .gdhead .gdlogo svg{position:absolute;left:50%;top:50%;width:100px;height:100px;margin:-50px 0 0 -50px;overflow:visible;pointer-events:none}',
+  G+' .gdhead .gdlogo .o{fill:none;stroke:#fff;stroke-width:1;opacity:.2}',
+  G+' .gdhead .gdlogo .d{fill:none;stroke:#fff;stroke-width:1;opacity:.16;stroke-dasharray:1.5 6}',
+  G+' .gdhead .gdlogo .s{fill:#fff}',
+  G+' .gdhead .gdlogo .sp{transform-box:view-box;transform-origin:80px 80px;animation:nx3-spin 14s linear infinite}',
+  G+' .gdt{font-size:23px!important;font-weight:760!important;letter-spacing:-.6px!important;color:#f2f2f2}',
+  G+' .gdi{font-size:14px!important;color:#8b8b8e!important;line-height:1.5!important;margin-top:8px!important}',
+  G+' .gdseg{display:flex!important;gap:4px!important;margin:16px 18px 6px!important;padding:4px!important;border-radius:999px!important;border:1px solid #1d1d1d!important;background:#000!important}',
+  G+' .gdseg button{flex:1;min-height:42px;border-radius:999px!important;background:transparent!important;color:#8b8b8e!important;border:0!important;font-weight:650!important;font-size:15px!important;box-shadow:none!important}',
+  G+' .gdseg button.on{background:#f2f2f2!important;color:#000!important}',
+  G+' .gdsteps{padding:0 18px!important;margin:10px 0 0!important}',
+  G+' .gdsteps li{border-bottom:1px solid #151515!important;padding:14px 0!important;font-size:15px!important;line-height:1.5!important;color:#e6e6e8;gap:14px!important}',
+  G+' .gdsteps li::before{flex:0 0 30px!important;height:30px!important;border-radius:50%!important;background:transparent!important;border:1px solid #cfa551!important;color:#cfa551!important;font-family:'+MONO+'!important;font-size:12px!important;font-weight:700!important;margin-top:-3px}',
+  G+' .gdsteps b{color:#fff;font-weight:700}',
+  G+' .gdic{background:#0c0c0d!important;border:1px solid #1d1d1d!important;border-radius:8px!important;color:#5a7dff!important}',
+  G+' .gdtip{margin:12px 18px 4px!important;padding:13px 15px!important;border-radius:18px!important;background:rgba(90,125,255,.08)!important;border:1px solid rgba(90,125,255,.35)!important;color:#d6dcff!important;font-size:13.5px!important;line-height:1.5}',
+  G+' .gdok{position:relative;display:block;width:calc(100% - 36px)!important;margin:16px 18px 0!important;height:58px!important;padding:0 66px!important;border-radius:999px!important;background:transparent!important;border:1.5px solid #5a7dff!important;color:#5a7dff!important;font-size:16.5px!important;font-weight:700!important;letter-spacing:-.2px;box-shadow:none!important}',
+  G+' .gdok::after{content:"";position:absolute;right:4px;top:50%;width:48px;height:48px;margin-top:-24px;border-radius:50%;background:#5a7dff '+KNOB+' center/19px no-repeat;transform:rotate(-45deg);transition:transform 420ms cubic-bezier(.34,1.56,.64,1)}',
+  G+' .gdok:active::after{transform:none}',
+  '@media (prefers-reduced-motion:reduce){'+G+' .gdhead .gdlogo .sp{animation:none}'+G+' .gdok::after{transition:none}}'
+  ].join('\n');
+  var st=document.createElement('style');st.id='d3instcss';st.textContent=css;document.head.appendChild(st);
+
+  /* icona del tasto dentro un piccolo anello tratteggiato dorato */
+  var b=$('gdbtn');
+  if(b){var ic=b.querySelector('svg');if(ic&&!b.querySelector('.gdi3')){var w=document.createElement('span');w.className='gdi3';b.insertBefore(w,ic);w.appendChild(ic)}
+    b.setAttribute('aria-label',(typeof gd==='function'&&gd('btn'))||'Installa')}
+
+  /* il tasto misura lo spazio: almeno 10 px dal cerchio del logo, altrimenti solo icona */
+  function fit(){
+    var bt=$('gdbtn'),hs=$('d3segs'),core=document.querySelector('#brand .nx3-core');if(!bt||bt.hidden||!hs||!core)return;
+    bt.classList.remove('ico');
+    var r=bt.getBoundingClientRect(),c=core.getBoundingClientRect();if(!r.width||!c.width)return;
+    /* centro dal logo (non animato) e raggio dalla misura vera dell'alone, non da quella in animazione */
+    var cx=c.left+c.width/2,cy=c.top+c.height/2,rad=parseFloat(getComputedStyle(hs).width)/2*(74/80);
+    var nx=Math.max(r.left,Math.min(cx,r.right)),ny=Math.max(r.top,Math.min(cy,r.bottom));
+    if(Math.hypot(nx-cx,ny-cy)-rad<10)bt.classList.add('ico');
+  }
+  window.addEventListener('resize',function(){setTimeout(fit,60)});
+  if(typeof applyLang==='function'){var _al=applyLang;applyLang=function(){var x=_al.apply(this,arguments);setTimeout(fit,30);return x}}
+  new MutationObserver(function(){setTimeout(fit,30)}).observe(document.body,{attributes:true,attributeFilter:['class']});
+  setTimeout(fit,50);setTimeout(fit,1600);setTimeout(fit,3500);
+  /* la guida: logo nell'orbita, come nell'accesso (la guida si ridisegna a ogni cambio iPhone/Android) */
+  var HALO='<svg viewBox="0 0 160 160" aria-hidden="true" focusable="false"><circle class="o" cx="80" cy="80" r="74"/><g class="sp"><circle class="d" cx="80" cy="80" r="66"/><circle class="s" cx="80" cy="6" r="3.2"/></g></svg>';
+  function deco(){
+    var s=document.getElementById('sheet');if(!s||!s.classList.contains('guide'))return;
+    var h=s.querySelector('.gdhead');if(!h||h.querySelector('.gdlogo'))return;
+    var img=h.querySelector('img');if(!img)return;
+    var w=document.createElement('span');w.className='gdlogo';h.insertBefore(w,img);w.appendChild(img);w.insertAdjacentHTML('beforeend',HALO);
+  }
+  var sh=document.getElementById('sheet');
+  if(sh)new MutationObserver(deco).observe(sh,{childList:true,attributes:true,attributeFilter:['class']});
 })();
