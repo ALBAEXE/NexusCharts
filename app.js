@@ -1590,7 +1590,7 @@ try{const sv=localStorage.getItem('tc_server');if(sv&&!$('server').value)$('serv
     window.__resume=true;
     if(snap.fr)friendMode(snap.fr);
     try{sessionStorage.removeItem('noAuto')}catch(e){}
-    loadInstruments().then(start).catch(e=>{if(e&&e.status===401){if(FRIEND)friendLost();else sessionLost()}else msg(e.message)});
+    setTimeout(()=>loadInstruments().then(start).catch(e=>{if(e&&e.status===401){if(FRIEND)friendLost();else sessionLost()}else msg(e.message)}),0);
     return;
   }
   let na=false;try{na=sessionStorage.getItem('noAuto')==='1';sessionStorage.removeItem('noAuto')}catch(e){}
@@ -2908,7 +2908,8 @@ fTexts();
   if(!code)return;
   friendUI(true);$('fcode').value=fshow(code);
   if(document.body.classList.contains('inapp')||FRIEND||window.__resume)return;   /* gia' dentro (ripresa dopo aggiornamento) */
-  if(!na)friendEnter(code,true);
+  /* 1.0.0: dopo che tutto lo script e' caricato (l'ingresso non passa piu' dal broker) */
+  if(!na)setTimeout(()=>friendEnter(code,true),0);
 })();
 
 /* ---------- Codici amici: solo per l'amministratore (serve la chiave amministratore) ---------- */
@@ -4977,7 +4978,9 @@ async function alSyncNow(){
   try{
     if(typeof pushState!=='function'||await pushState()!=='on')return;
     const r=await swReady(),s=r&&await r.pushManager.getSubscription();if(!s)return;
-    const list=alPushOn()?ALERTS.filter(a=>a.active&&BYN[a.sym]&&!BYN[a.sym].nx).slice(0,50).map(a=>({id:a.id,sym:a.sym,tid:BYN[a.sym].tid,route:BYN[a.sym].route,p:a.price,dir:a.dir,dec:alDec(a.sym),ts:a.ts})):[];
+    /* 1.0.0: il server controlla gli allarmi con i prezzi del nostro server (k = simbolo sul server dati), come l'app */
+    const nxk=n=>{try{const r=window.NXReg&&NXReg.regOf(n);return r&&NXReg.active(n)?r.k:null}catch(e){return null}};
+    const list=alPushOn()?ALERTS.filter(a=>a.active&&BYN[a.sym]).map(a=>({id:a.id,sym:a.sym,tid:BYN[a.sym].tid,route:BYN[a.sym].route,k:nxk(a.sym),p:a.price,dir:a.dir,dec:alDec(a.sym),ts:a.ts})).filter(x=>x.k||!BYN[x.sym].nx).slice(0,50):[];
     const ack=AL_ACK.slice();
     const res=await fetch(WORKER+'/alerts/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sub:s.toJSON(),lang,alerts:list,ack})});
     if(!res.ok)return;
@@ -13113,6 +13116,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   }
   function cred(){
     try{if(FRIEND)return 'c='+encodeURIComponent(FRIEND)+'&d='+encodeURIComponent(devId())}catch(e){}
+    try{var at=window.NXACCT&&NXACCT()&&window.NXAuth&&NXAuth.token();if(at)return 't='+encodeURIComponent(at)}catch(e){}
     var k='';try{k=admKey()}catch(e){}
     return k?'k='+encodeURIComponent(k):'';
   }
