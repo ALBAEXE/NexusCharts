@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.0.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.1.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,15 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.0.1 — Aktualisierter Willkommensbildschirm
+### 🆕 Neu in 1.1.0 — Anmeldung mit Face ID
+
+- 🙂 **Anmeldung mit Face ID** (Passkey): ein Blick aufs Handy und du bist drin, ohne Passwort. Dein Gesicht verlässt nie das iPhone: Der Server speichert nur einen öffentlichen Schlüssel.
+- ⚙️ **Face-ID-Schalter** in Einstellungen → Konto, zum Ein- und Ausschalten, wann du willst. Nach der Registrierung schlägt die App vor, ihn zu aktivieren.
+- 📧 Sicherheits-E-Mail, wenn Face ID für dein Konto aktiviert wird.
+- 🗂️ E-Mail, Passwort, Datenschutzerklärung und Konto löschen stehen jetzt nur noch in **Einstellungen → Konto**.
+- 🔔 **Zuverlässigere Alarme** bei geschlossener App: Nacheinander erstellte Alarme gehen nicht mehr verloren.
+
+### Vorher in 1.0.1 — Aktualisierter Willkommensbildschirm
 
 - 👤 Der letzte Willkommensbildschirm stellt jetzt die **NexusCharts-Konten** vor: zwei Felder (Benutzername und Passwort), mit neuem Text in allen 5 Sprachen.
 

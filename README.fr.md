@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.0.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.1.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,15 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.0.1 — Écran de bienvenue mis à jour
+### 🆕 Nouveautés de la 1.1.0 — Connexion avec Face ID
+
+- 🙂 **Connexion avec Face ID** (clé d'identification) : vous regardez votre téléphone et vous êtes connecté, sans saisir de mot de passe. Votre visage ne quitte jamais l'iPhone : le serveur ne garde qu'une clé publique.
+- ⚙️ **Interrupteur Face ID** dans Réglages → Compte, pour l'activer ou le désactiver quand vous voulez. Après l'inscription, l'app propose de l'activer.
+- 📧 E-mail de sécurité quand Face ID est activé sur votre compte.
+- 🗂️ E-mail, Mot de passe, Politique de confidentialité et Supprimer le compte sont maintenant uniquement dans **Réglages → Compte**.
+- 🔔 **Alertes plus fiables** avec l'app fermée : les alertes créées l'une après l'autre ne se perdent plus.
+
+### Auparavant, dans la 1.0.1 — Écran de bienvenue mis à jour
 
 - 👤 Le dernier écran de bienvenue présente désormais les **comptes NexusCharts** : deux champs (nom d'utilisateur et mot de passe), avec un nouveau texte dans les 5 langues.
 
