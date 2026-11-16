@@ -1,4 +1,4 @@
-const VERSION='0.46.0';
+const VERSION='0.46.1';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -897,9 +897,9 @@ async function loadInstruments(){
   let wOk=false;
   try{const sv=JSON.parse(localStorage.getItem('tc_watch')||'null');
     if(Array.isArray(sv)){sv.forEach(n=>{if(typeof n==='string'&&BYN[n]&&!WATCH.includes(n))WATCH.push(n)});wOk=(sv.length===0)||WATCH.length>0}}catch(e){WATCH=[]}
-  if(!wOk){WATCH=[];FIXED.forEach(b=>{const x=findBase(b);if(x&&!WATCH.includes(x.name))WATCH.push(x.name)})}
+  /* 0.46.1: alla prima installazione (o con dati rovinati) la watchlist parte vuota: ognuno sceglie i suoi simboli */
+  if(!wOk){WATCH=[];saveWatch()}
   window.__nxWatchSet=true;
-  if(!wOk&&!WATCH.length)WATCH=INST.slice(0,8).map(x=>x.name);
   /* 0.45.0: Watchlist vuota = nessun simbolo aperto (niente grafico, niente richieste) finche' non ne apri uno */
   if(!WATCH.length){cur=null;return}
   let s=cur;
@@ -12858,7 +12858,23 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   function keys(r){return [r.k].concat(r.al||[])}
   function regOf(n){var b=nrm(n),i,j,k;for(i=0;i<REG.length;i++){k=keys(REG[i]);for(j=0;j<k.length;j++)if(b===k[j])return REG[i]}for(i=0;i<REG.length;i++){k=keys(REG[i]);for(j=0;j<k.length;j++)if(b.indexOf(k[j])===0)return REG[i]}return null}
   function listed(n){return !!regOf(n)}
-  function active(n){var r=regOf(n);return !!(r&&r.active)}
+  /* 0.46.1: un solo simbolo per strumento. Se il broker ha due nomi per la stessa cosa (es. BTCUSD e BTCUSD.NX)
+     vale quello col nome esatto, altrimenti il primo che inizia col nome; gli altri non si mostrano (restano salvati) */
+  var CH={n:-1,f:null,m:{}};
+  function pick(){
+    try{
+      if(CH.n===INST.length&&CH.f===INST[0])return CH.m;
+      CH.n=INST.length;CH.f=INST[0];CH.m={};
+      REG.forEach(function(r){
+        var ks=keys(r),best=null,i,j,b;
+        for(j=0;j<ks.length&&!best;j++)for(i=0;i<INST.length;i++){if(nrm(INST[i].name)===ks[j]){best=INST[i].name;break}}
+        for(j=0;j<ks.length&&!best;j++)for(i=0;i<INST.length;i++){b=nrm(INST[i].name);if(b.indexOf(ks[j])===0){best=INST[i].name;break}}
+        if(best)CH.m[r.k]=best;
+      });
+    }catch(e){}
+    return CH.m;
+  }
+  function active(n){var r=regOf(n);if(!(r&&r.active))return false;var m=pick();return m[r.k]===undefined||m[r.k]===n}
   /* richieste al broker: solo per gli strumenti attivi (rete di sicurezza sotto a tutto il resto) */
   function pathOk(path){
     var m=/[?&]tradableInstrumentId=(\d+)/.exec(String(path||''));if(!m)return true;
@@ -13235,7 +13251,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   try{
     NXReg.list.forEach(function(r){
       if(r.src!=='biquote.io')return;
-      Object.defineProperty(r,'src',{configurable:true,enumerable:true,get:function(){return Date.now()>S.off&&(S.ok||live())?'biquote.io':'TradeLocker'}});
+      Object.defineProperty(r,'src',{configurable:true,enumerable:true,get:function(){return usable()?'biquote.io':'TradeLocker'}});
       /* "fonte temporanea" solo quando si sta usando ancora la fonte di prima */
       Object.defineProperty(r,'tmp',{configurable:true,enumerable:true,get:function(){return r.src==='TradeLocker'}});
     });
