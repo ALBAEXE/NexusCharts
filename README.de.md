@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v0.45.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v0.46.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -58,7 +58,7 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 | | |
 |---|---|
-| ⚡ **Live-Preise** | Kurse und Kerzen aktualisieren sich automatisch alle paar Sekunden |
+| ⚡ **Live-Preise** | Preise kommen live von unserem eigenen Datenserver, oft mehrmals pro Sekunde |
 | 📈 **42 Indikatoren + deine Skripte** | Integrierte Bibliothek und eine mit Pine Script™ kompatible Engine |
 | 🔔 **Echte Alarme** | Push-Benachrichtigungen, auch wenn die App geschlossen ist |
 | 📱 **Wie eine native App** | Vollbild, haptisches Feedback, flüssige Animationen, keine Browserleisten |
@@ -67,7 +67,16 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 0.45.0 — Design 3.0 in der App, mehrere Watchlists und Signale
+### 🆕 Neu in 0.46.0 — Unser eigener Datenserver und 72 Instrumente
+
+- 📡 **Live-Preise**: Die Preise kommen vom NexusCharts-Datenserver in dem Moment, in dem sie sich ändern (oft mehrmals pro Sekunde), auf jedem Handy gleich.
+- 🌐 **72 Instrumente**: 43 Forex-Paare, Metalle (Gold in USD, EUR, GBP und AUD, Silber, Platin, Palladium, Kupfer), Öl WTI und Brent, Erdgas, 10 Indizes (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, US-Dollar-Index) und 7 Kryptowährungen. Aktien folgen bald.
+- ⏱️ **Sekunden-Zeiteinheiten aus Live-Preisen**: 1s, 5s, 10s und die anderen werden jetzt aus jedem Live-Preis gebaut.
+- 🛟 **Automatischer Ersatz**: Antwortet der Datenserver nicht, wechselt der Chart von selbst zur bisherigen Quelle zurück. Zwei Quellen werden nie im selben Chart gemischt.
+- 🗂️ **Datenquellen** im Profil: woher Preise und Kerzen kommen und was als Nächstes kommt.
+- 🏷️ **Instrumentnamen in allen fünf Sprachen** (zum Beispiel *Gold Spot / US-Dollar*), **neue Icons** für Kupfer, Öl, Erdgas und den Dollar-Index und die **originalen Krypto-Icons**.
+
+### Vorher in 0.45.0 — Design 3.0 in der App, mehrere Watchlists und Signale
 
 - 🪐 **Design 3.0 in der App**: Watchlist, Chart-Menüs, Indikatoren, Skript-Editor, Bar Replay und Profil haben jetzt denselben Umlaufbahn-Stil wie die Anmeldung, im dunklen und hellen Design. Die Kerzen im Chart bleiben schlicht.
 - 📋 **Mehrere Watchlists**: erstelle, benenne um und lösche eigene Listen unter *Alle Watchlists*. Deine bisherige Liste bleibt die **Watchlist**, beim Update geht nichts verloren.
@@ -77,12 +86,15 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 📤 **Teilen**: zuerst eine Design-3.0-Vorschau des Charts, dann das Teilen-Menü des Systems nur mit dem Bild.
 - 🧩 **Minimap im Skript-Editor**: eine farbige Übersicht des Codes rechts; tippen oder ziehen zum Springen.
 
-### Vorher in 0.44.0 — Deutsch
+<details>
+<summary>Vorher in 0.44.0 — Deutsch</summary>
 
 - 🇩🇪 **Deutsch** ist die fünfte Sprache der App: Anmeldung, Willkommensbildschirme, Watchlist, Chart, Indikatoren, Skript-Editor, Alarme, Profil und Installationsanleitung.
 - 🔢 Zahlen und Daten im **deutschen Format** (zum Beispiel 1.234,56).
 - 🪐 Das **Sprachmenü mit Umlaufbahn** hat jetzt fünf runde Flaggen.
 - 📲 Die Taste **Installieren** auf den Anmeldebildschirmen zeigt jetzt auf allen Geräten und in allen Sprachen nur das Symbol, gleich groß wie die Flagge.
+
+</details>
 
 <details>
 <summary>Vorher in 0.43.0 — Design-3.0-Anmeldung</summary>
@@ -101,7 +113,7 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 ## 🚀 Funktionen
 
 ### 📋 Watchlist
-- Forex, Rohstoffe, Krypto, Indizes und Aktien, nach Kategorien gruppiert
+- 72 Instrumente: Forex, Metalle, Energie, Indizes und Krypto, nach Kategorien gruppiert (Aktien folgen bald)
 - Suche jedes Symbol und füge es mit einem Tipp hinzu
 - Live-Preis, Tagesveränderung in Punkten und Prozent, Flaggen- und Münzsymbole
 - Mini-Player unten mit dem ausgewählten Symbol und seinem Verlauf
@@ -231,6 +243,7 @@ Schon angemeldet? Nach einem Update siehst du vielleicht einmal die Willkommensb
 
 - 🚫 **Keine persönlichen Daten nötig**, um die App mit einem Code zu nutzen.
 - 📱 Zeichnungen, Layouts, Indikatoren, Skripte und Einstellungen werden **nur auf deinem Gerät** gespeichert.
+- 📡 Der Datenserver speichert nur Marktpreise: keine IP-Adressen und keine persönlichen Daten.
 - 🔔 Wenn du Benachrichtigungen aktivierst, bleiben deine aktiven Preisalarme nur auf dem Server, um dich zu benachrichtigen; löschst du einen Alarm, ist er weg.
 - 🔐 In diesem Repository sind keine Passwörter oder privaten Schlüssel gespeichert.
 - 🎟️ Zugangscodes sind an ein einziges Gerät gebunden und können jederzeit widerrufen werden.
@@ -242,7 +255,7 @@ Schon angemeldet? Nach einem Update siehst du vielleicht einmal die Willkommensb
 ## 🏗️ Wie es gebaut ist
 
 - 🖥️ **Die App** (was du auf dem Bildschirm siehst) liegt in diesem Repository und wird als Web-App veröffentlicht.
-- ⚙️ **Die Engine** läuft auf Cloudflare: sie prüft Zugangscodes, leitet Live-Preise weiter und sendet Alarme. Sie wird getrennt verwaltet und ist nicht Teil dieses Repositorys.
+- ⚙️ **Die Engine** läuft auf Cloudflare: sie prüft Zugangscodes und sendet Alarme, und ein eigener **Datenserver** liefert die Live-Preise und speichert den Kerzenverlauf. Beide werden getrennt verwaltet und sind nicht Teil dieses Repositorys.
 - 🔐 Schlüssel und Passwörter liegen nur in den verschlüsselten Einstellungen der Engine, nie im Code.
 
 ---
@@ -315,7 +328,9 @@ Noch nicht: sie werden auf dem Gerät gespeichert, auf dem du sie erstellt hast.
 | ✅ | Design-3.0-Anmeldung: Logo mit Umlaufbahn, Zugangscode in 8 Feldern, runde Flaggen |
 | ✅ | 5 Sprachen: Italienisch, Englisch, Spanisch, Französisch, Deutsch |
 | ✅ | Design 3.0 in der App, mehrere Watchlists, Signale, Linienstärke/-stil und Rückgängig |
-| 🔜 | Schnelleres Laden der Daten |
+| ✅ | Eigener Datenserver: Live-Preise, 72 Instrumente, Namen in 5 Sprachen |
+| 🔜 | Längerer Kerzenverlauf (Jahre) |
+| 🔜 | Aktien |
 | 🔜 | Volle Computer-Version |
 | 💡 | Synchronisierung zwischen Geräten |
 
@@ -324,6 +339,8 @@ Noch nicht: sie werden auf dem Gerät gespeichert, auf dem du sie erstellt hast.
 ## 🙏 Danksagungen
 
 - Charts mit [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache 2.0).
+- Marktdaten von [biquote.io](https://biquote.io). Die Preise dienen der Analyse und können von denen deines Brokers abweichen.
+- Krypto-Icons von [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons) (CC0 1.0).
 - TradingView und Pine Script sind Marken von TradingView, Inc. NexusCharts ist nicht mit TradingView verbunden.
 
 ---

@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v0.45.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v0.46.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -58,7 +58,7 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 | | |
 |---|---|
-| ⚡ **Live prices** | Quotes and candles refresh automatically every few seconds |
+| ⚡ **Live prices** | Prices stream live from our own data server, often several times per second |
 | 📈 **42 indicators + your scripts** | Built-in library and a Pine Script™-compatible engine |
 | 🔔 **Real alerts** | Push notifications even when the app is closed |
 | 📱 **Native feel** | Full screen, haptic feedback, smooth animations, no browser bars |
@@ -67,7 +67,16 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 0.45.0 — Design 3.0 inside the app, multiple watchlists and Signals
+### 🆕 New in 0.46.0 — Our own data server and 72 instruments
+
+- 📡 **Live streaming**: prices now come from the NexusCharts data server the moment they change (often several times per second), the same on every phone.
+- 🌐 **72 instruments**: 43 Forex pairs, metals (gold in USD, EUR, GBP and AUD, silver, platinum, palladium, copper), WTI and Brent oil, natural gas, 10 indices (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, US Dollar Index) and 7 cryptocurrencies. Stocks are coming soon.
+- ⏱️ **Seconds timeframes from live prices**: 1s, 5s, 10s and the others are now built from every live price.
+- 🛟 **Automatic fallback**: if the data server does not answer, the chart switches back to the previous source by itself. Two sources are never mixed on the same chart.
+- 🗂️ **Data sources** in Profile: where prices and candles come from, and what is coming next.
+- 🏷️ **Instrument names in all five languages** (for example *Gold Spot / US Dollar*), **new icons** for copper, oil, natural gas and the dollar index, and the **original crypto icons**.
+
+### Previously in 0.45.0 — Design 3.0 inside the app, multiple watchlists and Signals
 
 - 🪐 **Design 3.0 inside the app**: Watchlist, Chart menus, Indicators, Script editor, Bar Replay and Profile now use the same orbit style as the sign-in screen, in dark and light theme. The candles on the chart stay clean.
 - 📋 **Multiple watchlists**: create, rename and delete your own lists from *All watchlists*. Your usual list stays the main **Watchlist**, so nothing is lost when you update.
@@ -77,12 +86,15 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 📤 **Share**: a Design 3.0 preview of your chart first, then the system share sheet with the image only.
 - 🧩 **Script editor minimap**: a coloured overview of your code on the right; tap or drag to jump.
 
-### Previously in 0.44.0 — German
+<details>
+<summary>Previously in 0.44.0 — German</summary>
 
 - 🇩🇪 **German** is the fifth language of the app: sign-in, welcome screens, watchlist, chart, indicators, script editor, alerts, profile and install guide.
 - 🔢 Numbers and dates in **German format** (for example 1.234,56).
 - 🪐 The **orbit language menu** now has five round flags.
 - 📲 The **Install** button on the sign-in screens now shows only its icon, on every device and in every language, the same size as the flag.
+
+</details>
 
 <details>
 <summary>Previously in 0.43.0 — Design 3.0 sign-in</summary>
@@ -112,7 +124,7 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 ## 🚀 Features
 
 ### 📋 Watchlist
-- Forex, commodities, crypto, indices and stocks, grouped by category
+- 72 instruments: Forex, metals, energy, indices and crypto, grouped by category (stocks coming soon)
 - Search any symbol and add it with one tap
 - Live price, daily change in points and percent, flag/coin icons
 - Mini player at the bottom with the selected symbol and its sparkline
@@ -241,6 +253,7 @@ Already signed in? After an update you may see the welcome screens once: your co
 
 - 🚫 **No personal data required** to use the app with a code.
 - 📱 Drawings, layouts, indicators, scripts and settings are saved **only on your device**.
+- 📡 The data server stores only market prices: no IP addresses and no personal data.
 - 🔔 If you turn on notifications, your active price alerts are kept on the server only to notify you; delete an alert and it's gone.
 - 🔐 No passwords or private keys are stored in this repository.
 - 🎟️ Access codes are tied to a single device and can be revoked at any time.
@@ -252,7 +265,7 @@ Already signed in? After an update you may see the welcome screens once: your co
 ## 🏗️ How it's built
 
 - 🖥️ **The app** (what you see on your screen) lives in this repository and is published as a web app.
-- ⚙️ **The engine** runs on Cloudflare: it checks access codes, relays live prices and sends alerts. It is managed separately and is not part of this repository.
+- ⚙️ **The engine** runs on Cloudflare: it checks access codes and sends alerts, and a separate **data server** streams live prices and keeps the candle history. Both are managed separately and are not part of this repository.
 - 🔐 Keys and passwords live only in the engine's encrypted settings, never in the code.
 
 ---
@@ -324,7 +337,9 @@ Not yet: they're saved on the device where you made them.
 | ✅ | Design 3.0: welcome screens, logo animation, orbit language menu |
 | ✅ | Design 3.0 sign-in: orbit logo, 8-box access code, round flags |
 | ✅ | Design 3.0 inside the app, multiple watchlists, Signals, drawing width/style and Undo |
-| 🔜 | Faster data loading |
+| ✅ | Our own data server: live streaming, 72 instruments, names in 5 languages |
+| 🔜 | Longer candle history (years) |
+| 🔜 | Stocks |
 | 🔜 | Full desktop version |
 | 💡 | Sync between devices |
 
@@ -333,6 +348,8 @@ Not yet: they're saved on the device where you made them.
 ## 🙏 Credits
 
 - Charts powered by [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache 2.0).
+- Market data from [biquote.io](https://biquote.io). Prices are for analysis and may differ from your broker's.
+- Crypto icons from [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons) (CC0 1.0).
 - TradingView and Pine Script are trademarks of TradingView, Inc. NexusCharts is not affiliated with TradingView.
 
 ---

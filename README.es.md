@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v0.45.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v0.46.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -58,7 +58,7 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 | | |
 |---|---|
-| ⚡ **Precios en vivo** | Cotizaciones y velas se actualizan solas cada pocos segundos |
+| ⚡ **Precios en vivo** | Los precios llegan en directo desde nuestro servidor de datos, a menudo varias veces por segundo |
 | 📈 **42 indicadores + tus scripts** | Biblioteca integrada y un motor compatible con Pine Script™ |
 | 🔔 **Alertas de verdad** | Notificaciones push incluso con la app cerrada |
 | 📱 **Como una app nativa** | Pantalla completa, vibración al tocar, animaciones fluidas, sin barras del navegador |
@@ -67,7 +67,16 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 0.45.0 — Design 3.0 dentro de la app, varias watchlists y Señales
+### 🆕 Novedades de la 0.46.0 — Nuestro propio servidor de datos y 72 instrumentos
+
+- 📡 **Precios en directo**: los precios llegan del servidor de datos de NexusCharts en el momento en que cambian (a menudo varias veces por segundo), iguales en todos los teléfonos.
+- 🌐 **72 instrumentos**: 43 pares Forex, metales (oro en USD, EUR, GBP y AUD, plata, platino, paladio, cobre), petróleo WTI y Brent, gas natural, 10 índices (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, Dollar Index) y 7 criptomonedas. Las acciones llegarán pronto.
+- ⏱️ **Temporalidades en segundos con precios en directo**: 1s, 5s, 10s y las demás ahora se construyen con cada precio en directo.
+- 🛟 **Respaldo automático**: si el servidor de datos no responde, el gráfico vuelve solo a la fuente anterior. Nunca se mezclan dos fuentes en el mismo gráfico.
+- 🗂️ **Fuentes de datos** en el Perfil: de dónde vienen precios y velas, y qué llegará después.
+- 🏷️ **Nombres de los instrumentos en los cinco idiomas** (por ejemplo *Oro spot / Dólar EE. UU.*), **iconos nuevos** para cobre, petróleo, gas natural y Dollar Index, y los **iconos cripto originales**.
+
+### Anteriormente, en la 0.45.0 — Design 3.0 dentro de la app, varias watchlists y Señales
 
 - 🪐 **Design 3.0 dentro de la app**: Watchlist, menús del Gráfico, Indicadores, Editor de scripts, Bar Replay y Perfil tienen ahora el mismo estilo de órbitas que el acceso, en tema oscuro y claro. Las velas del gráfico siguen limpias.
 - 📋 **Varias watchlists**: crea, renombra y elimina tus listas desde *Todas las watchlists*. Tu lista de siempre sigue siendo la **Watchlist** principal, así que al actualizar no pierdes nada.
@@ -77,12 +86,15 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 📤 **Compartir**: primero una vista previa Design 3.0 del gráfico, luego la hoja de compartir del sistema solo con la imagen.
 - 🧩 **Minimapa del editor**: una vista de colores del código a la derecha; toca o arrastra para moverte.
 
-### Anteriormente, en la 0.44.0 — Alemán
+<details>
+<summary>Anteriormente, en la 0.44.0 — Alemán</summary>
 
 - 🇩🇪 El **alemán** es el quinto idioma de la app: acceso, pantallas de bienvenida, watchlist, gráfico, indicadores, editor de scripts, alertas, perfil y guía de instalación.
 - 🔢 Números y fechas en **formato alemán** (por ejemplo 1.234,56).
 - 🪐 El **menú de idiomas en órbita** ahora tiene cinco banderas redondas.
 - 📲 El botón **Instalar** de las pantallas de acceso ahora muestra solo el icono, en todos los dispositivos y en todos los idiomas, del mismo tamaño que la bandera.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 0.43.0 — Acceso Design 3.0</summary>
@@ -112,7 +124,7 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 ## 🚀 Funciones
 
 ### 📋 Watchlist
-- Forex, materias primas, cripto, índices y acciones, agrupados por categoría
+- 72 instrumentos: Forex, metales, energía, índices y cripto, agrupados por categoría (acciones próximamente)
 - Busca cualquier símbolo y añádelo con un toque
 - Precio en vivo, variación diaria en puntos y porcentaje, iconos con banderas y monedas
 - Mini reproductor abajo con el símbolo seleccionado y su minigráfico
@@ -241,6 +253,7 @@ A partir de ahí la app te deja entrar sola.
 
 - 🚫 **No se piden datos personales** para usar la app con un código.
 - 📱 Dibujos, diseños, indicadores, scripts y ajustes se guardan **solo en tu dispositivo**.
+- 📡 El servidor de datos guarda solo precios de mercado: ninguna dirección IP ni datos personales.
 - 🔔 Si activas las notificaciones, tus alertas activas se guardan en el servidor solo para avisarte; borras la alerta y desaparece.
 - 🔐 En este repositorio no hay contraseñas ni claves privadas.
 - 🎟️ Los códigos de acceso están ligados a un solo dispositivo y se pueden revocar en cualquier momento.
@@ -252,7 +265,7 @@ A partir de ahí la app te deja entrar sola.
 ## 🏗️ Cómo está hecha
 
 - 🖥️ **La app** (lo que ves en pantalla) está en este repositorio y se publica como web app.
-- ⚙️ **El motor** funciona en Cloudflare: comprueba los códigos de acceso, trae los precios en vivo y envía las alertas. Se gestiona aparte y no forma parte de este repositorio.
+- ⚙️ **El motor** funciona en Cloudflare: comprueba los códigos de acceso y envía las alertas, y un **servidor de datos** aparte envía los precios en directo y guarda el historial de velas. Se gestionan aparte y no forman parte de este repositorio.
 - 🔐 Las claves y contraseñas están solo en los ajustes cifrados del motor, nunca en el código.
 
 ---
@@ -324,7 +337,9 @@ Todavía no: se quedan en el dispositivo donde los creaste.
 | ✅ | Design 3.0: pantallas de bienvenida, animación del logo, menú de idiomas en órbita |
 | ✅ | Acceso Design 3.0: logo de órbitas, código en 8 casillas, banderas redondas |
 | ✅ | Design 3.0 dentro de la app, varias watchlists, Señales, grosor/estilo de dibujos y Deshacer |
-| 🔜 | Carga de datos más rápida |
+| ✅ | Servidor de datos propio: precios en directo, 72 instrumentos, nombres en 5 idiomas |
+| 🔜 | Historial de velas más largo (años) |
+| 🔜 | Acciones |
 | 🔜 | Versión completa para ordenador |
 | 💡 | Sincronización entre dispositivos |
 
@@ -333,6 +348,8 @@ Todavía no: se quedan en el dispositivo donde los creaste.
 ## 🙏 Créditos
 
 - Gráficos creados con [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache 2.0).
+- Datos de mercado de [biquote.io](https://biquote.io). Los precios son para análisis y pueden diferir de los de tu bróker.
+- Iconos cripto de [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons) (CC0 1.0).
 - TradingView y Pine Script son marcas de TradingView, Inc. NexusCharts no está afiliada a TradingView.
 
 ---
