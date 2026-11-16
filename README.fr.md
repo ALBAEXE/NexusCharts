@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.1.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.1.1-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.1.0 — Connexion avec Face ID
+### 🆕 Nouveautés de la 1.1.1 — Plus légère et mieux rangée
+
+- 🪶 **App plus légère** : le code qui ne servait plus a été retiré, l'app charge donc moins.
+- 📜 **Politique de confidentialité** mise à jour avec la connexion avec Face ID (ce que nous gardons et combien de temps).
+
+### Auparavant, dans la 1.1.0 — Connexion avec Face ID
 
 - 🙂 **Connexion avec Face ID** (clé d'identification) : vous regardez votre téléphone et vous êtes connecté, sans saisir de mot de passe. Votre visage ne quitte jamais l'iPhone : le serveur ne garde qu'une clé publique.
 - ⚙️ **Interrupteur Face ID** dans Réglages → Compte, pour l'activer ou le désactiver quand vous voulez. Après l'inscription, l'app propose de l'activer.

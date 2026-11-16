@@ -1,4 +1,4 @@
-const VERSION='1.1.0';
+const VERSION='1.1.1';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -61,11 +61,6 @@ button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 #fcode{text-align:center;font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:13px}
 #fcode::placeholder{font-size:16px;font-weight:400;letter-spacing:0;text-transform:none}
 #flost{color:var(--goldfg)}
-.sh-i .bnd{margin-left:auto;font-size:12px;color:var(--muted);white-space:nowrap}
-.sh-i .bnd.on{color:var(--up)}
-.sh-i .bnd+.addb{margin-left:10px}
-.fcodebox{margin:6px 18px 4px;padding:14px 10px 6px;border-radius:18px;background:var(--glasssel);text-align:center}
-.fcodebig{font-size:30px;font-weight:800;letter-spacing:.16em;font-variant-numeric:tabular-nums;color:var(--goldfg);user-select:all;-webkit-user-select:all}
 /* login 0.19: logo grande, tutto piu' in basso, campi compatti */
 body:not(.inapp) #login,body:not(.inapp) #msg{max-width:340px;margin-left:auto;margin-right:auto}
 #brand{flex-direction:column;align-items:center;margin:clamp(10px,6vh,60px) 0 clamp(14px,4vh,34px)}
@@ -222,7 +217,6 @@ html.vgap{--tbb:8px}
 .pfrow.busy .pfic svg{animation:rot .8s linear infinite}
 .pfrow.dim{opacity:.55}
 .tab{position:relative}
-.tbbadge{position:absolute;top:4px;left:calc(50% + 6px);min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#ef4444;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px rgba(0,0,0,.35)}
 .fbph{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
 .fbth{position:relative;width:76px;height:76px;margin:0;padding:0;border-radius:12px;border:1px solid var(--line);background:var(--glasssel) center/cover no-repeat}
 .fbth.load{animation:pulse 1s ease-in-out infinite alternate}
@@ -290,17 +284,6 @@ html.vgap{--tbb:8px}
 .ntask b{font-size:19px;font-weight:800}
 .ntask span{font-size:14px;color:var(--muted);line-height:1.45}
 .ntlater{display:block;width:calc(100% - 36px);margin:8px 18px 0;height:42px;border-radius:13px;background:transparent;color:var(--muted);font-size:15px;border:0}
-.ntstat{display:flex;align-items:baseline;justify-content:center;gap:8px;padding:10px 0 2px}
-.ntstat b{font-size:30px;font-weight:800;color:#f97316}
-.ntstat span{font-size:13.5px;color:var(--muted)}
-.ntprev{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border-radius:18px;background:rgba(120,120,128,.22);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);margin:2px 0 6px}
-.ntprev img{width:38px;height:38px;border-radius:9px;background:#000;padding:3px;flex:0 0 38px}
-.ntprev>div{flex:1;min-width:0}
-.nth{display:flex;justify-content:space-between;font-size:13px}.nth b{font-weight:700}.nth span{color:var(--muted);font-size:12px}
-.ntt{font-weight:700;font-size:14.5px;margin-top:1px}
-.ntb{font-size:14px;line-height:1.35;white-space:pre-wrap;word-break:break-word}
-.pfbadge{margin-left:auto;min-width:22px;height:22px;padding:0 7px;border-radius:11px;background:#ef4444;color:#fff;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.pfrow.chev .pfbadge+*{margin-left:8px}
 .pfnote{padding:10px 6px;color:var(--muted);font-size:13.5px;line-height:1.45}
 .pfpad{padding:12px}
 .pfin2{display:block;width:100%;height:46px;margin:6px 0;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--glasssel);color:var(--fg);font-size:15.5px}
@@ -309,24 +292,11 @@ html.vgap{--tbb:8px}
 .pfbtn:disabled{opacity:.5}
 .pfcodebig{margin:4px 0 2px;padding:16px 8px 6px;text-align:center;font-size:32px;font-weight:800;letter-spacing:.16em;color:var(--goldfg);font-variant-numeric:tabular-nums;-webkit-user-select:all;user-select:all}
 .pfcodename{text-align:center;color:var(--muted);font-size:13.5px;margin-bottom:6px}
-.pfacts{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 6px}
 .pfmini{width:auto;margin:0;padding:8px 14px;border-radius:999px;border:0;background:var(--glasssel);color:var(--fg);font-size:13.5px;font-weight:600}
 .pfmini.on{background:var(--gold);color:var(--ongold)}
 .pfmini.danger{color:var(--danger);margin-left:auto}
-.pfstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 2px}
-.pfstats div{background:var(--surf);border-radius:16px;padding:12px 8px;text-align:center;display:flex;flex-direction:column;gap:2px}
-.pfstats b{font-size:24px;font-weight:800}
-.pfstats span{font-size:12px;color:var(--muted)}
-.pfclist{display:flex;flex-direction:column;gap:8px}
-.pfccard{background:var(--surf);border-radius:16px;padding:12px 14px 6px;border:1px solid transparent}
-.pfccard.unread{border-color:rgba(167,139,250,.6)}
-.pfctop{display:flex;align-items:center;gap:8px}
-.pfcn{font-weight:700;font-size:15.5px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pfcst{font-size:12px;padding:3px 9px;border-radius:999px;background:var(--glasssel);color:var(--muted);font-weight:600}
 .pfcst.on{background:rgba(34,171,148,.16);color:var(--up)}
-.pfccode{font-size:20px;font-weight:800;letter-spacing:.12em;color:var(--goldfg);margin:6px 0 2px;font-variant-numeric:tabular-nums}
-.pfcmeta{font-size:12px;color:var(--muted);line-height:1.45}
-.pfcdate{font-size:12px;color:var(--muted)}
 .pffbic{display:flex}.pffbic svg{width:20px;height:20px}
 .pffbtx{margin:8px 0 6px;font-size:15px;line-height:1.45;white-space:pre-wrap;word-break:break-word}
 .pftypes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -335,7 +305,6 @@ html.vgap{--tbb:8px}
 .pftypes button.on{border-color:var(--goldfg)}
 .pfdone{display:flex;flex-direction:column;align-items:center;gap:10px;padding:30px 10px;text-align:center;font-size:16px}
 .pfdone i{width:58px;height:58px;border-radius:50%;background:rgba(34,171,148,.18);color:var(--up);font-style:normal;font-size:28px;font-weight:800;display:flex;align-items:center;justify-content:center}
-.pfsegsm button{font-size:14px;padding:9px 0}
 .pfrow .pftx{display:flex;flex-direction:column;gap:2px;min-width:0}
 .pfrow .pftx small{font-size:12.5px;color:var(--muted)}
 .pfrow .ck{margin-left:auto;color:var(--goldfg);font-weight:700}
@@ -1250,7 +1219,6 @@ function openMenu(){
       shItem(s,NAMES[k],{left:f,check:k===lang,on:()=>{lang=k;try{localStorage.setItem('lang',k)}catch(e){}applyLang();openMenu()}});
     });
     shEl(s,'sh-sep','');
-    if(!FRIEND)shItem(s,ft('codes'),{on:()=>openCodes()});
     shItem(s,t('refresh'),{on:async()=>{closeSheet();await doRefresh()}});
     shItem(s,t('reset'),{on:()=>{closeSheet();resetApp()}});
     shItem(s,t('logout'),{danger:true,on:logout});
@@ -1657,8 +1625,6 @@ function manyText(sec){
 }
 /* il 429 e' il limite ai tentativi del servizio amici (non un 429 del broker) */
 function isMany(e){return !!(e&&e.status===429&&e.body&&typeof e.body==='object'&&e.body.error==='troppi tentativi')}
-/* messaggio per gli errori della chiave amministratore */
-function admMsg(e){return e&&e.status===403?ft('keybad'):isMany(e)?manyText(e.retry):ft('neterr')}
 
 /* testo dell'errore: blocco di rete oppure la causa precisa */
 function errText(e){
@@ -2828,14 +2794,14 @@ renderSymPillTF();
    (le credenziali del broker stanno solo li', mai nell'app)
    ===================================================================== */
 var FRT={
- it:{nobroker:"Accedi senza broker",or:"oppure",hold:"Per sicurezza: tieni premuto il pulsante per ripristinare l'app.",other:"Questo codice è già usato su un altro telefono. Ogni codice vale per un solo telefono: richiedine uno nuovo su Telegram.",used:"in uso",free:"non ancora usato",have:"Hai un codice amico?",ph:"Codice amico",enter:"Entra col codice",lost:"Codice perso? Richiedilo su Telegram",back:"Accedi con email e password",bad:"Codice non valido. Controllalo o richiedine uno nuovo.",expired:"Il tuo codice non è più valido. Richiedine uno nuovo su Telegram.",tgmsg:"Ciao ALBAEXE, mi serve un codice per accedere a NexusCharts",
-   codes:"Codici amici",keyq:"Scrivi la tua chiave amministratore (la ADMIN_KEY che hai messo su Cloudflare). Serve una volta sola: poi resta su questo iPhone.",keyph:"Chiave amministratore",keysave:"Salva chiave",keybad:"Chiave sbagliata.",name:"Nome dell'amico",gen:"Genera codice",newc:"Nuovo codice",copy:"Copia",copied:"Copiato.",send:"Invia",active:"Codici attivi",none:"Nessun codice attivo.",delq:"Disattivare questo codice? Chi lo usa non potrà più entrare.",forgetkey:"Dimentica la chiave su questo iPhone",share:"Ecco il tuo codice per NexusCharts: ",howto:"Apri l'app, tocca «Hai un codice amico?» e scrivilo.",noname:"senza nome",neterr:"Servizio amici non raggiungibile."},
- es:{nobroker:"Entrar sin bróker",or:"o",hold:"Por seguridad: mantén pulsado el botón para restablecer la app.",other:"Este código ya se usa en otro teléfono. Cada código vale para un solo teléfono: pide uno nuevo en Telegram.",used:"en uso",free:"sin usar",have:"¿Tienes un código de amigo?",ph:"Código de amigo",enter:"Entrar con el código",lost:"¿Perdiste el código? Pídelo en Telegram",back:"Entrar con email y contraseña",bad:"Código no válido. Revísalo o pide uno nuevo.",expired:"Tu código ya no es válido. Pide uno nuevo en Telegram.",tgmsg:"Hola ALBAEXE, necesito un código para entrar en NexusCharts",
-   codes:"Códigos de amigos",keyq:"Escribe tu clave de administrador (la ADMIN_KEY de Cloudflare). Solo una vez: luego se queda en este iPhone.",keyph:"Clave de administrador",keysave:"Guardar clave",keybad:"Clave incorrecta.",name:"Nombre del amigo",gen:"Generar código",newc:"Código nuevo",copy:"Copiar",copied:"Copiado.",send:"Enviar",active:"Códigos activos",none:"No hay códigos activos.",delq:"¿Desactivar este código? Quien lo use ya no podrá entrar.",forgetkey:"Olvidar la clave en este iPhone",share:"Este es tu código para NexusCharts: ",howto:"Abre la app, toca «¿Tienes un código de amigo?» y escríbelo.",noname:"sin nombre",neterr:"Servicio de amigos no disponible."},
- en:{nobroker:"Sign in without a broker",or:"or",hold:"For safety: press and hold the button to reset the app.",other:"This code is already used on another phone. Each code works on one phone only: ask for a new one on Telegram.",used:"in use",free:"not used yet",have:"Have a friend code?",ph:"Friend code",enter:"Enter with code",lost:"Lost your code? Ask on Telegram",back:"Sign in with email and password",bad:"Invalid code. Check it or ask for a new one.",expired:"Your code is no longer valid. Ask for a new one on Telegram.",tgmsg:"Hi ALBAEXE, I need a code to sign in to NexusCharts",
-   codes:"Friend codes",keyq:"Type your admin key (the ADMIN_KEY you set on Cloudflare). Only once: then it stays on this iPhone.",keyph:"Admin key",keysave:"Save key",keybad:"Wrong key.",name:"Friend's name",gen:"Generate code",newc:"New code",copy:"Copy",copied:"Copied.",send:"Send",active:"Active codes",none:"No active codes.",delq:"Deactivate this code? Whoever uses it won't be able to sign in.",forgetkey:"Forget the key on this iPhone",share:"Here is your NexusCharts code: ",howto:"Open the app, tap “Have a friend code?” and type it.",noname:"no name",neterr:"Friend service unreachable."},
- fr:{nobroker:"Entrer sans courtier",or:"ou",hold:"Par sécurité : maintiens le bouton appuyé pour réinitialiser l'app.",other:"Ce code est déjà utilisé sur un autre téléphone. Chaque code ne vaut que pour un téléphone : demandes-en un nouveau sur Telegram.",used:"utilisé",free:"pas encore utilisé",have:"Tu as un code ami ?",ph:"Code ami",enter:"Entrer avec le code",lost:"Code perdu ? Demande-le sur Telegram",back:"Se connecter avec email et mot de passe",bad:"Code non valide. Vérifie-le ou demandes-en un nouveau.",expired:"Ton code n'est plus valide. Demandes-en un nouveau sur Telegram.",tgmsg:"Salut ALBAEXE, il me faut un code pour entrer dans NexusCharts",
-   codes:"Codes amis",keyq:"Écris ta clé administrateur (l'ADMIN_KEY mise sur Cloudflare). Une seule fois : elle reste ensuite sur cet iPhone.",keyph:"Clé administrateur",keysave:"Enregistrer la clé",keybad:"Clé incorrecte.",name:"Nom de l'ami",gen:"Générer un code",newc:"Nouveau code",copy:"Copier",copied:"Copié.",send:"Envoyer",active:"Codes actifs",none:"Aucun code actif.",delq:"Désactiver ce code ? La personne qui l'utilise ne pourra plus entrer.",forgetkey:"Oublier la clé sur cet iPhone",share:"Voici ton code NexusCharts : ",howto:"Ouvre l'app, touche « Tu as un code ami ? » et écris-le.",noname:"sans nom",neterr:"Service amis injoignable."},de:{"nobroker":"Ohne Broker eintreten","or":"oder","hold":"Zur Sicherheit: halte die Taste gedrückt, um die App zurückzusetzen.","other":"Dieser Code wird schon auf einem anderen Telefon verwendet. Jeder Code gilt nur für ein Telefon: frag auf Telegram nach einem neuen.","used":"in Verwendung","free":"noch nicht verwendet","have":"Hast du einen Freundescode?","ph":"Freundescode","enter":"Mit Code eintreten","lost":"Code verloren? Frag auf Telegram","back":"Mit E-Mail und Passwort anmelden","bad":"Ungültiger Code. Prüfe ihn oder frag nach einem neuen.","expired":"Dein Code ist nicht mehr gültig. Frag auf Telegram nach einem neuen.","tgmsg":"Hallo ALBAEXE, ich brauche einen Code für NexusCharts","codes":"Freundescodes","keyq":"Gib deinen Admin-Schlüssel ein (den ADMIN_KEY, den du bei Cloudflare festgelegt hast). Nur einmal: danach bleibt er auf diesem iPhone.","keyph":"Admin-Schlüssel","keysave":"Schlüssel speichern","keybad":"Falscher Schlüssel.","name":"Name des Freundes","gen":"Code erzeugen","newc":"Neuer Code","copy":"Kopieren","copied":"Kopiert.","send":"Senden","active":"Aktive Codes","none":"Keine aktiven Codes.","delq":"Diesen Code deaktivieren? Wer ihn nutzt, kann sich nicht mehr anmelden.","forgetkey":"Schlüssel auf diesem iPhone vergessen","share":"Hier ist dein NexusCharts-Code: ","howto":"Öffne die App, tippe auf „Hast du einen Freundescode?“ und gib ihn ein.","noname":"ohne Namen","neterr":"Freundes-Dienst nicht erreichbar."}
+ it:{nobroker:"Accedi senza broker",or:"oppure",hold:"Per sicurezza: tieni premuto il pulsante per ripristinare l'app.",other:"Questo codice è già usato su un altro telefono. Ogni codice vale per un solo telefono: richiedine uno nuovo su Telegram.",  have:"Hai un codice amico?",ph:"Codice amico",enter:"Entra col codice",lost:"Codice perso? Richiedilo su Telegram",back:"Accedi con email e password",bad:"Codice non valido. Controllalo o richiedine uno nuovo.",expired:"Il tuo codice non è più valido. Richiedine uno nuovo su Telegram.",tgmsg:"Ciao ALBAEXE, mi serve un codice per accedere a NexusCharts",
+                     neterr:"Servizio amici non raggiungibile."},
+ es:{nobroker:"Entrar sin bróker",or:"o",hold:"Por seguridad: mantén pulsado el botón para restablecer la app.",other:"Este código ya se usa en otro teléfono. Cada código vale para un solo teléfono: pide uno nuevo en Telegram.",  have:"¿Tienes un código de amigo?",ph:"Código de amigo",enter:"Entrar con el código",lost:"¿Perdiste el código? Pídelo en Telegram",back:"Entrar con email y contraseña",bad:"Código no válido. Revísalo o pide uno nuevo.",expired:"Tu código ya no es válido. Pide uno nuevo en Telegram.",tgmsg:"Hola ALBAEXE, necesito un código para entrar en NexusCharts",
+                     neterr:"Servicio de amigos no disponible."},
+ en:{nobroker:"Sign in without a broker",or:"or",hold:"For safety: press and hold the button to reset the app.",other:"This code is already used on another phone. Each code works on one phone only: ask for a new one on Telegram.",  have:"Have a friend code?",ph:"Friend code",enter:"Enter with code",lost:"Lost your code? Ask on Telegram",back:"Sign in with email and password",bad:"Invalid code. Check it or ask for a new one.",expired:"Your code is no longer valid. Ask for a new one on Telegram.",tgmsg:"Hi ALBAEXE, I need a code to sign in to NexusCharts",
+                     neterr:"Friend service unreachable."},
+ fr:{nobroker:"Entrer sans courtier",or:"ou",hold:"Par sécurité : maintiens le bouton appuyé pour réinitialiser l'app.",other:"Ce code est déjà utilisé sur un autre téléphone. Chaque code ne vaut que pour un téléphone : demandes-en un nouveau sur Telegram.",  have:"Tu as un code ami ?",ph:"Code ami",enter:"Entrer avec le code",lost:"Code perdu ? Demande-le sur Telegram",back:"Se connecter avec email et mot de passe",bad:"Code non valide. Vérifie-le ou demandes-en un nouveau.",expired:"Ton code n'est plus valide. Demandes-en un nouveau sur Telegram.",tgmsg:"Salut ALBAEXE, il me faut un code pour entrer dans NexusCharts",
+                     neterr:"Service amis injoignable."},de:{"nobroker":"Ohne Broker eintreten","or":"oder","hold":"Zur Sicherheit: halte die Taste gedrückt, um die App zurückzusetzen.","other":"Dieser Code wird schon auf einem anderen Telefon verwendet. Jeder Code gilt nur für ein Telefon: frag auf Telegram nach einem neuen.",  "have":"Hast du einen Freundescode?","ph":"Freundescode","enter":"Mit Code eintreten","lost":"Code verloren? Frag auf Telegram","back":"Mit E-Mail und Passwort anmelden","bad":"Ungültiger Code. Prüfe ihn oder frag nach einem neuen.","expired":"Dein Code ist nicht mehr gültig. Frag auf Telegram nach einem neuen.","tgmsg":"Hallo ALBAEXE, ich brauche einen Code für NexusCharts",                  "neterr":"Freundes-Dienst nicht erreichbar."}
 };
 function ft(k){return(FRT[lang]&&FRT[lang][k])||FRT.it[k]||k}
 /* identita' di questo telefono: creata una volta, resta finche' non si ripristina l'app */
@@ -2852,7 +2818,7 @@ const fshow=c=>{c=fnorm(c);return c.length===8?c.slice(0,4)+'-'+c.slice(4):c};
 
 function friendMode(code){FRIEND=fnorm(code);BASE=WORKER+'/tl';tok=FRIEND;accId='me';accNum='me';sess=null}
 function friendOff(){FRIEND=null;BASE=TL_BASE}
-/* codice tolto dall'amministratore mentre l'amico era dentro */
+/* codice non piu' valido mentre l'amico era dentro */
 function friendLost(why){
   try{localStorage.removeItem('tc_fcode');sessionStorage.setItem('noSplash','1');sessionStorage.setItem('tc_fexp',why==='dev'?'dev':'1')}catch(e){}
   location.reload();
@@ -2912,86 +2878,16 @@ fTexts();
   if(!na)setTimeout(()=>friendEnter(code,true),0);
 })();
 
-/* ---------- Codici amici: solo per l'amministratore (serve la chiave amministratore) ---------- */
-function admKey(){try{return localStorage.getItem('tc_admin')||''}catch(e){return ''}}
-async function adm(method,path,body,key){
-  const r=await fetch(WORKER+'/admin'+path,{method,headers:{'Content-Type':'application/json','X-Admin-Key':key||admKey()},body:body?JSON.stringify(body):undefined,cache:'no-store'});
-  let j=null;try{j=await r.json()}catch(e){}
-  if(!r.ok){const er=new Error((j&&j.error)||('HTTP '+r.status));er.status=r.status;er.body=j;if(r.status===429)er.retry=retryOf(r,j);throw er}
-  return j;
-}
-function codeBox(s,code){
-  const box=document.createElement('div');box.className='fcodebox';
-  const c=document.createElement('div');c.className='fcodebig';c.textContent=fshow(code);box.appendChild(c);
-  const row=document.createElement('div');row.className='chips';row.style.justifyContent='center';
-  const cp=document.createElement('button');cp.className='chip';cp.textContent=ft('copy');
-  cp.onclick=async()=>{try{await navigator.clipboard.writeText(fshow(code));msg(ft('copied'))}catch(e){msg(fshow(code))}};
-  const sh=document.createElement('button');sh.className='chip on';sh.textContent=ft('send');
-  sh.onclick=()=>{
-    const txt=ft('share')+fshow(code)+'\n'+ft('howto');
-    if(navigator.share)navigator.share({text:txt}).catch(()=>{});
-    else{try{navigator.clipboard.writeText(txt);msg(ft('copied'))}catch(e){}}
-  };
-  row.appendChild(cp);row.appendChild(sh);box.appendChild(row);s.appendChild(box);
-}
-function openCodes(fresh){
-  openSheet(s=>{
-    shEl(s,'sh-t',ft('codes'));
-    if(!admKey()){
-      shEl(s,'sh-note',ft('keyq'));
-      const i=document.createElement('input');i.type='password';i.className='hinput';i.placeholder=ft('keyph');i.autocomplete='off';s.appendChild(i);
-      const row=document.createElement('div');row.className='chips';
-      const ok=document.createElement('button');ok.className='chip on';ok.textContent=ft('keysave');
-      ok.onclick=async()=>{
-        const k=i.value.trim();if(!k)return;
-        try{await adm('GET','/codes',null,k);localStorage.setItem('tc_admin',k);openCodes()}
-        catch(e){msg(admMsg(e))}
-      };
-      row.appendChild(ok);s.appendChild(row);
-      return;
-    }
-    if(fresh){shEl(s,'sh-l',ft('newc')+(fresh.name?' — '+fresh.name:''));codeBox(s,fresh.code)}
-    const i=document.createElement('input');i.className='hinput';i.placeholder=ft('name');i.autocomplete='off';s.appendChild(i);
-    const row=document.createElement('div');row.className='chips';
-    const gen=document.createElement('button');gen.className='chip on';gen.textContent=ft('gen');
-    gen.onclick=async()=>{
-      gen.disabled=true;
-      try{const j=await adm('POST','/codes',{name:i.value.trim()});openCodes(j)}
-      catch(e){gen.disabled=false;msg(admMsg(e))}
-    };
-    row.appendChild(gen);s.appendChild(row);
-    shEl(s,'sh-l',ft('active'));
-    const list=document.createElement('div');s.appendChild(list);
-    adm('GET','/codes').then(j=>{
-      const cs=(j&&j.codes)||[];
-      if(!cs.length){shEl(list,'sh-note',ft('none'));return}
-      cs.forEach(c=>{
-        const del=document.createElement('button');del.className='addb';del.innerHTML='✕';del.setAttribute('aria-label',t('del'));
-        del.onclick=async e=>{
-          e.stopPropagation();
-          if(!confirm(ft('delq')))return;
-          try{await adm('DELETE','/codes/'+c.code);openCodes()}catch(er){msg(ft('neterr'))}
-        };
-        const d=c.created?new Date(c.created).toLocaleDateString(LOC[lang]||'it-IT',{day:'2-digit',month:'short'}):'';
-        const st=document.createElement('span');st.className='bnd'+(c.bound?' on':'');st.textContent=c.bound?ft('used'):ft('free');
-        const it=shItem(list,(c.name||ft('noname'))+'  ·  '+fshow(c.code)+(d?'  ·  '+d:''),{right:st,on:()=>openCodes({code:c.code,name:c.name})});
-        it.appendChild(del);
-      });
-    }).catch(e=>{if(e.status===403){try{localStorage.removeItem('tc_admin')}catch(_){}msg(ft('keybad'))}else shEl(list,'sh-note',ft('neterr'))});
-    shEl(s,'sh-sep','');
-    shItem(s,ft('forgetkey'),{danger:true,on:()=>{try{localStorage.removeItem('tc_admin')}catch(e){}openCodes()}});
-  });
-}
 
 
 /* =====================================================================
    PROFILO: scheda in basso col logo, tutte le impostazioni dell'app
    ===================================================================== */
 var PFT={
- it:{settings:"Impostazioni",setsub:"Aspetto, lingua e dati dell'app",data:"Dati",noind:"Nessun indicatore attivo",profile:"Profilo",look:"Aspetto",theme:"Tema",language:"Lingua",friends:"Amici",app:"App",own:"Conto demo TradeLocker",fr:"Accesso con codice",codesub:"Crea e gestisci i codici per i tuoi amici",refsub:"Ricarica i dati e controlla gli aggiornamenti",ressub:"Cancella tutto ciò che è salvato su questo iPhone"},
- es:{settings:"Ajustes",setsub:"Apariencia, idioma y datos de la app",data:"Datos",noind:"Ningún indicador activo",profile:"Perfil",look:"Apariencia",theme:"Tema",language:"Idioma",friends:"Amigos",app:"App",own:"Cuenta demo TradeLocker",fr:"Acceso con código",codesub:"Crea y gestiona los códigos de tus amigos",refsub:"Recarga los datos y busca actualizaciones",ressub:"Borra todo lo guardado en este iPhone"},
- en:{settings:"Settings",setsub:"Appearance, language and app data",data:"Data",noind:"No active indicators",profile:"Profile",look:"Appearance",theme:"Theme",language:"Language",friends:"Friends",app:"App",own:"TradeLocker demo account",fr:"Signed in with code",codesub:"Create and manage your friends' codes",refsub:"Reload data and check for updates",ressub:"Erase everything saved on this iPhone"},
- fr:{settings:"Réglages",setsub:"Apparence, langue et données de l'app",data:"Données",noind:"Aucun indicateur actif",profile:"Profil",look:"Apparence",theme:"Thème",language:"Langue",friends:"Amis",app:"App",own:"Compte démo TradeLocker",fr:"Accès avec code",codesub:"Crée et gère les codes de tes amis",refsub:"Recharge les données et cherche les mises à jour",ressub:"Efface tout ce qui est enregistré sur cet iPhone"},de:{"settings":"Einstellungen","setsub":"Aussehen, Sprache und App-Daten","data":"Daten","noind":"Keine aktiven Indikatoren","profile":"Profil","look":"Aussehen","theme":"Design","language":"Sprache","friends":"Freunde","app":"App","own":"TradeLocker-Demokonto","fr":"Mit Code angemeldet","codesub":"Codes deiner Freunde erstellen und verwalten","refsub":"Daten neu laden und nach Updates suchen","ressub":"Alles löschen, was auf diesem iPhone gespeichert ist"}
+ it:{settings:"Impostazioni",setsub:"Aspetto, lingua e dati dell'app",data:"Dati",noind:"Nessun indicatore attivo",profile:"Profilo",look:"Aspetto",theme:"Tema",language:"Lingua", app:"App",own:"Conto demo TradeLocker",fr:"Accesso con codice", refsub:"Ricarica i dati e controlla gli aggiornamenti",ressub:"Cancella tutto ciò che è salvato su questo iPhone"},
+ es:{settings:"Ajustes",setsub:"Apariencia, idioma y datos de la app",data:"Datos",noind:"Ningún indicador activo",profile:"Perfil",look:"Apariencia",theme:"Tema",language:"Idioma", app:"App",own:"Cuenta demo TradeLocker",fr:"Acceso con código", refsub:"Recarga los datos y busca actualizaciones",ressub:"Borra todo lo guardado en este iPhone"},
+ en:{settings:"Settings",setsub:"Appearance, language and app data",data:"Data",noind:"No active indicators",profile:"Profile",look:"Appearance",theme:"Theme",language:"Language", app:"App",own:"TradeLocker demo account",fr:"Signed in with code", refsub:"Reload data and check for updates",ressub:"Erase everything saved on this iPhone"},
+ fr:{settings:"Réglages",setsub:"Apparence, langue et données de l'app",data:"Données",noind:"Aucun indicateur actif",profile:"Profil",look:"Apparence",theme:"Thème",language:"Langue", app:"App",own:"Compte démo TradeLocker",fr:"Accès avec code", refsub:"Recharge les données et cherche les mises à jour",ressub:"Efface tout ce qui est enregistré sur cet iPhone"},de:{"settings":"Einstellungen","setsub":"Aussehen, Sprache und App-Daten","data":"Daten","noind":"Keine aktiven Indikatoren","profile":"Profil","look":"Aussehen","theme":"Design","language":"Sprache", "app":"App","own":"TradeLocker-Demokonto","fr":"Mit Code angemeldet", "refsub":"Daten neu laden und nach Updates suchen","ressub":"Alles löschen, was auf diesem iPhone gespeichert ist"}
 };
 function pt(k){const P=window.PFT;return P?((P[lang]&&P[lang][k])||P.it[k]||k):k}
 var PIC={
@@ -3030,7 +2926,6 @@ function renderProfile(){
   let g=pfGroup(p,'');
   const r=pfRow(g,PIC.gear,pt('settings'),pt('setsub'),()=>{PF.page='settings';renderProfile();p.firstChild&&p.firstChild.parentNode.classList.add('pfin');setTimeout(()=>p.classList.remove('pfin'),400)});
   r.classList.add('chev');
-  if(!FRIEND){g=pfGroup(p,pt('friends'));pfRow(g,PIC.codes,ft('codes'),pt('codesub'),()=>openCodes()).classList.add('chev')}
   g=pfGroup(p,pt('app'));
   pfRow(g,PIC.refresh,t('refresh'),pt('refsub'),()=>doRefresh());
   g=pfGroup(p,'');
@@ -3553,22 +3448,22 @@ function pageOpen(b){
    PROFILO 2: icone colorate, Codici amici, Social, Segnalazioni
    ===================================================================== */
 var PF2={
- it:{social:"Social",socsub:"Seguici e resta aggiornato",tgch:"Canale Telegram",tgchsub:"Novità e aggiornamenti",tgpr:"Contatto Telegram",tgprsub:"Scrivimi direttamente",soon:"In arrivo",fb:"Segnala o proponi",fbsub:"Un problema, un'idea, un consiglio",inbox:"Segnalazioni ricevute",inboxsub:"Leggi e gestisci i messaggi",codessub2:"Crea, invia e gestisci i codici",ref_ok:"Dati aggiornati. Hai già l'ultima versione",ref_new:"Nuova versione trovata, aggiorno…",ref_err:"Non riesco ad aggiornare adesso, riprova tra poco.",
-  t_bug:"Problema",t_idea:"Idea",t_other:"Altro",fbph:"Descrivi cosa succede o cosa vorresti…",fbcontact:"Il tuo Telegram (facoltativo)",fbsend:"Invia",fbsent:"Grazie! Il messaggio è arrivato.",fbnote:"Insieme al messaggio inviamo solo la versione dell'app, il tipo di telefono e la lingua, per capire meglio il problema.",fbshort:"Scrivi almeno qualche parola.",fbmany:"Hai già inviato molti messaggi oggi. Riprova domani.",fbagain:"Scrivi un altro messaggio",
-  all:"Tutte",new:"Nuove",done:"Risolte",markread:"Letta",markdone:"Risolta",reopen:"Riapri",del:"Elimina",delq:"Eliminare questo messaggio?",empty:"Nessun messaggio qui.",from_owner:"da te",from_web:"senza codice",from_code:"codice",
-  st_total:"Codici",st_used:"In uso",st_free:"Liberi",created:"Creato",used_on:"Usato dal",copy:"Copia",send:"Invia",off:"Disattiva",newcode:"Nuovo codice"},
- es:{social:"Redes sociales",socsub:"Síguenos y mantente al día",tgch:"Canal de Telegram",tgchsub:"Novedades y actualizaciones",tgpr:"Contacto de Telegram",tgprsub:"Escríbeme directamente",soon:"Próximamente",fb:"Informar o proponer",fbsub:"Un problema, una idea, un consejo",inbox:"Mensajes recibidos",inboxsub:"Lee y gestiona los mensajes",codessub2:"Crea, envía y gestiona los códigos",ref_ok:"Datos actualizados. Ya tienes la última versión",ref_new:"Nueva versión encontrada, actualizando…",ref_err:"No puedo actualizar ahora, inténtalo en un momento.",
-  t_bug:"Problema",t_idea:"Idea",t_other:"Otro",fbph:"Describe qué pasa o qué te gustaría…",fbcontact:"Tu Telegram (opcional)",fbsend:"Enviar",fbsent:"¡Gracias! El mensaje ha llegado.",fbnote:"Con el mensaje solo enviamos la versión de la app, el tipo de teléfono y el idioma, para entender mejor el problema.",fbshort:"Escribe al menos unas palabras.",fbmany:"Ya has enviado muchos mensajes hoy. Inténtalo mañana.",fbagain:"Escribir otro mensaje",
-  all:"Todos",new:"Nuevos",done:"Resueltos",markread:"Leído",markdone:"Resuelto",reopen:"Reabrir",del:"Eliminar",delq:"¿Eliminar este mensaje?",empty:"No hay mensajes aquí.",from_owner:"tuyo",from_web:"sin código",from_code:"código",
-  st_total:"Códigos",st_used:"En uso",st_free:"Libres",created:"Creado",used_on:"En uso desde",copy:"Copiar",send:"Enviar",off:"Desactivar",newcode:"Código nuevo"},
- en:{social:"Social",socsub:"Follow us and stay updated",tgch:"Telegram channel",tgchsub:"News and updates",tgpr:"Telegram contact",tgprsub:"Message me directly",soon:"Coming soon",fb:"Report or suggest",fbsub:"A problem, an idea, some advice",inbox:"Received messages",inboxsub:"Read and manage messages",codessub2:"Create, send and manage codes",ref_ok:"Data refreshed. You already have the latest version",ref_new:"New version found, updating…",ref_err:"Can't refresh right now, try again shortly.",
-  t_bug:"Problem",t_idea:"Idea",t_other:"Other",fbph:"Describe what happens or what you'd like…",fbcontact:"Your Telegram (optional)",fbsend:"Send",fbsent:"Thanks! Your message has arrived.",fbnote:"Along with the message we only send the app version, the phone type and the language, to better understand the problem.",fbshort:"Write at least a few words.",fbmany:"You've already sent many messages today. Try again tomorrow.",fbagain:"Write another message",
-  all:"All",new:"New",done:"Solved",markread:"Read",markdone:"Solved",reopen:"Reopen",del:"Delete",delq:"Delete this message?",empty:"No messages here.",from_owner:"from you",from_web:"no code",from_code:"code",
-  st_total:"Codes",st_used:"In use",st_free:"Free",created:"Created",used_on:"In use since",copy:"Copy",send:"Send",off:"Deactivate",newcode:"New code"},
- fr:{social:"Réseaux sociaux",socsub:"Suis-nous et reste informé",tgch:"Canal Telegram",tgchsub:"Nouveautés et mises à jour",tgpr:"Contact Telegram",tgprsub:"Écris-moi directement",soon:"Bientôt",fb:"Signaler ou proposer",fbsub:"Un problème, une idée, un conseil",inbox:"Messages reçus",inboxsub:"Lis et gère les messages",codessub2:"Crée, envoie et gère les codes",ref_ok:"Données à jour. Tu as déjà la dernière version",ref_new:"Nouvelle version trouvée, mise à jour…",ref_err:"Impossible d'actualiser maintenant, réessaie dans un instant.",
-  t_bug:"Problème",t_idea:"Idée",t_other:"Autre",fbph:"Décris ce qui se passe ou ce que tu voudrais…",fbcontact:"Ton Telegram (facultatif)",fbsend:"Envoyer",fbsent:"Merci ! Le message est bien arrivé.",fbnote:"Avec le message nous envoyons seulement la version de l'app, le type de téléphone et la langue, pour mieux comprendre le problème.",fbshort:"Écris au moins quelques mots.",fbmany:"Tu as déjà envoyé beaucoup de messages aujourd'hui. Réessaie demain.",fbagain:"Écrire un autre message",
-  all:"Tous",new:"Nouveaux",done:"Résolus",markread:"Lu",markdone:"Résolu",reopen:"Rouvrir",del:"Supprimer",delq:"Supprimer ce message ?",empty:"Aucun message ici.",from_owner:"de toi",from_web:"sans code",from_code:"code",
-  st_total:"Codes",st_used:"Utilisés",st_free:"Libres",created:"Créé",used_on:"Utilisé depuis",copy:"Copier",send:"Envoyer",off:"Désactiver",newcode:"Nouveau code"},de:{"social":"Soziale Netzwerke","socsub":"Folge uns und bleib auf dem Laufenden","tgch":"Telegram-Kanal","tgchsub":"Neuigkeiten und Updates","tgpr":"Telegram-Kontakt","tgprsub":"Schreib mir direkt","soon":"Demnächst","fb":"Melden oder vorschlagen","fbsub":"Ein Problem, eine Idee, ein Tipp","inbox":"Empfangene Nachrichten","inboxsub":"Nachrichten lesen und verwalten","codessub2":"Codes erstellen, senden und verwalten","ref_ok":"Daten aktualisiert. Du hast schon die neueste Version","ref_new":"Neue Version gefunden, wird aktualisiert…","ref_err":"Aktualisieren gerade nicht möglich, versuche es gleich noch einmal.","t_bug":"Problem","t_idea":"Idee","t_other":"Sonstiges","fbph":"Beschreibe, was passiert oder was du dir wünschst…","fbcontact":"Dein Telegram (optional)","fbsend":"Senden","fbsent":"Danke! Deine Nachricht ist angekommen.","fbnote":"Mit der Nachricht senden wir nur die App-Version, den Telefontyp und die Sprache, um das Problem besser zu verstehen.","fbshort":"Schreib wenigstens ein paar Worte.","fbmany":"Du hast heute schon viele Nachrichten gesendet. Versuche es morgen wieder.","fbagain":"Weitere Nachricht schreiben","all":"Alle","new":"Neu","done":"Erledigt","markread":"Gelesen","markdone":"Erledigt","reopen":"Wieder öffnen","del":"Löschen","delq":"Diese Nachricht löschen?","empty":"Keine Nachrichten hier.","from_owner":"von dir","from_web":"ohne Code","from_code":"Code","st_total":"Codes","st_used":"In Verwendung","st_free":"Frei","created":"Erstellt","used_on":"In Verwendung seit","copy":"Kopieren","send":"Senden","off":"Deaktivieren","newcode":"Neuer Code"}
+ it:{social:"Social",socsub:"Seguici e resta aggiornato",tgch:"Canale Telegram",tgchsub:"Novità e aggiornamenti",tgpr:"Contatto Telegram",tgprsub:"Scrivimi direttamente",soon:"In arrivo",fb:"Segnala o proponi",fbsub:"Un problema, un'idea, un consiglio",   ref_ok:"Dati aggiornati. Hai già l'ultima versione",ref_new:"Nuova versione trovata, aggiorno…",ref_err:"Non riesco ad aggiornare adesso, riprova tra poco.",
+  t_bug:"Problema",t_idea:"Idea",t_other:"Altro",fbph:"Descrivi cosa succede o cosa vorresti…",fbcontact:"Il tuo Telegram (facoltativo)",fbsend:"Invia",fbsent:"Grazie! Il messaggio è arrivato.",fbnote:"Insieme al messaggio inviamo solo la versione dell'app, il tipo di telefono e la lingua, per capire meglio il problema.",fbshort:"Scrivi almeno qualche parola.",fbmany:"Hai già inviato molti messaggi oggi. Riprova domani.",fbagain:"Scrivi un altro messaggio"
+              
+           },
+ es:{social:"Redes sociales",socsub:"Síguenos y mantente al día",tgch:"Canal de Telegram",tgchsub:"Novedades y actualizaciones",tgpr:"Contacto de Telegram",tgprsub:"Escríbeme directamente",soon:"Próximamente",fb:"Informar o proponer",fbsub:"Un problema, una idea, un consejo",   ref_ok:"Datos actualizados. Ya tienes la última versión",ref_new:"Nueva versión encontrada, actualizando…",ref_err:"No puedo actualizar ahora, inténtalo en un momento.",
+  t_bug:"Problema",t_idea:"Idea",t_other:"Otro",fbph:"Describe qué pasa o qué te gustaría…",fbcontact:"Tu Telegram (opcional)",fbsend:"Enviar",fbsent:"¡Gracias! El mensaje ha llegado.",fbnote:"Con el mensaje solo enviamos la versión de la app, el tipo de teléfono y el idioma, para entender mejor el problema.",fbshort:"Escribe al menos unas palabras.",fbmany:"Ya has enviado muchos mensajes hoy. Inténtalo mañana.",fbagain:"Escribir otro mensaje"
+              
+           },
+ en:{social:"Social",socsub:"Follow us and stay updated",tgch:"Telegram channel",tgchsub:"News and updates",tgpr:"Telegram contact",tgprsub:"Message me directly",soon:"Coming soon",fb:"Report or suggest",fbsub:"A problem, an idea, some advice",   ref_ok:"Data refreshed. You already have the latest version",ref_new:"New version found, updating…",ref_err:"Can't refresh right now, try again shortly.",
+  t_bug:"Problem",t_idea:"Idea",t_other:"Other",fbph:"Describe what happens or what you'd like…",fbcontact:"Your Telegram (optional)",fbsend:"Send",fbsent:"Thanks! Your message has arrived.",fbnote:"Along with the message we only send the app version, the phone type and the language, to better understand the problem.",fbshort:"Write at least a few words.",fbmany:"You've already sent many messages today. Try again tomorrow.",fbagain:"Write another message"
+              
+           },
+ fr:{social:"Réseaux sociaux",socsub:"Suis-nous et reste informé",tgch:"Canal Telegram",tgchsub:"Nouveautés et mises à jour",tgpr:"Contact Telegram",tgprsub:"Écris-moi directement",soon:"Bientôt",fb:"Signaler ou proposer",fbsub:"Un problème, une idée, un conseil",   ref_ok:"Données à jour. Tu as déjà la dernière version",ref_new:"Nouvelle version trouvée, mise à jour…",ref_err:"Impossible d'actualiser maintenant, réessaie dans un instant.",
+  t_bug:"Problème",t_idea:"Idée",t_other:"Autre",fbph:"Décris ce qui se passe ou ce que tu voudrais…",fbcontact:"Ton Telegram (facultatif)",fbsend:"Envoyer",fbsent:"Merci ! Le message est bien arrivé.",fbnote:"Avec le message nous envoyons seulement la version de l'app, le type de téléphone et la langue, pour mieux comprendre le problème.",fbshort:"Écris au moins quelques mots.",fbmany:"Tu as déjà envoyé beaucoup de messages aujourd'hui. Réessaie demain.",fbagain:"Écrire un autre message"
+              
+           },de:{"social":"Soziale Netzwerke","socsub":"Folge uns und bleib auf dem Laufenden","tgch":"Telegram-Kanal","tgchsub":"Neuigkeiten und Updates","tgpr":"Telegram-Kontakt","tgprsub":"Schreib mir direkt","soon":"Demnächst","fb":"Melden oder vorschlagen","fbsub":"Ein Problem, eine Idee, ein Tipp",   "ref_ok":"Daten aktualisiert. Du hast schon die neueste Version","ref_new":"Neue Version gefunden, wird aktualisiert…","ref_err":"Aktualisieren gerade nicht möglich, versuche es gleich noch einmal.","t_bug":"Problem","t_idea":"Idee","t_other":"Sonstiges","fbph":"Beschreibe, was passiert oder was du dir wünschst…","fbcontact":"Dein Telegram (optional)","fbsend":"Senden","fbsent":"Danke! Deine Nachricht ist angekommen.","fbnote":"Mit der Nachricht senden wir nur die App-Version, den Telefontyp und die Sprache, um das Problem besser zu verstehen.","fbshort":"Schreib wenigstens ein paar Worte.","fbmany":"Du hast heute schon viele Nachrichten gesendet. Versuche es morgen wieder.","fbagain":"Weitere Nachricht schreiben"                     }
 };
 function p2(k){return(PF2[lang]&&PF2[lang][k])||PF2.it[k]||k}
 /* link social: il canale si aggiunge qui quando e' pronto */
@@ -3601,21 +3496,18 @@ function pfGo(page){const p=$('pf-screen');PF.page=page;renderProfile();p.classL
 function pfSub(p,title){
   const bar=document.createElement('div');bar.className='pfbar';
   const bk=document.createElement('button');bk.className='pfback';bk.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg><span></span>';
-  const fromAdm=!FRIEND&&['codes','inbox','send'].includes(PF.page);
-  bk.lastChild.textContent=fromAdm?'Admin':pt('profile');
-  bk.onclick=()=>{PF.page=fromAdm?'admin':null;PF.fresh=null;renderProfile();p.classList.add('pfout');setTimeout(()=>p.classList.remove('pfout'),400)};
+  const fromP=false;
+  bk.lastChild.textContent=pt('profile');
+  bk.onclick=()=>{PF.page=null;PF.fresh=null;renderProfile();p.classList.add('pfout');setTimeout(()=>p.classList.remove('pfout'),400)};
   const ti=document.createElement('div');ti.className='pftitle';ti.textContent=title;
   bar.appendChild(bk);bar.appendChild(ti);p.appendChild(bar);
 }
-var FBN=0;
 function renderProfile(){
   const p=$('pf-screen');if(!p)return;
   const st=PF.keep?p.scrollTop:0;PF.keep=false;p.innerHTML='';
   if(PF.page==='settings'){renderSettings(p);p.scrollTop=st;return}
-  if(PF.page==='codes'){renderCodes(p);p.scrollTop=st;return}
   if(PF.page==='social'){renderSocial(p);return}
   if(PF.page==='fb'){renderFeedback(p);return}
-  if(PF.page==='inbox'){renderInbox(p);p.scrollTop=st;return}
   const h=document.createElement('div');h.className='pfhead';
   h.innerHTML='<img alt="" src="'+LOGO_SRC+'"><div class="pfname">NexusCharts</div>';
   const sub=document.createElement('div');sub.className='pfsub';
@@ -3624,14 +3516,6 @@ function renderProfile(){
   h.appendChild(sub);p.appendChild(h);
   let g=pfGroup(p,'');
   pfRow(g,PIC.gear,pt('settings'),pt('setsub'),()=>pfGo('settings')).classList.add('chev');
-  if(!FRIEND){
-    g=pfGroup(p,pt('friends'));
-    pfRow(g,PIC.codes,ft('codes'),p2('codessub2'),()=>pfGo('codes')).classList.add('chev');
-    if(admKey()){
-      const r=pfRow(g,PIC.inbox,p2('inbox'),p2('inboxsub'),()=>pfGo('inbox'));r.classList.add('chev');
-      if(FBN){const bd=document.createElement('span');bd.className='pfbadge';bd.textContent=FBN;r.appendChild(bd)}
-    }
-  }
   g=pfGroup(p,'Community');
   pfRow(g,PIC.share2,p2('social'),p2('socsub'),()=>pfGo('social')).classList.add('chev');
   pfRow(g,PIC.bug,p2('fb'),p2('fbsub'),()=>pfGo('fb')).classList.add('chev');
@@ -3640,7 +3524,6 @@ function renderProfile(){
   g=pfGroup(p,'');
   pfRow(g,PIC.out,t('logout'),'',logout,'danger');
   p.scrollTop=st;
-  fbCount(false);
 }
 /* Aggiorna: icona che gira, poi un avviso chiaro */
 async function pfRefresh(row){
@@ -3680,63 +3563,6 @@ function renderSettings(p){
   g=pfGroup(p,pt('data'));
   pfRow(g,PIC.reset,t('reset'),pt('ressub'),()=>resetApp(),'',PCOL.reset);
 }
-/* ---------- Codici amici: pagina intera ---------- */
-function renderCodes(p){
-  pfSub(p,ft('codes'));
-  if(!admKey()){
-    shEl(p,'pfnote',ft('keyq'));
-    const g=pfGroup(p,'');g.classList.add('pfpad');
-    const i=document.createElement('input');i.type='password';i.className='pfin2';i.placeholder=ft('keyph');i.autocomplete='off';g.appendChild(i);
-    const ok=document.createElement('button');ok.className='pfbtn';ok.textContent=ft('keysave');g.appendChild(ok);
-    ok.onclick=async()=>{const k=i.value.trim();if(!k)return;try{await adm('GET','/codes',null,k);localStorage.setItem('tc_admin',k);PF.fbChecked=false;renderProfile()}catch(e){msg(admMsg(e))}};
-    return;
-  }
-  /* nuovo codice */
-  let g=pfGroup(p,p2('newcode'));g.classList.add('pfpad');
-  if(PF.fresh){
-    const box=document.createElement('div');box.className='pfcodebig';box.textContent=fshow(PF.fresh.code);g.appendChild(box);
-    if(PF.fresh.name){const n=document.createElement('div');n.className='pfcodename';n.textContent=PF.fresh.name;g.appendChild(n)}
-    g.appendChild(codeActs(PF.fresh.code));
-  }
-  const i=document.createElement('input');i.className='pfin2';i.placeholder=ft('name');i.autocomplete='off';g.appendChild(i);
-  const gen=document.createElement('button');gen.className='pfbtn';gen.textContent=ft('gen');g.appendChild(gen);
-  gen.onclick=async()=>{gen.disabled=true;try{PF.fresh=await adm('POST','/codes',{name:i.value.trim()});haptic();renderProfile()}catch(e){gen.disabled=false;msg(admMsg(e))}};
-  /* riepilogo e lista */
-  const stats=document.createElement('div');stats.className='pfstats';p.appendChild(stats);
-  const lab=document.createElement('div');lab.className='pfl';lab.textContent=ft('active');p.appendChild(lab);
-  const list=document.createElement('div');list.className='pfclist';p.appendChild(list);
-  adm('GET','/codes').then(j=>{
-    const cs=(j&&j.codes)||[],u=cs.filter(c=>c.bound).length;
-    stats.innerHTML='';[[cs.length,p2('st_total'),'#f5b301'],[u,p2('st_used'),'#22ab94'],[cs.length-u,p2('st_free'),'#9ca3af']].forEach(([n,l,c])=>{const d=document.createElement('div');d.innerHTML='<b></b><span></span>';d.firstChild.textContent=n;d.firstChild.style.color=c;d.lastChild.textContent=l;stats.appendChild(d)});
-    if(!cs.length){shEl(list,'pfnote',ft('none'));return}
-    const df=ts=>ts?new Date(ts).toLocaleDateString(LOC[lang]||'it-IT',{day:'2-digit',month:'short',year:'numeric'}):'';
-    cs.forEach(c=>{
-      const card=document.createElement('div');card.className='pfccard';
-      const top=document.createElement('div');top.className='pfctop';
-      top.innerHTML='<span class="pfcn"></span><span class="pfcst"></span>';
-      top.firstChild.textContent=c.name||ft('noname');
-      top.lastChild.textContent=c.bound?ft('used'):ft('free');top.lastChild.classList.toggle('on',!!c.bound);
-      card.appendChild(top);
-      const code=document.createElement('div');code.className='pfccode';code.textContent=fshow(c.code);card.appendChild(code);
-      const meta=document.createElement('div');meta.className='pfcmeta';
-      meta.textContent=p2('created')+' '+df(c.created)+(c.used?'  ·  '+p2('used_on')+' '+df(c.used):'');card.appendChild(meta);
-      const acts=codeActs(c.code);
-      const off=document.createElement('button');off.className='pfmini danger';off.textContent=p2('off');
-      off.onclick=async()=>{if(!confirm(ft('delq')))return;try{await adm('DELETE','/codes/'+c.code);if(PF.fresh&&PF.fresh.code===c.code)PF.fresh=null;PF.keep=true;renderProfile()}catch(e){msg(ft('neterr'))}};
-      acts.appendChild(off);card.appendChild(acts);list.appendChild(card);
-    });
-  }).catch(e=>{if(e.status===403){try{localStorage.removeItem('tc_admin')}catch(_){}msg(ft('keybad'));renderProfile()}else shEl(list,'pfnote',ft('neterr'))});
-  const g2=pfGroup(p,'');
-  pfRow(g2,PIC.out,ft('forgetkey'),'',()=>{try{localStorage.removeItem('tc_admin')}catch(e){}PF.fresh=null;renderProfile()},'danger');
-}
-function codeActs(code){
-  const row=document.createElement('div');row.className='pfacts';
-  const cp=document.createElement('button');cp.className='pfmini';cp.textContent=p2('copy');
-  cp.onclick=async()=>{try{await navigator.clipboard.writeText(fshow(code));msg(ft('copied'))}catch(e){msg(fshow(code))}};
-  const sh=document.createElement('button');sh.className='pfmini on';sh.textContent=p2('send');
-  sh.onclick=()=>{const txt=ft('share')+fshow(code)+'\n'+ft('howto');if(navigator.share)navigator.share({text:txt}).catch(()=>{});else{try{navigator.clipboard.writeText(txt);msg(ft('copied'))}catch(e){}}};
-  row.appendChild(cp);row.appendChild(sh);return row;
-}
 /* ---------- Social ---------- */
 function renderSocial(p){
   pfSub(p,p2('social'));
@@ -3771,73 +3597,13 @@ function renderFeedback(p){
     send.disabled=true;
     try{
       const ua=navigator.userAgent,dev=/iPhone/.test(ua)?'iPhone':/iPad/.test(ua)?'iPad':/Android/.test(ua)?'Android':'Computer';
-      const r=await fetch(WORKER+'/feedback',{method:'POST',headers:{'Content-Type':'application/json',...(FRIEND?{Authorization:'Bearer '+FRIEND}:{}),...(admKey()&&!FRIEND?{'X-Admin-Key':admKey()}:{})},body:JSON.stringify({type:PF.fbType,text,contact:ct.value.trim(),ver:VERSION,dev,lang,ctx:(cur||'')+' '+(res||''),standalone:isStandalone()})});
+      const r=await fetch(WORKER+'/feedback',{method:'POST',headers:{'Content-Type':'application/json',...(FRIEND?{Authorization:'Bearer '+FRIEND}:{}),...acctH()},body:JSON.stringify({type:PF.fbType,text,contact:ct.value.trim(),ver:VERSION,dev,lang,ctx:(cur||'')+' '+(res||''),standalone:isStandalone()})});
       if(r.status===429){msg(p2('fbmany'));send.disabled=false;return}
       if(!r.ok)throw new Error(r.status);
       PF.fbDone=true;PF.fbDraft='';haptic();renderProfile();
     }catch(e){send.disabled=false;msg(ft('neterr'))}
   };
 }
-/* ---------- Segnalazioni ricevute (solo amministratore) ---------- */
-function renderInbox(p){
-  pfSub(p,p2('inbox'));
-  PF.fbFilter=PF.fbFilter||'new';
-  const seg=document.createElement('div');seg.className='pfseg pfsegsm';
-  [['new',p2('new')],['all',p2('all')],['done',p2('done')]].forEach(([k,l])=>{const b=document.createElement('button');b.className=PF.fbFilter===k?'on':'';b.textContent=l;b.onclick=()=>{PF.fbFilter=k;PF.keep=true;renderProfile()};seg.appendChild(b)});
-  const sg=pfGroup(p,'');sg.appendChild(seg);
-  const list=document.createElement('div');list.className='pfclist';p.appendChild(list);
-  adm('GET','/feedback').then(j=>{
-    const all=(j&&j.items)||[];FBN=all.filter(x=>x.status==='new').length;fbBadge();
-    const items=all.filter(x=>PF.fbFilter==='all'||(PF.fbFilter==='new'?x.status!=='done':x.status==='done'));
-    if(!items.length){shEl(list,'pfnote',p2('empty'));return}
-    const TI={bug:[PIC.bug,'#f97316'],idea:[PIC.idea,'#facc15'],other:[PIC.chat,'#3b82f6']};
-    items.forEach(x=>{
-      const card=document.createElement('div');card.className='pfccard'+(x.status==='new'?' unread':'');card.dataset.id=x.id;card.dataset.imgs=x.imgs||0;
-      const top=document.createElement('div');top.className='pfctop';
-      const ic=TI[x.type]||TI.other;
-      top.innerHTML='<span class="pffbic">'+ic[0]+'</span><span class="pfcn"></span><span class="pfcdate"></span>';
-      top.firstChild.style.color=ic[1];top.children[1].textContent=p2('t_'+(TI[x.type]?x.type:'other'));
-      top.children[2].textContent=new Date(x.ts).toLocaleString(LOC[lang]||'it-IT',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
-      card.appendChild(top);
-      const tx=document.createElement('div');tx.className='pffbtx';tx.textContent=x.text;card.appendChild(tx);
-      const meta=document.createElement('div');meta.className='pfcmeta';
-      const who=x.who==='owner'?p2('from_owner'):x.who?p2('from_code')+' '+fshow(x.who):p2('from_web');
-      meta.textContent=[x.contact?'✈︎ '+x.contact:'',who,x.dev,x.ver?'v'+x.ver:'',x.ctx].filter(Boolean).join('  ·  ');card.appendChild(meta);
-      const acts=document.createElement('div');acts.className='pfacts';
-      const setSt=st=>async()=>{try{await adm('POST','/feedback/'+x.id,{status:st});PF.keep=true;renderProfile()}catch(e){msg(ft('neterr'))}};
-      if(x.status==='new'){const b=document.createElement('button');b.className='pfmini';b.textContent=p2('markread');b.onclick=setSt('read');acts.appendChild(b)}
-      const d=document.createElement('button');d.className='pfmini on';d.textContent=x.status==='done'?p2('reopen'):p2('markdone');d.onclick=setSt(x.status==='done'?'read':'done');acts.appendChild(d);
-      if(x.contact&&/^@?[A-Za-z0-9_]{4,}$/.test(x.contact)){const t=document.createElement('button');t.className='pfmini';t.textContent='Telegram';t.onclick=()=>window.open('https://t.me/'+x.contact.replace('@',''),'_blank');acts.appendChild(t)}
-      const del=document.createElement('button');del.className='pfmini danger';del.textContent=p2('del');del.onclick=async()=>{if(!confirm(p2('delq')))return;try{await adm('DELETE','/feedback/'+x.id);PF.keep=true;renderProfile()}catch(e){msg(ft('neterr'))}};acts.appendChild(del);
-      card.appendChild(acts);list.appendChild(card);
-    });
-  }).catch(e=>{shEl(list,'pfnote',admMsg(e))});
-}
-/* numero di segnalazioni nuove: sulla voce del Profilo e sull'icona Profilo in basso */
-var FB_LAST=0;
-function fbBadge(){
-  const tb=document.querySelector('.tab[data-t=pf]');if(!tb)return;
-  let b=tb.querySelector('.tbbadge');
-  if(!FBN){if(b)b.remove();return}
-  if(!b){b=document.createElement('span');b.className='tbbadge';tb.appendChild(b)}
-  b.textContent=FBN>9?'9+':FBN;
-}
-function fbCount(force){
-  if(FRIEND||!admKey()||document.hidden)return;
-  if(!force&&Date.now()-FB_LAST<30000)return;
-  FB_LAST=Date.now();
-  adm('GET','/feedback').then(j=>{
-    const n=((j&&j.items)||[]).filter(x=>x.status==='new').length;
-    const ch=n!==FBN;FBN=n;fbBadge();
-    if(ch&&tab==='pf'&&!PF.page){PF.keep=true;renderProfile()}
-  }).catch(()=>{});
-}
-/* controllo ogni 4 minuti mentre l'app e' aperta, e subito quando torni sull'app */
-setInterval(()=>fbCount(true),240000);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)fbCount(false)});
-setTimeout(()=>fbCount(true),4000);
-/* "Codici amici" dal vecchio foglio ora apre la pagina */
-function openCodes(){if(tab!=='pf')showTab('pf');pfGo('codes')}
 
 
 /* =====================================================================
@@ -3965,34 +3731,13 @@ function fbPhotos(g,before){
       send.disabled=true;
       try{
         const ua=navigator.userAgent,dev=/iPhone/.test(ua)?'iPhone':/iPad/.test(ua)?'iPad':/Android/.test(ua)?'Android':'Computer';
-        const r=await fetch(WORKER+'/feedback',{method:'POST',headers:{'Content-Type':'application/json',...(FRIEND?{Authorization:'Bearer '+FRIEND}:{}),...(admKey()&&!FRIEND?{'X-Admin-Key':admKey()}:{})},
+        const r=await fetch(WORKER+'/feedback',{method:'POST',headers:{'Content-Type':'application/json',...(FRIEND?{Authorization:'Bearer '+FRIEND}:{}),...acctH()},
           body:JSON.stringify({type:PF.fbType,text,contact:p.querySelector('.pfin2').value.trim(),ver:VERSION,dev,lang,ctx:(cur||'')+' '+(res||''),imgs:PF.fbImgs||[]})});
         if(r.status===429){msg(p2('fbmany'));send.disabled=false;return}
         if(!r.ok)throw new Error(r.status);
         PF.fbDone=true;PF.fbDraft='';PF.fbImgs=[];haptic();renderProfile();
       }catch(e){send.disabled=false;msg(ft('neterr'))}
     };
-  };
-})();
-/* foto nelle segnalazioni ricevute */
-(function(){
-  const orig=renderInbox;
-  renderInbox=function(p){
-    orig(p);
-    let n=0;const iv=setInterval(()=>{
-      if(++n>60){clearInterval(iv);return}
-      const cards=p.querySelectorAll('.pfccard[data-id]');if(!cards.length)return;
-      clearInterval(iv);
-      cards.forEach(card=>{
-        const id=card.dataset.id,k=+card.dataset.imgs||0;if(!k)return;
-        const tx=card.querySelector('.pffbtx'),row=document.createElement('div');row.className='fbph';
-        for(let i=0;i<k;i++){
-          const t=document.createElement('button');t.className='fbth load';row.appendChild(t);
-          adm('GET','/feedback/'+id+'/img/'+i).then(r=>{t.classList.remove('load');t.style.backgroundImage='url('+r.data+')';t.onclick=()=>viewImg(r.data,id+'_'+(i+1))}).catch(()=>{});
-        }
-        tx.after(row);
-      });
-    },150);
   };
 })();
 function viewImg(data,name){
@@ -4140,17 +3885,17 @@ var PMI={
 
 
 /* =====================================================================
-   NOTIFICHE: attivazione per tutti + portale "Invia notifica" per l'amministratore
+   NOTIFICHE: attivazione per tutti
    ===================================================================== */
 var NT={
- it:{reuse:"Riusa",del:"Elimina",delq:"Togliere questa notifica dallo storico? Su chi l'ha già ricevuta resta.",delall:"Svuota lo storico",delallq:"Togliere tutte le notifiche dallo storico?",n:"Notifiche",nsub:"Novità e avvisi sul telefono",on:"Notifiche attive",off:"Notifiche spente",enable:"Attiva notifiche",disable:"Disattiva",why:"Ricevi sul telefono le novità di NexusCharts e gli avvisi importanti, anche ad app chiusa.",home:"Per ricevere le notifiche apri NexusCharts dall'icona sulla schermata Home (non da Safari).",old:"Questo telefono non supporta le notifiche delle web app. Su iPhone serve iOS 16.4 o successivo.",denied:"Le notifiche sono bloccate. Riattivale da Impostazioni dell'iPhone → Notifiche → NexusCharts.",done:"Notifiche attivate.",fail:"Non sono riuscito ad attivare le notifiche. Riprova.",offdone:"Notifiche disattivate.",ask:"Vuoi ricevere le notifiche di NexusCharts?",asksub:"Novità, aggiornamenti e avvisi importanti. Puoi spegnerle quando vuoi dal Profilo.",later:"Non ora",
-  send:"Invia notifica",sendsub:"Scrivi un messaggio a tutti gli utenti",ttl:"Titolo",body:"Messaggio",preview:"Anteprima",devices:"telefoni con le notifiche attive",go:"Invia a tutti",confirm:"Inviare questa notifica a tutti?",sent:"Notifica inviata",hist:"Inviate di recente",none:"Nessuna notifica inviata.",now:"ora",lim:"Con il piano gratuito si arriva a circa 45 telefoni per invio."},
- es:{reuse:"Reutilizar",del:"Eliminar",delq:"¿Quitar esta notificación del historial? Quien ya la recibió la conserva.",delall:"Vaciar historial",delallq:"¿Quitar todas las notificaciones del historial?",n:"Notificaciones",nsub:"Novedades y avisos en el teléfono",on:"Notificaciones activas",off:"Notificaciones apagadas",enable:"Activar notificaciones",disable:"Desactivar",why:"Recibe en el teléfono las novedades de NexusCharts y los avisos importantes, incluso con la app cerrada.",home:"Para recibir notificaciones abre NexusCharts desde el icono de la pantalla de inicio (no desde Safari).",old:"Este teléfono no admite notificaciones de web apps. En iPhone hace falta iOS 16.4 o posterior.",denied:"Las notificaciones están bloqueadas. Actívalas en Ajustes del iPhone → Notificaciones → NexusCharts.",done:"Notificaciones activadas.",fail:"No pude activar las notificaciones. Inténtalo de nuevo.",offdone:"Notificaciones desactivadas.",ask:"¿Quieres recibir las notificaciones de NexusCharts?",asksub:"Novedades, actualizaciones y avisos importantes. Puedes apagarlas cuando quieras desde el Perfil.",later:"Ahora no",
-  send:"Enviar notificación",sendsub:"Escribe un mensaje a todos los usuarios",ttl:"Título",body:"Mensaje",preview:"Vista previa",devices:"teléfonos con notificaciones activas",go:"Enviar a todos",confirm:"¿Enviar esta notificación a todos?",sent:"Notificación enviada",hist:"Enviadas recientemente",none:"Ninguna notificación enviada.",now:"ahora",lim:"Con el plan gratuito se llega a unos 45 teléfonos por envío."},
- en:{reuse:"Reuse",del:"Delete",delq:"Remove this notification from the history? People who already got it keep it.",delall:"Clear history",delallq:"Remove all notifications from the history?",n:"Notifications",nsub:"News and alerts on your phone",on:"Notifications on",off:"Notifications off",enable:"Turn on notifications",disable:"Turn off",why:"Get NexusCharts news and important alerts on your phone, even when the app is closed.",home:"To get notifications open NexusCharts from its Home Screen icon (not from Safari).",old:"This phone doesn't support web app notifications. iPhone needs iOS 16.4 or later.",denied:"Notifications are blocked. Turn them back on in iPhone Settings → Notifications → NexusCharts.",done:"Notifications turned on.",fail:"Couldn't turn on notifications. Try again.",offdone:"Notifications turned off.",ask:"Do you want NexusCharts notifications?",asksub:"News, updates and important alerts. You can turn them off anytime from Profile.",later:"Not now",
-  send:"Send notification",sendsub:"Write a message to all users",ttl:"Title",body:"Message",preview:"Preview",devices:"phones with notifications on",go:"Send to everyone",confirm:"Send this notification to everyone?",sent:"Notification sent",hist:"Recently sent",none:"No notifications sent.",now:"now",lim:"On the free plan each send reaches about 45 phones."},
- fr:{reuse:"Réutiliser",del:"Supprimer",delq:"Retirer cette notification de l'historique ? Ceux qui l'ont reçue la gardent.",delall:"Vider l'historique",delallq:"Retirer toutes les notifications de l'historique ?",n:"Notifications",nsub:"Nouveautés et alertes sur le téléphone",on:"Notifications activées",off:"Notifications désactivées",enable:"Activer les notifications",disable:"Désactiver",why:"Reçois sur ton téléphone les nouveautés de NexusCharts et les alertes importantes, même app fermée.",home:"Pour recevoir les notifications, ouvre NexusCharts depuis l'icône de l'écran d'accueil (pas depuis Safari).",old:"Ce téléphone ne prend pas en charge les notifications des web apps. Sur iPhone il faut iOS 16.4 ou plus.",denied:"Les notifications sont bloquées. Réactive-les dans Réglages de l'iPhone → Notifications → NexusCharts.",done:"Notifications activées.",fail:"Impossible d'activer les notifications. Réessaie.",offdone:"Notifications désactivées.",ask:"Veux-tu recevoir les notifications de NexusCharts ?",asksub:"Nouveautés, mises à jour et alertes importantes. Tu peux les couper quand tu veux depuis le Profil.",later:"Pas maintenant",
-  send:"Envoyer une notification",sendsub:"Écris un message à tous les utilisateurs",ttl:"Titre",body:"Message",preview:"Aperçu",devices:"téléphones avec les notifications activées",go:"Envoyer à tous",confirm:"Envoyer cette notification à tous ?",sent:"Notification envoyée",hist:"Envoyées récemment",none:"Aucune notification envoyée.",now:"maintenant",lim:"Avec le plan gratuit chaque envoi atteint environ 45 téléphones."},de:{"reuse":"Wiederverwenden","del":"Löschen","delq":"Diese Benachrichtigung aus dem Verlauf entfernen? Wer sie schon erhalten hat, behält sie.","delall":"Verlauf leeren","delallq":"Alle Benachrichtigungen aus dem Verlauf entfernen?","n":"Benachrichtigungen","nsub":"Neuigkeiten und Hinweise auf dem Telefon","on":"Benachrichtigungen an","off":"Benachrichtigungen aus","enable":"Benachrichtigungen aktivieren","disable":"Ausschalten","why":"Erhalte Neuigkeiten von NexusCharts und wichtige Hinweise auf deinem Telefon, auch wenn die App geschlossen ist.","home":"Um Benachrichtigungen zu erhalten, öffne NexusCharts über das Symbol auf dem Home-Bildschirm (nicht über Safari).","old":"Dieses Telefon unterstützt keine Benachrichtigungen von Web-Apps. Auf dem iPhone braucht es iOS 16.4 oder neuer.","denied":"Benachrichtigungen sind blockiert. Aktiviere sie wieder in den iPhone-Einstellungen → Mitteilungen → NexusCharts.","done":"Benachrichtigungen aktiviert.","fail":"Benachrichtigungen konnten nicht aktiviert werden. Versuche es erneut.","offdone":"Benachrichtigungen deaktiviert.","ask":"Möchtest du Benachrichtigungen von NexusCharts erhalten?","asksub":"Neuigkeiten, Updates und wichtige Hinweise. Du kannst sie jederzeit im Profil ausschalten.","later":"Nicht jetzt","send":"Benachrichtigung senden","sendsub":"Schreib eine Nachricht an alle Nutzer","ttl":"Titel","body":"Nachricht","preview":"Vorschau","devices":"Telefone mit aktiven Benachrichtigungen","go":"An alle senden","confirm":"Diese Benachrichtigung an alle senden?","sent":"Benachrichtigung gesendet","hist":"Zuletzt gesendet","none":"Keine Benachrichtigungen gesendet.","now":"jetzt","lim":"Im kostenlosen Plan erreicht jeder Versand etwa 45 Telefone."}
+ it:{     n:"Notifiche",nsub:"Novità e avvisi sul telefono",on:"Notifiche attive",off:"Notifiche spente",enable:"Attiva notifiche",disable:"Disattiva",why:"Ricevi sul telefono le novità di NexusCharts e gli avvisi importanti, anche ad app chiusa.",home:"Per ricevere le notifiche apri NexusCharts dall'icona sulla schermata Home (non da Safari).",old:"Questo telefono non supporta le notifiche delle web app. Su iPhone serve iOS 16.4 o successivo.",denied:"Le notifiche sono bloccate. Riattivale da Impostazioni dell'iPhone → Notifiche → NexusCharts.",done:"Notifiche attivate.",fail:"Non sono riuscito ad attivare le notifiche. Riprova.",offdone:"Notifiche disattivate.",ask:"Vuoi ricevere le notifiche di NexusCharts?",asksub:"Novità, aggiornamenti e avvisi importanti. Puoi spegnerle quando vuoi dal Profilo.",later:"Non ora"
+               },
+ es:{     n:"Notificaciones",nsub:"Novedades y avisos en el teléfono",on:"Notificaciones activas",off:"Notificaciones apagadas",enable:"Activar notificaciones",disable:"Desactivar",why:"Recibe en el teléfono las novedades de NexusCharts y los avisos importantes, incluso con la app cerrada.",home:"Para recibir notificaciones abre NexusCharts desde el icono de la pantalla de inicio (no desde Safari).",old:"Este teléfono no admite notificaciones de web apps. En iPhone hace falta iOS 16.4 o posterior.",denied:"Las notificaciones están bloqueadas. Actívalas en Ajustes del iPhone → Notificaciones → NexusCharts.",done:"Notificaciones activadas.",fail:"No pude activar las notificaciones. Inténtalo de nuevo.",offdone:"Notificaciones desactivadas.",ask:"¿Quieres recibir las notificaciones de NexusCharts?",asksub:"Novedades, actualizaciones y avisos importantes. Puedes apagarlas cuando quieras desde el Perfil.",later:"Ahora no"
+               },
+ en:{     n:"Notifications",nsub:"News and alerts on your phone",on:"Notifications on",off:"Notifications off",enable:"Turn on notifications",disable:"Turn off",why:"Get NexusCharts news and important alerts on your phone, even when the app is closed.",home:"To get notifications open NexusCharts from its Home Screen icon (not from Safari).",old:"This phone doesn't support web app notifications. iPhone needs iOS 16.4 or later.",denied:"Notifications are blocked. Turn them back on in iPhone Settings → Notifications → NexusCharts.",done:"Notifications turned on.",fail:"Couldn't turn on notifications. Try again.",offdone:"Notifications turned off.",ask:"Do you want NexusCharts notifications?",asksub:"News, updates and important alerts. You can turn them off anytime from Profile.",later:"Not now"
+               },
+ fr:{     n:"Notifications",nsub:"Nouveautés et alertes sur le téléphone",on:"Notifications activées",off:"Notifications désactivées",enable:"Activer les notifications",disable:"Désactiver",why:"Reçois sur ton téléphone les nouveautés de NexusCharts et les alertes importantes, même app fermée.",home:"Pour recevoir les notifications, ouvre NexusCharts depuis l'icône de l'écran d'accueil (pas depuis Safari).",old:"Ce téléphone ne prend pas en charge les notifications des web apps. Sur iPhone il faut iOS 16.4 ou plus.",denied:"Les notifications sont bloquées. Réactive-les dans Réglages de l'iPhone → Notifications → NexusCharts.",done:"Notifications activées.",fail:"Impossible d'activer les notifications. Réessaie.",offdone:"Notifications désactivées.",ask:"Veux-tu recevoir les notifications de NexusCharts ?",asksub:"Nouveautés, mises à jour et alertes importantes. Tu peux les couper quand tu veux depuis le Profil.",later:"Pas maintenant"
+               },de:{     "n":"Benachrichtigungen","nsub":"Neuigkeiten und Hinweise auf dem Telefon","on":"Benachrichtigungen an","off":"Benachrichtigungen aus","enable":"Benachrichtigungen aktivieren","disable":"Ausschalten","why":"Erhalte Neuigkeiten von NexusCharts und wichtige Hinweise auf deinem Telefon, auch wenn die App geschlossen ist.","home":"Um Benachrichtigungen zu erhalten, öffne NexusCharts über das Symbol auf dem Home-Bildschirm (nicht über Safari).","old":"Dieses Telefon unterstützt keine Benachrichtigungen von Web-Apps. Auf dem iPhone braucht es iOS 16.4 oder neuer.","denied":"Benachrichtigungen sind blockiert. Aktiviere sie wieder in den iPhone-Einstellungen → Mitteilungen → NexusCharts.","done":"Benachrichtigungen aktiviert.","fail":"Benachrichtigungen konnten nicht aktiviert werden. Versuche es erneut.","offdone":"Benachrichtigungen deaktiviert.","ask":"Möchtest du Benachrichtigungen von NexusCharts erhalten?","asksub":"Neuigkeiten, Updates und wichtige Hinweise. Du kannst sie jederzeit im Profil ausschalten.","later":"Nicht jetzt"             }
 };
 function nt(k){return(NT[lang]&&NT[lang][k])||NT.it[k]||k}
 PIC.bell='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg>';
@@ -4173,7 +3918,7 @@ async function pushState(){
   const s=await r.pushManager.getSubscription();
   return s&&Notification.permission==='granted'?'on':'off';
 }
-function pushHeaders(){return{'Content-Type':'application/json',...(FRIEND?{Authorization:'Bearer '+FRIEND}:{}),...(admKey()&&!FRIEND?{'X-Admin-Key':admKey()}:{})}}
+function pushHeaders(){return{'Content-Type':'application/json',...(FRIEND?{Authorization:'Bearer '+FRIEND}:{}),...acctH()}}
 async function pushEnable(){
   try{
     /* la richiesta di permesso deve partire subito dal tocco */
@@ -4236,65 +3981,17 @@ function renderNotif(p){
     g.appendChild(b);
   });
 }
-/* ---------- pagina Invia notifica (solo amministratore) ---------- */
-function renderSend(p){
-  pfSub(p,nt('send'));
-  const stat=document.createElement('div');stat.className='ntstat';stat.innerHTML='<b>…</b><span></span>';stat.lastChild.textContent=nt('devices');p.appendChild(stat);
-  const g=pfGroup(p,'');g.classList.add('pfpad');
-  const ti=document.createElement('input');ti.className='pfin2';ti.placeholder=nt('ttl');ti.maxLength=80;ti.value=PF.ntT||'';g.appendChild(ti);
-  const bo=document.createElement('textarea');bo.className='pfta';bo.placeholder=nt('body');bo.maxLength=300;bo.value=PF.ntB||'';g.appendChild(bo);
-  /* anteprima stile iPhone */
-  const lab=document.createElement('div');lab.className='pfl';lab.textContent=nt('preview');g.appendChild(lab);
-  const pv=document.createElement('div');pv.className='ntprev';
-  pv.innerHTML='<img alt="" src="'+LOGO_SRC+'"><div><div class="nth"><b>NexusCharts</b><span></span></div><div class="ntt"></div><div class="ntb"></div></div>';
-  pv.querySelector('.nth span').textContent=nt('now');g.appendChild(pv);
-  const upd=()=>{PF.ntT=ti.value;PF.ntB=bo.value;pv.querySelector('.ntt').textContent=ti.value||nt('ttl');pv.querySelector('.ntb').textContent=bo.value||nt('body')};
-  ti.oninput=upd;bo.oninput=upd;upd();
-  const go=document.createElement('button');go.className='pfbtn';go.textContent=nt('go');g.appendChild(go);
-  go.onclick=async()=>{
-    if(!ti.value.trim()&&!bo.value.trim())return;
-    if(!confirm(nt('confirm')))return;
-    go.disabled=true;
-    try{const r=await adm('POST','/push',{title:ti.value.trim(),body:bo.value.trim()});msg('✓ '+nt('sent')+': '+r.sent+'/'+r.total);PF.ntT='';PF.ntB='';haptic();PF.keep=true;renderProfile()}
-    catch(e){go.disabled=false;msg(admMsg(e))}
-  };
-  shEl(p,'pfnote',nt('lim'));
-  const hl=document.createElement('div');hl.className='pfl';hl.textContent=nt('hist');p.appendChild(hl);
-  const list=document.createElement('div');list.className='pfclist';p.appendChild(list);
-  adm('GET','/push').then(j=>{
-    stat.firstChild.textContent=j.devices;
-    if(!j.hist||!j.hist.length){shEl(list,'pfnote',nt('none'));return}
-    j.hist.forEach(h=>{
-      const c=document.createElement('div');c.className='pfccard';
-      c.innerHTML='<div class="pfctop"><span class="pfcn"></span><span class="pfcdate"></span></div><div class="pffbtx"></div><div class="pfcmeta"></div>';
-      c.querySelector('.pfcn').textContent=h.title;c.querySelector('.pffbtx').textContent=h.body;
-      c.querySelector('.pfcdate').textContent=new Date(h.ts).toLocaleString(LOC[lang]||'it-IT',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
-      c.querySelector('.pfcmeta').textContent='✓ '+h.sent+'/'+h.total+(h.removed?'  ·  −'+h.removed:'');
-      const acts=document.createElement('div');acts.className='pfacts';
-      const again=document.createElement('button');again.className='pfmini';again.textContent=nt('reuse');
-      again.onclick=()=>{PF.ntT=h.title;PF.ntB=h.body;PF.keep=false;renderProfile()};acts.appendChild(again);
-      const del=document.createElement('button');del.className='pfmini danger';del.textContent=nt('del');
-      del.onclick=async()=>{if(!confirm(nt('delq')))return;try{await adm('DELETE','/push/'+h.id);PF.keep=true;renderProfile()}catch(e){msg(ft('neterr'))}};
-      acts.appendChild(del);c.appendChild(acts);
-      list.appendChild(c);
-    });
-    if(j.hist.length>1){const g2=pfGroup(p,'');pfRow(g2,PIC.reset,nt('delall'),'',async()=>{if(!confirm(nt('delallq')))return;try{await adm('DELETE','/push/all');PF.keep=true;renderProfile()}catch(e){msg(ft('neterr'))}},'danger')}
-  }).catch(()=>{stat.firstChild.textContent='–'});
-}
 /* voci nel Profilo */
 (function(){
   const orig=renderProfile;
   renderProfile=function(){
     const p=$('pf-screen');
     if(PF.page==='notif'){p.innerHTML='';renderNotif(p);return}
-    if(PF.page==='send'){const st=PF.keep?p.scrollTop:0;PF.keep=false;p.innerHTML='';renderSend(p);p.scrollTop=st;return}
     orig();
     if(PF.page)return;
     const rows=[...p.querySelectorAll('.pfrow')];
     const setRow=rows.find(r=>(r.querySelector('.pftx span')||{}).textContent===pt('settings'));
     if(setRow){const tmp=document.createElement('div');const r=pfRow(tmp,PIC.bell,nt('n'),nt('nsub'),()=>pfGo('notif'),'',PCOL.bell);r.classList.add('chev');setRow.after(r)}
-    const inbox=rows.find(r=>(r.querySelector('.pftx span')||{}).textContent===p2('inbox'));
-    if(inbox){const tmp=document.createElement('div');const r=pfRow(tmp,PIC.mega,nt('send'),nt('sendsub'),()=>pfGo('send'),'',PCOL.mega);r.classList.add('chev');inbox.after(r)}
   };
 })();
 
@@ -7599,176 +7296,6 @@ var LOGOUT_T={
   document.addEventListener('click',e=>{if(long&&e.target.closest&&e.target.closest(SEL)){e.preventDefault();e.stopPropagation();long=false}},true);
 })();
 
-/* =====================================================================
-   0.38.0 — PANNELLO AMMINISTRATORE separato dalle impostazioni
-   ===================================================================== */
-var ADT_={
- it:{short:"Amministratore",admin:"Pannello amministratore",adminsub:"Codici, messaggi, notifiche e statistiche",locked:"Sblocca con la tua chiave",unlock:"Sblocca",
-  users:"Utenti attivi",week:"+{n} questa settimana",free:"Codici liberi",total:"su {n} creati",devices:"Notifiche attive",yours:"{n} tuoi",
-  msgs:"Messaggi nuovi",msgtot:"{n} in tutto",sent:"Notifiche inviate",last:"ultima {d}",server:"Server",online:"online · {n} ms",offline:"non raggiungibile",
-  chart:"Nuovi utenti · ultimi 14 giorni",manage:"Gestione",codes:"Codici amici",codessub:"{u} in uso · {f} liberi",inbox:"Messaggi ricevuti",inboxsub:"{n} da leggere",send:"Invia notifica",sendsub:"a {n} telefoni",
-  recent:"Ultimi messaggi",nomsg:"Nessun messaggio.",security:"Sicurezza",lock:"Esci dalla modalità amministratore",lockq:"Uscire dalla modalità amministratore?",lockx:"La chiave verrà tolta da questo dispositivo. Per rientrare dovrai scriverla di nuovo.",lockok:"Esci",cancel:"Annulla",
-  upd:"aggiornato alle {t}",note:"Gli utenti attivi sono i codici già usati su un telefono: non indicano chi è online in questo momento.",never:"mai",today:"oggi"},
- es:{short:"Administrador",admin:"Panel de administrador",adminsub:"Códigos, mensajes, notificaciones y estadísticas",locked:"Desbloquea con tu clave",unlock:"Desbloquear",
-  users:"Usuarios activos",week:"+{n} esta semana",free:"Códigos libres",total:"de {n} creados",devices:"Notificaciones activas",yours:"{n} tuyos",
-  msgs:"Mensajes nuevos",msgtot:"{n} en total",sent:"Notificaciones enviadas",last:"última {d}",server:"Servidor",online:"en línea · {n} ms",offline:"no disponible",
-  chart:"Nuevos usuarios · últimos 14 días",manage:"Gestión",codes:"Códigos de amigos",codessub:"{u} en uso · {f} libres",inbox:"Mensajes recibidos",inboxsub:"{n} por leer",send:"Enviar notificación",sendsub:"a {n} teléfonos",
-  recent:"Últimos mensajes",nomsg:"Ningún mensaje.",security:"Seguridad",lock:"Salir del modo administrador",lockq:"¿Salir del modo administrador?",lockx:"La clave se quitará de este dispositivo. Para volver tendrás que escribirla otra vez.",lockok:"Salir",cancel:"Cancelar",
-  upd:"actualizado a las {t}",note:"Los usuarios activos son los códigos ya usados en un teléfono: no indican quién está conectado ahora.",never:"nunca",today:"hoy"},
- en:{short:"Admin",admin:"Admin panel",adminsub:"Codes, messages, notifications and stats",locked:"Unlock with your key",unlock:"Unlock",
-  users:"Active users",week:"+{n} this week",free:"Free codes",total:"of {n} created",devices:"Notifications on",yours:"{n} yours",
-  msgs:"New messages",msgtot:"{n} in total",sent:"Notifications sent",last:"last {d}",server:"Server",online:"online · {n} ms",offline:"unreachable",
-  chart:"New users · last 14 days",manage:"Manage",codes:"Friend codes",codessub:"{u} in use · {f} free",inbox:"Received messages",inboxsub:"{n} to read",send:"Send notification",sendsub:"to {n} phones",
-  recent:"Latest messages",nomsg:"No messages.",security:"Security",lock:"Leave admin mode",lockq:"Leave admin mode?",lockx:"The key will be removed from this device. To come back you'll have to type it again.",lockok:"Leave",cancel:"Cancel",
-  upd:"updated at {t}",note:"Active users are codes already used on a phone: they don't show who is online right now.",never:"never",today:"today"},
- fr:{short:"Admin",admin:"Panneau administrateur",adminsub:"Codes, messages, notifications et statistiques",locked:"Déverrouille avec ta clé",unlock:"Déverrouiller",
-  users:"Utilisateurs actifs",week:"+{n} cette semaine",free:"Codes libres",total:"sur {n} créés",devices:"Notifications actives",yours:"{n} à toi",
-  msgs:"Nouveaux messages",msgtot:"{n} au total",sent:"Notifications envoyées",last:"dernière {d}",server:"Serveur",online:"en ligne · {n} ms",offline:"injoignable",
-  chart:"Nouveaux utilisateurs · 14 derniers jours",manage:"Gestion",codes:"Codes amis",codessub:"{u} utilisés · {f} libres",inbox:"Messages reçus",inboxsub:"{n} à lire",send:"Envoyer une notification",sendsub:"à {n} téléphones",
-  recent:"Derniers messages",nomsg:"Aucun message.",security:"Sécurité",lock:"Quitter le mode administrateur",lockq:"Quitter le mode administrateur ?",lockx:"La clé sera retirée de cet appareil. Pour revenir, il faudra la saisir à nouveau.",lockok:"Quitter",cancel:"Annuler",
-  upd:"mis à jour à {t}",note:"Les utilisateurs actifs sont les codes déjà utilisés sur un téléphone : ils n'indiquent pas qui est en ligne maintenant.",never:"jamais",today:"aujourd'hui"},de:{"short":"Admin","admin":"Admin-Bereich","adminsub":"Codes, Nachrichten, Benachrichtigungen und Statistiken","locked":"Mit deinem Schlüssel entsperren","unlock":"Entsperren","users":"Aktive Nutzer","week":"+{n} diese Woche","free":"Freie Codes","total":"von {n} erstellten","devices":"Benachrichtigungen an","yours":"{n} deine","msgs":"Neue Nachrichten","msgtot":"{n} insgesamt","sent":"Gesendete Benachrichtigungen","last":"zuletzt {d}","server":"Server","online":"online · {n} ms","offline":"nicht erreichbar","chart":"Neue Nutzer · letzte 14 Tage","manage":"Verwalten","codes":"Freundescodes","codessub":"{u} in Verwendung · {f} frei","inbox":"Empfangene Nachrichten","inboxsub":"{n} zu lesen","send":"Benachrichtigung senden","sendsub":"an {n} Telefone","recent":"Letzte Nachrichten","nomsg":"Keine Nachrichten.","security":"Sicherheit","lock":"Admin-Modus verlassen","lockq":"Admin-Modus verlassen?","lockx":"Der Schlüssel wird von diesem Gerät entfernt. Um zurückzukommen, musst du ihn erneut eingeben.","lockok":"Verlassen","cancel":"Abbrechen","upd":"aktualisiert um {t}","note":"Aktive Nutzer sind Codes, die schon auf einem Telefon verwendet werden: sie zeigen nicht, wer gerade online ist.","never":"nie","today":"heute"}
-};
-function adt(k,o){let s=(ADT_[lang]&&ADT_[lang][k])||ADT_.it[k]||k;if(o)Object.keys(o).forEach(x=>{s=s.split('{'+x+'}').join(o[x])});return s}
-PIC.shield='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.4-7.5 9.5-4.3-1.1-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg>';
-PIC.lock='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>';
-PCOL.shield='#d9a441';PCOL.lock='#ef4444';
-(function(){
-  const st=document.createElement('style');
-  st.textContent=`
-.adcard{position:relative;display:flex;align-items:center;gap:14px;width:100%;margin:6px 0 4px;padding:16px;border-radius:22px;border:1px solid rgba(217,164,65,.45);
- background:linear-gradient(135deg,rgba(217,164,65,.22),rgba(99,102,241,.14) 60%,rgba(34,171,148,.12));color:var(--fg);text-align:left;overflow:hidden}
-.adcard::after{content:'';position:absolute;inset:-40% -10%;background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.10) 50%,transparent 60%);animation:adShine 4.5s ease-in-out infinite;pointer-events:none}
-@keyframes adShine{0%{transform:translateX(-60%)}60%,100%{transform:translateX(60%)}}
-.adcard .adi{width:46px;height:46px;flex:0 0 46px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#d9a441;background:rgba(217,164,65,.16)}
-.adcard .adi svg{width:28px;height:28px}
-.adcard .adt{flex:1;min-width:0}.adcard b{display:block;font-size:17px;font-weight:800}.adcard small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
-.adcard .adch{color:var(--muted);display:flex}.adcard .adch svg{width:18px;height:18px}
-.adcard .pfbadge{margin:0 2px 0 0}
-.adhero{display:flex;align-items:center;gap:12px;padding:8px 2px 4px}
-.adhero .adi{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#d9a441;background:rgba(217,164,65,.16);border:1px solid rgba(217,164,65,.35)}
-.adhero .adi svg{width:30px;height:30px}
-.adhero b{display:block;font-size:21px;font-weight:800}.adhero small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
-.adhero button{margin-left:auto;width:40px;height:40px;padding:0;border-radius:50%;border:1px solid var(--line);background:var(--surf);color:var(--fg);display:flex;align-items:center;justify-content:center}
-.adhero button svg{width:20px;height:20px}.adhero button.busy svg{animation:rot .8s linear infinite}
-.adgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.adst{background:var(--surf);border-radius:18px;padding:14px 14px 12px;border:1px solid var(--glassline);min-height:96px;display:flex;flex-direction:column}
-.adst i{display:flex;align-items:center;gap:7px;font-style:normal;font-size:12.5px;color:var(--muted);font-weight:600}
-.adst i s{width:8px;height:8px;border-radius:50%;background:var(--c,#888);text-decoration:none;flex:0 0 8px}
-.adst b{font-size:30px;font-weight:800;margin-top:8px;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.05}
-.adst small{font-size:12.5px;color:var(--muted);margin-top:auto;padding-top:4px}
-.adst small.up{color:var(--up)}
-.adchart{background:var(--surf);border-radius:18px;padding:14px;margin-top:10px;border:1px solid var(--glassline)}
-.adchart i{font-style:normal;font-size:12.5px;color:var(--muted);font-weight:600}
-.adchart svg{display:block;width:100%;height:96px;margin-top:10px}
-.admsg{display:block;width:100%;margin:0;padding:12px 16px;border:0;background:transparent;color:var(--fg);text-align:left;border-top:1px solid var(--line)}
-.admsg:first-child{border-top:0}
-.admsg b{display:flex;gap:8px;align-items:center;font-size:14.5px}.admsg b em{font-style:normal;font-size:11px;font-weight:700;color:#fff;background:#ef4444;border-radius:6px;padding:1px 6px}
-.admsg span{display:block;font-size:13.5px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.adnote{font-size:12.5px;color:var(--muted);line-height:1.45;padding:12px 6px 4px}
-.adlock{padding:4px 2px}.adlock .pfin2{margin-top:10px}`;
-  document.head.appendChild(st);
-})();
-var ADM={data:null,at:0,busy:false};
-async function admLoad(){
-  if(ADM.busy)return;ADM.busy=true;
-  const t0=Date.now();
-  const ping=fetch(WORKER+'/ping',{cache:'no-store'}).then(r=>r.ok?Date.now()-t0:null).catch(()=>null);
-  const [c,f,p,ms]=await Promise.all([adm('GET','/codes').catch(e=>({__e:e})),adm('GET','/feedback').catch(e=>({__e:e})),adm('GET','/push').catch(e=>({__e:e})),ping]);
-  ADM.busy=false;
-  if(c&&c.__e&&c.__e.status===403){try{localStorage.removeItem('tc_admin')}catch(e){}msg(ft('keybad'));ADM.data=null;if(PF.page==='admin'){PF.keep=true;renderProfile()}return}
-  ADM.data={codes:(c&&c.codes)||null,fb:(f&&f.items)||null,push:(p&&!p.__e)?p:null,ms};ADM.at=Date.now();
-  if(f&&f.items){FBN=f.items.filter(x=>x.status==='new').length;try{fbBadge()}catch(e){}}
-  if(tab==='pf'&&(PF.page==='admin'||!PF.page)){PF.keep=true;renderProfile()}
-}
-function adStat(g,label,val,sub,col,cls){
-  const d=document.createElement('div');d.className='adst';d.style.setProperty('--c',col);
-  d.innerHTML='<i><s></s><span></span></i><b></b><small></small>';
-  d.querySelector('i span').textContent=label;d.querySelector('b').textContent=val;const sm=d.querySelector('small');sm.textContent=sub||'';if(cls)sm.className=cls;
-  g.appendChild(d);return d;
-}
-function adWhen(ts){if(!ts)return adt('never');const d=new Date(ts),n=new Date();if(d.toDateString()===n.toDateString())return adt('today')+' '+d.toLocaleTimeString(LOC[lang]||'it-IT',{hour:'2-digit',minute:'2-digit'});return d.toLocaleDateString(LOC[lang]||'it-IT',{day:'2-digit',month:'short'})}
-function renderAdmin(p){
-  pfSub(p,adt('short'));
-  const hero=document.createElement('div');hero.className='adhero';
-  hero.innerHTML='<span class="adi">'+PIC.shield+'</span><div><b></b><small></small></div>';
-  hero.querySelector('b').textContent=adt('admin');p.appendChild(hero);
-  if(!admKey()){
-    hero.querySelector('small').textContent=adt('locked');
-    shEl(p,'pfnote',ft('keyq'));
-    const g=pfGroup(p,'');g.classList.add('pfpad','adlock');
-    const i=document.createElement('input');i.type='password';i.className='pfin2';i.placeholder=ft('keyph');i.autocomplete='off';g.appendChild(i);
-    const ok=document.createElement('button');ok.className='pfbtn';ok.textContent=adt('unlock');g.appendChild(ok);
-    ok.onclick=async()=>{const k=i.value.trim();if(!k)return;ok.disabled=true;try{await adm('GET','/codes',null,k);localStorage.setItem('tc_admin',k);haptic();ADM.data=null;PF.keep=true;renderProfile();admLoad()}catch(e){ok.disabled=false;msg(admMsg(e))}};
-    return;
-  }
-  const D=ADM.data;
-  hero.querySelector('small').textContent=ADM.at?adt('upd',{t:new Date(ADM.at).toLocaleTimeString(LOC[lang]||'it-IT',{hour:'2-digit',minute:'2-digit'})}):'…';
-  const rb=document.createElement('button');rb.innerHTML=PIC.refresh;rb.setAttribute('aria-label','refresh');if(ADM.busy)rb.classList.add('busy');
-  rb.onclick=()=>{rb.classList.add('busy');haptic();admLoad()};hero.appendChild(rb);
-  if(!D||Date.now()-ADM.at>20000)setTimeout(admLoad,0);
-  const cs=D&&D.codes||[],used=cs.filter(c=>c.bound),wk=Date.now()-7*864e5,newW=used.filter(c=>c.used&&c.used>=wk).length;
-  const fb=D&&D.fb||[],fbNew=fb.filter(x=>x.status==='new').length,ph=D&&D.push,hist=ph&&ph.hist||[];
-  const grid=document.createElement('div');grid.className='adgrid';p.appendChild(grid);
-  const dash=v=>D?v:'–';
-  adStat(grid,adt('users'),dash(used.length),D?adt('week',{n:newW}):'','#22ab94',newW?'up':'');
-  adStat(grid,adt('free'),dash(cs.length-used.length),D?adt('total',{n:cs.length}):'','#f5b301');
-  adStat(grid,adt('devices'),ph?ph.devices:'–',ph?adt('yours',{n:ph.owner||0}):'','#3b82f6');
-  adStat(grid,adt('msgs'),dash(fbNew),D?adt('msgtot',{n:fb.length}):'','#ef4444');
-  adStat(grid,adt('sent'),ph?hist.length:'–',ph&&hist[0]?adt('last',{d:adWhen(hist[0].ts)}):'','#a78bfa');
-  adStat(grid,adt('server'),D?(D.ms!=null?'OK':'—'):'–',D?(D.ms!=null?adt('online',{n:D.ms}):adt('offline')):'',D&&D.ms!=null?'#22ab94':'#9ca3af').querySelector('b').style.color=D&&D.ms!=null?'var(--up)':'var(--muted)';
-  /* grafico nuovi utenti */
-  const ch=document.createElement('div');ch.className='adchart';ch.innerHTML='<i></i>';ch.firstChild.textContent=adt('chart');
-  const days=[];const d0=new Date();d0.setHours(0,0,0,0);
-  for(let i=13;i>=0;i--){const a=d0.getTime()-i*864e5;days.push({a,n:used.filter(c=>c.used>=a&&c.used<a+864e5).length})}
-  const mx=Math.max(1,...days.map(x=>x.n)),W=320,H=96,bw=W/14;
-  let svg='<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">';
-  days.forEach((x,i)=>{const h=x.n?Math.max(6,(H-18)*x.n/mx):3;svg+='<rect x="'+(i*bw+3).toFixed(1)+'" y="'+(H-14-h).toFixed(1)+'" width="'+(bw-6).toFixed(1)+'" height="'+h.toFixed(1)+'" rx="3" fill="'+(x.n?'#22ab94':'var(--glasssel)')+'"/>';
-    if(x.n)svg+='<text x="'+(i*bw+bw/2).toFixed(1)+'" y="'+(H-18-h).toFixed(1)+'" font-size="10" text-anchor="middle" fill="var(--fg)">'+x.n+'</text>';
-    if(i%2===0)svg+='<text x="'+(i*bw+bw/2).toFixed(1)+'" y="'+(H-2)+'" font-size="9" text-anchor="middle" fill="var(--muted)">'+new Date(x.a).getDate()+'</text>'});
-  ch.insertAdjacentHTML('beforeend',svg+'</svg>');p.appendChild(ch);
-  /* gestione */
-  let g=pfGroup(p,adt('manage'));
-  pfRow(g,PIC.codes,adt('codes'),D?adt('codessub',{u:used.length,f:cs.length-used.length}):'',()=>pfGo('codes')).classList.add('chev');
-  const ir=pfRow(g,PIC.inbox,adt('inbox'),D?adt('inboxsub',{n:fbNew}):'',()=>pfGo('inbox'));ir.classList.add('chev');
-  if(fbNew){const bd=document.createElement('span');bd.className='pfbadge';bd.textContent=fbNew;ir.appendChild(bd)}
-  pfRow(g,PIC.mega,adt('send'),ph?adt('sendsub',{n:ph.devices}):'',()=>pfGo('send'),'',PCOL.mega).classList.add('chev');
-  /* ultimi messaggi */
-  g=pfGroup(p,adt('recent'));
-  if(D&&!fb.length)shEl(g,'pfnote',adt('nomsg'));
-  fb.slice(0,3).forEach(x=>{
-    const b=document.createElement('button');b.className='admsg';
-    b.innerHTML='<b></b><span></span>';
-    const tl=b.firstChild;tl.textContent=(x.who||x.contact||'')+(x.who||x.contact?' · ':'')+adWhen(x.ts);
-    if(x.status==='new'){const e=document.createElement('em');e.textContent='NEW';tl.prepend(e)}
-    b.lastChild.textContent=x.text||x.msg||x.body||'';b.onclick=()=>pfGo('inbox');g.appendChild(b);
-  });
-  /* sicurezza */
-  g=pfGroup(p,adt('security'));
-  pfRow(g,PIC.lock,adt('lock'),'',()=>ncConfirm({title:adt('lockq'),text:adt('lockx'),ok:adt('lockok'),cancel:adt('cancel')}).then(y=>{if(!y)return;try{localStorage.removeItem('tc_admin')}catch(e){}ADM.data=null;FBN=0;try{fbBadge()}catch(e){}PF.page=null;renderProfile()}),'danger');
-  shEl(p,'adnote',adt('note'));
-}
-(function(){
-  const orig=renderProfile;
-  renderProfile=function(){
-    const p=$('pf-screen');
-    if(PF.page==='admin'){const st=PF.keep?p.scrollTop:0;PF.keep=false;p.innerHTML='';renderAdmin(p);p.scrollTop=st;return}
-    orig();
-    if(PF.page||FRIEND)return;
-    /* tolgo il gruppo "Amici" (codici, messaggi, invia notifica): ora stanno nel pannello */
-    const codesRow=[...p.querySelectorAll('.pfrow')].find(r=>(r.querySelector('.pftx span')||{}).textContent===ft('codes'));
-    if(codesRow){const grp=codesRow.closest('.pfg');const lab=grp&&grp.previousElementSibling;if(lab&&lab.classList.contains('pfl'))lab.remove();if(grp)grp.remove()}
-    /* scheda in evidenza sotto l'intestazione */
-    const card=document.createElement('button');card.className='adcard';
-    card.innerHTML='<span class="adi">'+PIC.shield+'</span><span class="adt"><b></b><small></small></span><span class="adch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>';
-    card.querySelector('b').textContent=adt('admin');
-    const D=ADM.data,used=D&&D.codes?D.codes.filter(c=>c.bound).length:null;
-    card.querySelector('small').textContent=!admKey()?adt('locked'):(used!=null?adt('users')+': '+used:adt('adminsub'));
-    if(admKey()&&FBN){const bd=document.createElement('span');bd.className='pfbadge';bd.textContent=FBN;card.insertBefore(bd,card.lastChild)}
-    card.onclick=()=>{haptic();pfGo('admin')};
-    const head=p.querySelector('.pfhead');if(head)head.after(card);else p.prepend(card);
-  };
-})();
-setTimeout(()=>{if(!FRIEND&&admKey())admLoad()},4000);
 
 /* elenco indicatori integrati: [id, nome, categoria, codice] */
 var IND_LIB=[
@@ -8201,17 +7728,19 @@ function isdVis(body,ind){
 pageIndSet=function(b,ind){setTimeout(()=>openIndSet(ind),0)};
 
 /* =====================================================================
-   0.40.0: chi è online adesso + pannello admin aggiornato in diretta
+   0.40.0: segnale di presenza (app aperta)
    ===================================================================== */
 /* ---------- segnale di presenza: ogni minuto mentre l'app è aperta ---------- */
 var PRES={t:0,last:0};
 function presPlat(){const u=navigator.userAgent||'';return /iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)?'ios':/Android/.test(u)?'android':'desktop'}
 function presOn(){const s=$('shell');return !!(s&&!s.hidden)}
+/* 1.1.1: per gli account, il server riconosce lo username dalla sessione */
+function acctH(){try{const t=window.NXACCT&&NXACCT()&&window.NXAuth&&NXAuth.token();return t?{'X-Account':t}:{}}catch(e){return {}}}
 function presSend(off){
   if(!presOn())return;
   const h={'Content-Type':'application/json'};
   if(FRIEND)h.Authorization='Bearer '+FRIEND;
-  const k=admKey();if(k)h['X-Admin-Key']=k;
+  Object.assign(h,acctH());
   PRES.last=Date.now();
   try{fetch(WORKER+'/hello',{method:'POST',headers:h,body:JSON.stringify({dev:devId(),plat:presPlat(),ver:VERSION,off:!!off}),keepalive:true,cache:'no-store'}).catch(()=>{})}catch(e){}
 }
@@ -8219,166 +7748,6 @@ setInterval(()=>{if(!document.hidden)presSend(false)},60000);
 document.addEventListener('visibilitychange',()=>{presSend(document.hidden)});
 window.addEventListener('pagehide',()=>presSend(true));
 (function(){const o=start;start=function(){const r=o.apply(this,arguments);setTimeout(()=>presSend(false),2500);return r}})();
-
-/* ---------- testi ---------- */
-Object.assign(ADT_.it,{users:"Codici in uso",live:"Online ora",livesub:"{d} oggi · {w} in 7 giorni",livenone:"Nessuno in questo momento",liveon:"In diretta",nodb:"Collega il database (guida in chat)",
-  you:"Tu",guest:"Ospite",since:"da {m}",justnow:"adesso",min:"{n} min",hrs:"{n} h",plat_ios:"iPhone",plat_android:"Android",plat_desktop:"Computer",plat_other:"Altro",
-  barn:"{n} nuovi utenti",bar1:"1 nuovo utente",bar0:"Nessun nuovo utente",
-  updlive:"aggiornato alle {t}",
-  note:"Online ora: chi ha l'app aperta in questo momento (segnale ogni minuto). Oggi e 7 giorni: dispositivi diversi che hanno aperto l'app. Codici in uso: codici già collegati a un telefono."});
-Object.assign(ADT_.es,{users:"Códigos en uso",live:"En línea ahora",livesub:"{d} hoy · {w} en 7 días",livenone:"Nadie en este momento",liveon:"En directo",nodb:"Conecta la base de datos (guía en el chat)",
-  you:"Tú",guest:"Invitado",since:"desde hace {m}",justnow:"ahora",min:"{n} min",hrs:"{n} h",plat_ios:"iPhone",plat_android:"Android",plat_desktop:"Ordenador",plat_other:"Otro",
-  barn:"{n} usuarios nuevos",bar1:"1 usuario nuevo",bar0:"Ningún usuario nuevo",
-  updlive:"actualizado a las {t}",
-  note:"En línea ahora: quien tiene la app abierta en este momento (señal cada minuto). Hoy y 7 días: dispositivos distintos que han abierto la app. Códigos en uso: códigos ya vinculados a un teléfono."});
-Object.assign(ADT_.en,{users:"Codes in use",live:"Online now",livesub:"{d} today · {w} in 7 days",livenone:"Nobody right now",liveon:"Live",nodb:"Connect the database (guide in chat)",
-  you:"You",guest:"Guest",since:"for {m}",justnow:"just now",min:"{n} min",hrs:"{n} h",plat_ios:"iPhone",plat_android:"Android",plat_desktop:"Desktop",plat_other:"Other",
-  barn:"{n} new users",bar1:"1 new user",bar0:"No new users",
-  updlive:"updated at {t}",
-  note:"Online now: who has the app open right now (signal every minute). Today and 7 days: different devices that opened the app. Codes in use: codes already linked to a phone."});
-Object.assign(ADT_.fr,{users:"Codes utilisés",live:"En ligne",livesub:"{d} aujourd'hui · {w} sur 7 jours",livenone:"Personne en ce moment",liveon:"En direct",nodb:"Connecte la base de données (guide dans le chat)",
-  you:"Toi",guest:"Invité",since:"depuis {m}",justnow:"à l'instant",min:"{n} min",hrs:"{n} h",plat_ios:"iPhone",plat_android:"Android",plat_desktop:"Ordinateur",plat_other:"Autre",
-  barn:"{n} nouveaux utilisateurs",bar1:"1 nouvel utilisateur",bar0:"Aucun nouvel utilisateur",
-  updlive:"mis à jour à {t}",
-  note:"En ligne : qui a l'app ouverte en ce moment (signal chaque minute). Aujourd'hui et 7 jours : appareils différents qui ont ouvert l'app. Codes utilisés : codes déjà liés à un téléphone."});
-Object.assign(ADT_.de,{users:"Codes in Verwendung",live:"Jetzt online",livesub:"{d} heute · {w} in 7 Tagen",livenone:"Gerade niemand",liveon:"Live",nodb:"Datenbank verbinden (Anleitung im Chat)",
-  you:"Du",guest:"Gast",since:"seit {m}",justnow:"gerade eben",min:"{n} Min.",hrs:"{n} Std.",plat_ios:"iPhone",plat_android:"Android",plat_desktop:"Computer",plat_other:"Sonstige",
-  barn:"{n} neue Nutzer",bar1:"1 neuer Nutzer",bar0:"Keine neuen Nutzer",
-  updlive:"aktualisiert um {t}",
-  note:"Jetzt online: wer die App gerade geöffnet hat (Signal jede Minute). Heute und 7 Tage: verschiedene Geräte, die die App geöffnet haben. Codes in Verwendung: Codes, die schon mit einem Telefon verbunden sind."});
-
-/* ---------- stile ---------- */
-(function(){
-  const st=document.createElement('style');
-  st.textContent=`
-.adlive{grid-column:1/-1;min-height:0}
-.adlive .adlh{display:flex;align-items:center;gap:10px}
-.adlive b{margin-top:6px}
-.adpulse{position:relative;width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:var(--up)}
-.adpulse::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--up);opacity:0;animation:adPulse 1.8s ease-out infinite}
-.adpulse.off{background:var(--faint)}.adpulse.off::after{display:none}
-@keyframes adPulse{0%{transform:scale(.4);opacity:.9}100%{transform:scale(1.5);opacity:0}}
-.adlv{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--up);background:color-mix(in srgb,var(--up) 14%,transparent);padding:3px 8px;border-radius:999px;display:flex;align-items:center;gap:6px}
-.adlv::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 1s ease-in-out infinite alternate}
-.adul{display:flex;flex-direction:column;gap:6px;margin-top:10px}
-.adu{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:var(--surf2)}
-.adu .av{width:30px;height:30px;flex:0 0 30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;background:var(--c,#3b82f6)}
-.adu .ut{flex:1;min-width:0}.adu .ut b{display:block;font-size:14px;margin:0;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0}
-.adu .ut small{display:block;font-size:12px;color:var(--muted);padding:0;margin-top:1px}
-.adu .dot{width:8px;height:8px;border-radius:50%;background:var(--up)}
-.adnum{transition:transform .25s}.adnum.bump{transform:scale(1.12)}
-.adchart{position:relative}
-.adchart svg .col{cursor:pointer}
-.adtip{position:absolute;transform:translate(-50%,-100%);padding:7px 10px;border-radius:10px;background:var(--fg);color:var(--bg);font-size:12.5px;font-weight:700;white-space:nowrap;pointer-events:none;box-shadow:0 6px 18px var(--shadow);animation:adTip .18s ease}
-.adtip small{display:block;font-weight:500;opacity:.7;font-size:11px;margin-top:1px}
-.adtip::after{content:'';position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:var(--fg)}
-@keyframes adTip{from{opacity:0;transform:translate(-50%,-90%)}to{opacity:1;transform:translate(-50%,-100%)}}`;
-  document.head.appendChild(st);
-})();
-
-/* ---------- dati in diretta ---------- */
-var ADL={data:null,ms:null,at:0,busy:false,tm:0,full:0};
-function adMidnight(){const d=new Date();d.setHours(0,0,0,0);return d.getTime()}
-async function admLive(){
-  if(ADL.busy||!admKey())return;ADL.busy=true;
-  const t0=Date.now();
-  const ping=fetch(WORKER+'/ping',{cache:'no-store'}).then(r=>r.ok?Date.now()-t0:null).catch(()=>null);
-  const lv=adm('GET','/live?day='+adMidnight()).catch(()=>null);
-  const [ms,d]=await Promise.all([ping,lv]);
-  ADL.busy=false;ADL.ms=ms;if(d)ADL.data=d;ADL.at=Date.now();
-  adLivePaint();
-}
-function adAgo(ms){const m=Math.floor(ms/60000);if(m<1)return adt('justnow');if(m<60)return adt('min',{n:m});return adt('hrs',{n:Math.floor(m/60)})}
-function adWho(w){
-  if(w==='owner')return{n:adt('you'),c:'#d9a441'};
-  if(w==='guest')return{n:adt('guest'),c:'#6b7280'};
-  const cs=ADM.data&&ADM.data.codes||[],x=cs.find(c=>c.code===w);
-  const pal=['#3b82f6','#22ab94','#a78bfa','#f97316','#ec4899','#14b8a6','#eab308'];let h=0;for(const ch of String(w))h=(h*31+ch.charCodeAt(0))>>>0;
-  return{n:(x&&x.name)||w,c:pal[h%pal.length]};
-}
-function adSet(el,v){if(!el)return;v=String(v);if(el.textContent!==v){el.textContent=v;el.classList.add('bump');setTimeout(()=>el.classList.remove('bump'),250)}}
-function adLivePaint(){
-  const E=ADL.el;if(!E||!document.body.contains(E.tile))return;
-  const D=ADL.data;
-  if(D&&D.nodb){adSet(E.num,'–');E.sub.textContent=adt('nodb');E.dot.classList.add('off');E.list.innerHTML='';}
-  else if(D){
-    const on=D.online||[];
-    adSet(E.num,on.length);E.dot.classList.toggle('off',!on.length);
-    E.sub.textContent=adt('livesub',{d:D.today||0,w:D.week||0});
-    E.list.innerHTML='';
-    if(!on.length){const s=document.createElement('small');s.textContent=adt('livenone');s.style.cssText='color:var(--muted);font-size:12.5px';E.list.appendChild(s)}
-    on.forEach(u=>{
-      const w=adWho(u.who),r=document.createElement('div');r.className='adu';
-      r.innerHTML='<span class="av"></span><span class="ut"><b></b><small></small></span><span class="dot"></span>';
-      r.querySelector('.av').style.setProperty('--c',w.c);r.querySelector('.av').textContent=(w.n||'?').trim().charAt(0).toUpperCase();
-      r.querySelector('b').textContent=w.n;
-      r.querySelector('small').textContent=[adt('plat_'+(u.plat||'other')),u.ver?'v'+u.ver:'',adt('since',{m:adAgo((D.now||Date.now())-(u.since||u.ts))})].filter(Boolean).join(' · ');
-      E.list.appendChild(r);
-    });
-  }
-  if(E.srv){const ok=ADL.ms!=null;adSet(E.srvB,ok?'●':'○');E.srvB.style.color=ok?'var(--up)':'var(--muted)';E.srvS.textContent=ok?adt('online',{n:ADL.ms}):adt('offline');E.srv.style.setProperty('--c',ok?'#22ab94':'#9ca3af')}
-  if(E.upd)E.upd.textContent=adt('updlive',{t:new Date(ADL.at).toLocaleTimeString(LOC[lang]||'it-IT',{hour:'2-digit',minute:'2-digit',second:'2-digit'})});
-}
-/* aggiornamento automatico mentre il pannello è aperto */
-function adLiveLoop(){
-  clearTimeout(ADL.tm);
-  const open=tab==='pf'&&PF.page==='admin'&&!document.hidden&&admKey()&&ADL.el&&document.body.contains(ADL.el.tile);
-  if(!open)return;
-  admLive();
-  if(Date.now()-ADL.full>45000){ADL.full=Date.now();setTimeout(admLoad,800)}
-  ADL.tm=setTimeout(adLiveLoop,5000);
-}
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(adLiveLoop,300)});
-
-/* ---------- il pannello: riquadro "Online ora", server live, grafico toccabile ---------- */
-(function(){
-  const orig=renderAdmin;
-  renderAdmin=function(p){
-    orig(p);
-    if(!admKey())return;
-    const grid=p.querySelector('.adgrid');if(!grid)return;
-    /* riquadro grande "Online ora" in cima */
-    const t=document.createElement('div');t.className='adst adlive';t.style.setProperty('--c','#22ab94');
-    t.innerHTML='<div class="adlh"><span class="adpulse off"></span><i style="font-style:normal"></i><span class="adlv"></span></div><b class="adnum">–</b><small></small><div class="adul"></div>';
-    t.querySelector('i').textContent=adt('live');t.querySelector('i').style.cssText='font-size:12.5px;color:var(--muted);font-weight:600';
-    t.querySelector('.adlv').textContent=adt('liveon');
-    grid.prepend(t);
-    const st=[...grid.querySelectorAll('.adst')],srv=st[st.length-1];
-    ADL.el={tile:t,num:t.querySelector('b'),sub:t.querySelector('small'),dot:t.querySelector('.adpulse'),list:t.querySelector('.adul'),
-      srv,srvB:srv.querySelector('b'),srvS:srv.querySelector('small'),upd:p.querySelector('.adhero small')};
-    adLivePaint();
-    /* grafico: tocca una colonna per vedere il numero */
-    const ch=p.querySelector('.adchart');
-    if(ch){
-      const svg=ch.querySelector('svg'),cs=ADM.data&&ADM.data.codes||[],used=cs.filter(c=>c.bound);
-      const d0=new Date();d0.setHours(0,0,0,0);const days=[];
-      for(let i=13;i>=0;i--){const a=d0.getTime()-i*864e5;days.push({a,n:used.filter(c=>c.used>=a&&c.used<a+864e5).length})}
-      const W=320,H=96,bw=W/14,rects=[...svg.querySelectorAll('rect')];
-      days.forEach((x,i)=>{
-        const hit=document.createElementNS('http://www.w3.org/2000/svg','rect');
-        hit.setAttribute('x',(i*bw).toFixed(1));hit.setAttribute('y','0');hit.setAttribute('width',bw.toFixed(1));hit.setAttribute('height',String(H));hit.setAttribute('fill','transparent');hit.setAttribute('class','col');
-        hit.addEventListener('click',e=>{
-          e.stopPropagation();haptic();
-          const old=ch.querySelector('.adtip');const same=old&&old.dataset.i==String(i);if(old)old.remove();
-          rects.forEach((r,k)=>r.style.opacity='');
-          if(same)return;
-          rects.forEach((r,k)=>{if(k!==i)r.style.opacity='.35'});
-          const tip=document.createElement('div');tip.className='adtip';tip.dataset.i=i;
-          tip.textContent=x.n===0?adt('bar0'):x.n===1?adt('bar1'):adt('barn',{n:x.n});
-          const sm=document.createElement('small');sm.textContent=new Date(x.a).toLocaleDateString(LOC[lang]||'it-IT',{weekday:'short',day:'numeric',month:'short'});tip.appendChild(sm);
-          const sb=svg.getBoundingClientRect(),cb=ch.getBoundingClientRect(),r=rects[i].getBoundingClientRect();
-          let left=r.left+r.width/2-cb.left;left=Math.max(60,Math.min(cb.width-60,left));
-          tip.style.left=left+'px';tip.style.top=(r.top-cb.top-6)+'px';
-          ch.appendChild(tip);
-        });
-        svg.appendChild(hit);
-      });
-      ch.addEventListener('click',()=>{const o=ch.querySelector('.adtip');if(o)o.remove();rects.forEach(r=>r.style.opacity='')});
-    }
-    ADL.full=ADM.at||0;
-    clearTimeout(ADL.tm);ADL.tm=setTimeout(adLiveLoop,ADL.data?1500:50);
-  };
-})();
 
 /* =====================================================================
    0.41.0: tutti i timeframe (secondi, minuti, ore, giorni, settimane, mesi)
@@ -8644,7 +8013,7 @@ function onboardingDone(){try{var v=JSON.parse(get(KEY_ONBOARDING)||'null');retu
 function markOnboarding(stato){set(KEY_ONBOARDING,JSON.stringify({stato:stato,quando:new Date().toISOString()}));}
 var FIRST=!onboardingDone();
 /* Design 3.0: il benvenuto compare una volta a TUTTI, anche a chi era gia' collegato.
-   Non legge e non tocca codice amico, credenziali, chiave admin o altri dati salvati. */
+   Non legge e non tocca codice amico, credenziali o altri dati salvati. */
 
 /* ---------- markup e stile ---------- */
 var st=document.createElement('style');st.id='nx3css';st.textContent=NX3_CSS;document.head.appendChild(st);
@@ -9649,36 +9018,14 @@ else{
   B+'.pfmini.on{border-color:transparent}'+
   B+'.pfseg{background:transparent;border:1px solid var(--line);border-radius:999px}'+
   B+'.pfseg button{border-radius:999px}'+
-  B+'.pfccard{border:1px solid var(--line)}'+
-  B+'.pfccode{font-family:var(--d3m);font-weight:600;letter-spacing:.18em}'+
-  B+'.pfstats div{background:transparent;border:1px solid var(--line)}'+
-  B+'.pfstats b{font-family:var(--d3m);font-weight:500;letter-spacing:-.02em}'+
-  /* parte amministratore: pillola console con la manopola dorata, come Collegati */
-  B+'.adcard{background:transparent!important;border:1px solid var(--d3gl)!important;border-radius:22px!important}'+
-  B+'.adcard::after{background:linear-gradient(100deg,transparent 44%,rgba(207,165,81,.12) 50%,transparent 56%)}'+
-  B+'.adcard .adi,'+B+'.adhero .adi{position:relative;border-radius:50%;background:var(--gold);color:var(--ongold);overflow:visible}'+
-  B+'.adcard .adi::before{content:"";position:absolute;left:-6px;top:-6px;right:-6px;bottom:-6px;border-radius:50%;border:1px dashed var(--d3gl);animation:d3turn 14s linear infinite}'+
-  B+'.adcard .adch{transform:rotate(-45deg);transition:transform .22s cubic-bezier(.2,.9,.3,1.2)}'+
-  B+'.adcard:active .adch{transform:none}'+
-  B+'.adst,'+B+'.adchart{background:transparent;border:1px solid var(--line);border-radius:18px}'+
-  B+'.adst i,'+B+'.adchart i{font-family:var(--d3m);font-size:10px;letter-spacing:.14em;text-transform:uppercase}'+
-  B+'.adnum{font-family:var(--d3m);font-weight:500;letter-spacing:-.03em}'+
-  B+'.adu{border:1px solid var(--line);background:transparent}'+
-  B+'.pfbadge{font-family:var(--d3m)}'+
-  L+'.pfstats div:nth-child(1) b{color:var(--goldfg)!important}'+
-  L+'.pfstats div:nth-child(2) b{color:#0e8571!important}'+
-  L+'.pfstats div:nth-child(3) b{color:#5f636b!important}'+
   /* testi lunghi su schermi piccoli (de/es/fr a 320 punti): vanno a capo invece di uscire */
   B+'#dbantxt{line-height:1.2;overflow-wrap:anywhere;padding:6px 0}'+
-  B+'.adcard b,'+B+'.adcard small{overflow-wrap:anywhere;hyphens:auto}'+
   'body .irow .it{overflow-wrap:anywhere;hyphens:auto}'+
   'body .htiles{grid-template-columns:repeat(2,minmax(0,1fr))}'+
   'body .htiles.three{grid-template-columns:repeat(3,minmax(0,1fr))}'+
   'body .htile>span{max-width:100%;overflow-wrap:anywhere;hyphens:auto}'+
-  B+'.adlive .adlh i{flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'+
-  B+'.adlv{flex:0 0 auto}'+
   '@media (max-width:340px){'+B+'#sympill .ghost{display:none}'+B+'#wlhdt{font-size:27px}'+B+'#wlhd .d3orb{width:124px;right:-34px}'+B+'#wlhd .d3sat{right:26px}'+B+'.tab{font-size:8.5px;letter-spacing:.1em}'+B+'.pfname,'+B+'.pftitle{font-size:26px}}'+
-  '@media (prefers-reduced-motion:reduce){'+B+'.tab.on::after,'+B+'.pfhead::after,'+B+'.pfhead::before,'+B+'#wlhd .d3sat,'+B+'#wlhd .d3eye i,'+B+'.adcard .adi::before{animation:none!important}'+'body .chev::after,'+B+'.adcard .adch{transition:none}}';
+  '@media (prefers-reduced-motion:reduce){'+B+'.tab.on::after,'+B+'.pfhead::after,'+B+'.pfhead::before,'+B+'#wlhd .d3sat,'+B+'#wlhd .d3eye i{animation:none!important}'+'body .chev::after{transition:none}}';
   var st=document.createElement('style');st.id='d3innercss';st.textContent=css;document.head.appendChild(st);
 
   /* intestazione della watchlist: solo testo e decorazione, nessun comando nuovo */
@@ -9708,7 +9055,7 @@ else{
    Barra in basso: un solo satellite che passa da una scheda all'altra con un arco.
    Mini e Bar Replay: capsule con la manopola come il pulsante dell'accesso.
    Menu (hub, indicatori, disegni, altro, editor, alert): schede a capsula con anello e freccia diagonale.
-   Profilo e admin: sistema orbitale intorno al logo, righe a capsula, pannello admin come pulsante dorato.
+   Profilo: sistema orbitale intorno al logo, righe a capsula.
    Nessun id cambiato, nessuna funzione tolta, nessun dato salvato nuovo. Il grafico (candele) non si tocca. */
 (function(){
   var B='body.inapp ',L='html[data-theme="light"] body.inapp ';
@@ -9858,34 +9205,12 @@ ${B}.pfrow .pfic::after{content:"";position:absolute;right:-1px;top:3px;width:5p
 ${B}.pfrow.chev::after{position:absolute;right:18px;top:50%;margin:-7px 0 0!important}
 ${B}.pfrow.chev:active::after{transform:translate(3px,-3px)}
 ${B}.pfrow:not(.chev)::after{display:none}
-${B}.pfrow .pfbadge{position:absolute;right:42px;top:50%;transform:translateY(-50%)}
 ${B}.pfrow.danger{justify-content:center;padding:8px 18px!important;border-color:rgba(242,54,69,.4)!important}
 ${B}.pfrow.danger .pfic::after{display:none}
 ${B}.pfrow.pflang{padding-right:18px!important}
-${B}.pfstats{gap:10px}
-${B}.pfstats div{position:relative;aspect-ratio:1/1;max-height:118px;border-radius:50%!important;justify-content:center;align-items:center;padding:6px}
-${B}.pfstats div::before{content:"";position:absolute;left:-4px;right:-4px;top:28%;bottom:28%;border-radius:50%;border:1px solid var(--d3o);transform:rotate(-18deg);pointer-events:none}
-${B}.pfstats span{font-family:var(--d3m);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;max-width:100%;overflow-wrap:anywhere;text-align:center}
-/* admin: pulsante dorato con la manopola, schede console */
-${B}.adcard{border-radius:999px!important;min-height:70px;padding:8px 70px 8px 8px!important;border:1.5px solid var(--gold)!important}
-${B}.adcard .adch{position:absolute;right:6px;top:50%;width:52px;height:52px;margin-top:-26px;border-radius:50%;background:var(--gold);color:var(--ongold);display:grid;place-items:center;transform:none!important;transition:transform .42s ${EASE}}
-${B}.adcard .adch::before{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px dashed var(--d3gl);animation:d3turn 9s linear infinite}
-${B}.adcard .adch svg{display:none}
-${B}.adcard .adch::after{content:"";width:17px;height:17px;background:currentColor;transition:transform .42s ${EASE};${M(ARR)}}
-${B}.adcard:active .adch{transform:translateX(-4px) scale(.92)!important}
-${B}.adcard:active .adch::after{transform:rotate(45deg)}
-${B}.adcard .adi{background:transparent!important;color:var(--goldfg)!important;border:1px solid var(--d3gl)}
-${B}.adcard .pfbadge{margin-left:auto}
-${B}.adhero{position:relative;padding:10px 4px 8px}
-${B}.adhero .adi{box-shadow:0 0 0 5px var(--bg),0 0 0 6px var(--d3gl)}
-${B}.adgrid{gap:10px}
-${B}.adst{position:relative;border-radius:24px;overflow:hidden}
-${B}.adst::after{content:"";position:absolute;right:-30px;top:-22px;width:96px;height:56px;border-radius:50%;border:1px solid var(--d3o);transform:rotate(-16deg);pointer-events:none}
-${B}.adst i s{box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--c)}
-${B}.adst b{font-weight:500}
 @media (max-width:340px){${B}#d3sum{height:118px}${B}#d3sumc b{font-size:21px}${B}.pfhead .d3sys{width:190px;height:130px}${B}#d3cats button{padding:0 12px 0 10px;letter-spacing:.1em}}
 @media (min-width:700px){${B}#d3sum{height:150px;margin:8px 18px 4px}}
-@media (prefers-reduced-motion:reduce){${B}#d3tsat b,${B}#d3cats button.on i,${B}#mini .d3knob::before,${B}#rpbar #rpplay::after,${B}.pfhead .d3sys .r1,${B}.pfhead .d3sys .r2,${B}.adcard .adch::before,${B}#d3sum .st.top circle.h,body #hub:not([hidden])>*{animation:none!important}${B}#d3sum .st{transition:none}}
+@media (prefers-reduced-motion:reduce){${B}#d3tsat b,${B}#d3cats button.on i,${B}#mini .d3knob::before,${B}#rpbar #rpplay::after,${B}.pfhead .d3sys .r1,${B}.pfhead .d3sys .r2,${B}#d3sum .st.top circle.h,body #hub:not([hidden])>*{animation:none!important}${B}#d3sum .st{transition:none}}
 `;
   var st=document.createElement('style');st.id='d3inner2css';st.textContent=css;document.head.appendChild(st);
   var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
@@ -10433,12 +9758,11 @@ ${B}#pf-screen.d3main .pfrow:active .pfic::before{opacity:1;transform:scale(1) r
   if(!wireLP()){var iv=setInterval(function(){if(wireLP())clearInterval(iv)},300)}
   try{var prev=NXAPP.onLang;NXAPP.onLang=function(k){try{prev&&prev(k)}catch(e){}closeCtx();setTimeout(function(){try{if(document.body.classList.contains('inapp')&&INST.length)renderWL()}catch(e){}var e2=document.getElementById('d3srch');if(e2&&!e2.hidden){fillTexts();drawFilters();draw(false)}},40)}}catch(e){}
 })();
-/* ---------- 0.45.0: ridisegno interno DESIGN 3.0 (quarta parte: indicatori, editor, Bar Replay, admin) ----------
+/* ---------- 0.45.0: ridisegno interno DESIGN 3.0 (quarta parte: indicatori, editor, Bar Replay) ----------
    Indicatori: testata con l'orbita (ogni indicatore sul grafico e' un satellite), ricerca a capsula, sezioni numerate
    in stile console, righe a capsula con l'icona nell'anello, stella dei preferiti nel cerchio, freccia diagonale.
    Editor: testata con orbita, barra a capsule, salva dorato con la manopola, area del codice invariata (stesso font e misure).
    Bar Replay: capsula alta con comandi grandi, play dorato con la manopola, spia console con avanzamento sull'orbita.
-   Admin: testata orbitale, «Online ora» come sistema con un satellite per persona online, cerchi per i numeri.
    Nessun id cambiato, nessuna funzione tolta, nessun dato salvato nuovo, nessun dato in piu' mostrato.
    Le animazioni hanno nomi propri (d3i4*) per non toccare quelle dell'accesso. */
 (function(){
@@ -10550,49 +9874,6 @@ ${B}#d3rpk u::before{content:"";position:absolute;left:0;right:0;top:5px;height:
 ${B}#d3rpk u s{position:absolute;left:0;top:5px;height:1px;background:var(--goldfg);width:var(--p,0%);text-decoration:none}
 ${B}#d3rpk u b{position:absolute;top:3px;left:var(--p,0%);width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--d3sat);box-shadow:0 0 6px var(--d3sat);transition:left .25s linear}
 ${B}#d3rpk em{font-style:normal;color:var(--muted)}
-/* ===== admin ===== */
-${B}.adhero{min-height:120px;overflow:hidden;border-radius:30px;border:1px solid var(--line);padding:18px 16px!important;margin-bottom:10px;align-items:flex-end!important}
-${B}.adhero .d3ado{position:absolute;right:-40px;top:-20px;width:230px;height:140px;pointer-events:none}
-${B}.adhero .d3ado .o{fill:none;stroke:var(--d3o)}
-${B}.adhero .d3ado .od{fill:none;stroke:var(--d3o);stroke-dasharray:3 5}
-${B}.adhero .d3ado .dg{stroke:var(--d3gl)}
-${B}.adhero .d3ado .rot{transform-origin:115px 70px;animation:d3i4turn 36s linear infinite}
-${B}.adhero .d3ado .sat{fill:var(--d3sat)}
-${B}.adhero .d3ado .satg{fill:var(--goldfg)}
-${B}.adhero>*:not(.d3ado){position:relative;z-index:1}
-${B}.adhero b{font-size:25px!important;font-weight:760!important;letter-spacing:-.035em}
-${B}.adhero small{font-family:var(--d3m,monospace);font-size:10.5px!important;letter-spacing:.12em;text-transform:uppercase}
-${B}.adhero .adi{width:44px!important;height:44px!important;flex:0 0 44px!important;min-width:44px;box-sizing:border-box}
-${B}.adhero>div{flex:1 1 auto;min-width:0}
-${B}.adhero b{display:block;overflow-wrap:anywhere;line-height:1.08}
-${B}.adhero>button{flex:0 0 42px!important;min-width:42px;width:42px!important;height:42px!important;border-radius:50%!important;border:1px solid var(--d3o)!important;background:var(--bg)!important}
-${B}.adgrid{grid-template-columns:1fr 1fr!important}
-${B}.adst{border-radius:28px!important;min-height:112px;box-sizing:border-box;padding:14px 14px 12px!important}
-${B}.adst b{font-size:30px!important;letter-spacing:-.04em}
-${B}.adst i span{overflow-wrap:anywhere}
-${B}.adst.adlive{grid-column:1/-1;min-height:190px;padding:16px 16px 14px!important}
-${B}.adst.adlive::after{display:none}
-${B}.adst.adlive .adlh{position:relative;z-index:1;font-family:var(--d3m,monospace);letter-spacing:.12em;text-transform:uppercase}
-${B}.adst.adlive .adlh i{font-size:10.5px!important;font-weight:500!important}
-${B}.adst.adlive .adlv{border-radius:999px}
-${B}.adst.adlive .adnum{position:relative;z-index:1;font-size:56px!important;line-height:1;font-weight:760!important}
-${B}.adst.adlive>small{position:relative;z-index:1;font-family:var(--d3m,monospace);font-size:10.5px;letter-spacing:.08em}
-${B}.adst.adlive .adul{position:relative;z-index:1}
-${B}.d3lsys{position:absolute;right:-30px;top:-10px;width:220px;height:150px;pointer-events:none;z-index:0}
-${B}.d3lsys .o{fill:none;stroke:var(--d3o)}
-${B}.d3lsys .od{fill:none;stroke:var(--d3o);stroke-dasharray:3 5}
-${B}.d3lsys .core{fill:none;stroke:var(--up);stroke-width:1.2}
-${B}.d3lsys .rot{transform-origin:110px 75px;animation:d3i4turn 24s linear infinite}
-${B}.d3lsys circle.u{stroke:var(--bg);stroke-width:2}
-${B}.adu{border-radius:999px!important;border:1px solid var(--line);padding:6px 12px 6px 6px!important;margin-top:7px;background:var(--bg)}
-${B}.adu .av{box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--c)}
-${B}.adchart{border-radius:28px!important;position:relative;overflow:hidden}
-${B}.adchart>i{font-family:var(--d3m,monospace);letter-spacing:.14em;text-transform:uppercase}
-${B}.admsg{border-radius:24px!important;border:1px solid var(--line)!important;margin:0 0 7px!important}
-${B}.admsg em{border-radius:999px!important;background:var(--gold)!important;color:var(--ongold)!important;font-family:var(--d3m,monospace);letter-spacing:.08em}
-${B}.adnote{border-radius:22px;border:1px dashed var(--d3o);padding:12px 14px!important}
-${B}.adlock .pfin2{border-radius:999px!important}
-${B}.adlock .pfbtn{border-radius:999px!important;background:var(--gold)!important;color:var(--ongold)!important}
 @media (max-width:359px){
 ${B}.d3ih svg{right:-60px}
 ${B}.d3ihk{right:110px}
@@ -10601,11 +9882,9 @@ ${B}.d3ihn b{font-size:40px}
 ${B}#rpbar button{width:44px!important;height:44px!important;flex-basis:44px}
 ${B}#rpbar #rpplay{width:52px!important;height:52px!important;flex-basis:52px}
 ${B}#rpbar #rpspeed{min-width:54px;padding:0 10px!important}
-${B}.adst b{font-size:26px!important}
-${B}.adhero .d3ado{right:-80px}
 }
 @media (prefers-reduced-motion:reduce){
-${B}.d3ih .rot,${B}#sed .d3edo .rot,${B}.adhero .d3ado .rot,${B}.d3lsys .rot,${B}#sed .sedsave.dirty::after,${B}#sed .sedfab .fbed::after,${B}#d3rpk.run i{animation:none!important}
+${B}.d3ih .rot,${B}#sed .d3edo .rot,${B}#sed .sedsave.dirty::after,${B}#sed .sedfab .fbed::after,${B}#d3rpk.run i{animation:none!important}
 ${B}.d3ipg.d3in .irow,${B}.d3ipg.d3in .ihd,${B}.d3ipg.d3in .d3ih{animation:none!important}
 }
 `;
@@ -10666,34 +9945,6 @@ ${B}.d3ipg.d3in .irow,${B}.d3ipg.d3in .ihd,${B}.d3ipg.d3in .d3ih{animation:none!
   }
   setInterval(rpk,250);
 
-  /* ---- admin: orbita nella testata e «Online ora» come sistema ---- */
-  function adDeco(p){
-    try{
-      var h=p.querySelector('.adhero');
-      if(h&&!h.querySelector('.d3ado'))h.insertAdjacentHTML('afterbegin',orbitSVG('d3ado',230,140,'<line class="dg" x1="30" y1="134" x2="212" y2="8"/><ellipse class="od" cx="115" cy="70" rx="58" ry="42" transform="rotate(24 115 70)"/><g class="rot"><ellipse class="o" cx="115" cy="70" rx="96" ry="34" transform="rotate(-14 115 70)"/><circle class="sat" cx="208" cy="46" r="3.5"/><circle class="satg" cx="24" cy="94" r="2.6"/></g>'));
-    }catch(e){}
-  }
-  function liveSys(){
-    try{
-      var E=ADL&&ADL.el;if(!E||!E.tile)return;
-      var on=(ADL.data&&ADL.data.online)||[];
-      var cols=on.slice(0,12).map(function(u){try{return adWho(u.who).c}catch(e){return 'var(--d3sat)'}});
-      var key=on.length+':'+cols.join(',');
-      var s=E.tile.querySelector('.d3lsys');
-      if(s&&s.dataset.k===key)return;
-      if(s)s.remove();
-      E.tile.insertAdjacentHTML('afterbegin',orbitSVG('d3lsys',220,150,'<ellipse class="od" cx="110" cy="75" rx="56" ry="40" transform="rotate(24 110 75)"/><g class="rot"><ellipse class="o" cx="110" cy="75" rx="94" ry="34" transform="rotate(-14 110 75)"/>'+sats(cols.length,110,75,94,34,-14,cols)+'</g><circle class="core" cx="110" cy="75" r="9"/>'));
-      E.tile.querySelector('.d3lsys').dataset.k=key;
-    }catch(e){}
-  }
-  if(typeof renderAdmin==='function'){
-    var oAd=renderAdmin;
-    renderAdmin=function(p){oAd(p);adDeco(p);liveSys()};
-  }
-  if(typeof adLivePaint==='function'){
-    var oLp=adLivePaint;
-    adLivePaint=function(){oLp.apply(this,arguments);liveSys()};
-  }
 })();
 /* ---------- 0.45.0: Bar Replay e editor (quinta parte) ----------
    Bar Replay: la spia sopra i comandi mostra data e ora della candela (formato della lingua, ora del telefono come l'asse),
@@ -12480,297 +11731,6 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   try{var prevL=NXAPP.onLang;NXAPP.onLang=function(k){try{prevL&&prevL(k)}catch(e){}setTimeout(upd,40)}}catch(e){}
 })();
 
-/* =====================================================================
-   0.45.0 - Pannello amministratore: «Online ora» compatto + pagina «Utenti».
-   Solo presentazione: usa gli stessi dati che il pannello riceve gia' (/admin/live e l'elenco codici).
-   - Riquadro: al massimo 3 righe (Tu per primo, poi attivita' piu' recente) e «Vedi tutti · N» se sono di piu'.
-   - Pagina Utenti: ricerca per nome, filtri Tutti / Online ora / Non online, gruppi Online e Non online.
-     «Oggi» e «7 giorni» il server li manda solo come totali, senza dire chi: restano numeri, non filtri.
-   ===================================================================== */
-(function(){
-  var B='body.inapp ';
-  var EASE='cubic-bezier(.2,.9,.25,1)';
-  var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
-  var T={
-    it:{all:'Vedi tutti',title:'Utenti',close:'Chiudi',search:'Cerca per nome',clear:'Cancella',fAll:'Tutti',fOn:'Online ora',fOff:'Non online',gOn:'Online',gOff:'Non online',
-      linked:'codice collegato il {d}',linked0:'codice collegato',tot:'Oggi {d} \u00b7 7 giorni {w}',totH:'Dispositivi che hanno aperto l\u2019app: solo il totale, il server non dice chi.',
-      none:'Nessuno da mostrare',noneD:'Quando qualcuno apre l\u2019app con il suo codice, compare qui.',nores:'Nessun nome con \u00ab{q}\u00bb',noresD:'Prova con un altro nome o togli il filtro.',
-      noOn:'Nessuno online adesso',noOff:'Tutti i codici collegati sono online',load:'Carico gli utenti\u2026',nodb:'Collega il database per vedere chi \u00e8 online.'},
-    en:{all:'See all',title:'Users',close:'Close',search:'Search by name',clear:'Clear',fAll:'All',fOn:'Online now',fOff:'Not online',gOn:'Online',gOff:'Not online',
-      linked:'code linked on {d}',linked0:'code linked',tot:'Today {d} \u00b7 7 days {w}',totH:'Devices that opened the app: totals only, the server doesn\u2019t say who.',
-      none:'Nobody to show',noneD:'When someone opens the app with their code, they show up here.',nores:'No name matches \u201c{q}\u201d',noresD:'Try another name or clear the filter.',
-      noOn:'Nobody online right now',noOff:'Every linked code is online',load:'Loading users\u2026',nodb:'Connect the database to see who is online.'},
-    es:{all:'Ver todos',title:'Usuarios',close:'Cerrar',search:'Buscar por nombre',clear:'Borrar',fAll:'Todos',fOn:'En l\u00ednea',fOff:'Sin conexi\u00f3n',gOn:'En l\u00ednea',gOff:'Sin conexi\u00f3n',
-      linked:'c\u00f3digo vinculado el {d}',linked0:'c\u00f3digo vinculado',tot:'Hoy {d} \u00b7 7 d\u00edas {w}',totH:'Dispositivos que abrieron la app: solo el total, el servidor no dice qui\u00e9n.',
-      none:'Nadie que mostrar',noneD:'Cuando alguien abra la app con su c\u00f3digo, aparecer\u00e1 aqu\u00ed.',nores:'Ning\u00fan nombre con \u00ab{q}\u00bb',noresD:'Prueba con otro nombre o quita el filtro.',
-      noOn:'Nadie en l\u00ednea ahora',noOff:'Todos los c\u00f3digos vinculados est\u00e1n en l\u00ednea',load:'Cargando usuarios\u2026',nodb:'Conecta la base de datos para ver qui\u00e9n est\u00e1 en l\u00ednea.'},
-    fr:{all:'Voir tout',title:'Utilisateurs',close:'Fermer',search:'Chercher un nom',clear:'Effacer',fAll:'Tous',fOn:'En ligne',fOff:'Hors ligne',gOn:'En ligne',gOff:'Hors ligne',
-      linked:'code li\u00e9 le {d}',linked0:'code li\u00e9',tot:'Aujourd\u2019hui {d} \u00b7 7 jours {w}',totH:'Appareils qui ont ouvert l\u2019app\u00a0: total seulement, le serveur ne dit pas qui.',
-      none:'Personne \u00e0 afficher',noneD:'Quand quelqu\u2019un ouvre l\u2019app avec son code, il appara\u00eet ici.',nores:'Aucun nom avec \u00ab\u00a0{q}\u00a0\u00bb',noresD:'Essaie un autre nom ou retire le filtre.',
-      noOn:'Personne en ligne maintenant',noOff:'Tous les codes li\u00e9s sont en ligne',load:'Chargement des utilisateurs\u2026',nodb:'Connecte la base de donn\u00e9es pour voir qui est en ligne.'},
-    de:{all:'Alle ansehen',title:'Nutzer',close:'Schlie\u00dfen',search:'Nach Namen suchen',clear:'L\u00f6schen',fAll:'Alle',fOn:'Jetzt online',fOff:'Nicht online',gOn:'Online',gOff:'Nicht online',
-      linked:'Code verkn\u00fcpft am {d}',linked0:'Code verkn\u00fcpft',tot:'Heute {d} \u00b7 7 Tage {w}',totH:'Ger\u00e4te, die die App ge\u00f6ffnet haben: nur die Summe, der Server sagt nicht, wer.',
-      none:'Niemand anzuzeigen',noneD:'Sobald jemand die App mit seinem Code \u00f6ffnet, erscheint er hier.',nores:'Kein Name mit \u201e{q}\u201c',noresD:'Versuche einen anderen Namen oder entferne den Filter.',
-      noOn:'Gerade niemand online',noOff:'Alle verkn\u00fcpften Codes sind online',load:'Nutzer werden geladen\u2026',nodb:'Verbinde die Datenbank, um zu sehen, wer online ist.'}};
-  function lx(){try{return T[lang]||T.it}catch(e){return T.it}}
-  function fm(s,o){return String(s).replace(/\{(\w+)\}/g,function(_,k){return o[k]!=null?o[k]:''})}
-  function hap(){try{haptic()}catch(e){}}
-  function loc(){try{return LOC[lang]||'it-IT'}catch(e){return 'it-IT'}}
-
-  var css=[
-    /* riquadro: righe compatte (prima il nome prendeva i 30px dei numeri del riquadro) */
-    B+'.adst.adlive .adul{gap:0;margin-top:8px}',
-    B+'.adst.adlive .adu{min-height:46px;box-sizing:border-box;padding:5px 12px 5px 5px!important;margin-top:6px;gap:10px}',
-    B+'.adst.adlive .adu .av{width:32px;height:32px;flex:0 0 32px;font-size:13px}',
-    B+'.adst.adlive .adu .ut b{font-size:17px!important;line-height:1.2;font-weight:650!important;letter-spacing:-.01em!important;margin:0!important}',
-    B+'.adst.adlive .adu .ut small{font-size:11.5px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:inherit;letter-spacing:0}',
-    B+'.adst.adlive .adu.me .av{box-shadow:0 0 0 3px var(--bg),0 0 0 4.5px var(--gold)}',
-    B+'.d3uall{display:flex;align-items:center;gap:10px;width:100%;min-height:46px;margin-top:8px;padding:0 6px 0 16px;box-sizing:border-box;border-radius:999px;border:1px dashed var(--d3o);background:transparent;color:var(--fg);font:inherit;font-size:14.5px;font-weight:650;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .3s '+EASE+',border-color .2s}',
-    B+'.d3uall:active{transform:scale(.98);border-color:var(--fg)}',
-    B+'.d3uall span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
-    B+'.d3uall em{font-style:normal;font-family:var(--d3m,monospace);font-size:12px;color:var(--muted)}',
-    B+'.d3uall i{flex:0 0 34px;width:34px;height:34px;border-radius:50%;border:1px solid var(--d3o);display:grid;place-items:center;transition:transform .42s '+EASE+'}',
-    B+'.d3uall:active i{transform:rotate(45deg)}',
-    B+'.d3uall i svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}',
-    B+'.adst.adlive .d3usk{height:46px;margin-top:6px;border-radius:999px;border:1px solid var(--line);background:linear-gradient(90deg,transparent,var(--d3o),transparent) 0 0/200% 100%;animation:d3ush 1.4s linear infinite;opacity:.55}',
-    '@keyframes d3ush{from{background-position:120% 0}to{background-position:-120% 0}}',
-
-    /* pagina Utenti: come le altre schermate intere (Tutte le liste, Cerca) */
-    '#d3usr{position:fixed;inset:0;z-index:72;display:flex;flex-direction:column;background:var(--bg);color:var(--fg);padding-top:env(safe-area-inset-top);opacity:0;transform:translateY(18px);transition:opacity .22s ease,transform .32s '+EASE+';overflow:hidden}',
-    '#d3usr.show{opacity:1;transform:none}',
-    '#d3usr[hidden]{display:none}',
-    '#d3usr .d3u-orb{position:absolute;right:-70px;top:-40px;width:260px;height:170px;pointer-events:none}',
-    '#d3usr .d3u-orb svg{width:100%;height:100%;overflow:visible}',
-    '#d3usr .d3u-orb ellipse{fill:none;stroke:var(--d3o);stroke-width:1}',
-    '#d3usr .d3u-orb .od{stroke-dasharray:2 6}',
-    '#d3usr .d3u-orb .rot{transform-origin:140px 80px;animation:d3turn 40s linear infinite}',
-    '#d3usr .d3u-orb circle{fill:var(--up)}',
-    '#d3usr header{position:relative;z-index:1;display:flex;align-items:center;gap:12px;padding:16px 16px 4px}',
-    '#d3usr header h2{flex:1;min-width:0;margin:0;font-size:28px;line-height:1.1;font-weight:300;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
-    '#d3usr header h2 em{font-style:normal;font-family:var(--d3m,monospace);font-size:13px;letter-spacing:.06em;color:var(--muted);margin-left:8px;vertical-align:middle}',
-    '#d3usr header button{flex:0 0 46px;margin:0;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;padding:0;cursor:pointer}',
-    '#d3usr header button svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}',
-    '#d3usr .d3u-tot{position:relative;z-index:1;margin:2px 18px 10px;font-family:var(--d3m,monospace);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
-    '#d3usr .d3u-q{position:relative;z-index:1;display:flex;align-items:center;gap:10px;height:48px;margin:0 14px;padding:0 6px 0 16px;border-radius:999px;border:1px solid var(--line);background:var(--bg);transition:border-color .2s,box-shadow .2s}',
-    '#d3usr .d3u-q:focus-within{border-color:var(--fg);box-shadow:0 0 0 4px color-mix(in srgb,var(--fg) 10%,transparent)}',
-    '#d3usr .d3u-q>svg{flex:0 0 18px;width:18px;height:18px;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round}',
-    '#d3usr .d3u-q input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;color:var(--fg);font:inherit;font-size:16px;-webkit-user-select:text;user-select:text}',
-    '#d3usr .d3u-q input::placeholder{color:var(--muted)}',
-    '#d3usr .d3u-q input::-webkit-search-cancel-button{display:none}',
-    '#d3usr .d3u-q button{flex:0 0 36px;margin:0;width:36px;height:36px;border-radius:50%;border:0;background:var(--surf2,transparent);color:var(--fg);display:grid;place-items:center;padding:0;cursor:pointer}',
-    '#d3usr .d3u-q button[hidden]{display:none}',
-    '#d3usr .d3u-q button svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}',
-    '#d3usr .d3u-f{position:relative;z-index:1;display:flex;gap:6px;padding:12px 14px 6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}',
-    '#d3usr .d3u-f::-webkit-scrollbar{display:none}',
-    '#d3usr .d3u-f button{flex:0 0 auto;width:auto;min-width:0;margin:0;display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg);font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .2s,color .2s,border-color .2s,transform .3s '+EASE+'}',
-    '#d3usr .d3u-f button:active{transform:scale(.96)}',
-    '#d3usr .d3u-f button em{font-style:normal;font-family:var(--d3m,monospace);font-size:12px;opacity:.7}',
-    '#d3usr .d3u-f button.on{background:var(--fg);border-color:var(--fg);color:var(--bg)}',
-    '#d3usr .d3u-f button .dt{width:7px;height:7px;border-radius:50%;background:var(--up)}',
-    '#d3usr .d3u-f button.off .dt{background:transparent;border:1.5px solid var(--muted);box-sizing:border-box}',
-    '#d3usr .d3u-b{position:relative;z-index:1;flex:1;overflow-y:auto;overscroll-behavior:contain;padding:2px 0 calc(env(safe-area-inset-bottom) + 40px);-webkit-overflow-scrolling:touch}',
-    '#d3usr .d3u-sec{display:flex;align-items:center;gap:8px;margin:14px 18px 4px;font-family:var(--d3m,monospace);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}',
-    '#d3usr .d3u-sec::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--up)}',
-    '#d3usr .d3u-sec.off::before{background:transparent;border:1.5px solid var(--muted);box-sizing:border-box;width:7px;height:7px}',
-    '#d3usr .d3u-r{display:flex;align-items:center;gap:11px;margin:5px 14px;min-height:54px;padding:6px 14px 6px 6px;box-sizing:border-box;border-radius:999px;border:1px solid var(--line);content-visibility:auto;contain-intrinsic-size:auto 54px}',
-    '#d3usr .d3u-r.in{animation:d3urin .38s '+EASE+' both}',
-    '#d3usr .d3u-r .av{flex:0 0 38px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:800;color:#fff;background:var(--c,#3b82f6);box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--c)}',
-    '#d3usr .d3u-r.me .av{box-shadow:0 0 0 3px var(--bg),0 0 0 4.5px var(--gold)}',
-    '#d3usr .d3u-r.zz .av{background:transparent;color:var(--fg);box-shadow:none;border:1px solid var(--d3o)}',
-    '#d3usr .d3u-r .ut{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}',
-    '#d3usr .d3u-r .ut b{font-size:16px;font-weight:650;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
-    '#d3usr .d3u-r .ut b mark{background:color-mix(in srgb,var(--gold) 32%,transparent);color:inherit;border-radius:3px}',
-    '#d3usr .d3u-r .ut small{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
-    '#d3usr .d3u-r .dot{flex:0 0 8px;width:8px;height:8px;border-radius:50%;background:var(--up)}',
-    '#d3usr .d3u-r.zz .dot{background:transparent;border:1.5px solid var(--faint,var(--muted));box-sizing:border-box}',
-    '#d3usr .d3u-mini{margin:6px 18px 2px;font-size:13px;color:var(--muted)}',
-    '#d3usr .d3u-e{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:44px 28px 20px}',
-    '#d3usr .d3u-e svg{width:150px;height:90px;overflow:visible;margin-bottom:10px}',
-    '#d3usr .d3u-e svg ellipse{fill:none;stroke:var(--d3o)}',
-    '#d3usr .d3u-e svg .od{stroke-dasharray:2 5}',
-    '#d3usr .d3u-e svg .core{fill:none;stroke:var(--fg)}',
-    '#d3usr .d3u-e svg .sat{fill:var(--muted)}',
-    '#d3usr .d3u-e b{font-size:18px;font-weight:700;overflow-wrap:anywhere}',
-    '#d3usr .d3u-e p{margin:0;max-width:280px;font-size:13.5px;line-height:1.45;color:var(--muted);overflow-wrap:anywhere}',
-    '#d3usr .d3u-sk{height:54px;margin:5px 14px;border-radius:999px;border:1px solid var(--line);background:linear-gradient(90deg,transparent,var(--d3o),transparent) 0 0/200% 100%;animation:d3ush 1.4s linear infinite;opacity:.55}',
-    '@keyframes d3urin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}',
-    '@media (prefers-reduced-motion:reduce){#d3usr,#d3usr .d3u-r.in,#d3usr .d3u-orb .rot,'+B+'.adst.adlive .d3usk,#d3usr .d3u-sk{animation:none!important;transition:none!important}}'
-  ].join('\n');
-  try{var st=document.createElement('style');st.id='d3usr-css';st.textContent=css;document.head.appendChild(st)}catch(e){}
-
-  /* ---------- dati: solo quelli gia' ricevuti ---------- */
-  function rank(a,b){
-    var ao=a.who==='owner'?0:1,bo=b.who==='owner'?0:1;if(ao!==bo)return ao-bo;
-    return (b.ts||0)-(a.ts||0)||(b.since||0)-(a.since||0);
-  }
-  function onlineList(){var D=ADL&&ADL.data;return (D&&!D.nodb&&D.online||[]).slice().sort(rank)}
-  function who(w){try{return adWho(w)}catch(e){return {n:String(w),c:'#6b7280'}}}
-  function sub(u){
-    var D=ADL.data||{};
-    return [adt('plat_'+(u.plat||'other')),u.ver?'v'+u.ver:'',adt('since',{m:adAgo((D.now||Date.now())-(u.since||u.ts))})].filter(Boolean).join(' \u00b7 ');
-  }
-  /* codici collegati a un telefono che adesso non sono online (dall'elenco codici del pannello) */
-  function offList(on){
-    var cs=(ADM&&ADM.data&&ADM.data.codes)||[],seen={};on.forEach(function(u){seen[u.who]=1});
-    return cs.filter(function(c){return c&&c.bound&&!seen[c.code]}).sort(function(a,b){return (b.used||0)-(a.used||0)});
-  }
-  function row(cls,name,col,small,me,q){
-    var r=document.createElement('div');r.className=cls+(me?' me':'');
-    r.innerHTML='<span class="av" aria-hidden="true"></span><span class="ut"><b></b><small></small></span><span class="dot" aria-hidden="true"></span>';
-    var av=r.querySelector('.av');av.style.setProperty('--c',col);av.textContent=(String(name||'?').trim().charAt(0)||'?').toUpperCase();
-    var b=r.querySelector('b');
-    if(q){var i=name.toLowerCase().indexOf(q);if(i>=0){b.appendChild(document.createTextNode(name.slice(0,i)));var mk=document.createElement('mark');mk.textContent=name.slice(i,i+q.length);b.appendChild(mk);b.appendChild(document.createTextNode(name.slice(i+q.length)))}else b.textContent=name}
-    else b.textContent=name;
-    b.title=name;
-    r.querySelector('small').textContent=small;
-    return r;
-  }
-
-  /* ---------- riquadro «Online ora»: 3 righe al massimo ---------- */
-  function tilePaint(){
-    var E=ADL&&ADL.el;if(!E||!E.list||!document.body.contains(E.tile))return;
-    var D=ADL.data;
-    if(!D){
-      if(!E.list.querySelector('.d3usk')){E.list.innerHTML='';for(var k=0;k<2;k++){var s=document.createElement('div');s.className='d3usk';E.list.appendChild(s)}}
-      return;
-    }
-    if(D.nodb)return;
-    var on=onlineList();
-    if(!on.length)return;
-    E.list.innerHTML='';
-    on.slice(0,3).forEach(function(u){var w=who(u.who);var r=row('adu',w.n,w.c,sub(u),u.who==='owner');E.list.appendChild(r)});
-    if(on.length>3){
-      var l=lx(),b=document.createElement('button');b.type='button';b.className='d3uall';
-      b.innerHTML='<span></span><em></em><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></i>';
-      b.querySelector('span').textContent=l.all;b.querySelector('em').textContent=String(on.length);
-      b.setAttribute('aria-label',l.all+' \u00b7 '+on.length);
-      b.onclick=function(e){e.stopPropagation();hap();openUsers('on')};
-      E.list.appendChild(b);
-    }
-  }
-
-  /* ---------- pagina «Utenti» ---------- */
-  var U={f:'all',q:'',key:'',firstPaint:true};
-  var ORB='<div class="d3u-orb" aria-hidden="true"><svg viewBox="0 0 260 170"><ellipse cx="140" cy="80" rx="118" ry="44" transform="rotate(-14 140 80)"/><g class="rot"><ellipse class="od" cx="140" cy="80" rx="78" ry="62" transform="rotate(24 140 80)"/><circle cx="78" cy="34" r="3.4"/></g></svg></div>';
-  function el(){
-    var e=document.getElementById('d3usr');
-    if(e)return e;
-    e=document.createElement('div');e.id='d3usr';e.hidden=true;e.setAttribute('role','dialog');e.setAttribute('aria-modal','true');
-    e.innerHTML=ORB+'<header><h2></h2><button type="button" class="x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>'+
-      '<div class="d3u-tot"></div>'+
-      '<label class="d3u-q"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M15.5 15.5L20 20"/></svg><input type="search" enterkeyhint="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="40"><button type="button" class="cl" hidden><svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg></button></label>'+
-      '<div class="d3u-f" role="tablist"></div><div class="d3u-b"></div>';
-    e.querySelector('.x').onclick=function(){hap();closeUsers()};
-    var inp=e.querySelector('input'),cl=e.querySelector('.cl');
-    inp.addEventListener('input',function(){U.q=inp.value;cl.hidden=!inp.value;paint(true)});
-    inp.addEventListener('keydown',function(ev){if(ev.key==='Enter'){inp.blur()}});
-    cl.onclick=function(ev){ev.preventDefault();inp.value='';U.q='';cl.hidden=true;paint(true);inp.focus()};
-    e.addEventListener('keydown',function(ev){if(ev.key==='Escape'){ev.stopPropagation();closeUsers()}});
-    /* scorrendo, la tastiera si chiude */
-    e.querySelector('.d3u-b').addEventListener('touchstart',function(){if(document.activeElement===inp)inp.blur()},{passive:true});
-    document.body.appendChild(e);
-    return e;
-  }
-  function texts(e){
-    var l=lx();
-    e.setAttribute('aria-label',l.title);
-    e.querySelector('.x').setAttribute('aria-label',l.close);
-    e.querySelector('input').placeholder=l.search;e.querySelector('input').setAttribute('aria-label',l.search);
-    e.querySelector('.cl').setAttribute('aria-label',l.clear);
-  }
-  function paint(reset){
-    var e=document.getElementById('d3usr');if(!e||e.hidden)return;
-    var l=lx(),D=ADL&&ADL.data,body=e.querySelector('.d3u-b');
-    texts(e);
-    var on=onlineList(),off=D&&!D.nodb?offList(on):[];
-    var h=e.querySelector('h2');h.textContent=l.title;
-    if(D&&!D.nodb){var em=document.createElement('em');em.textContent=String(on.length+off.length);h.appendChild(em)}
-    var tot=e.querySelector('.d3u-tot');
-    if(D&&!D.nodb){tot.textContent=fm(l.tot,{d:D.today||0,w:D.week||0});tot.title=l.totH;tot.hidden=false}else tot.hidden=true;
-    /* filtri */
-    var fb=e.querySelector('.d3u-f');fb.innerHTML='';
-    [['all',l.fAll,on.length+off.length],['on',l.fOn,on.length],['off',l.fOff,off.length]].forEach(function(x){
-      var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.className=(U.f===x[0]?'on ':'')+(x[0]==='off'?'off':'');
-      b.setAttribute('aria-selected',U.f===x[0]?'true':'false');
-      b.innerHTML=(x[0]==='all'?'':'<span class="dt" aria-hidden="true"></span>')+'<span></span><em></em>';
-      b.querySelector('span:not(.dt)').textContent=x[1];b.querySelector('em').textContent=D&&!D.nodb?String(x[2]):'';
-      b.onclick=function(){if(U.f===x[0])return;hap();U.f=x[0];paint(true);try{b.scrollIntoView({inline:'nearest',block:'nearest'})}catch(z){}};
-      fb.appendChild(b);
-    });
-    /* contenuto: ridisegna solo se e' cambiato, cosi' lo scorrimento resta dov'e' */
-    var q=String(U.q||'').trim().toLowerCase();
-    var key=JSON.stringify([lang,U.f,q,D?(D.nodb?'nodb':1):0,on.map(function(u){return u.who+u.plat+u.ver+Math.floor(((D&&D.now||0)-(u.since||u.ts))/60000)}),off.map(function(c){return c.code+(c.name||'')})]);
-    if(!reset&&key===U.key)return;
-    var top=body.scrollTop;U.key=key;
-    var fr=document.createDocumentFragment(),n=0,anim=U.firstPaint||reset;
-    function add(r){if(anim&&n<14){r.classList.add('in');r.style.animationDelay=(RM?0:n*22)+'ms'}n++;fr.appendChild(r)}
-    function empty(t,d){var x=document.createElement('div');x.className='d3u-e';x.innerHTML='<svg viewBox="0 0 150 90" aria-hidden="true"><ellipse cx="75" cy="45" rx="68" ry="22" transform="rotate(-12 75 45)"/><ellipse class="od" cx="75" cy="45" rx="42" ry="34" transform="rotate(24 75 45)"/><circle class="core" cx="75" cy="45" r="8"/><circle class="sat" cx="112" cy="26" r="3"/></svg><b></b><p></p>';x.querySelector('b').textContent=t;x.querySelector('p').textContent=d;fr.appendChild(x)}
-    if(!D){
-      body.setAttribute('aria-busy','true');
-      var lt=document.createElement('div');lt.className='d3u-mini';lt.textContent=l.load;fr.appendChild(lt);
-      for(var k=0;k<6;k++){var s=document.createElement('div');s.className='d3u-sk';s.style.opacity=String(.55-k*.07);fr.appendChild(s)}
-    }else if(D.nodb){
-      body.removeAttribute('aria-busy');empty(l.none,l.nodb);
-    }else{
-      body.removeAttribute('aria-busy');
-      var match=function(n){return !q||String(n||'').toLowerCase().indexOf(q)>=0};
-      var onF=U.f==='off'?[]:on.filter(function(u){return match(who(u.who).n)});
-      var offF=U.f==='on'?[]:off.filter(function(c){return match(c.name||c.code)});
-      if(!onF.length&&!offF.length){
-        if(q)empty(fm(l.nores,{q:String(U.q).trim()}),l.noresD);
-        else if(U.f==='on')empty(l.noOn,l.noneD);
-        else if(U.f==='off')empty(l.noOff,'');
-        else empty(l.none,l.noneD);
-      }else{
-        var both=U.f==='all';
-        if(onF.length||(both&&!q)){
-          if(both){var s1=document.createElement('div');s1.className='d3u-sec';s1.textContent=l.gOn+' \u00b7 '+onF.length;fr.appendChild(s1)}
-          if(!onF.length){var m1=document.createElement('div');m1.className='d3u-mini';m1.textContent=l.noOn;fr.appendChild(m1)}
-          onF.forEach(function(u){var w=who(u.who);add(row('d3u-r',w.n,w.c,sub(u),u.who==='owner',q))});
-        }
-        if(offF.length){
-          if(both){var s2=document.createElement('div');s2.className='d3u-sec off';s2.textContent=l.gOff+' \u00b7 '+offF.length;fr.appendChild(s2)}
-          offF.forEach(function(c){
-            var nm=c.name||c.code,w=who(c.code),d='';
-            try{d=c.used?fm(l.linked,{d:new Date(c.used).toLocaleDateString(loc(),{day:'numeric',month:'short'})}):l.linked0}catch(z){d=l.linked0}
-            add(row('d3u-r zz',nm,w.c,d,false,q));
-          });
-        }
-      }
-    }
-    body.innerHTML='';body.appendChild(fr);
-    body.scrollTop=reset?0:top;
-    U.firstPaint=false;
-  }
-  function openUsers(f){
-    var e=el();U.f=f||'all';U.q='';U.key='';U.firstPaint=true;
-    var inp=e.querySelector('input');inp.value='';e.querySelector('.cl').hidden=true;
-    e.hidden=false;paint(true);void e.offsetWidth;e.classList.add('show');
-    try{e.querySelector('.x').focus({preventScroll:true})}catch(x){}
-    /* dati freschi aprendo la pagina */
-    try{admLive()}catch(x){}
-  }
-  function closeUsers(){
-    var e=document.getElementById('d3usr');if(!e||e.hidden)return;
-    try{if(document.activeElement)document.activeElement.blur()}catch(x){}
-    e.classList.remove('show');setTimeout(function(){if(!e.classList.contains('show'))e.hidden=true},RM?0:260);
-  }
-  window.NXUsers={open:openUsers,close:closeUsers,paint:function(){paint(false)}};
-
-  /* ---------- collegamenti ---------- */
-  if(typeof adLivePaint==='function'){
-    var oLp=adLivePaint;
-    adLivePaint=function(){var r=oLp.apply(this,arguments);try{tilePaint()}catch(e){}try{paint(false)}catch(e){}return r};
-  }
-  if(typeof renderAdmin==='function'){
-    var oAd=renderAdmin;
-    renderAdmin=function(p){var r=oAd.apply(this,arguments);try{tilePaint()}catch(e){}try{paint(false)}catch(e){}return r};
-  }
-  /* mentre la pagina Utenti e' aperta il pannello continua ad aggiornarsi ogni 5 secondi (stesso ciclo di prima) */
-  try{var oTab=showTab;showTab=function(){closeUsers();return oTab.apply(this,arguments)}}catch(e){}
-  try{var prevL=NXAPP.onLang;NXAPP.onLang=function(k){try{prevL&&prevL(k)}catch(e){}setTimeout(function(){paint(true)},40)}}catch(e){}
-  document.addEventListener('visibilitychange',function(){if(!document.hidden)setTimeout(function(){paint(false)},400)});
-})();
 
 /* =====================================================================
    0.46.0 (Fase 0 del motore nostro): un pair alla volta + pagina «Fonti dati»
@@ -13117,8 +12077,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   function cred(){
     try{if(FRIEND)return 'c='+encodeURIComponent(FRIEND)+'&d='+encodeURIComponent(devId())}catch(e){}
     try{var at=window.NXACCT&&NXACCT()&&window.NXAuth&&NXAuth.token();if(at)return 't='+encodeURIComponent(at)}catch(e){}
-    var k='';try{k=admKey()}catch(e){}
-    return k?'k='+encodeURIComponent(k):'';
+    return '';
   }
   var S={off:0,ok:0,fails:0,ws:null,wsOk:0,last:{},lat:[],frames:0,raf:0,pend:{},retry:0,hideT:0,pingT:0,srv:0};
   window.NXData=S;
@@ -13894,22 +12853,6 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   /* ---------- profilo: username in alto e sezione Account ---------- */
   var oRP=renderProfile;
   renderProfile=function(){
-    if(ACCT&&ACCT.admin){
-      /* NexusAdmin: una sola sezione, il pannello; le Impostazioni si aprono da li' */
-      if(!PF.page)PF.page='admin';
-      oRP.apply(this,arguments);
-      try{
-        var ps=$('pf-screen');
-        if(PF.page==='admin'){
-          var bk=ps.querySelector('.pfbar .pfback');if(bk)bk.style.visibility='hidden';
-          var ttl=ps.querySelector('.pfbar .pftitle');if(ttl)ttl.textContent='NexusAdmin';
-          if(!ps.querySelector('.nxadm-set')){var lb=mk('div','pfl');lb.textContent=pt('settings');var gg=mk('div','pfg nxadm-set');
-            var note=ps.querySelector('.adnote');if(note){ps.insertBefore(lb,note);ps.insertBefore(gg,note)}else{ps.appendChild(lb);ps.appendChild(gg)}
-            pfRow(gg,PIC.gear,pt('settings'),pt('setsub'),function(){pfGo('settings')}).classList.add('chev')}
-        }else if(PF.page==='settings'){var bk2=ps.querySelector('.pfbar .pfback span');if(bk2)bk2.textContent='NexusAdmin'}
-      }catch(e){}
-      return;
-    }
     if(!ACCT){oRP.apply(this,arguments);return}
     var p=$('pf-screen');
     if(PF.page&&String(PF.page).indexOf('acc_')===0){var st=PF.keep?p.scrollTop:0;PF.keep=false;p.innerHTML='';renderAcc(p,PF.page);p.scrollTop=st;return}
@@ -13918,10 +12861,6 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     oRP.apply(this,arguments);
     try{
       if(!PF.page){var sub=p.querySelector('.pfsub');if(sub)sub.textContent='@'+(u.username||'');}
-      /* il pannello amministratore sta solo in NexusAdmin */
-      if(!window.NX_ADMIN_APP){var adc=p.querySelector('.adcard');if(adc)adc.remove()}
-      /* niente gruppo codici amici per gli account normali */
-      if(!admKey()){[].slice.call(p.querySelectorAll('.pfl')).forEach(function(l){if(l.textContent===pt('friends')){var g=l.nextElementSibling;l.remove();if(g&&g.classList.contains('pfg'))g.remove()}})}
       /* 1.0.2: la sezione Account sta solo nelle Impostazioni, in fondo */
       if(PF.page!=='settings')return;
       var lbl=mk('div','pfl');lbl.textContent=T('acc');
@@ -14013,7 +12952,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   }
   /* invito, una volta sola: dopo la registrazione o dopo un accesso con la password */
   function pkInvite(){
-    if(!NXAuth.pkOk()||pkHave()||window.NX_ADMIN_APP)return;
+    if(!NXAuth.pkOk()||pkHave())return;
     var seen=null;try{seen=localStorage.getItem('nx_pkask')}catch(e){}if(seen)return;
     try{localStorage.setItem('nx_pkask','1')}catch(e){}
     setTimeout(function(){openSheet(function(s){
@@ -14030,7 +12969,6 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     if(m)setTimeout(function(){try{msg(T(m))}catch(e){}},400);
     var na=false;try{na=sessionStorage.getItem('noAuto')==='1'}catch(e){}
     var fc=null;try{fc=localStorage.getItem('tc_fcode')}catch(e){}
-    if(window.NX_ADMIN_APP)return;
     if(!NXAuth.signedIn()||fc||FRIEND||document.body.classList.contains('inapp'))return;
     var u=NXAuth.user();if(u&&u.username&&!fU.inp.value)fU.inp.value=u.username;
     if(na)return;
@@ -14039,30 +12977,6 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     NXAuth.me().then(function(r){if(!r.ok&&r.error==='auth'){try{sessionStorage.setItem('noSplash','1');sessionStorage.setItem('nx_acc_msg','e_auth')}catch(e){}location.reload()}});
   })();
   TX.it.e_auth=TX.it.e.auth;TX.en.e_auth=TX.en.e.auth;TX.es.e_auth=TX.es.e.auth;TX.fr.e_auth=TX.fr.e.auth;TX.de.e_auth=TX.de.e.auth;
-  /* ---------- NexusAdmin e app pubblica ---------- */
-  if(!window.NX_ADMIN_APP){
-    /* app pubblica: niente pannello amministratore (sta solo in NexusAdmin) */
-    try{localStorage.removeItem('tc_admin')}catch(e){}
-    admKey=function(){return ''};
-  }else{
-    /* NexusAdmin: stessa app, si apre direttamente sul pannello; i dati passano con la chiave amministratore */
-    document.title='NexusAdmin';
-    document.body.classList.add('nxadmin');
-    /* logo e orbite dell'apertura in rosso (lo sfondo resta nero); niente barra in basso: una sola sezione */
-    (function(){
-      var f=document.createElementNS('http://www.w3.org/2000/svg','svg');f.setAttribute('width','0');f.setAttribute('height','0');f.setAttribute('aria-hidden','true');f.style.position='absolute';
-      f.innerHTML='<filter id="nxred" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0  0 .165 0 0 0  0 0 .165 0 0  0 0 0 1 0"/></filter>';
-      document.body.appendChild(f);
-      var st2=document.createElement('style');st2.textContent='body.nxadmin #nx3 .nx-mark{color:#ff2a2a!important}body.nxadmin #nx3 .nx-orbit{border-color:#ff2a2a!important}body.nxadmin #nx3 .nx-slash{background:#ff2a2a!important}body.nxadmin #splash{filter:url(#nxred)}body.nxadmin #tabbar,body.nxadmin #mini{display:none!important}';
-      document.head.appendChild(st2);
-    })();
-    try{$('brandname').textContent='NexusAdmin'}catch(e){}
-    setTimeout(function(){
-      acctEnter({username:'NexusAdmin',admin:true},true).then(function(){
-        try{showTab('pf');pfGo('admin')}catch(e){}
-      });
-    },0);
-  }
   /* l'ultimo utente che ha usato questo telefono: il campo e' gia' pronto */
   try{var lu=sget(KL);if(lu&&!fU.inp.value)fU.inp.value=lu}catch(e){}
 })();
