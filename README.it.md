@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v0.46.2-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.0.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,18 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 0.46.0 — Il nostro server dati e 72 strumenti
+### 🆕 Novità della 1.0.0 — Account NexusCharts, nuovo indirizzo, solo dati nostri
+
+- 🌐 **Nuovo indirizzo**: NexusCharts ora vive su **[nexuscharts.app](https://nexuscharts.app)**. Il vecchio indirizzo porta da solo a quello nuovo.
+- 👤 **Account NexusCharts**: registrazione aperta a tutti con username, email e password. Username unico, password sicure, codice di 6 cifre via email per confermare l'indirizzo.
+- 🔐 **Accesso più comodo**: Accedi con username o email, **Password dimenticata** con codice via email, **Face ID** con il portachiavi di iPhone, e su iPhone il codice email compare da solo sopra la tastiera.
+- ⚙️ **Sezione Account** nel Profilo: cambia email, cambia password, Informativa Privacy, Esci ed **Elimina account**.
+- 📧 **Email in 5 lingue**: codice di verifica, benvenuto, avvisi di sicurezza (password o email cambiate) e conferma di eliminazione dell'account.
+- 📡 **Solo dati nostri**: elenco strumenti, candele e prezzi arrivano tutti dal server dati di NexusCharts. Anche gli alert ad app chiusa usano gli stessi prezzi del grafico.
+- 📜 **[Informativa Privacy](https://nexuscharts.app/privacy.html)** in 5 lingue, leggibile anche dentro l'app.
+- ⚠️ Con il nuovo indirizzo l'app si installa di nuovo sulla schermata Home e watchlist, disegni, script e alert ripartono da zero.
+
+### In precedenza, nella 0.46.0 — Il nostro server dati e 72 strumenti
 
 - 📡 **Prezzi in diretta**: i prezzi arrivano dal server dati di NexusCharts nel momento in cui cambiano (spesso più volte al secondo), uguali su tutti i telefoni.
 - 🌐 **72 strumenti**: 43 coppie Forex, metalli (oro in USD, EUR, GBP e AUD, argento, platino, palladio, rame), petrolio WTI e Brent, gas naturale, 10 indici (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, Dollar Index) e 7 criptovalute. Le azioni arrivano presto.
@@ -196,6 +207,8 @@ Seleziona un disegno per spostarlo, cambiargli colore, **spessore e stile** o el
 
 ## 📲 Installazione
 
+> 🌐 L'indirizzo dell'app è **[nexuscharts.app](https://nexuscharts.app)**.
+
 > NexusCharts si installa dal browser: niente App Store o Play Store.
 
 ### 🍎 iPhone (Safari)
@@ -220,17 +233,15 @@ Seleziona un disegno per spostarlo, cambiargli colore, **spessore e stile** o el
 
 ## 🔑 Come ottenere l'accesso
 
-NexusCharts usa **codici di accesso personali**: niente registrazione, niente conto con un broker.
+1. Apri **[nexuscharts.app](https://nexuscharts.app)** e tocca **Crea un account**.
+2. Scegli username, email e password, e conferma di avere almeno 18 anni e di aver letto l'Informativa Privacy.
+3. Inserisci il codice di 6 cifre che arriva per email e sei dentro.
 
-1. Chiedi il tuo codice su Telegram 👉 **[t.me/albaexe](https://t.me/albaexe)**
-2. Apri l'app e tocca **Accedi senza broker**.
-3. Scrivi il codice (formato `XXXX-XXXX`) e sei dentro.
+Da quel momento l'app ti fa entrare da sola. Se cambi telefono basta accedere con username o email e password.
 
-Da quel momento l'app ti fa entrare da sola.
+Hai un **codice amico**? Tocca **Entra con un codice** e scrivilo (formato `XXXX-XXXX`): funziona su un solo dispositivo.
 
-Eri già dentro? Dopo un aggiornamento potresti vedere una volta le schermate di benvenuto: il tuo codice resta salvato e l'app ti fa entrare come sempre.
-
-> ⚠️ Ogni codice funziona su **un solo dispositivo**, come una licenza. Se cambi telefono o ripristini l'app, chiedine uno nuovo.
+> 💬 Serve aiuto? Scrivi a **support@nexuscharts.app**.
 
 ---
 
@@ -251,7 +262,8 @@ Eri già dentro? Dopo un aggiornamento potresti vedere una volta le schermate di
 
 ## 🔒 Privacy e sicurezza
 
-- 🚫 **Nessun dato personale richiesto** per usare l'app con un codice.
+- 👤 Per l'account servono solo **username, email e password**. La password non la vediamo mai: sul server c'è solo una sua impronta cifrata.
+- 📜 Tutti i dettagli sono nell'**[Informativa Privacy](https://nexuscharts.app/privacy.html)**.
 - 📱 Disegni, layout, indicatori, script e impostazioni restano **solo sul tuo dispositivo**.
 - 📡 Il server dati conserva solo i prezzi di mercato: nessun indirizzo IP e nessun dato personale.
 - 🔔 Se attivi le notifiche, i tuoi alert attivi vengono tenuti sul server solo per avvisarti; elimini l'alert e sparisce.
@@ -265,7 +277,7 @@ Eri già dentro? Dopo un aggiornamento potresti vedere una volta le schermate di
 ## 🏗️ Come è fatta
 
 - 🖥️ **L'app** (quello che vedi sullo schermo) sta in questo repository ed è pubblicata come web app.
-- ⚙️ **Il motore** gira su Cloudflare: controlla i codici di accesso e invia gli alert, e un **server dati** separato manda i prezzi in diretta e conserva lo storico delle candele. Sono gestiti a parte e non fanno parte di questo repository.
+- ⚙️ **Il motore** gira su Cloudflare: un **server degli account** (registrazione, accesso, email), un **server dati** che manda i prezzi in diretta e conserva lo storico delle candele, e un server per i codici amico e gli alert. Sono gestiti a parte e non fanno parte di questo repository.
 - 🔐 Chiavi e password stanno solo nelle impostazioni cifrate del motore, mai nel codice.
 
 ---
@@ -338,6 +350,7 @@ Non ancora: restano sul dispositivo dove li hai creati.
 | ✅ | Accesso Design 3.0: logo a orbite, codice in 8 caselle, bandiere rotonde |
 | ✅ | Design 3.0 dentro l'app, più watchlist, Segnali, spessore/stile dei disegni e Annulla |
 | ✅ | Server dati nostro: prezzi in diretta, 72 strumenti, nomi in 5 lingue |
+| ✅ | Account NexusCharts, nuovo indirizzo nexuscharts.app, Informativa Privacy |
 | 🔜 | Storico delle candele più lungo (anni) |
 | 🔜 | Azioni |
 | 🔜 | Versione completa per computer |

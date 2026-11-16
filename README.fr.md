@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v0.46.2-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.0.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,18 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 0.46.0 — Notre propre serveur de données et 72 instruments
+### 🆕 Nouveautés de la 1.0.0 — Comptes NexusCharts, nouvelle adresse, uniquement nos données
+
+- 🌐 **Nouvelle adresse** : NexusCharts est maintenant sur **[nexuscharts.app](https://nexuscharts.app)**. L'ancienne adresse t'y emmène toute seule.
+- 👤 **Comptes NexusCharts** : inscription ouverte à tous avec un pseudo, un e-mail et un mot de passe. Pseudo unique, mots de passe solides et un code à 6 chiffres par e-mail pour confirmer l'adresse.
+- 🔐 **Connexion plus simple** : connexion avec pseudo ou e-mail, **Mot de passe oublié** avec un code par e-mail, **Face ID** avec le trousseau de l'iPhone, et sur iPhone le code de l'e-mail apparaît tout seul au-dessus du clavier.
+- ⚙️ **Section Compte** dans le Profil : changer d'e-mail, changer de mot de passe, Politique de Confidentialité, Se déconnecter et **Supprimer le compte**.
+- 📧 **E-mails en 5 langues** : code de vérification, bienvenue, alertes de sécurité (mot de passe ou e-mail modifié) et confirmation de suppression du compte.
+- 📡 **Uniquement nos données** : la liste des instruments, les bougies et les prix viennent tous du serveur de données de NexusCharts. Les alertes avec l'app fermée utilisent les mêmes prix que le graphique.
+- 📜 **[Politique de Confidentialité](https://nexuscharts.app/privacy.html)** en 5 langues, lisible aussi dans l'app.
+- ⚠️ Avec la nouvelle adresse, l'app s'installe à nouveau sur l'écran d'accueil et watchlist, dessins, scripts et alertes repartent de zéro.
+
+### Auparavant, dans la 0.46.0 — Notre propre serveur de données et 72 instruments
 
 - 📡 **Prix en direct** : les prix arrivent du serveur de données de NexusCharts au moment où ils changent (souvent plusieurs fois par seconde), identiques sur tous les téléphones.
 - 🌐 **72 instruments** : 43 paires Forex, métaux (or en USD, EUR, GBP et AUD, argent, platine, palladium, cuivre), pétrole WTI et Brent, gaz naturel, 10 indices (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, Dollar Index) et 7 cryptomonnaies. Les actions arrivent bientôt.
@@ -196,6 +207,8 @@ Sélectionne un dessin pour le déplacer, changer sa couleur, **son épaisseur e
 
 ## 📲 Installation
 
+> 🌐 L'app est sur **[nexuscharts.app](https://nexuscharts.app)**.
+
 > NexusCharts s'installe depuis le navigateur : pas besoin d'App Store ni de Play Store.
 
 ### 🍎 iPhone (Safari)
@@ -220,17 +233,15 @@ Sélectionne un dessin pour le déplacer, changer sa couleur, **son épaisseur e
 
 ## 🔑 Comment obtenir l'accès
 
-NexusCharts fonctionne avec des **codes d'accès personnels** : pas d'inscription, pas de compte chez un courtier.
+1. Ouvre **[nexuscharts.app](https://nexuscharts.app)** et touche **Créer un compte**.
+2. Choisis un pseudo, un e-mail et un mot de passe, et confirme que tu as au moins 18 ans et que tu as lu la Politique de Confidentialité.
+3. Saisis le code à 6 chiffres reçu par e-mail et c'est fait.
 
-1. Demande ton code sur Telegram 👉 **[t.me/albaexe](https://t.me/albaexe)**
-2. Ouvre l'app et touche **Entrer sans courtier**.
-3. Saisis le code (format `XXXX-XXXX`) et c'est parti.
+Ensuite l'app te connecte toute seule. Sur un nouveau téléphone, connecte-toi avec ton pseudo ou ton e-mail et ton mot de passe.
 
-Ensuite, l'app te connecte toute seule.
+Tu as un **code ami** ? Touche **Entrer avec un code** et saisis-le (format `XXXX-XXXX`) : il fonctionne sur un seul appareil.
 
-Tu étais déjà connecté ? Après une mise à jour, tu verras peut-être une fois les écrans de bienvenue : ton code reste enregistré et l'app te connecte comme d'habitude.
-
-> ⚠️ Chaque code fonctionne sur **un seul appareil**, comme une licence. Si tu changes de téléphone ou réinitialises l'app, demandes-en un nouveau.
+> 💬 Besoin d'aide ? Écris à **support@nexuscharts.app**.
 
 ---
 
@@ -251,7 +262,8 @@ Tu étais déjà connecté ? Après une mise à jour, tu verras peut-être une f
 
 ## 🔒 Confidentialité et sécurité
 
-- 🚫 **Aucune donnée personnelle demandée** pour utiliser l'app avec un code.
+- 👤 Un compte demande seulement un **pseudo, un e-mail et un mot de passe**. Nous ne voyons jamais ton mot de passe : le serveur n'en garde qu'une empreinte chiffrée.
+- 📜 Tous les détails sont dans la **[Politique de Confidentialité](https://nexuscharts.app/privacy.html)**.
 - 📱 Dessins, mises en page, indicateurs, scripts et réglages restent **uniquement sur ton appareil**.
 - 📡 Le serveur de données ne conserve que les prix du marché : aucune adresse IP ni donnée personnelle.
 - 🔔 Si tu actives les notifications, tes alertes actives sont gardées sur le serveur uniquement pour te prévenir ; supprime l'alerte et elle disparaît.
@@ -265,7 +277,7 @@ Tu étais déjà connecté ? Après une mise à jour, tu verras peut-être une f
 ## 🏗️ Comment elle est faite
 
 - 🖥️ **L'app** (ce que tu vois à l'écran) se trouve dans ce dépôt et est publiée comme web app.
-- ⚙️ **Le moteur** tourne sur Cloudflare : il vérifie les codes d'accès et envoie les alertes, et un **serveur de données** séparé diffuse les prix en direct et conserve l'historique des bougies. Ils sont gérés à part et ne font pas partie de ce dépôt.
+- ⚙️ **Le moteur** tourne sur Cloudflare : un **serveur des comptes** (inscription, connexion, e-mails), un **serveur de données** qui diffuse les prix en direct et conserve l'historique des bougies, et un serveur pour les codes ami et les alertes. Ils sont gérés à part et ne font pas partie de ce dépôt.
 - 🔐 Les clés et mots de passe se trouvent uniquement dans les réglages chiffrés du moteur, jamais dans le code.
 
 ---
@@ -338,6 +350,7 @@ Pas encore : ils restent sur l'appareil où tu les as créés.
 | ✅ | Connexion Design 3.0 : logo en orbite, code en 8 cases, drapeaux ronds |
 | ✅ | Design 3.0 dans l'app, plusieurs watchlists, Signaux, épaisseur/style des dessins et Annuler |
 | ✅ | Notre propre serveur de données : prix en direct, 72 instruments, noms en 5 langues |
+| ✅ | Comptes NexusCharts, nouvelle adresse nexuscharts.app, Politique de Confidentialité |
 | 🔜 | Historique des bougies plus long (des années) |
 | 🔜 | Actions |
 | 🔜 | Version complète pour ordinateur |

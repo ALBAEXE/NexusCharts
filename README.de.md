@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v0.46.2-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.0.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,18 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 0.46.0 — Unser eigener Datenserver und 72 Instrumente
+### 🆕 Neu in 1.0.0 — NexusCharts-Konten, neue Adresse, nur eigene Daten
+
+- 🌐 **Neue Adresse**: NexusCharts ist jetzt unter **[nexuscharts.app](https://nexuscharts.app)**. Die alte Adresse leitet automatisch dorthin weiter.
+- 👤 **NexusCharts-Konten**: Registrierung für alle mit Benutzername, E-Mail und Passwort. Eindeutige Benutzernamen, sichere Passwörter und ein 6-stelliger E-Mail-Code zur Bestätigung der Adresse.
+- 🔐 **Bequemere Anmeldung**: Anmeldung mit Benutzername oder E-Mail, **Passwort vergessen** mit E-Mail-Code, **Face ID** über den iPhone-Schlüsselbund, und auf dem iPhone erscheint der E-Mail-Code direkt über der Tastatur.
+- ⚙️ **Bereich Konto** im Profil: E-Mail ändern, Passwort ändern, Datenschutzerklärung, Abmelden und **Konto löschen**.
+- 📧 **E-Mails in 5 Sprachen**: Bestätigungscode, Willkommen, Sicherheitshinweise (Passwort oder E-Mail geändert) und Bestätigung der Kontolöschung.
+- 📡 **Nur eigene Daten**: Instrumentenliste, Kerzen und Preise kommen alle vom NexusCharts-Datenserver. Alarme bei geschlossener App nutzen dieselben Preise wie der Chart.
+- 📜 **[Datenschutzerklärung](https://nexuscharts.app/privacy.html)** in 5 Sprachen, auch in der App lesbar.
+- ⚠️ Mit der neuen Adresse wird die App neu auf dem Home-Bildschirm installiert, und Watchlist, Zeichnungen, Skripte und Alarme beginnen von vorn.
+
+### Vorher in 0.46.0 — Unser eigener Datenserver und 72 Instrumente
 
 - 📡 **Live-Preise**: Die Preise kommen vom NexusCharts-Datenserver in dem Moment, in dem sie sich ändern (oft mehrmals pro Sekunde), auf jedem Handy gleich.
 - 🌐 **72 Instrumente**: 43 Forex-Paare, Metalle (Gold in USD, EUR, GBP und AUD, Silber, Platin, Palladium, Kupfer), Öl WTI und Brent, Erdgas, 10 Indizes (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, US-Dollar-Index) und 7 Kryptowährungen. Aktien folgen bald.
@@ -186,6 +197,8 @@ Wähle eine Zeichnung aus, um sie zu verschieben, ihre Farbe, **Linienstärke un
 
 ## 📲 Installation
 
+> 🌐 Die App ist unter **[nexuscharts.app](https://nexuscharts.app)**.
+
 > NexusCharts wird über den Browser installiert — ohne App Store oder Play Store.
 
 ### 🍎 iPhone (Safari)
@@ -210,17 +223,15 @@ Wähle eine Zeichnung aus, um sie zu verschieben, ihre Farbe, **Linienstärke un
 
 ## 🔑 So bekommst du Zugang
 
-NexusCharts nutzt **persönliche Zugangscodes** — ohne Registrierung und ohne Broker-Konto.
+1. Öffne **[nexuscharts.app](https://nexuscharts.app)** und tippe auf **Konto erstellen**.
+2. Wähle Benutzername, E-Mail und Passwort und bestätige, dass du mindestens 18 Jahre alt bist und die Datenschutzerklärung gelesen hast.
+3. Gib den 6-stelligen Code aus der E-Mail ein, und du bist drin.
 
-1. Frag auf Telegram nach deinem Code 👉 **[t.me/albaexe](https://t.me/albaexe)**
-2. Öffne die App und tippe auf **Ohne Broker eintreten**.
-3. Gib deinen Code ein (Format `XXXX-XXXX`) — und du bist drin.
+Danach meldet dich die App von selbst an. Auf einem neuen Handy meldest du dich einfach mit Benutzername oder E-Mail und Passwort an.
 
-Ab dann meldet dich die App automatisch an.
+Du hast einen **Freundescode**? Tippe auf **Mit Code eintreten** und gib ihn ein (Format `XXXX-XXXX`): Er funktioniert auf nur einem Gerät.
 
-Schon angemeldet? Nach einem Update siehst du vielleicht einmal die Willkommensbildschirme: dein Code bleibt gespeichert und die App meldet dich wie gewohnt an.
-
-> ⚠️ Jeder Code gilt nur auf **einem Gerät**, wie eine Lizenz. Wenn du das Telefon wechselst oder die App zurücksetzt, frag einfach nach einem neuen.
+> 💬 Brauchst du Hilfe? Schreib an **support@nexuscharts.app**.
 
 ---
 
@@ -241,7 +252,8 @@ Schon angemeldet? Nach einem Update siehst du vielleicht einmal die Willkommensb
 
 ## 🔒 Datenschutz & Sicherheit
 
-- 🚫 **Keine persönlichen Daten nötig**, um die App mit einem Code zu nutzen.
+- 👤 Für ein Konto braucht es nur **Benutzername, E-Mail und Passwort**. Dein Passwort sehen wir nie: Auf dem Server liegt nur ein verschlüsselter Fingerabdruck davon.
+- 📜 Alle Details stehen in der **[Datenschutzerklärung](https://nexuscharts.app/privacy.html)**.
 - 📱 Zeichnungen, Layouts, Indikatoren, Skripte und Einstellungen werden **nur auf deinem Gerät** gespeichert.
 - 📡 Der Datenserver speichert nur Marktpreise: keine IP-Adressen und keine persönlichen Daten.
 - 🔔 Wenn du Benachrichtigungen aktivierst, bleiben deine aktiven Preisalarme nur auf dem Server, um dich zu benachrichtigen; löschst du einen Alarm, ist er weg.
@@ -255,7 +267,7 @@ Schon angemeldet? Nach einem Update siehst du vielleicht einmal die Willkommensb
 ## 🏗️ Wie es gebaut ist
 
 - 🖥️ **Die App** (was du auf dem Bildschirm siehst) liegt in diesem Repository und wird als Web-App veröffentlicht.
-- ⚙️ **Die Engine** läuft auf Cloudflare: sie prüft Zugangscodes und sendet Alarme, und ein eigener **Datenserver** liefert die Live-Preise und speichert den Kerzenverlauf. Beide werden getrennt verwaltet und sind nicht Teil dieses Repositorys.
+- ⚙️ **Die Engine** läuft auf Cloudflare: ein **Kontoserver** (Registrierung, Anmeldung, E-Mails), ein **Datenserver**, der die Live-Preise liefert und den Kerzenverlauf speichert, und ein Server für Freundescodes und Alarme. Sie werden getrennt verwaltet und sind nicht Teil dieses Repositorys.
 - 🔐 Schlüssel und Passwörter liegen nur in den verschlüsselten Einstellungen der Engine, nie im Code.
 
 ---
@@ -329,6 +341,7 @@ Noch nicht: sie werden auf dem Gerät gespeichert, auf dem du sie erstellt hast.
 | ✅ | 5 Sprachen: Italienisch, Englisch, Spanisch, Französisch, Deutsch |
 | ✅ | Design 3.0 in der App, mehrere Watchlists, Signale, Linienstärke/-stil und Rückgängig |
 | ✅ | Eigener Datenserver: Live-Preise, 72 Instrumente, Namen in 5 Sprachen |
+| ✅ | NexusCharts-Konten, neue Adresse nexuscharts.app, Datenschutzerklärung |
 | 🔜 | Längerer Kerzenverlauf (Jahre) |
 | 🔜 | Aktien |
 | 🔜 | Volle Computer-Version |
