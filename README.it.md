@@ -16,18 +16,22 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 </div>
 
-<p align="center">
-  <img src="screenshots/it/watchlist.png" width="24%">
-  <img src="screenshots/it/chart.png" width="24%">
-  <img src="screenshots/it/indicators.png" width="24%">
-  <img src="screenshots/it/settings.png" width="24%">
-</p>
-<p align="center">
-  <img src="screenshots/it/hub.png" width="24%">
-  <img src="screenshots/it/drawings.png" width="24%">
-  <img src="screenshots/it/editor.png" width="24%">
-  <img src="screenshots/it/login.png" width="24%">
-</p>
+<div align="center">
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="screenshots/it/01-welcome.webp" width="190" alt="Benvenuto"><br><sub>1. Benvenuto</sub></td>
+    <td align="center" width="25%"><img src="screenshots/it/02-sign-in.webp" width="190" alt="Accesso"><br><sub>2. Accesso</sub></td>
+    <td align="center" width="25%"><img src="screenshots/it/03-watchlist.webp" width="190" alt="Watchlist"><br><sub>3. Watchlist</sub></td>
+    <td align="center" width="25%"><img src="screenshots/it/04-signals.webp" width="190" alt="Segnali"><br><sub>4. Segnali</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="25%"><img src="screenshots/it/05-chart-drawings.webp" width="190" alt="Grafico e disegni"><br><sub>5. Grafico e disegni</sub></td>
+    <td align="center" width="25%"><img src="screenshots/it/06-indicators.webp" width="190" alt="Indicatori"><br><sub>6. Indicatori</sub></td>
+    <td align="center" width="25%"><img src="screenshots/it/07-script-editor.webp" width="190" alt="Editor di script"><br><sub>7. Editor di script</sub></td>
+    <td align="center" width="25%"><img src="screenshots/it/08-bar-replay.webp" width="190" alt="Bar Replay"><br><sub>8. Bar Replay</sub></td>
+  </tr>
+</table>
+</div>
 
 ---
 

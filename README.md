@@ -16,18 +16,22 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 </div>
 
-<p align="center">
-  <img src="screenshots/en/watchlist.png" width="24%">
-  <img src="screenshots/en/chart.png" width="24%">
-  <img src="screenshots/en/indicators.png" width="24%">
-  <img src="screenshots/en/settings.png" width="24%">
-</p>
-<p align="center">
-  <img src="screenshots/en/hub.png" width="24%">
-  <img src="screenshots/en/drawings.png" width="24%">
-  <img src="screenshots/en/editor.png" width="24%">
-  <img src="screenshots/en/login.png" width="24%">
-</p>
+<div align="center">
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="screenshots/en/01-welcome.webp" width="190" alt="Welcome"><br><sub>1. Welcome</sub></td>
+    <td align="center" width="25%"><img src="screenshots/en/02-sign-in.webp" width="190" alt="Sign-in"><br><sub>2. Sign-in</sub></td>
+    <td align="center" width="25%"><img src="screenshots/en/03-watchlist.webp" width="190" alt="Watchlist"><br><sub>3. Watchlist</sub></td>
+    <td align="center" width="25%"><img src="screenshots/en/04-signals.webp" width="190" alt="Signals"><br><sub>4. Signals</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="25%"><img src="screenshots/en/05-chart-drawings.webp" width="190" alt="Chart & drawings"><br><sub>5. Chart & drawings</sub></td>
+    <td align="center" width="25%"><img src="screenshots/en/06-indicators.webp" width="190" alt="Indicators"><br><sub>6. Indicators</sub></td>
+    <td align="center" width="25%"><img src="screenshots/en/07-script-editor.webp" width="190" alt="Script editor"><br><sub>7. Script editor</sub></td>
+    <td align="center" width="25%"><img src="screenshots/en/08-bar-replay.webp" width="190" alt="Bar Replay"><br><sub>8. Bar Replay</sub></td>
+  </tr>
+</table>
+</div>
 
 ---
 
