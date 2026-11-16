@@ -1,4 +1,4 @@
-const VERSION='0.46.1';
+const VERSION='0.46.2';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -889,6 +889,8 @@ async function loadInstruments(){
     INST.push(it);BYN[it.name]=it;
   });
   if(!INST.length)throw new Error(t('noinst'));
+  /* 0.46.2: gli strumenti del nostro server che il broker non ha si aggiungono lo stesso (i dati arrivano dal nostro server) */
+  try{if(window.NXReg&&NXReg.fill)NXReg.fill()}catch(e){}
   /* watchlist: la lista salvata (tc_watch, la stessa chiave di sempre) se c'e' ed e' valida,
      altrimenti gli 8 simboli di partenza */
   WATCH=[];
@@ -4975,7 +4977,7 @@ async function alSyncNow(){
   try{
     if(typeof pushState!=='function'||await pushState()!=='on')return;
     const r=await swReady(),s=r&&await r.pushManager.getSubscription();if(!s)return;
-    const list=alPushOn()?ALERTS.filter(a=>a.active&&BYN[a.sym]).slice(0,50).map(a=>({id:a.id,sym:a.sym,tid:BYN[a.sym].tid,route:BYN[a.sym].route,p:a.price,dir:a.dir,dec:alDec(a.sym),ts:a.ts})):[];
+    const list=alPushOn()?ALERTS.filter(a=>a.active&&BYN[a.sym]&&!BYN[a.sym].nx).slice(0,50).map(a=>({id:a.id,sym:a.sym,tid:BYN[a.sym].tid,route:BYN[a.sym].route,p:a.price,dir:a.dir,dec:alDec(a.sym),ts:a.ts})):[];
     const ack=AL_ACK.slice();
     const res=await fetch(WORKER+'/alerts/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sub:s.toJSON(),lang,alerts:list,ack})});
     if(!res.ok)return;
@@ -12875,6 +12877,16 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     return CH.m;
   }
   function active(n){var r=regOf(n);if(!(r&&r.active))return false;var m=pick();return m[r.k]===undefined||m[r.k]===n}
+  /* 0.46.2: strumenti attivi che l'elenco del broker non ha: si aggiungono con il nome della fonte e un numero interno negativo */
+  function fill(){
+    var m=pick(),n=0;
+    REG.forEach(function(r,i){
+      if(!r.active||m[r.k]!==undefined||BYN[r.k])return;
+      var it={name:r.k,tid:-1000-i,route:0,desc:'',type:{fx:'FOREX',com:'COMMODITY',cry:'CRYPTO',idx:'INDEX'}[r.cls]||'',nx:1};
+      INST.push(it);BYN[it.name]=it;n++;
+    });
+    CH.n=-1;return n;
+  }
   /* richieste al broker: solo per gli strumenti attivi (rete di sicurezza sotto a tutto il resto) */
   function pathOk(path){
     var m=/[?&]tradableInstrumentId=(\d+)/.exec(String(path||''));if(!m)return true;
@@ -12891,7 +12903,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     de:{soon:'Demnächst',soonT:'{n} kommt bald.',title:'Datenquellen',sub:'Woher Preise und Charts kommen',act:'Aktive Instrumente',next:'Demnächst',chart:'Chart',src:'Preise und Kerzen von {s}',tmp:'Vorübergehende Quelle: wir ersetzen sie durch eine unabhängige Quelle.',nextD:'Sie kommen nacheinander, jedes mit seiner eigenen Quelle.',lw:'Der Chart wird mit dieser Open-Source-Bibliothek gezeichnet (Apache-2.0-Lizenz):',site:'tradingview.com öffnen',note:'Preise und Charts dienen der Analyse: sie können von denen deines Brokers abweichen.'}
   };
   function L(){try{return TX[lang]||TX.it}catch(e){return TX.it}}
-  window.NXReg={list:REG,regOf:regOf,listed:listed,active:active,pathOk:pathOk,firstActive:firstActive,tx:L};
+  window.NXReg={list:REG,regOf:regOf,listed:listed,active:active,pathOk:pathOk,firstActive:firstActive,fill:fill,tx:L};
 
   /* ---------- dati: niente richieste per gli strumenti non attivi ---------- */
   try{var oQF=quoteFor;quoteFor=function(n){if(n&&!active(n))return Promise.resolve();return oQF.apply(this,arguments)}}catch(e){}
@@ -13142,6 +13154,8 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
           }
         }
       }
+      /* strumenti che il broker non ha: solo il nostro server, mai richieste al broker */
+      try{var mm=/[?&]tradableInstrumentId=(-?\d+)/.exec(p),xid=mm?+mm[1]:0;if(xid<0){var e0=new Error('nexus only');e0.status=0;throw e0}}catch(e){if(e&&e.message==='nexus only')throw e}
       if(p.indexOf('/trade/history?')===0&&!usable()){
         try{var q2=new URLSearchParams(p.split('?')[1]),id2=+q2.get('tradableInstrumentId');for(var j2=0;j2<INST.length;j2++)if(+INST[j2].tid===id2&&symOf(INST[j2].name)){srcIs('tl');break}}catch(e){}
       }
