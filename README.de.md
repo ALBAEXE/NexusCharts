@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.0.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.0.1-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.0.0 — NexusCharts-Konten, neue Adresse, nur eigene Daten
+### 🆕 Neu in 1.0.1 — Aktualisierter Willkommensbildschirm
+
+- 👤 Der letzte Willkommensbildschirm stellt jetzt die **NexusCharts-Konten** vor: zwei Felder (Benutzername und Passwort) statt des alten Zugangscodes, mit neuem Text in allen 5 Sprachen.
+
+### Vorher in 1.0.0 — NexusCharts-Konten, neue Adresse, nur eigene Daten
 
 - 🌐 **Neue Adresse**: NexusCharts ist jetzt unter **[nexuscharts.app](https://nexuscharts.app)**. Die alte Adresse leitet automatisch dorthin weiter.
 - 👤 **NexusCharts-Konten**: Registrierung für alle mit Benutzername, E-Mail und Passwort. Eindeutige Benutzernamen, sichere Passwörter und ein 6-stelliger E-Mail-Code zur Bestätigung der Adresse.
