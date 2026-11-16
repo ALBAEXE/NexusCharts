@@ -1368,6 +1368,8 @@ function relogin(){
   return relogging;
 }
 async function authed(path){
+  /* 0.46.0: nessuna richiesta per gli strumenti non ancora attivi */
+  if(window.NXReg&&!NXReg.pathOk(path)){const e=new Error('inactive');e.status=0;e.inactive=true;throw e}
   try{return await api(path,{headers:auth()})}
   catch(e){
     if(e.status===401&&sess){await relogin();return await api(path,{headers:auth()})}
@@ -10279,6 +10281,8 @@ ${B}#pf-screen.d3main .pfrow:active .pfic::before{opacity:1;transform:scale(1) r
     if(k)base=INST.filter(function(x){return norm(x.name).indexOf(k)>=0||norm(x.desc).indexOf(k)>=0});
     else base=INST.slice();
     if(S.f!=='all')base=base.filter(function(x){return catOf(x)===S.f});
+    /* 0.46.0: un pair alla volta, nella ricerca solo gli strumenti attivi */
+    if(window.NXReg)base=base.filter(function(x){return NXReg.active(x.name)});
     return base;
   }
   function drawFilters(){
@@ -10310,12 +10314,13 @@ ${B}#pf-screen.d3main .pfrow:active .pfic::before{opacity:1;transform:scale(1) r
     row.appendChild(go);row.appendChild(star);
     return row;
   }
-  function updK(){var e=document.getElementById('d3srch');if(!e)return;var l=lx();e.querySelector('.d3s-k').textContent=l.k+' \u00b7 '+INST.length+' \u00b7 \u2605 '+WATCH.length}
+  function updK(){var e=document.getElementById('d3srch');if(!e)return;var l=lx();var nI=window.NXReg?INST.filter(function(x){return NXReg.active(x.name)}).length:INST.length;e.querySelector('.d3s-k').textContent=l.k+' \u00b7 '+nI+' \u00b7 \u2605 '+(window.NXReg?WATCH.filter(function(n){return NXReg.active(n)}).length:WATCH.length)}
   function draw(anim){
     var e=srchEl(),lst=e.querySelector('.d3s-list'),l=lx();lst.innerHTML='';updK();
     var res=results();
     if(!res.length){
       if(S.f==='stk'&&!norm(S.q))lst.appendChild(emptyStk(true));
+      else if(window.NXReg&&NXReg.soonCat(S.f)&&!norm(S.q))lst.appendChild(NXReg.soonCard(S.f));
       else{var n=document.createElement('div');n.className='d3s-nores';n.textContent=t('noresult');lst.appendChild(n);if(S.f==='stk')lst.appendChild(emptyStk(true))}
       return;
     }
@@ -12760,4 +12765,168 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   try{var oTab=showTab;showTab=function(){closeUsers();return oTab.apply(this,arguments)}}catch(e){}
   try{var prevL=NXAPP.onLang;NXAPP.onLang=function(k){try{prevL&&prevL(k)}catch(e){}setTimeout(function(){paint(true)},40)}}catch(e){}
   document.addEventListener('visibilitychange',function(){if(!document.hidden)setTimeout(function(){paint(false)},400)});
+})();
+
+/* =====================================================================
+   0.46.0 (Fase 0 del motore nostro): un pair alla volta + pagina «Fonti dati»
+   - registro unico degli strumenti: solo quelli attivi caricano prezzi e candele;
+   - gli strumenti del registro non ancora attivi restano visibili come «In arrivo»;
+   - i simboli fuori dal registro restano salvati nelle liste ma non si vedono;
+   - nessun dato salvato viene cancellato o riscritto (tc_watch, liste e Segnali intatti);
+   - nel Profilo la pagina «Fonti dati» con le attribuzioni (Lightweight Charts compresa).
+   ===================================================================== */
+(function(){
+  if(window.NXReg)return;
+  /* registro: k = nome base, cls = classe, active = carica dati, src = nome pubblico della fonte */
+  var REG=[
+    {k:'XAUUSD',cls:'com',active:true,src:'TradeLocker',tmp:true},
+    {k:'EURUSD',cls:'fx'},
+    {k:'BTCUSD',cls:'cry'},
+    {k:'ETHUSD',cls:'cry'},
+    {k:'XAGUSD',cls:'com'},
+    {k:'XPTUSD',cls:'com'},
+    {k:'US30',cls:'idx'},
+    {k:'NAS100',cls:'idx'}
+  ];
+  var nrm=function(s){return String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'')};
+  function regOf(n){var b=nrm(n),i;for(i=0;i<REG.length;i++)if(b===REG[i].k)return REG[i];for(i=0;i<REG.length;i++)if(b.indexOf(REG[i].k)===0)return REG[i];return null}
+  function listed(n){return !!regOf(n)}
+  function active(n){var r=regOf(n);return !!(r&&r.active)}
+  /* richieste al broker: solo per gli strumenti attivi (rete di sicurezza sotto a tutto il resto) */
+  function pathOk(path){
+    var m=/[?&]tradableInstrumentId=(\d+)/.exec(String(path||''));if(!m)return true;
+    var id=+m[1],it=null;try{for(var i=0;i<INST.length;i++)if(+INST[i].tid===id){it=INST[i];break}}catch(e){}
+    return !it||active(it.name);
+  }
+  function firstActive(){try{for(var i=0;i<REG.length;i++)if(REG[i].active){var x=findBase(REG[i].k);if(x)return x.name}}catch(e){}return null}
+
+  var TX={
+    it:{soon:'In arrivo',soonT:'{n} arriva presto: per ora è attivo solo l\'oro.',title:'Fonti dati',sub:'Da dove arrivano prezzi e grafici',act:'Strumenti attivi',next:'In arrivo',chart:'Grafico',src:'prezzi e candele da {s}',tmp:'Fonte temporanea: la stiamo sostituendo con una fonte indipendente.',nextD:'Arriveranno uno alla volta, ognuno con la sua fonte.',lw:'Il grafico è disegnato con questa libreria open source (licenza Apache 2.0):',site:'Apri tradingview.com',note:'Prezzi e grafici servono per l\'analisi: possono essere diversi da quelli del tuo broker.'},
+    en:{soon:'Coming soon',soonT:'{n} is coming soon: for now only gold is active.',title:'Data sources',sub:'Where prices and charts come from',act:'Active instruments',next:'Coming soon',chart:'Chart',src:'prices and candles from {s}',tmp:'Temporary source: we are replacing it with an independent one.',nextD:'They will arrive one at a time, each with its own source.',lw:'The chart is drawn with this open-source library (Apache 2.0 license):',site:'Open tradingview.com',note:'Prices and charts are for analysis: they may differ from your broker\'s.'},
+    es:{soon:'Próximamente',soonT:'{n} llegará pronto: por ahora solo el oro está activo.',title:'Fuentes de datos',sub:'De dónde vienen precios y gráficos',act:'Instrumentos activos',next:'Próximamente',chart:'Gráfico',src:'precios y velas de {s}',tmp:'Fuente temporal: la estamos sustituyendo por una fuente independiente.',nextD:'Llegarán uno a uno, cada uno con su fuente.',lw:'El gráfico se dibuja con esta biblioteca de código abierto (licencia Apache 2.0):',site:'Abrir tradingview.com',note:'Precios y gráficos sirven para el análisis: pueden ser distintos de los de tu bróker.'},
+    fr:{soon:'Bientôt',soonT:'{n} arrive bientôt : pour l\'instant seul l\'or est actif.',title:'Sources des données',sub:'D\'où viennent les prix et les graphiques',act:'Instruments actifs',next:'Bientôt',chart:'Graphique',src:'prix et bougies de {s}',tmp:'Source temporaire : nous la remplaçons par une source indépendante.',nextD:'Ils arriveront un par un, chacun avec sa source.',lw:'Le graphique est dessiné avec cette bibliothèque open source (licence Apache 2.0) :',site:'Ouvrir tradingview.com',note:'Les prix et les graphiques servent à l\'analyse : ils peuvent différer de ceux de ton courtier.'},
+    de:{soon:'Demnächst',soonT:'{n} kommt bald: im Moment ist nur Gold aktiv.',title:'Datenquellen',sub:'Woher Preise und Charts kommen',act:'Aktive Instrumente',next:'Demnächst',chart:'Chart',src:'Preise und Kerzen von {s}',tmp:'Vorübergehende Quelle: wir ersetzen sie durch eine unabhängige Quelle.',nextD:'Sie kommen nacheinander, jedes mit seiner eigenen Quelle.',lw:'Der Chart wird mit dieser Open-Source-Bibliothek gezeichnet (Apache-2.0-Lizenz):',site:'tradingview.com öffnen',note:'Preise und Charts dienen der Analyse: sie können von denen deines Brokers abweichen.'}
+  };
+  function L(){try{return TX[lang]||TX.it}catch(e){return TX.it}}
+  window.NXReg={list:REG,regOf:regOf,listed:listed,active:active,pathOk:pathOk,firstActive:firstActive,tx:L};
+
+  /* ---------- dati: niente richieste per gli strumenti non attivi ---------- */
+  try{var oQF=quoteFor;quoteFor=function(n){if(n&&!active(n))return Promise.resolve();return oQF.apply(this,arguments)}}catch(e){}
+  try{var oBF=barsFor;barsFor=function(it){if(it&&it.name&&!active(it.name))return Promise.resolve([]);return oBF.apply(this,arguments)}}catch(e){}
+  try{var oBC=barsCached;barsCached=function(sym){if(sym&&!active(sym))return Promise.resolve([]);return oBC.apply(this,arguments)}}catch(e){}
+  try{var oBA=bidAsk;bidAsk=function(sym){if(sym&&!active(sym))return Promise.resolve(null);return oBA.apply(this,arguments)}}catch(e){}
+
+  /* ---------- simbolo aperto: solo strumenti attivi ---------- */
+  function soonToast(n){var m=L().soonT.replace('{n}',n);try{if(window.NXToast)return NXToast(m)}catch(e){}try{var e=document.getElementById('d3toast');if(!e){e=document.createElement('div');e.id='d3toast';e.setAttribute('role','status');e.setAttribute('aria-live','polite');e.innerHTML='<i></i><span></span>';document.body.appendChild(e)}e.lastChild.textContent=m;var two=e.offsetHeight>48;e.classList.toggle('d3t2',two);e.classList.add('show');clearTimeout(soonToast.t);soonToast.t=setTimeout(function(){e.classList.remove('show')},two?2600:1900)}catch(e){}}
+  try{
+    var oSC=setCur;
+    setCur=function(name){
+      if(name&&BYN[name]&&!active(name)){
+        /* simbolo salvato non attivo (per esempio all'avvio): si apre il primo strumento attivo */
+        if(!cur||!active(cur)){var f=firstActive();if(f&&f!==name){var a=[].slice.call(arguments);a[0]=f;return oSC.apply(this,a)}}
+        return;
+      }
+      return oSC.apply(this,arguments);
+    };
+  }catch(e){}
+
+
+  /* ---------- Watchlist, liste e Segnali: stesse schede vuote di Design 3.0 ----------
+     Le categorie senza strumenti attivi (Forex, Cripto, Indici) mostrano il riquadro «in arrivo»,
+     come quello delle Azioni. Le righe dei simboli non attivi o fuori dal registro non si disegnano,
+     ma restano salvate nelle liste e tornano quando lo strumento si attiva. */
+  var CE={
+    it:{w:'in arrivo',b:'Cerca',t:{fx:'Nessuna coppia Forex, per ora',com:'Nessuna commodity, per ora',cry:'Nessuna cripto, per ora',idx:'Nessun indice, per ora'},d:{fx:'Quando le coppie Forex saranno disponibili le troverai qui e nella ricerca.',cry:'Quando le cripto saranno disponibili le troverai qui e nella ricerca.',idx:'Quando gli indici saranno disponibili li troverai qui e nella ricerca.',com:'Cerca e tocca la stella per aggiungerne uno.'}},
+    en:{w:'coming',b:'Search',t:{fx:'No Forex pairs yet',com:'No commodities yet',cry:'No crypto yet',idx:'No indices yet'},d:{fx:'When Forex pairs become available you will find them here and in search.',cry:'When crypto becomes available you will find it here and in search.',idx:'When indices become available you will find them here and in search.',com:'Search and tap the star to add one.'}},
+    es:{w:'próximamente',b:'Buscar',t:{fx:'Ningún par Forex, por ahora',com:'Ninguna materia prima, por ahora',cry:'Ninguna cripto, por ahora',idx:'Ningún índice, por ahora'},d:{fx:'Cuando haya pares Forex disponibles los encontrarás aquí y en la búsqueda.',cry:'Cuando haya cripto disponibles las encontrarás aquí y en la búsqueda.',idx:'Cuando haya índices disponibles los encontrarás aquí y en la búsqueda.',com:'Busca y toca la estrella para añadir uno.'}},
+    fr:{w:'bientôt',b:'Chercher',t:{fx:'Aucune paire Forex pour l’instant',com:'Aucune matière première pour l’instant',cry:'Aucune crypto pour l’instant',idx:'Aucun indice pour l’instant'},d:{fx:'Quand des paires Forex seront disponibles, tu les trouveras ici et dans la recherche.',cry:'Quand des cryptos seront disponibles, tu les trouveras ici et dans la recherche.',idx:'Quand des indices seront disponibles, tu les trouveras ici et dans la recherche.',com:'Cherche et touche l’étoile pour en ajouter un.'}},
+    de:{w:'bald',b:'Suchen',t:{fx:'Noch kein Forex-Paar',com:'Noch kein Rohstoff',cry:'Noch keine Krypto',idx:'Noch kein Index'},d:{fx:'Sobald Forex-Paare verfügbar sind, findest du sie hier und in der Suche.',cry:'Sobald Krypto verfügbar ist, findest du sie hier und in der Suche.',idx:'Sobald Indizes verfügbar sind, findest du sie hier und in der Suche.',com:'Suche und tippe auf den Stern, um eins hinzuzufügen.'}}
+  };
+  function C(){try{return CE[lang]||CE.it}catch(e){return CE.it}}
+  /* categoria «in arrivo»: nessuno strumento attivo di quella classe */
+  function soonCat(c){if(!c||c==='all'||c==='stk'||c==='oth')return false;for(var i=0;i<REG.length;i++)if(REG[i].cls===c&&REG[i].active)return false;return true}
+  /* riquadro vuoto con la stessa grafica di Maya (d3empty d3cate): «in arrivo» oppure «tocca la stella» */
+  function card(c,soon,inSearch){
+    var l=C(),cn=t('cat_'+c),e=document.createElement('div');e.className='d3empty d3cate'+(soon?' nxsoon':'');e.setAttribute('data-cat',c);
+    var o='';try{o=NXSearch.orb()}catch(x){}
+    e.innerHTML='<div class="d3e-o">'+o+'</div><span class="d3e-k"></span><b></b><p></p>';
+    e.querySelector('.d3e-k').textContent=cn+' · '+(soon?l.w:'0');e.querySelector('b').textContent=l.t[c]||cn;e.querySelector('p').textContent=l.d[soon?c:'com'];
+    if(!inSearch){var b=document.createElement('button');b.type='button';b.innerHTML='<span></span><i aria-hidden="true"></i>';b.firstChild.textContent=l.b+' '+cn;b.onclick=function(){try{haptic()}catch(x){}try{NXSearch.open(c)}catch(x){}};e.appendChild(b)}
+    return e;
+  }
+  function decorate(){
+    var box=document.getElementById('wl');if(!box)return;
+    /* righe fuori dal registro o non attive: non si disegnano */
+    [].forEach.call(box.querySelectorAll('.row[data-n]'),function(r){if(!active(r.dataset.n))r.remove()});
+    var main=true;try{main=!window.NXLists||!NXLists.isMainList||NXLists.isMainList()}catch(e){}
+    [].slice.call(box.querySelectorAll('.sec')).forEach(function(h){
+      if(!h.dataset.cat){for(var i=0;i<CATS.length;i++){if(h.textContent===t('cat_'+CATS[i])){h.dataset.cat=CATS[i];break}}}
+      var c=h.dataset.cat;if(!c||c==='stk')return;
+      var rows=0,cards=[],el=h.nextElementSibling;
+      while(el&&!el.classList.contains('sec')){if(el.classList.contains('row'))rows++;else if(el.classList.contains('d3empty'))cards.push(el);el=el.nextElementSibling}
+      if(rows)return;
+      var soon=soonCat(c);
+      if(cards.length){
+        if(soon&&!cards[0].classList.contains('nxsoon')){var n=card(c,true,false);if(cards[0].classList.contains('d3in'))n.classList.add('d3in');h.parentNode.replaceChild(n,cards[0])}
+        return;
+      }
+      if(main||soon)h.parentNode.insertBefore(card(c,soon,false),h.nextSibling);
+      else h.remove();
+    });
+  }
+  try{var oRW=renderWL;renderWL=function(){var r=oRW.apply(this,arguments);try{decorate()}catch(e){}return r}}catch(e){}
+  window.NXReg.soonCat=soonCat;
+  window.NXReg.soonCard=function(c){return card(c,true,true)};
+
+  /* ---------- Profilo: pagina «Fonti dati» ---------- */
+  PIC.sources='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/></svg>';
+  PCOL.sources='#22ab94';
+  function openSite(){var u='https://www.tradingview.com/';var w=null;try{w=window.open(u,'_blank','noopener')}catch(e){}if(!w)location.href=u}
+  /* stessa struttura e stessi elementi della pagina «Note legali» (lgbox, lghd, lglist, pfmini) */
+  var SIC={
+    px:['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>','#22ab94'],
+    next:['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>','#f59e0b'],
+    chart:['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v16M16 4v16"/><rect x="5.5" y="8" width="5" height="7" rx="1"/><rect x="13.5" y="6" width="5" height="9" rx="1"/></svg>','#3b82f6']
+  };
+  function renderSources(p){
+    var l=L();pfSub(p,l.title);
+    if(PF.srcOpen===undefined)PF.srcOpen='px';
+    var act=REG.filter(function(r){return r.active}),nxt=REG.filter(function(r){return !r.active});
+    var secs=[
+      ['px',l.act,act.map(function(r){var it=null;try{it=findBase(r.k)}catch(e){}return (it?it.name:r.k)+' · '+l.src.replace('{s}',r.src)}).concat(act.some(function(r){return r.tmp})?[l.tmp]:[]).concat([l.note])],
+      ['next',l.next,[nxt.map(function(r){return r.k}).join(', ')+'.',l.nextD]],
+      ['chart',l.chart,[l.lw,'TradingView Lightweight Charts™ Copyright (c) 2025 TradingView, Inc.']]
+    ];
+    secs.forEach(function(x){
+      var k=x[0],box=document.createElement('div');box.className='lgbox'+(PF.srcOpen===k?' open':'');
+      var hd=document.createElement('button');hd.className='lghd';
+      hd.innerHTML='<i></i><span></span><em></em>';hd.firstChild.innerHTML=SIC[k][0];hd.firstChild.style.color=SIC[k][1];hd.children[1].textContent=x[1];
+      hd.onclick=function(){PF.srcOpen=PF.srcOpen===k?null:k;var st=p.scrollTop;p.innerHTML='';renderSources(p);p.scrollTop=st};
+      box.appendChild(hd);
+      if(PF.srcOpen===k){
+        var ul=document.createElement('ul');ul.className='lglist';
+        x[2].forEach(function(t){var li=document.createElement('li');li.textContent=t;ul.appendChild(li)});
+        if(k==='chart'){var b=document.createElement('button');b.className='pfmini on';b.style.margin='4px 0 6px 0';b.textContent='tradingview.com';b.onclick=openSite;ul.appendChild(b)}
+        box.appendChild(ul);
+      }
+      p.appendChild(box);
+    });
+  }
+  window.NXReg.renderSources=renderSources;
+  try{
+    var oRP=renderProfile;
+    renderProfile=function(){
+      if(PF.page==='sources'){var p=$('pf-screen');p.innerHTML='';renderSources(p);p.scrollTop=0;return}
+      var r=oRP.apply(this,arguments);
+      if(PF.page)return r;
+      try{
+        var p2=$('pf-screen');if(p2.querySelector('.nxsrcrow'))return r;
+        /* subito dopo «Note legali» */
+        var lgRow=null;[].forEach.call(p2.querySelectorAll('.pfrow'),function(b){var s=b.querySelector('.pftx span');if(s&&s.textContent===lg().title)lgRow=b});
+        var l=L();
+        if(lgRow){var g=lgRow.parentNode;var row=pfRow(g,PIC.sources,l.title,l.sub,function(){pfGo('sources')},'chev',PCOL.sources);row.classList.add('nxsrcrow');g.insertBefore(row,lgRow.nextSibling)}
+      }catch(e){}
+      return r;
+    };
+  }catch(e){}
 })();
