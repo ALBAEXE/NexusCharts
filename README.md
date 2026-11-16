@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v0.44.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v0.45.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -63,14 +63,25 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 0.44.0 — German
+### 🆕 New in 0.45.0 — Design 3.0 inside the app, multiple watchlists and Signals
+
+- 🪐 **Design 3.0 inside the app**: Watchlist, Chart menus, Indicators, Script editor, Bar Replay and Profile now use the same orbit style as the sign-in screen, in dark and light theme. The candles on the chart stay clean.
+- 📋 **Multiple watchlists**: create, rename and delete your own lists from *All watchlists*. Your usual list stays the main **Watchlist**, so nothing is lost when you update.
+- 🛰️ **Signals**: long-press a pair and pick one of 7 colours. Each colour gets its own tab before *Watchlist* with the pairs of that colour from all your lists. Signals can be renamed or deleted.
+- 🫙 **Empty states**: an empty list shows one clear empty box per category, and when no symbol is open the Chart shows *No symbol open* with a **Search a symbol** button (no data is loaded).
+- ✏️ **Drawings**: crosshair placement that never hides the point under your finger, **line width** (1–4 px) and **style** (solid, dashed, dotted), and an **Undo** button (up to 30 steps per symbol).
+- 📤 **Share**: a Design 3.0 preview of your chart first, then the system share sheet with the image only.
+- 🧩 **Script editor minimap**: a coloured overview of your code on the right; tap or drag to jump.
+
+### Previously in 0.44.0 — German
 
 - 🇩🇪 **German** is the fifth language of the app: sign-in, welcome screens, watchlist, chart, indicators, script editor, alerts, profile and install guide.
 - 🔢 Numbers and dates in **German format** (for example 1.234,56).
 - 🪐 The **orbit language menu** now has five round flags.
 - 📲 The **Install** button on the sign-in screens now shows only its icon, on every device and in every language, the same size as the flag.
 
-### Previously in 0.43.0 — Design 3.0 sign-in
+<details>
+<summary>Previously in 0.43.0 — Design 3.0 sign-in</summary>
 
 - 🔐 **New sign-in screen**, built exactly like the Design 3.0 prototype: orbit logo, Face ID scanner, console-style fields and gold and blue buttons with a rotating dashed ring.
 - 🔢 **Access code in 8 boxes** (4 + 4): each character drops into its box and the eight segments around the logo light up one by one. A wrong code turns red and shakes.
@@ -79,6 +90,8 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🧹 **Cleaner sign-in**: *Reset the app* is now only in Profile › Settings.
 - 🖤 **0.43.1**: black launch screen and no more old glowing logo at startup, the new clean logo everywhere in the app, no yellow background when iPhone fills in your email and password, and an empty Server field shows only the green dot.
 - 📲 **0.43.2**: the **Install** button is back on the sign-in screens (top right), in Design 3.0 style, with the step-by-step guide for iPhone and Android.
+
+</details>
 
 <details>
 <summary>Previously in 0.42.0</summary>
@@ -99,6 +112,8 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - Search any symbol and add it with one tap
 - Live price, daily change in points and percent, flag/coin icons
 - Mini player at the bottom with the selected symbol and its sparkline
+- **Multiple watchlists** (*All watchlists*: create, rename, delete) and colour **Signals** with their own tabs
+- Long-press a pair for Signal and Remove
 
 ### 📊 Chart
 - Full-screen chart with **live updates** and a candle **countdown**
@@ -123,6 +138,7 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - Code editor with line numbers, error check and console
 - Supports plots, shapes, boxes, lines, labels, tables, fills, inputs, alerts, higher timeframes and sessions
 - Save your scripts and add them to the chart from **My scripts**
+- **Minimap** of the code on the right: tap or drag to move through long scripts
 
 ### ✏️ Drawing tools
 Saved automatically for each symbol.
@@ -134,7 +150,7 @@ Saved automatically for each symbol.
 | Shapes | Brush · Arrow · Rectangle · Path · Ellipse |
 | Annotations | Text · Note |
 
-Select a drawing to move it, change its color or delete it.
+Select a drawing to move it, change its color, **line width and style** or delete it. The **Undo** button takes back up to 30 steps.
 
 ### 🔔 Alerts
 - Create a price alert from the crosshair **"+"** or from the **Alerts** manager
@@ -303,6 +319,7 @@ Not yet: they're saved on the device where you made them.
 | ✅ | 5 languages (German added in 0.44.0), dark and light theme |
 | ✅ | Design 3.0: welcome screens, logo animation, orbit language menu |
 | ✅ | Design 3.0 sign-in: orbit logo, 8-box access code, round flags |
+| ✅ | Design 3.0 inside the app, multiple watchlists, Signals, drawing width/style and Undo |
 | 🔜 | Faster data loading |
 | 🔜 | Full desktop version |
 | 💡 | Sync between devices |

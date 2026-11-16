@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v0.44.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v0.45.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -63,14 +63,25 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 0.44.0 — Tedesco
+### 🆕 Novità della 0.45.0 — Design 3.0 dentro l'app, più watchlist e Segnali
+
+- 🪐 **Design 3.0 dentro l'app**: Watchlist, menu del Grafico, Indicatori, Editor script, Bar Replay e Profilo ora hanno lo stesso stile a orbite dell'accesso, in tema scuro e chiaro. Le candele del grafico restano pulite.
+- 📋 **Più watchlist**: crea, rinomina ed elimina le tue liste da *Tutte le watchlist*. La lista di sempre resta la **Watchlist** principale, quindi aggiornando non perdi niente.
+- 🛰️ **Segnali**: tieni premuto un pair e scegli uno dei 7 colori. Ogni colore ha la sua scheda prima di *Watchlist*, con i pair di quel colore presi da tutte le liste. I Segnali si possono rinominare ed eliminare.
+- 🫙 **Stati vuoti**: una lista vuota mostra un riquadro chiaro per ogni categoria, e senza simbolo aperto il Grafico mostra *Nessun simbolo aperto* con il pulsante **Cerca un simbolo** (non carica nessun dato).
+- ✏️ **Disegni**: mirino che non copre mai il punto sotto il dito, **spessore** della linea (1–4 px) e **stile** (continua, tratteggiata, punteggiata), e il pulsante **Annulla** (fino a 30 passi per simbolo).
+- 📤 **Condividi**: prima un'anteprima Design 3.0 del grafico, poi il foglio di condivisione con la sola immagine.
+- 🧩 **Minimappa dell'editor**: una panoramica colorata del codice a destra; tocca o trascina per spostarti.
+
+### In precedenza, nella 0.44.0 — Tedesco
 
 - 🇩🇪 Il **tedesco** è la quinta lingua dell'app: accesso, schermate di benvenuto, watchlist, grafico, indicatori, editor degli script, alert, profilo e guida all'installazione.
 - 🔢 Numeri e date nel **formato tedesco** (per esempio 1.234,56).
 - 🪐 Il **menu lingue a orbita** ora ha cinque bandiere rotonde.
 - 📲 Il tasto **Installa** nelle schermate di accesso ora mostra solo l'icona, su tutti i dispositivi e in tutte le lingue, grande quanto la bandiera.
 
-### In precedenza, nella 0.43.0 — Accesso Design 3.0
+<details>
+<summary>In precedenza, nella 0.43.0 — Accesso Design 3.0</summary>
 
 - 🔐 **Nuova schermata di accesso**, fatta esattamente come il prototipo Design 3.0: logo a orbite, scanner del Face ID, campi in stile console e pulsanti oro e blu con l'anello tratteggiato che gira.
 - 🔢 **Codice di accesso in 8 caselle** (4 + 4): ogni carattere cade nella sua casella e gli otto segmenti intorno al logo si accendono uno alla volta. Se il codice è sbagliato diventano rossi e tremano.
@@ -79,6 +90,8 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🧹 **Accesso più pulito**: *Ripristina l'app* ora è solo in Profilo › Impostazioni.
 - 🖤 **0.43.1**: schermata di avvio nera e niente più vecchio logo luminoso all'apertura, logo nuovo e pulito in tutta l'app, niente sfondo giallo quando iPhone inserisce email e password, e il campo Server vuoto mostra solo il pallino verde.
 - 📲 **0.43.2**: torna il tasto **Installa** nelle schermate di accesso (in alto a destra), in stile Design 3.0, con la guida passo passo per iPhone e Android.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 0.42.0</summary>
@@ -99,6 +112,8 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - Cerca qualsiasi simbolo e aggiungilo con un tocco
 - Prezzo live, variazione giornaliera in punti e percentuale, icone con bandiere e monete
 - Mini player in basso con il simbolo selezionato e il suo grafichino
+- **Più watchlist** (*Tutte le watchlist*: crea, rinomina, elimina) e **Segnali** colorati con le loro schede
+- Tieni premuto un pair per Segnale e Rimuovi
 
 ### 📊 Grafico
 - Grafico a tutto schermo con **aggiornamento live** e **conto alla rovescia** della candela
@@ -123,6 +138,7 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - Editor di codice con numeri di riga, controllo errori e console
 - Supporta plot, forme, box, linee, etichette, tabelle, riempimenti, input, alert, timeframe superiori e sessioni
 - Salva i tuoi script e aggiungili al grafico da **I miei script**
+- **Minimappa** del codice a destra: tocca o trascina per muoverti negli script lunghi
 
 ### ✏️ Strumenti di disegno
 Salvati in automatico per ogni simbolo.
@@ -134,7 +150,7 @@ Salvati in automatico per ogni simbolo.
 | Figure | Pennello · Freccia · Rettangolo · Percorso · Ellisse |
 | Annotazioni | Testo · Nota |
 
-Seleziona un disegno per spostarlo, cambiargli colore o eliminarlo.
+Seleziona un disegno per spostarlo, cambiargli colore, **spessore e stile** o eliminarlo. Il pulsante **Annulla** torna indietro fino a 30 passi.
 
 ### 🔔 Alert
 - Crea un alert sul prezzo dal **"+"** del mirino o dalla gestione **Alert**
@@ -303,6 +319,7 @@ Non ancora: restano sul dispositivo dove li hai creati.
 | ✅ | 5 lingue (tedesco dalla 0.44.0), tema scuro e chiaro |
 | ✅ | Design 3.0: schermate di benvenuto, animazione del logo, menu lingue a orbita |
 | ✅ | Accesso Design 3.0: logo a orbite, codice in 8 caselle, bandiere rotonde |
+| ✅ | Design 3.0 dentro l'app, più watchlist, Segnali, spessore/stile dei disegni e Annulla |
 | 🔜 | Caricamento dati più veloce |
 | 🔜 | Versione completa per computer |
 | 💡 | Sincronizzazione tra dispositivi |

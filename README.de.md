@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v0.44.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v0.45.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -63,7 +63,17 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 0.44.0 — Deutsch
+### 🆕 Neu in 0.45.0 — Design 3.0 in der App, mehrere Watchlists und Signale
+
+- 🪐 **Design 3.0 in der App**: Watchlist, Chart-Menüs, Indikatoren, Skript-Editor, Bar Replay und Profil haben jetzt denselben Umlaufbahn-Stil wie die Anmeldung, im dunklen und hellen Design. Die Kerzen im Chart bleiben schlicht.
+- 📋 **Mehrere Watchlists**: erstelle, benenne um und lösche eigene Listen unter *Alle Watchlists*. Deine bisherige Liste bleibt die **Watchlist**, beim Update geht nichts verloren.
+- 🛰️ **Signale**: halte ein Paar gedrückt und wähle eine von 7 Farben. Jede Farbe bekommt einen eigenen Tab vor *Watchlist* mit den Paaren dieser Farbe aus allen Listen. Signale lassen sich umbenennen und löschen.
+- 🫙 **Leere Zustände**: eine leere Liste zeigt pro Kategorie ein klares leeres Feld, und ohne offenes Symbol zeigt der Chart *Kein Symbol geöffnet* mit der Taste **Symbol suchen** (es werden keine Daten geladen).
+- ✏️ **Zeichnungen**: Fadenkreuz, das den Punkt unter dem Finger nie verdeckt, **Linienstärke** (1–4 px) und **Stil** (durchgezogen, gestrichelt, gepunktet) und die Taste **Rückgängig** (bis zu 30 Schritte pro Symbol).
+- 📤 **Teilen**: zuerst eine Design-3.0-Vorschau des Charts, dann das Teilen-Menü des Systems nur mit dem Bild.
+- 🧩 **Minimap im Skript-Editor**: eine farbige Übersicht des Codes rechts; tippen oder ziehen zum Springen.
+
+### Vorher in 0.44.0 — Deutsch
 
 - 🇩🇪 **Deutsch** ist die fünfte Sprache der App: Anmeldung, Willkommensbildschirme, Watchlist, Chart, Indikatoren, Skript-Editor, Alarme, Profil und Installationsanleitung.
 - 🔢 Zahlen und Daten im **deutschen Format** (zum Beispiel 1.234,56).
@@ -91,6 +101,8 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - Suche jedes Symbol und füge es mit einem Tipp hinzu
 - Live-Preis, Tagesveränderung in Punkten und Prozent, Flaggen- und Münzsymbole
 - Mini-Player unten mit dem ausgewählten Symbol und seinem Verlauf
+- **Mehrere Watchlists** (*Alle Watchlists*: erstellen, umbenennen, löschen) und farbige **Signale** mit eigenen Tabs
+- Paar gedrückt halten für Signal und Entfernen
 
 ### 📊 Chart
 - Vollbild-Chart mit **Live-Aktualisierung** und **Countdown** der Kerze
@@ -115,6 +127,7 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - Code-Editor mit Zeilennummern, Fehlerprüfung und Konsole
 - Unterstützt Plots, Formen, Boxen, Linien, Beschriftungen, Tabellen, Füllungen, Eingaben, Alarme, höhere Zeiteinheiten und Sessions
 - Speichere deine Skripte und füge sie über **Meine Skripte** zum Chart hinzu
+- **Minimap** des Codes rechts: tippen oder ziehen, um durch lange Skripte zu springen
 - Der Code der Skripte bleibt wie bei Pine Script™ immer auf Englisch; Menüs und Meldungen des Editors sind auf Deutsch
 
 ### ✏️ Zeichenwerkzeuge
@@ -127,7 +140,7 @@ Werden für jedes Symbol automatisch gespeichert.
 | Formen | Pinsel · Pfeil · Rechteck · Pfad · Ellipse |
 | Anmerkungen | Text · Notiz |
 
-Wähle eine Zeichnung aus, um sie zu verschieben, ihre Farbe zu ändern oder sie zu löschen.
+Wähle eine Zeichnung aus, um sie zu verschieben, ihre Farbe, **Linienstärke und Stil** zu ändern oder sie zu löschen. Die Taste **Rückgängig** nimmt bis zu 30 Schritte zurück.
 
 ### 🔔 Alarme
 - Erstelle einen Preisalarm über das **„+“** am Fadenkreuz oder in der Alarmverwaltung
@@ -297,6 +310,7 @@ Noch nicht: sie werden auf dem Gerät gespeichert, auf dem du sie erstellt hast.
 | ✅ | Design 3.0: Willkommensbildschirme, Logo-Animation, Sprachmenü mit Umlaufbahn |
 | ✅ | Design-3.0-Anmeldung: Logo mit Umlaufbahn, Zugangscode in 8 Feldern, runde Flaggen |
 | ✅ | 5 Sprachen: Italienisch, Englisch, Spanisch, Französisch, Deutsch |
+| ✅ | Design 3.0 in der App, mehrere Watchlists, Signale, Linienstärke/-stil und Rückgängig |
 | 🔜 | Schnelleres Laden der Daten |
 | 🔜 | Volle Computer-Version |
 | 💡 | Synchronisierung zwischen Geräten |
