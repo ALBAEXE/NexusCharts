@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v0.44.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v0.45.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -63,14 +63,25 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 0.44.0 — Allemand
+### 🆕 Nouveautés de la 0.45.0 — Design 3.0 dans l'app, plusieurs watchlists et Signaux
+
+- 🪐 **Design 3.0 dans l'app** : Watchlist, menus du Graphique, Indicateurs, Éditeur de scripts, Bar Replay et Profil ont maintenant le même style en orbite que la connexion, en thème sombre et clair. Les bougies du graphique restent épurées.
+- 📋 **Plusieurs watchlists** : crée, renomme et supprime tes listes depuis *Toutes les watchlists*. Ta liste habituelle reste la **Watchlist** principale, donc la mise à jour ne fait rien perdre.
+- 🛰️ **Signaux** : appuie longuement sur une paire et choisis l'une des 7 couleurs. Chaque couleur a son onglet avant *Watchlist*, avec les paires de cette couleur venant de toutes tes listes. Les Signaux peuvent être renommés et supprimés.
+- 🫙 **États vides** : une liste vide montre un encadré clair par catégorie et, sans symbole ouvert, le Graphique affiche *Aucun symbole ouvert* avec le bouton **Chercher un symbole** (aucune donnée chargée).
+- ✏️ **Dessins** : réticule qui ne cache jamais le point sous le doigt, **épaisseur** du trait (1–4 px) et **style** (continu, tirets, pointillés), et le bouton **Annuler** (jusqu'à 30 étapes par symbole).
+- 📤 **Partager** : d'abord un aperçu Design 3.0 du graphique, puis la feuille de partage du système avec l'image seule.
+- 🧩 **Minicarte de l'éditeur** : un aperçu en couleurs du code à droite ; touche ou fais glisser pour te déplacer.
+
+### Auparavant, dans la 0.44.0 — Allemand
 
 - 🇩🇪 L'**allemand** est la cinquième langue de l'app : connexion, écrans de bienvenue, watchlist, graphique, indicateurs, éditeur de scripts, alertes, profil et guide d'installation.
 - 🔢 Nombres et dates au **format allemand** (par exemple 1.234,56).
 - 🪐 Le **menu des langues en orbite** a maintenant cinq drapeaux ronds.
 - 📲 Le bouton **Installer** des écrans de connexion n'affiche plus que son icône, sur tous les appareils et dans toutes les langues, de la même taille que le drapeau.
 
-### Auparavant, dans la 0.43.0 — Connexion Design 3.0
+<details>
+<summary>Auparavant, dans la 0.43.0 — Connexion Design 3.0</summary>
 
 - 🔐 **Nouvel écran de connexion**, fait exactement comme le prototype Design 3.0 : logo en orbite, scanner Face ID, champs style console et boutons or et bleu avec un anneau en pointillés qui tourne.
 - 🔢 **Code d'accès en 8 cases** (4 + 4) : chaque caractère tombe dans sa case et les huit segments autour du logo s'allument un par un. Un code erroné devient rouge et tremble.
@@ -79,6 +90,8 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🧹 **Connexion plus épurée** : *Réinitialiser l'app* se trouve maintenant seulement dans Profil › Réglages.
 - 🖤 **0.43.1** : écran de lancement noir et plus d'ancien logo lumineux à l'ouverture, le nouveau logo épuré dans toute l'app, plus de fond jaune quand l'iPhone remplit ton e-mail et ton mot de passe, et le champ Serveur vide n'affiche que le point vert.
 - 📲 **0.43.2** : le bouton **Installer** revient sur les écrans de connexion (en haut à droite), au style Design 3.0, avec le guide pas à pas pour iPhone et Android.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 0.42.0</summary>
@@ -99,6 +112,8 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - Cherche n'importe quel symbole et ajoute-le d'un toucher
 - Prix en direct, variation du jour en points et en pourcentage, icônes avec drapeaux et pièces
 - Mini lecteur en bas avec le symbole sélectionné et son mini-graphique
+- **Plusieurs watchlists** (*Toutes les watchlists* : créer, renommer, supprimer) et **Signaux** en couleur avec leurs onglets
+- Appui long sur une paire pour Signal et Retirer
 
 ### 📊 Graphique
 - Graphique plein écran avec **mise à jour en direct** et **compte à rebours** de la bougie
@@ -123,6 +138,7 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - Éditeur de code avec numéros de ligne, vérification des erreurs et console
 - Prend en charge plots, formes, boîtes, lignes, étiquettes, tableaux, remplissages, paramètres, alertes, unités de temps supérieures et sessions
 - Enregistre tes scripts et ajoute-les au graphique depuis **Mes scripts**
+- **Minicarte** du code à droite : touche ou fais glisser pour parcourir les longs scripts
 
 ### ✏️ Outils de dessin
 Enregistrés automatiquement pour chaque symbole.
@@ -134,7 +150,7 @@ Enregistrés automatiquement pour chaque symbole.
 | Formes | Pinceau · Flèche · Rectangle · Chemin · Ellipse |
 | Annotations | Texte · Note |
 
-Sélectionne un dessin pour le déplacer, changer sa couleur ou le supprimer.
+Sélectionne un dessin pour le déplacer, changer sa couleur, **son épaisseur et son style** ou le supprimer. Le bouton **Annuler** revient jusqu'à 30 étapes en arrière.
 
 ### 🔔 Alertes
 - Crée une alerte de prix depuis le **« + »** du réticule ou depuis le gestionnaire d'**Alertes**
@@ -303,6 +319,7 @@ Pas encore : ils restent sur l'appareil où tu les as créés.
 | ✅ | 5 langues (allemand depuis la 0.44.0), thème sombre et clair |
 | ✅ | Design 3.0 : écrans de bienvenue, animation du logo, menu des langues en orbite |
 | ✅ | Connexion Design 3.0 : logo en orbite, code en 8 cases, drapeaux ronds |
+| ✅ | Design 3.0 dans l'app, plusieurs watchlists, Signaux, épaisseur/style des dessins et Annuler |
 | 🔜 | Chargement des données plus rapide |
 | 🔜 | Version complète pour ordinateur |
 | 💡 | Synchronisation entre appareils |

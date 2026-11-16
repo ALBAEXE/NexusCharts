@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v0.44.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v0.45.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -63,14 +63,25 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 0.44.0 — Alemán
+### 🆕 Novedades de la 0.45.0 — Design 3.0 dentro de la app, varias watchlists y Señales
+
+- 🪐 **Design 3.0 dentro de la app**: Watchlist, menús del Gráfico, Indicadores, Editor de scripts, Bar Replay y Perfil tienen ahora el mismo estilo de órbitas que el acceso, en tema oscuro y claro. Las velas del gráfico siguen limpias.
+- 📋 **Varias watchlists**: crea, renombra y elimina tus listas desde *Todas las watchlists*. Tu lista de siempre sigue siendo la **Watchlist** principal, así que al actualizar no pierdes nada.
+- 🛰️ **Señales**: mantén pulsado un par y elige uno de los 7 colores. Cada color tiene su pestaña antes de *Watchlist*, con los pares de ese color de todas tus listas. Las Señales se pueden renombrar y eliminar.
+- 🫙 **Estados vacíos**: una lista vacía muestra un recuadro claro por categoría y, sin símbolo abierto, el Gráfico muestra *Ningún símbolo abierto* con el botón **Buscar un símbolo** (no carga datos).
+- ✏️ **Dibujos**: mira que nunca tapa el punto bajo el dedo, **grosor** de la línea (1–4 px) y **estilo** (continua, discontinua, punteada), y el botón **Deshacer** (hasta 30 pasos por símbolo).
+- 📤 **Compartir**: primero una vista previa Design 3.0 del gráfico, luego la hoja de compartir del sistema solo con la imagen.
+- 🧩 **Minimapa del editor**: una vista de colores del código a la derecha; toca o arrastra para moverte.
+
+### Anteriormente, en la 0.44.0 — Alemán
 
 - 🇩🇪 El **alemán** es el quinto idioma de la app: acceso, pantallas de bienvenida, watchlist, gráfico, indicadores, editor de scripts, alertas, perfil y guía de instalación.
 - 🔢 Números y fechas en **formato alemán** (por ejemplo 1.234,56).
 - 🪐 El **menú de idiomas en órbita** ahora tiene cinco banderas redondas.
 - 📲 El botón **Instalar** de las pantallas de acceso ahora muestra solo el icono, en todos los dispositivos y en todos los idiomas, del mismo tamaño que la bandera.
 
-### Anteriormente, en la 0.43.0 — Acceso Design 3.0
+<details>
+<summary>Anteriormente, en la 0.43.0 — Acceso Design 3.0</summary>
 
 - 🔐 **Nueva pantalla de acceso**, hecha exactamente como el prototipo Design 3.0: logo de órbitas, escáner de Face ID, campos estilo consola y botones dorado y azul con un anillo discontinuo que gira.
 - 🔢 **Código de acceso en 8 casillas** (4 + 4): cada carácter cae en su casilla y los ocho segmentos alrededor del logo se encienden uno a uno. Si el código es incorrecto se ponen rojos y tiemblan.
@@ -79,6 +90,8 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🧹 **Acceso más limpio**: *Restablecer la app* ahora está solo en Perfil › Ajustes.
 - 🖤 **0.43.1**: pantalla de inicio negra y sin el antiguo logo brillante al abrir, el nuevo logo limpio en toda la app, sin fondo amarillo cuando el iPhone rellena tu email y contraseña, y el campo Servidor vacío muestra solo el punto verde.
 - 📲 **0.43.2**: vuelve el botón **Instalar** en las pantallas de acceso (arriba a la derecha), con estilo Design 3.0 y la guía paso a paso para iPhone y Android.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 0.42.0</summary>
@@ -99,6 +112,8 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - Busca cualquier símbolo y añádelo con un toque
 - Precio en vivo, variación diaria en puntos y porcentaje, iconos con banderas y monedas
 - Mini reproductor abajo con el símbolo seleccionado y su minigráfico
+- **Varias watchlists** (*Todas las watchlists*: crear, renombrar, eliminar) y **Señales** de colores con sus pestañas
+- Mantén pulsado un par para Señal y Quitar
 
 ### 📊 Gráfico
 - Gráfico a pantalla completa con **actualización en vivo** y **cuenta atrás** de la vela
@@ -123,6 +138,7 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - Editor de código con números de línea, comprobación de errores y consola
 - Admite plots, formas, cajas, líneas, etiquetas, tablas, rellenos, entradas, alertas, temporalidades superiores y sesiones
 - Guarda tus scripts y añádelos al gráfico desde **Mis scripts**
+- **Minimapa** del código a la derecha: toca o arrastra para moverte por scripts largos
 
 ### ✏️ Herramientas de dibujo
 Se guardan automáticamente para cada símbolo.
@@ -134,7 +150,7 @@ Se guardan automáticamente para cada símbolo.
 | Formas | Pincel · Flecha · Rectángulo · Trayectoria · Elipse |
 | Anotaciones | Texto · Nota |
 
-Selecciona un dibujo para moverlo, cambiarle el color o eliminarlo.
+Selecciona un dibujo para moverlo, cambiarle el color, **el grosor y el estilo** o eliminarlo. El botón **Deshacer** vuelve atrás hasta 30 pasos.
 
 ### 🔔 Alertas
 - Crea una alerta de precio desde el **"+"** de la retícula o desde el gestor de **Alertas**
@@ -303,6 +319,7 @@ Todavía no: se quedan en el dispositivo donde los creaste.
 | ✅ | 5 idiomas (alemán desde la 0.44.0), tema oscuro y claro |
 | ✅ | Design 3.0: pantallas de bienvenida, animación del logo, menú de idiomas en órbita |
 | ✅ | Acceso Design 3.0: logo de órbitas, código en 8 casillas, banderas redondas |
+| ✅ | Design 3.0 dentro de la app, varias watchlists, Señales, grosor/estilo de dibujos y Deshacer |
 | 🔜 | Carga de datos más rápida |
 | 🔜 | Versión completa para ordenador |
 | 💡 | Sincronización entre dispositivos |
