@@ -16,18 +16,22 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 </div>
 
-<p align="center">
-  <img src="screenshots/de/watchlist.png" width="24%">
-  <img src="screenshots/de/chart.png" width="24%">
-  <img src="screenshots/de/indicators.png" width="24%">
-  <img src="screenshots/de/settings.png" width="24%">
-</p>
-<p align="center">
-  <img src="screenshots/de/hub.png" width="24%">
-  <img src="screenshots/de/drawings.png" width="24%">
-  <img src="screenshots/de/editor.png" width="24%">
-  <img src="screenshots/de/login.png" width="24%">
-</p>
+<div align="center">
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="screenshots/de/01-welcome.webp" width="190" alt="Willkommen"><br><sub>1. Willkommen</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/02-sign-in.webp" width="190" alt="Anmeldung"><br><sub>2. Anmeldung</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/03-watchlist.webp" width="190" alt="Watchlist"><br><sub>3. Watchlist</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/04-signals.webp" width="190" alt="Signale"><br><sub>4. Signale</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="25%"><img src="screenshots/de/05-chart-drawings.webp" width="190" alt="Chart & Zeichnungen"><br><sub>5. Chart & Zeichnungen</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/06-indicators.webp" width="190" alt="Indikatoren"><br><sub>6. Indikatoren</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/07-script-editor.webp" width="190" alt="Skript-Editor"><br><sub>7. Skript-Editor</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/08-bar-replay.webp" width="190" alt="Bar Replay"><br><sub>8. Bar Replay</sub></td>
+  </tr>
+</table>
+</div>
 
 ---
 
