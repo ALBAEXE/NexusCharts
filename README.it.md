@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.1.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.1.1-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.1.0 — Accesso con Face ID
+### 🆕 Novità della 1.1.1 — Più leggera e ordinata
+
+- 🪶 **App più leggera**: tolto il codice che non serviva più, così l'app carica meno.
+- 📜 **Informativa Privacy** aggiornata con l'accesso con Face ID (cosa salviamo e per quanto tempo).
+
+### In precedenza, nella 1.1.0 — Accesso con Face ID
 
 - 🙂 **Accesso con Face ID** (passkey): guardi il telefono e sei dentro, senza scrivere la password. Il tuo volto non esce mai dall'iPhone: sul server resta solo una chiave pubblica.
 - ⚙️ **Interruttore Face ID** in Impostazioni → Account, per attivarlo o disattivarlo quando vuoi. Dopo la registrazione l'app propone di attivarlo.
