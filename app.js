@@ -1,4 +1,4 @@
-const VERSION='0.45.0';
+const VERSION='0.46.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -12778,18 +12778,85 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
 (function(){
   if(window.NXReg)return;
   /* registro: k = nome base, cls = classe, active = carica dati, src = nome pubblico della fonte */
+  /* biquote.io: circa 70 strumenti che rispondono davvero (provati uno per uno); al = altri nomi dello stesso strumento */
   var REG=[
-    {k:'XAUUSD',cls:'com',active:true,src:'TradeLocker',tmp:true},
-    {k:'EURUSD',cls:'fx'},
-    {k:'BTCUSD',cls:'cry'},
-    {k:'ETHUSD',cls:'cry'},
-    {k:'XAGUSD',cls:'com'},
-    {k:'XPTUSD',cls:'com'},
-    {k:'US30',cls:'idx'},
-    {k:'NAS100',cls:'idx'}
+    {k:'EURUSD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'GBPUSD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDJPY',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDCHF',cls:'fx',active:true,src:'biquote.io'},
+    {k:'AUDUSD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'NZDUSD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDCAD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'EURGBP',cls:'fx',active:true,src:'biquote.io'},
+    {k:'EURJPY',cls:'fx',active:true,src:'biquote.io'},
+    {k:'EURCHF',cls:'fx',active:true,src:'biquote.io'},
+    {k:'EURCAD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'EURAUD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'EURNZD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'GBPJPY',cls:'fx',active:true,src:'biquote.io'},
+    {k:'GBPCHF',cls:'fx',active:true,src:'biquote.io'},
+    {k:'GBPCAD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'GBPAUD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'GBPNZD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'AUDJPY',cls:'fx',active:true,src:'biquote.io'},
+    {k:'AUDCAD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'AUDCHF',cls:'fx',active:true,src:'biquote.io'},
+    {k:'AUDNZD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'NZDJPY',cls:'fx',active:true,src:'biquote.io'},
+    {k:'NZDCAD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'NZDCHF',cls:'fx',active:true,src:'biquote.io'},
+    {k:'CADJPY',cls:'fx',active:true,src:'biquote.io'},
+    {k:'CADCHF',cls:'fx',active:true,src:'biquote.io'},
+    {k:'CHFJPY',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDMXN',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDZAR',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDTRY',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDSEK',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDNOK',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDPLN',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDHUF',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDSGD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDHKD',cls:'fx',active:true,src:'biquote.io'},
+    {k:'USDCNH',cls:'fx',active:true,src:'biquote.io'},
+    {k:'EURTRY',cls:'fx',active:true,src:'biquote.io'},
+    {k:'EURPLN',cls:'fx',active:true,src:'biquote.io'},
+    {k:'EURSEK',cls:'fx',active:true,src:'biquote.io'},
+    {k:'EURNOK',cls:'fx',active:true,src:'biquote.io'},
+    {k:'EURHUF',cls:'fx',active:true,src:'biquote.io'},
+    {k:'XAUUSD',cls:'com',active:true,src:'biquote.io'},
+    {k:'XAUEUR',cls:'com',active:true,src:'biquote.io'},
+    {k:'XAUGBP',cls:'com',active:true,src:'biquote.io'},
+    {k:'XAUAUD',cls:'com',active:true,src:'biquote.io'},
+    {k:'XAGUSD',cls:'com',active:true,src:'biquote.io'},
+    {k:'XAGEUR',cls:'com',active:true,src:'biquote.io'},
+    {k:'XPTUSD',cls:'com',active:true,src:'biquote.io'},
+    {k:'XPDUSD',cls:'com',active:true,src:'biquote.io'},
+    {k:'XCUUSD',cls:'com',active:true,src:'biquote.io',al:['COPPER','HGUSD']},
+    {k:'USOIL',cls:'com',active:true,src:'biquote.io',al:['XTIUSD','WTI','USOUSD']},
+    {k:'UKOIL',cls:'com',active:true,src:'biquote.io',al:['XBRUSD','BRENT','UKOUSD']},
+    {k:'XNGUSD',cls:'com',active:true,src:'biquote.io',al:['NATGAS','NGAS','NGUSD']},
+    {k:'US30',cls:'idx',active:true,src:'biquote.io',al:['DJ30','WS30','DOW','DJI']},
+    {k:'US500',cls:'idx',active:true,src:'biquote.io',al:['SPX500','SP500','SPX','USA500']},
+    {k:'USTEC',cls:'idx',active:true,src:'biquote.io',al:['NAS100','US100','NDX','NASDAQ']},
+    {k:'DE30',cls:'idx',active:true,src:'biquote.io',al:['GER40','DE40','GER30','DAX']},
+    {k:'UK100',cls:'idx',active:true,src:'biquote.io',al:['FTSE','FTSE100']},
+    {k:'JP225',cls:'idx',active:true,src:'biquote.io',al:['JPN225','NIKKEI','NI225','JAPAN225']},
+    {k:'AUS200',cls:'idx',active:true,src:'biquote.io',al:['ASX200','AU200']},
+    {k:'FR40',cls:'idx',active:true,src:'biquote.io',al:['FRA40','CAC40','FRANCE40']},
+    {k:'STOXX50',cls:'idx',active:true,src:'biquote.io',al:['EU50','EUSTX50','ESTX50','EURO50']},
+    {k:'DXY',cls:'idx',active:true,src:'biquote.io',al:['USDX','USDINDEX','DOLLARINDEX']},
+    {k:'BTCUSD',cls:'cry',active:true,src:'biquote.io'},
+    {k:'ETHUSD',cls:'cry',active:true,src:'biquote.io'},
+    {k:'SOLUSD',cls:'cry',active:true,src:'biquote.io'},
+    {k:'XRPUSD',cls:'cry',active:true,src:'biquote.io'},
+    {k:'LTCUSD',cls:'cry',active:true,src:'biquote.io'},
+    {k:'BCHUSD',cls:'cry',active:true,src:'biquote.io'},
+    {k:'BNBUSD',cls:'cry',active:true,src:'biquote.io'}
   ];
+
   var nrm=function(s){return String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'')};
-  function regOf(n){var b=nrm(n),i;for(i=0;i<REG.length;i++)if(b===REG[i].k)return REG[i];for(i=0;i<REG.length;i++)if(b.indexOf(REG[i].k)===0)return REG[i];return null}
+  function keys(r){return [r.k].concat(r.al||[])}
+  function regOf(n){var b=nrm(n),i,j,k;for(i=0;i<REG.length;i++){k=keys(REG[i]);for(j=0;j<k.length;j++)if(b===k[j])return REG[i]}for(i=0;i<REG.length;i++){k=keys(REG[i]);for(j=0;j<k.length;j++)if(b.indexOf(k[j])===0)return REG[i]}return null}
   function listed(n){return !!regOf(n)}
   function active(n){var r=regOf(n);return !!(r&&r.active)}
   /* richieste al broker: solo per gli strumenti attivi (rete di sicurezza sotto a tutto il resto) */
@@ -12798,14 +12865,14 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     var id=+m[1],it=null;try{for(var i=0;i<INST.length;i++)if(+INST[i].tid===id){it=INST[i];break}}catch(e){}
     return !it||active(it.name);
   }
-  function firstActive(){try{for(var i=0;i<REG.length;i++)if(REG[i].active){var x=findBase(REG[i].k);if(x)return x.name}}catch(e){}return null}
+  function firstActive(){try{var g=findBase('XAUUSD');if(g&&active(g.name))return g.name;for(var i=0;i<INST.length;i++)if(active(INST[i].name))return INST[i].name}catch(e){}return null}
 
   var TX={
-    it:{soon:'In arrivo',soonT:'{n} arriva presto: per ora è attivo solo l\'oro.',title:'Fonti dati',sub:'Da dove arrivano prezzi e grafici',act:'Strumenti attivi',next:'In arrivo',chart:'Grafico',src:'prezzi e candele da {s}',tmp:'Fonte temporanea: la stiamo sostituendo con una fonte indipendente.',nextD:'Arriveranno uno alla volta, ognuno con la sua fonte.',lw:'Il grafico è disegnato con questa libreria open source (licenza Apache 2.0):',site:'Apri tradingview.com',note:'Prezzi e grafici servono per l\'analisi: possono essere diversi da quelli del tuo broker.'},
-    en:{soon:'Coming soon',soonT:'{n} is coming soon: for now only gold is active.',title:'Data sources',sub:'Where prices and charts come from',act:'Active instruments',next:'Coming soon',chart:'Chart',src:'prices and candles from {s}',tmp:'Temporary source: we are replacing it with an independent one.',nextD:'They will arrive one at a time, each with its own source.',lw:'The chart is drawn with this open-source library (Apache 2.0 license):',site:'Open tradingview.com',note:'Prices and charts are for analysis: they may differ from your broker\'s.'},
-    es:{soon:'Próximamente',soonT:'{n} llegará pronto: por ahora solo el oro está activo.',title:'Fuentes de datos',sub:'De dónde vienen precios y gráficos',act:'Instrumentos activos',next:'Próximamente',chart:'Gráfico',src:'precios y velas de {s}',tmp:'Fuente temporal: la estamos sustituyendo por una fuente independiente.',nextD:'Llegarán uno a uno, cada uno con su fuente.',lw:'El gráfico se dibuja con esta biblioteca de código abierto (licencia Apache 2.0):',site:'Abrir tradingview.com',note:'Precios y gráficos sirven para el análisis: pueden ser distintos de los de tu bróker.'},
-    fr:{soon:'Bientôt',soonT:'{n} arrive bientôt : pour l\'instant seul l\'or est actif.',title:'Sources des données',sub:'D\'où viennent les prix et les graphiques',act:'Instruments actifs',next:'Bientôt',chart:'Graphique',src:'prix et bougies de {s}',tmp:'Source temporaire : nous la remplaçons par une source indépendante.',nextD:'Ils arriveront un par un, chacun avec sa source.',lw:'Le graphique est dessiné avec cette bibliothèque open source (licence Apache 2.0) :',site:'Ouvrir tradingview.com',note:'Les prix et les graphiques servent à l\'analyse : ils peuvent différer de ceux de ton courtier.'},
-    de:{soon:'Demnächst',soonT:'{n} kommt bald: im Moment ist nur Gold aktiv.',title:'Datenquellen',sub:'Woher Preise und Charts kommen',act:'Aktive Instrumente',next:'Demnächst',chart:'Chart',src:'Preise und Kerzen von {s}',tmp:'Vorübergehende Quelle: wir ersetzen sie durch eine unabhängige Quelle.',nextD:'Sie kommen nacheinander, jedes mit seiner eigenen Quelle.',lw:'Der Chart wird mit dieser Open-Source-Bibliothek gezeichnet (Apache-2.0-Lizenz):',site:'tradingview.com öffnen',note:'Preise und Charts dienen der Analyse: sie können von denen deines Brokers abweichen.'}
+    it:{soon:'In arrivo',soonT:'{n} arriva presto.',title:'Fonti dati',sub:'Da dove arrivano prezzi e grafici',act:'Strumenti attivi',next:'In arrivo',chart:'Grafico',src:'prezzi e candele da {s}',tmp:'Fonte temporanea: la stiamo sostituendo con una fonte indipendente.',nextD:'Arriveranno uno alla volta, ognuno con la sua fonte.',lw:'Il grafico è disegnato con questa libreria open source (licenza Apache 2.0):',site:'Apri tradingview.com',note:'Prezzi e grafici servono per l\'analisi: possono essere diversi da quelli del tuo broker.'},
+    en:{soon:'Coming soon',soonT:'{n} is coming soon.',title:'Data sources',sub:'Where prices and charts come from',act:'Active instruments',next:'Coming soon',chart:'Chart',src:'prices and candles from {s}',tmp:'Temporary source: we are replacing it with an independent one.',nextD:'They will arrive one at a time, each with its own source.',lw:'The chart is drawn with this open-source library (Apache 2.0 license):',site:'Open tradingview.com',note:'Prices and charts are for analysis: they may differ from your broker\'s.'},
+    es:{soon:'Próximamente',soonT:'{n} llegará pronto.',title:'Fuentes de datos',sub:'De dónde vienen precios y gráficos',act:'Instrumentos activos',next:'Próximamente',chart:'Gráfico',src:'precios y velas de {s}',tmp:'Fuente temporal: la estamos sustituyendo por una fuente independiente.',nextD:'Llegarán uno a uno, cada uno con su fuente.',lw:'El gráfico se dibuja con esta biblioteca de código abierto (licencia Apache 2.0):',site:'Abrir tradingview.com',note:'Precios y gráficos sirven para el análisis: pueden ser distintos de los de tu bróker.'},
+    fr:{soon:'Bientôt',soonT:'{n} arrive bientôt.',title:'Sources des données',sub:'D\'où viennent les prix et les graphiques',act:'Instruments actifs',next:'Bientôt',chart:'Graphique',src:'prix et bougies de {s}',tmp:'Source temporaire : nous la remplaçons par une source indépendante.',nextD:'Ils arriveront un par un, chacun avec sa source.',lw:'Le graphique est dessiné avec cette bibliothèque open source (licence Apache 2.0) :',site:'Ouvrir tradingview.com',note:'Les prix et les graphiques servent à l\'analyse : ils peuvent différer de ceux de ton courtier.'},
+    de:{soon:'Demnächst',soonT:'{n} kommt bald.',title:'Datenquellen',sub:'Woher Preise und Charts kommen',act:'Aktive Instrumente',next:'Demnächst',chart:'Chart',src:'Preise und Kerzen von {s}',tmp:'Vorübergehende Quelle: wir ersetzen sie durch eine unabhängige Quelle.',nextD:'Sie kommen nacheinander, jedes mit seiner eigenen Quelle.',lw:'Der Chart wird mit dieser Open-Source-Bibliothek gezeichnet (Apache-2.0-Lizenz):',site:'tradingview.com öffnen',note:'Preise und Charts dienen der Analyse: sie können von denen deines Brokers abweichen.'}
   };
   function L(){try{return TX[lang]||TX.it}catch(e){return TX.it}}
   window.NXReg={list:REG,regOf:regOf,listed:listed,active:active,pathOk:pathOk,firstActive:firstActive,tx:L};
@@ -12893,8 +12960,10 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     if(PF.srcOpen===undefined)PF.srcOpen='px';
     var act=REG.filter(function(r){return r.active}),nxt=REG.filter(function(r){return !r.active});
     var secs=[
-      ['px',l.act,act.map(function(r){var it=null;try{it=findBase(r.k)}catch(e){}return (it?it.name:r.k)+' · '+l.src.replace('{s}',r.src)}).concat(act.some(function(r){return r.tmp})?[l.tmp]:[]).concat([l.note])],
-      ['next',l.next,[nxt.map(function(r){return r.k}).join(', ')+'.',l.nextD]],
+      /* una riga per fonte: categorie attive e numero di strumenti */
+      ['px',l.act,(function(){var by={},ord=[];act.forEach(function(r){var s=r.src;if(!by[s]){by[s]={n:0,c:[]};ord.push(s)}by[s].n++;if(by[s].c.indexOf(r.cls)<0)by[s].c.push(r.cls)});
+        return ord.map(function(s){var cs=CATS.filter(function(c){return by[s].c.indexOf(c)>=0}).map(function(c){return t('cat_'+c)});return cs.join(', ')+' ('+by[s].n+') · '+l.src.replace('{s}',s)})})().concat(act.some(function(r){return r.tmp})?[l.tmp]:[]).concat([l.note])],
+      ['next',l.next,[(nxt.length?nxt.map(function(r){return r.k}).join(', '):t('cat_stk'))+'.',l.nextD]],
       ['chart',l.chart,[l.lw,'TradingView Lightweight Charts™ Copyright (c) 2025 TradingView, Inc.']]
     ];
     secs.forEach(function(x){
@@ -12929,4 +12998,250 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
       return r;
     };
   }catch(e){}
+})();
+
+/* ---------- icone degli strumenti nuovi, nello stesso stile delle altre (cerchio + simbolo bianco) ---------- */
+(function(){
+  try{IDX.push([/^(DXY|USDX|USDINDEX)/,'🇺🇸','US Dollar Index'])}catch(e){}
+  var DROP='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.6c3.1 4.1 5.6 7.1 5.6 10.1a5.6 5.6 0 0 1-11.2 0c0-3 2.5-6 5.6-10.1z"/></svg>';
+  var FLAME='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2c.6 3.2 4.8 5.2 4.8 10a4.8 4.8 0 0 1-9.6 0c0-2.2 1.1-3.5 2.2-4.4.2 1.7 1 2.7 2.1 3C10.9 9 11.4 6 12 3.2z"/></svg>';
+  var K=[[/^(XCU|COPPER|HGUSD)/,'#b87333',IC_BARS],[/^(XTI|WTI|USOIL|USOUSD|XBR|UKOIL|UKOUSD|BRENT)/,'#2b2f36',DROP],[/^(XNG|NGAS|NATGAS|NGUSD)/,'#2f6fd6',FLAME]];
+  try{
+    var oI=iconEl;
+    iconEl=function(it,size,id){
+      var d=oI.apply(this,arguments);
+      try{var b=norm(it.name);for(var i=0;i<K.length;i++)if(K[i][0].test(b)){d.className='ic';d.textContent='';d.style.background=K[i][1];d.style.fontSize=((size||44)/2)+'px';d.innerHTML=K[i][2];break}}catch(e){}
+      return d;
+    };
+  }catch(e){}
+})();
+
+/* ---------- nomi degli strumenti in tutte e 5 le lingue (prima arrivavano dal broker, solo in inglese) ---------- */
+(function(){
+  var CUR={
+    it:{USD:'Dollaro USA',EUR:'Euro',GBP:'Sterlina britannica',JPY:'Yen giapponese',CHF:'Franco svizzero',CAD:'Dollaro canadese',AUD:'Dollaro australiano',NZD:'Dollaro neozelandese',SEK:'Corona svedese',NOK:'Corona norvegese',DKK:'Corona danese',PLN:'Zloty polacco',HUF:'Fiorino ungherese',CZK:'Corona ceca',TRY:'Lira turca',ZAR:'Rand sudafricano',MXN:'Peso messicano',SGD:'Dollaro di Singapore',HKD:'Dollaro di Hong Kong',CNH:'Yuan cinese'},
+    en:{USD:'US Dollar',EUR:'Euro',GBP:'British Pound',JPY:'Japanese Yen',CHF:'Swiss Franc',CAD:'Canadian Dollar',AUD:'Australian Dollar',NZD:'New Zealand Dollar',SEK:'Swedish Krona',NOK:'Norwegian Krone',DKK:'Danish Krone',PLN:'Polish Zloty',HUF:'Hungarian Forint',CZK:'Czech Koruna',TRY:'Turkish Lira',ZAR:'South African Rand',MXN:'Mexican Peso',SGD:'Singapore Dollar',HKD:'Hong Kong Dollar',CNH:'Chinese Yuan'},
+    es:{USD:'Dólar EE. UU.',EUR:'Euro',GBP:'Libra esterlina',JPY:'Yen japonés',CHF:'Franco suizo',CAD:'Dólar canadiense',AUD:'Dólar australiano',NZD:'Dólar neozelandés',SEK:'Corona sueca',NOK:'Corona noruega',DKK:'Corona danesa',PLN:'Esloti polaco',HUF:'Forinto húngaro',CZK:'Corona checa',TRY:'Lira turca',ZAR:'Rand sudafricano',MXN:'Peso mexicano',SGD:'Dólar de Singapur',HKD:'Dólar de Hong Kong',CNH:'Yuan chino'},
+    fr:{USD:'Dollar US',EUR:'Euro',GBP:'Livre sterling',JPY:'Yen japonais',CHF:'Franc suisse',CAD:'Dollar canadien',AUD:'Dollar australien',NZD:'Dollar néo-zélandais',SEK:'Couronne suédoise',NOK:'Couronne norvégienne',DKK:'Couronne danoise',PLN:'Zloty polonais',HUF:'Forint hongrois',CZK:'Couronne tchèque',TRY:'Livre turque',ZAR:'Rand sud-africain',MXN:'Peso mexicain',SGD:'Dollar de Singapour',HKD:'Dollar de Hong Kong',CNH:'Yuan chinois'},
+    de:{USD:'US-Dollar',EUR:'Euro',GBP:'Britisches Pfund',JPY:'Japanischer Yen',CHF:'Schweizer Franken',CAD:'Kanadischer Dollar',AUD:'Australischer Dollar',NZD:'Neuseeland-Dollar',SEK:'Schwedische Krone',NOK:'Norwegische Krone',DKK:'Dänische Krone',PLN:'Polnischer Zloty',HUF:'Ungarischer Forint',CZK:'Tschechische Krone',TRY:'Türkische Lira',ZAR:'Südafrikanischer Rand',MXN:'Mexikanischer Peso',SGD:'Singapur-Dollar',HKD:'Hongkong-Dollar',CNH:'Chinesischer Yuan'}
+  };
+  /* metalli e crypto: «nome / valuta»; energia: nome intero */
+  var AS={
+    XAU:['Oro spot','Gold Spot','Oro spot','Or spot','Gold Spot'],XAG:['Argento','Silver','Plata','Argent','Silber'],XPT:['Platino','Platinum','Platino','Platine','Platin'],
+    XPD:['Palladio','Palladium','Paladio','Palladium','Palladium'],XCU:['Rame','Copper','Cobre','Cuivre','Kupfer'],
+    BTC:['Bitcoin'],ETH:['Ethereum'],SOL:['Solana'],XRP:['XRP'],LTC:['Litecoin'],BCH:['Bitcoin Cash'],BNB:['BNB']
+  };
+  var EN=[[/^(XTI|WTI|USOIL|USOUSD)/,['Petrolio WTI','WTI Crude Oil','Petróleo WTI','Pétrole WTI','WTI-Rohöl']],[/^(XBR|UKOIL|UKOUSD|BRENT)/,['Petrolio Brent','Brent Crude Oil','Petróleo Brent','Pétrole Brent','Brent-Rohöl']],[/^(XNG|NGAS|NATGAS|NGUSD)/,['Gas naturale','Natural Gas','Gas natural','Gaz naturel','Erdgas']]];
+  var LI={it:0,en:1,es:2,fr:3,de:4};
+  function nameFor(b){
+    var l=(typeof lang!=='undefined'&&CUR[lang])?lang:'it',k=LI[l],C=CUR[l],i;
+    for(i=0;i<EN.length;i++)if(EN[i][0].test(b))return EN[i][1][k];
+    var a=b.slice(0,3),q=b.slice(3,6);
+    if(AS[a]&&C[q])return (AS[a][k]||AS[a][0])+' / '+C[q];
+    if(b.length>=6&&C[a]&&C[q])return C[a]+' / '+C[q];
+    return '';
+  }
+  try{
+    var oInfo=info;
+    info=function(it){
+      var r=oInfo.apply(this,arguments);
+      try{if(r.cat!=='idx'&&r.cat!=='stk'){var n=nameFor(r.b);if(n)r.desc=n}}catch(e){}
+      return r;
+    };
+  }catch(e){}
+  window.NXNames=nameFor;
+})();
+
+
+/* ---------- icone cripto originali (set «cryptocurrency-icons», licenza CC0), salvate dentro l'app ---------- */
+(function(){
+  try{var st=document.createElement('style');st.textContent='.ic svg.nxci{width:100%!important;height:100%!important;display:block}';document.head.appendChild(st)}catch(e){}
+  var CI={"BTC": "<svg class=\"nxci\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><g fill=\"none\" fill-rule=\"evenodd\"><circle cx=\"16\" cy=\"16\" r=\"16\" fill=\"#F7931A\"/><path fill=\"#FFF\" fill-rule=\"nonzero\" d=\"M23.189 14.02c.314-2.096-1.283-3.223-3.465-3.975l.708-2.84-1.728-.43-.69 2.765c-.454-.114-.92-.22-1.385-.326l.695-2.783L15.596 6l-.708 2.839c-.376-.086-.746-.17-1.104-.26l.002-.009-2.384-.595-.46 1.846s1.283.294 1.256.312c.7.175.826.638.805 1.006l-.806 3.235c.048.012.11.03.18.057l-.183-.045-1.13 4.532c-.086.212-.303.531-.793.41.018.025-1.256-.313-1.256-.313l-.858 1.978 2.25.561c.418.105.828.215 1.231.318l-.715 2.872 1.727.43.708-2.84c.472.127.93.245 1.378.357l-.706 2.828 1.728.43.715-2.866c2.948.558 5.164.333 6.097-2.333.752-2.146-.037-3.385-1.588-4.192 1.13-.26 1.98-1.003 2.207-2.538zm-3.95 5.538c-.533 2.147-4.148.986-5.32.695l.95-3.805c1.172.293 4.929.872 4.37 3.11zm.535-5.569c-.487 1.953-3.495.96-4.47.717l.86-3.45c.975.243 4.118.696 3.61 2.733z\"/></g></svg>", "ETH": "<svg class=\"nxci\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><g fill=\"none\" fill-rule=\"evenodd\"><circle cx=\"16\" cy=\"16\" r=\"16\" fill=\"#627EEA\"/><g fill=\"#FFF\" fill-rule=\"nonzero\"><path fill-opacity=\".602\" d=\"M16.498 4v8.87l7.497 3.35z\"/><path d=\"M16.498 4L9 16.22l7.498-3.35z\"/><path fill-opacity=\".602\" d=\"M16.498 21.968v6.027L24 17.616z\"/><path d=\"M16.498 27.995v-6.028L9 17.616z\"/><path fill-opacity=\".2\" d=\"M16.498 20.573l7.497-4.353-7.497-3.348z\"/><path fill-opacity=\".602\" d=\"M9 16.22l7.498 4.353v-7.701z\"/></g></g></svg>", "SOL": "<svg class=\"nxci\" style=\"width:100%;height:100%\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"none\"><circle fill=\"#66F9A1\" cx=\"16\" cy=\"16\" r=\"16\"/><path d=\"M9.925 19.687a.59.59 0 01.415-.17h14.366a.29.29 0 01.207.497l-2.838 2.815a.59.59 0 01-.415.171H7.294a.291.291 0 01-.207-.498l2.838-2.815zm0-10.517A.59.59 0 0110.34 9h14.366c.261 0 .392.314.207.498l-2.838 2.815a.59.59 0 01-.415.17H7.294a.291.291 0 01-.207-.497L9.925 9.17zm12.15 5.225a.59.59 0 00-.415-.17H7.294a.291.291 0 00-.207.498l2.838 2.815c.11.109.26.17.415.17h14.366a.291.291 0 00.207-.498l-2.838-2.815z\" fill=\"#FFF\"/></g></svg>", "XRP": "<svg class=\"nxci\" style=\"width:100%;height:100%\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"none\"><circle cx=\"16\" cy=\"16\" r=\"16\" fill=\"#23292F\"/><path d=\"M23.07 8h2.89l-6.015 5.957a5.621 5.621 0 01-7.89 0L6.035 8H8.93l4.57 4.523a3.556 3.556 0 004.996 0L23.07 8zM8.895 24.563H6l6.055-5.993a5.621 5.621 0 017.89 0L26 24.562h-2.895L18.5 20a3.556 3.556 0 00-4.996 0l-4.61 4.563z\" fill=\"#FFF\"/></g></svg>", "LTC": "<svg class=\"nxci\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><g fill=\"none\" fill-rule=\"evenodd\"><circle cx=\"16\" cy=\"16\" r=\"16\" fill=\"#BFBBBB\"/><path fill=\"#FFF\" d=\"M10.427 19.214L9 19.768l.688-2.759 1.444-.58L13.213 8h5.129l-1.519 6.196 1.41-.571-.68 2.75-1.427.571-.848 3.483H23L22.127 24H9.252z\"/></g></svg>", "BCH": "<svg class=\"nxci\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><g fill=\"none\" fill-rule=\"evenodd\"><circle cx=\"16\" cy=\"16\" fill=\"#8dc351\" r=\"16\"/><path d=\"M21.207 10.534c-.776-1.972-2.722-2.15-4.988-1.71l-.807-2.813-1.712.491.786 2.74c-.45.128-.908.27-1.363.41l-.79-2.758-1.711.49.805 2.813c-.368.114-.73.226-1.085.328l-.003-.01-2.362.677.525 1.83s1.258-.388 1.243-.358c.694-.199 1.035.139 1.2.468l.92 3.204c.047-.013.11-.029.184-.04l-.181.052 1.287 4.49c.032.227.004.612-.48.752.027.013-1.246.356-1.246.356l.247 2.143 2.228-.64c.415-.117.825-.227 1.226-.34l.817 2.845 1.71-.49-.807-2.815a65.74 65.74 0 001.372-.38l.802 2.803 1.713-.491-.814-2.84c2.831-.991 4.638-2.294 4.113-5.07-.422-2.234-1.724-2.912-3.471-2.836.848-.79 1.213-1.858.642-3.3zm-.65 6.77c.61 2.127-3.1 2.929-4.26 3.263l-1.081-3.77c1.16-.333 4.704-1.71 5.34.508zm-2.322-5.09c.554 1.935-2.547 2.58-3.514 2.857l-.98-3.419c.966-.277 3.915-1.455 4.494.563z\" fill=\"#fff\" fill-rule=\"nonzero\"/></g></svg>", "BNB": "<svg class=\"nxci\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><g fill=\"none\"><circle cx=\"16\" cy=\"16\" r=\"16\" fill=\"#F3BA2F\"/><path fill=\"#FFF\" d=\"M12.116 14.404L16 10.52l3.886 3.886 2.26-2.26L16 6l-6.144 6.144 2.26 2.26zM6 16l2.26-2.26L10.52 16l-2.26 2.26L6 16zm6.116 1.596L16 21.48l3.886-3.886 2.26 2.259L16 26l-6.144-6.144-.003-.003 2.263-2.257zM21.48 16l2.26-2.26L26 16l-2.26 2.26L21.48 16zm-3.188-.002h.002V16L16 18.294l-2.291-2.29-.004-.004.004-.003.401-.402.195-.195L16 13.706l2.293 2.293z\"/></g></svg>"};
+  try{
+    var oI2=iconEl;
+    iconEl=function(it,size,id){
+      var d=oI2.apply(this,arguments);
+      try{var r=info(it);if(r.cat==='cry'){for(var k in CI)if(r.b.indexOf(k)===0){d.textContent='';d.style.background='transparent';d.innerHTML=CI[k];break}}}catch(e){}
+      return d;
+    };
+  }catch(e){}
+})();
+
+/* ================= Motore nostro · fase 1: prezzi e candele dal server NexusCharts ================= */
+/* Per gli strumenti del registro con fonte "nexus" i dati arrivano dal nostro server (nexus-data):
+   - candele: /v2/candles (al posto della cronologia del broker);
+   - prezzi dal vivo: un solo WebSocket condiviso, aggiornato a ogni fotogramma;
+   - se il nostro server non risponde, l'app torna da sola alle richieste di prima. */
+(function(){
+  var NXD='https://nexus-data.nexuscharts.workers.dev';
+  var TFM={'1m':'1m','5m':'5m','15m':'15m','1H':'1H','4H':'4H','1D':'1D'};
+  var nrm=function(s){return String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'')};
+  /* nome nell'app -> simbolo sul nostro server (dal registro: k è il nome della fonte, al gli altri nomi) */
+  function symOf(name){try{var r=NXReg.regOf(name);return r&&r.active&&r.src!==undefined?r.k:null}catch(e){return null}}
+  var REV={n:-1,m:{}};
+  function namesOf(sym){
+    try{if(REV.n!==INST.length){REV.n=INST.length;REV.m={};INST.forEach(function(it){var s=symOf(it.name);if(s)(REV.m[s]=REV.m[s]||[]).push(it.name)})}}catch(e){}
+    return REV.m[sym]||[];
+  }
+  function cred(){
+    try{if(FRIEND)return 'c='+encodeURIComponent(FRIEND)+'&d='+encodeURIComponent(devId())}catch(e){}
+    var k='';try{k=admKey()}catch(e){}
+    return k?'k='+encodeURIComponent(k):'';
+  }
+  var S={off:0,ok:0,fails:0,ws:null,wsOk:0,last:{},lat:[],frames:0,raf:0,pend:{},retry:0,hideT:0,pingT:0,srv:0};
+  window.NXData=S;
+  function usable(){return !!cred()&&Date.now()>S.off}
+
+  /* ---------- candele: risposta nello stesso formato del broker ---------- */
+  async function nxCandles(sym,reso,from,to){
+    var u=NXD+'/v2/candles?symbol='+sym+'&tf='+TFM[reso]+'&from='+Math.floor(+from||0)+'&to='+Math.floor(+to||Date.now())+'&'+cred();
+    var r=await fetch(u,{cache:'no-store'});
+    if(!r.ok){var e=new Error('nexus '+r.status);e.status=r.status;throw e}
+    var j=await r.json();
+    return (j.candles||[]).map(function(b){return{t:b[0]*1000,o:b[1],h:b[2],l:b[3],c:b[4],v:b[5]||0}});
+  }
+  /* cambio di fonte (nostro server <-> fonte di prima): si ricarica tutto, così le candele non si mescolano mai */
+  function srcIs(x){
+    if(S.src===x)return;var was=S.src;S.src=x;if(!was)return;
+    try{for(var k in TFC)delete TFC[k]}catch(e){}
+    try{for(var k2 in TCACHE)delete TCACHE[k2]}catch(e){}
+    try{if(cur&&symOf(cur))setTimeout(function(){try{loadSafe()}catch(e){}},0)}catch(e){}
+  }
+  try{
+    var oA=authed;
+    authed=async function(path){
+      var p=String(path||'');
+      if(p.indexOf('/trade/history?')===0&&usable()){
+        var q=new URLSearchParams(p.split('?')[1]),id=+q.get('tradableInstrumentId'),it=null;
+        try{for(var i=0;i<INST.length;i++)if(+INST[i].tid===id){it=INST[i];break}}catch(e){}
+        var sym=it&&symOf(it.name),reso=q.get('resolution');
+        if(sym&&TFM[reso]&&!(window.NXReg&&!NXReg.active(it.name))){
+          try{
+            var b=await nxCandles(sym,reso,q.get('from'),q.get('to'));
+            S.ok=Date.now();S.fails=0;srcIs('nx');
+            return {d:{barDetails:b}};
+          }catch(e){
+            /* nostro server non raggiungibile: per un minuto si torna alla fonte di prima */
+            if(++S.fails>=2||e.status===401){S.off=Date.now()+60000;S.fails=0}
+          }
+        }
+      }
+      if(p.indexOf('/trade/history?')===0&&!usable()){
+        try{var q2=new URLSearchParams(p.split('?')[1]),id2=+q2.get('tradableInstrumentId');for(var j2=0;j2<INST.length;j2++)if(+INST[j2].tid===id2&&symOf(INST[j2].name)){srcIs('tl');break}}catch(e){}
+      }
+      return oA.apply(this,arguments);
+    };
+  }catch(e){}
+
+  /* ---------- prezzi dal vivo: un solo WebSocket ---------- */
+  /* prezzi dal vivo usati solo se anche le candele arrivano dal nostro server (mai due fonti sullo stesso grafico) */
+  function live(){return !!(S.ws&&S.ws.readyState===1&&Date.now()-S.wsOk<5000&&Date.now()>S.off)}
+  S.live=live;
+  function open(){
+    if(S.ws||document.hidden||!usable())return;
+    var c=cred();if(!c)return;
+    var ws;try{ws=new WebSocket(NXD.replace(/^http/,'ws')+'/v2/stream?'+c)}catch(e){return later()}
+    S.ws=ws;
+    ws.onopen=function(){S.retry=0;S.subKey='';sub();clearInterval(S.pingT);S.pingT=setInterval(function(){try{ws.send('ping')}catch(e){}},20000)};
+    ws.onmessage=function(ev){
+      var m;try{m=JSON.parse(ev.data)}catch(e){return}
+      if(!m||!m.q)return;
+      var now=Date.now();S.wsOk=now;
+      if(m.type==='q'&&m.t){S.srv=m.t-now}
+      for(var s in m.q){var x=m.q[s];if(!x||!isFinite(x.m))continue;S.last[s]=x;S.pend[s]=x;if(m.type==='q'&&x.ts){S.lat.push(now-x.ts);if(S.lat.length>300)S.lat.shift()}}
+      if(!S.raf)S.raf=requestAnimationFrame(frame);
+    };
+    ws.onclose=ws.onerror=function(){if(S.ws!==ws)return;S.ws=null;clearInterval(S.pingT);later()};
+  }
+  function later(){if(document.hidden)return;S.retry=Math.min(S.retry+1,6);setTimeout(open,Math.min(30000,1000*Math.pow(2,S.retry)))}
+  function close(){clearInterval(S.pingT);var w=S.ws;S.ws=null;if(w){try{w.close()}catch(e){}}}
+  document.addEventListener('visibilitychange',function(){
+    clearTimeout(S.hideT);
+    if(document.hidden)S.hideT=setTimeout(close,30000);
+    else{S.retry=0;open()}
+  });
+  setInterval(function(){if(!S.ws)open()},5000);
+  /* il server manda solo i prezzi degli strumenti in watchlist e di quello sul grafico */
+  function sub(){
+    if(!S.ws||S.ws.readyState!==1)return;
+    var want=[];
+    try{(cur?[cur]:[]).concat(WATCH).forEach(function(n){var s=symOf(n);if(s&&want.indexOf(s)<0)want.push(s)})}catch(e){}
+    want=want.slice(0,40);var k=want.join(',');
+    if(k===S.subKey)return;S.subKey=k;
+    try{S.ws.send(JSON.stringify({sub:want}))}catch(e){}
+  }
+  setInterval(sub,1500);
+
+  /* ---------- un aggiornamento per fotogramma ---------- */
+  function frame(){
+    S.raf=0;S.frames++;
+    var P=S.pend;S.pend={};
+    if(Date.now()<S.off)return;
+    for(var sym in P){var NS=namesOf(sym);for(var ni=0;ni<NS.length;ni++){
+      var x=P[sym],name=NS[ni];
+      var px=x.m;
+      try{secPush(name,px)}catch(e){}
+      /* elenco: prezzo e variazione */
+      var q=QUOTE[name];
+      if(q){q.last=px;q.t=x.ts;try{document.querySelectorAll('#wl .row').forEach(function(r){if(r.dataset.n===name)fillQuote(r,name)})}catch(e){}}
+      if(q&&name===cur){try{renderLegend();renderMini();tint()}catch(e){}}
+      if(name!==cur){try{checkAlerts(name,px)}catch(e){}continue}
+      if(!series||!lastBars.length||(window.RP&&RP.on))continue;
+      try{
+        var L=lastBars[lastBars.length-1],sec=SECS[res]*1000,ch=[];
+        if(tfIsSec(res)){
+          var nb=secBuild(name,TF_PLAN[res].n,L.t);
+          nb.forEach(function(b){if(b.t===L.t){L.h=Math.max(L.h,b.h);L.l=Math.min(L.l,b.l);L.c=b.c;ch.push(L.t)}else if(b.t>L.t){lastBars.push(b);ch.push(b.t)}});
+        }else if(x.ts>=L.t&&x.ts<L.t+sec){
+          L.c=px;if(px>L.h)L.h=px;if(px<L.l)L.l=px;ch.push(L.t);
+        }else if(TF_NATIVE[res]&&res!=='1D'&&x.ts>=L.t+sec){
+          var t0=Math.floor(x.ts/sec)*sec;lastBars.push({t:t0,o:px,h:px,l:px,c:px,v:0});ch.push(t0);
+        }
+        if(ch.length){if(lastBars.length>5000)lastBars=lastBars.slice(-5000);updSeries(lastBars,ch);afterData()}
+      }catch(e){}
+    }}
+  }
+
+  /* ---------- con il WebSocket attivo il grafico chiede le candele ogni 10 secondi invece che ogni secondo ---------- */
+  try{
+    var oT=tick;
+    tick=function(){
+      if(live()&&cur&&symOf(cur)&&S.last[symOf(cur)]){
+        if(tfIsSec(res))return;
+        if(Date.now()-(S.tk||0)<10000)return;
+        S.tk=Date.now();
+      }
+      return oT.apply(this,arguments);
+    };
+  }catch(e){}
+  /* denaro e lettera dal vivo */
+  try{
+    var oB=bidAsk;
+    bidAsk=function(sym){var s=symOf(sym),x=s&&S.last[s];if(x&&live()&&isFinite(x.b)&&isFinite(x.a))return Promise.resolve({b:x.b,a:x.a});return oB.apply(this,arguments)};
+  }catch(e){}
+
+  /* elenco: con il WebSocket attivo la chiusura di ieri si chiede una volta ogni 10 minuti, il prezzo arriva dal vivo */
+  try{
+    var oQ=quoteFor;
+    quoteFor=function(name){
+      var s=symOf(name),q=QUOTE[name],x=s&&S.last[s];
+      if(s&&q&&q._nx&&x&&live()&&Date.now()-q._nx<600000&&new Date(q._nx).getUTCDate()===new Date().getUTCDate()){q.last=x.m;q.t=x.ts;return Promise.resolve()}
+      var pr=oQ.apply(this,arguments);
+      return Promise.resolve(pr).then(function(v){try{if(s&&QUOTE[name]&&S.src==='nx')QUOTE[name]._nx=Date.now()}catch(e){}return v});
+    };
+  }catch(e){}
+
+  /* ---------- fonte mostrata in "Fonti dati" ---------- */
+  try{
+    NXReg.list.forEach(function(r){
+      if(r.src!=='biquote.io')return;
+      Object.defineProperty(r,'src',{configurable:true,enumerable:true,get:function(){return Date.now()>S.off&&(S.ok||live())?'biquote.io':'TradeLocker'}});
+      /* "fonte temporanea" solo quando si sta usando ancora la fonte di prima */
+      Object.defineProperty(r,'tmp',{configurable:true,enumerable:true,get:function(){return r.src==='TradeLocker'}});
+    });
+  }catch(e){}
+
+  /* misure (solo per noi): NXData.stats() */
+  S.stats=function(){var a=S.lat.slice().sort(function(x,y){return x-y}),p=function(k){return a.length?a[Math.min(a.length-1,Math.floor(a.length*k))]:null};return{live:live(),n:a.length,p50:p(.5),p95:p(.95),frames:S.frames,clock:S.srv}};
+  setTimeout(open,1500);
 })();
