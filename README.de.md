@@ -69,7 +69,7 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 ### 🆕 Neu in 1.0.1 — Aktualisierter Willkommensbildschirm
 
-- 👤 Der letzte Willkommensbildschirm stellt jetzt die **NexusCharts-Konten** vor: zwei Felder (Benutzername und Passwort) statt des alten Zugangscodes, mit neuem Text in allen 5 Sprachen.
+- 👤 Der letzte Willkommensbildschirm stellt jetzt die **NexusCharts-Konten** vor: zwei Felder (Benutzername und Passwort), mit neuem Text in allen 5 Sprachen.
 
 ### Vorher in 1.0.0 — NexusCharts-Konten, neue Adresse, nur eigene Daten
 

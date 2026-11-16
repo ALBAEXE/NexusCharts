@@ -69,7 +69,7 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 ### 🆕 Nouveautés de la 1.0.1 — Écran de bienvenue mis à jour
 
-- 👤 Le dernier écran de bienvenue présente désormais les **comptes NexusCharts** : deux champs (nom d'utilisateur et mot de passe) à la place de l'ancien code d'accès, avec un nouveau texte dans les 5 langues.
+- 👤 Le dernier écran de bienvenue présente désormais les **comptes NexusCharts** : deux champs (nom d'utilisateur et mot de passe), avec un nouveau texte dans les 5 langues.
 
 ### Auparavant, dans la 1.0.0 — Comptes NexusCharts, nouvelle adresse, uniquement nos données
 

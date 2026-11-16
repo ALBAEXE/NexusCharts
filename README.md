@@ -69,7 +69,7 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 ### 🆕 New in 1.0.1 — Updated welcome screen
 
-- 👤 The last welcome screen now presents **NexusCharts accounts**: two fields (username and password) instead of the old access code, with a new text in all 5 languages.
+- 👤 The last welcome screen now presents **NexusCharts accounts**: two fields (username and password), with a new text in all 5 languages.
 
 ### Previously in 1.0.0 — NexusCharts accounts, a new address, only our own data
 
