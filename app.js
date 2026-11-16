@@ -1,4 +1,4 @@
-const VERSION='1.0.1';
+const VERSION='1.1.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -13321,8 +13321,29 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     /* due passi: {email,password} -> codice alla nuova email -> {code} */
     changeEmail:function(o){return call('changeEmail',o.code!==undefined?{code:o.code}:{email:o.email,password:o.password,lang:L2()})},
     changePassword:function(o){return call('changePassword',{old:o.old,password:o.password})},
-    deleteAccount:async function(o){var r=await call('deleteAccount',{password:o&&o.password});if(r.ok){sset(KT,null);sset(KU,null)}return r}
+    deleteAccount:async function(o){var r=await call('deleteAccount',{password:o&&o.password});if(r.ok){sset(KT,null);sset(KU,null)}return r},
+    /* 1.1.0: accesso con Face ID (passkey). Il volto resta sul telefono: al server va solo una firma */
+    pkOk:function(){try{return !!(window.PublicKeyCredential&&navigator.credentials&&navigator.credentials.create)}catch(e){return false}},
+    pkLogin:async function(){
+      var o=await call('pkLoginOptions',{});if(!o.ok)return o;
+      var pk=o.publicKey;pk.challenge=unb(pk.challenge);
+      var c;try{c=await navigator.credentials.get({publicKey:pk})}catch(e){return {ok:false,error:e&&e.name==='NotAllowedError'?'pk_cancel':'pk_failed'}}
+      if(!c)return {ok:false,error:'pk_cancel'};
+      var rs=c.response;
+      return call('pkLogin',{id:c.id,clientDataJSON:enb(rs.clientDataJSON),authenticatorData:enb(rs.authenticatorData),signature:enb(rs.signature)});
+    },
+    pkRegister:async function(){
+      var o=await call('pkRegOptions',{});if(!o.ok)return o;
+      var pk=o.publicKey;pk.challenge=unb(pk.challenge);pk.user.id=unb(pk.user.id);
+      (pk.excludeCredentials||[]).forEach(function(x){x.id=unb(x.id)});
+      var c;try{c=await navigator.credentials.create({publicKey:pk})}catch(e){return {ok:false,error:e&&e.name==='InvalidStateError'?'pk_exists':e&&e.name==='NotAllowedError'?'pk_cancel':'pk_failed'}}
+      if(!c)return {ok:false,error:'pk_cancel'};
+      return call('pkRegister',{id:c.id,clientDataJSON:enb(c.response.clientDataJSON),attestationObject:enb(c.response.attestationObject)});
+    },
+    pkRemove:function(){return call('pkRemove',{})}
   };
+  function enb(b){var u=new Uint8Array(b),s='';for(var i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+  function unb(s){s=String(s).replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u.buffer}
 
   /* ---------- testi ---------- */
   var TX={
@@ -13732,7 +13753,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     if(!id||!pw){err(errIn,'need',!id?fU.row:fP.row);return}
     busy(bIn,true);
     var r=await NXAuth.login({id:id,password:pw});busy(bIn,false);
-    if(r.ok){fP.inp.value='';acctEnter(r.user);return}
+    if(r.ok){fP.inp.value='';acctEnter(r.user).then(pkInvite);return}
     if(r.error==='unverified'){pend.email=r.email;pend.pw=pw;pend.user=id;toVerify();return}
     err(errIn,r.error,r.error==='bad_login'?fP.row:null);
   });
@@ -13740,7 +13761,17 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   (function(){
     var f=$('fid');if(!f)return;var nf=f.cloneNode(true);f.parentNode.replaceChild(nf,f);
     vIn.insertBefore(nf,fIn);
-    nf.addEventListener('click',function(){flash(nf,'scanning',950);fU.inp.focus();try{msg(t('afhint'))}catch(e){}});
+    nf.addEventListener('click',async function(){
+      flash(nf,'scanning',950);
+      if(NXAuth.pkOk()&&!nf.disabled){
+        nf.disabled=true;var r=await NXAuth.pkLogin();nf.disabled=false;
+        if(r.ok){acctEnter(r.user);return}
+        if(r.error==='pk_cancel')return;
+        if(r.error==='pk_unknown'){try{msg(FX('unknown'))}catch(e){}fU.inp.focus();return}
+        if(r.error==='limit'||r.error==='network'){err(errIn,r.error);return}
+      }
+      fU.inp.focus();try{msg(t('afhint'))}catch(e){}
+    });
     var lens={aid:0,apw:0},tmr=0;
     function chk(e){var el=e.target,len=el.value.length,jump=len-lens[el.id];lens[el.id]=len;var it=e.inputType||'';
       var auto=e.type==='change'?jump>1:(it==='insertReplacementText'||it==='insertFromPaste'||(it===''&&jump>1));if(!auto)return;
@@ -13799,7 +13830,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     ev.preventDefault();errVer.textContent='';okVer.textContent='';
     var c=cVer.inp.value.replace(/\D/g,'');if(c.length!==6){cVer.bad();return}
     busy(bVer,true);var r=await NXAuth.verify({email:pend.email,code:c});busy(bVer,false);
-    if(r.ok){stopTimer();segsShow(6,6);var u=r.user;setTimeout(function(){gold(false);acctEnter(u)},350);return}
+    if(r.ok){stopTimer();segsShow(6,6);var u=r.user;setTimeout(function(){gold(false);acctEnter(u).then(pkInvite)},350);return}
     cVer.bad();err(errVer,r.error);if(r.error==='badcode'){cVer.inp.value='';cVer.paint();cVer.inp.focus()}
   });
   cVer.inp.addEventListener('input',function(){if(cVer.inp.value.replace(/\D/g,'').length===6&&!bVer.disabled)setTimeout(function(){if(fVer.requestSubmit)fVer.requestSubmit();else bVer.click()},120)});
@@ -13898,6 +13929,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
       p.appendChild(lbl);p.appendChild(g);
       pfRow(g,PIC.inbox||PIC.chat,T('em'),u.email||'',function(){pfGo('acc_email')}).classList.add('chev');
       pfRow(g,PIC.lock||PIC.gear,T('pw'),T('pwsub'),function(){pfGo('acc_pw')}).classList.add('chev');
+      if(NXAuth.pkOk())pkRow(g);
       pfRow(g,PIC.shield||PIC.gear,T('privrow'),T('privsub'),function(){openPrivacy()}).classList.add('chev');
       var dr=pfRow(g,PIC.reset||PIC.out,T('del'),T('delsub'),function(){pfGo('acc_del')});dr.classList.add('chev');var dt=dr.querySelector('.pftx>span,.pftx b,.pftx');if(dr.querySelector('.pftx span'))dr.querySelector('.pftx span').style.color='#e06860'
     }catch(e){}
@@ -13944,6 +13976,53 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   }
   var oPS=pfSub;
   pfSub=function(p,title){oPS.apply(this,arguments);try{if(PF.page&&String(PF.page).indexOf('acc_')===0){/* 1.0.2: si torna alle Impostazioni */var bk=p.querySelector('.pfback');if(bk){bk.lastChild.textContent=pt('settings');bk.onclick=function(){PF.page='settings';PF.accStep=null;renderProfile();p.classList.add('pfout');setTimeout(function(){p.classList.remove('pfout')},400)}}}}catch(e){}};
+
+
+  /* ---------- 1.1.0: Face ID (passkey) ---------- */
+  var FXT={
+    it:{row:'Accedi con Face ID',on:'Attivo: entri senza password',off:'Entra senza password',ask:'Vuoi entrare con Face ID?',asksub:'La prossima volta ti basta guardare il telefono: niente password da scrivere. Il tuo volto resta sul tuo iPhone.',yes:'Attiva Face ID',later:'Non ora',done:'Face ID attivato',removed:'Face ID disattivato. Puoi cancellare la passkey anche da Impostazioni iPhone > Password.',unknown:'Face ID non è attivo per questo account: entra con la password e attivalo in Impostazioni.',fail:'Face ID non attivato. Riprova.',exists:'Face ID è già attivo su questo telefono.',max:'Hai già 5 dispositivi con Face ID: disattivalo e riattivalo.'},
+    en:{row:'Sign in with Face ID',on:'On: sign in without a password',off:'Sign in without a password',ask:'Sign in with Face ID?',asksub:'Next time just look at your phone: no password to type. Your face stays on your iPhone.',yes:'Turn on Face ID',later:'Not now',done:'Face ID turned on',removed:'Face ID turned off. You can also delete the passkey in iPhone Settings > Passwords.',unknown:'Face ID is not on for this account: sign in with your password and turn it on in Settings.',fail:'Face ID was not turned on. Try again.',exists:'Face ID is already on for this phone.',max:'You already have 5 devices with Face ID: turn it off and on again.'},
+    es:{row:'Entrar con Face ID',on:'Activado: entras sin contraseña',off:'Entra sin contraseña',ask:'¿Quieres entrar con Face ID?',asksub:'La próxima vez solo tienes que mirar el teléfono: sin escribir contraseña. Tu cara se queda en tu iPhone.',yes:'Activar Face ID',later:'Ahora no',done:'Face ID activado',removed:'Face ID desactivado. También puedes borrar la llave de acceso en Ajustes del iPhone > Contraseñas.',unknown:'Face ID no está activado en esta cuenta: entra con la contraseña y actívalo en Ajustes.',fail:'Face ID no se ha activado. Inténtalo de nuevo.',exists:'Face ID ya está activado en este teléfono.',max:'Ya tienes 5 dispositivos con Face ID: desactívalo y vuelve a activarlo.'},
+    fr:{row:'Connexion avec Face ID',on:'Activé : connexion sans mot de passe',off:'Connexion sans mot de passe',ask:'Se connecter avec Face ID ?',asksub:'La prochaine fois, il suffit de regarder votre téléphone : aucun mot de passe à saisir. Votre visage reste sur votre iPhone.',yes:'Activer Face ID',later:'Pas maintenant',done:'Face ID activé',removed:'Face ID désactivé. Vous pouvez aussi supprimer la clé d’identification dans Réglages iPhone > Mots de passe.',unknown:'Face ID n’est pas activé pour ce compte : connectez-vous avec le mot de passe et activez-le dans Réglages.',fail:'Face ID n’a pas été activé. Réessayez.',exists:'Face ID est déjà activé sur ce téléphone.',max:'Vous avez déjà 5 appareils avec Face ID : désactivez-le puis réactivez-le.'},
+    de:{row:'Mit Face ID anmelden',on:'Aktiv: Anmeldung ohne Passwort',off:'Anmeldung ohne Passwort',ask:'Mit Face ID anmelden?',asksub:'Beim nächsten Mal reicht ein Blick aufs Handy: kein Passwort eintippen. Dein Gesicht bleibt auf deinem iPhone.',yes:'Face ID aktivieren',later:'Nicht jetzt',done:'Face ID aktiviert',removed:'Face ID deaktiviert. Du kannst den Passkey auch in den iPhone-Einstellungen > Passwörter löschen.',unknown:'Face ID ist für dieses Konto nicht aktiv: Melde dich mit dem Passwort an und aktiviere es in den Einstellungen.',fail:'Face ID wurde nicht aktiviert. Versuche es erneut.',exists:'Face ID ist auf diesem Handy schon aktiv.',max:'Du hast schon 5 Geräte mit Face ID: deaktiviere und aktiviere es neu.'}
+  };
+  function FX(k){var d=FXT[LANGS_OK(typeof lang!=='undefined'?lang:'en')];return d[k]!==undefined?d[k]:FXT.en[k]}
+  var FIDIC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M9 10v1.5M15 10v1.5M12 10v3.5h-1M9 16.2c1.8 1.4 4.2 1.4 6 0"/></svg>';
+  (function(){var st=document.createElement('style');st.textContent='.ntask.nxfid i{background:rgba(207,165,81,.16);color:var(--gold,#cfa551);animation:none}.ntask.nxfid i svg{width:34px;height:34px}.pkrow.pfrow{display:flex;align-items:center;gap:13px;width:100%;margin:0!important;padding:8px 14px 8px 8px!important;box-sizing:border-box}.pkrow .pftx{flex:1;min-width:0}.pkrow input[switch]{flex:0 0 auto}';document.head.appendChild(st)})();
+  function pkHave(){var u=NXAuth.user()||{};return (u.pk||0)>0}
+  async function pkTurnOn(){
+    var r=await NXAuth.pkRegister();
+    if(r.ok){try{localStorage.setItem('nx_pkask','1')}catch(e){}msg('✓ '+FX('done'));return true}
+    if(r.error!=='pk_cancel')msg(r.error==='pk_exists'?FX('exists'):r.error==='pk_max'?FX('max'):r.error==='network'?E('network'):FX('fail'));
+    return false;
+  }
+  function pkRow(g){
+    /* riga come le altre, ma <div> (un interruttore non puo' stare dentro un bottone) */
+    var b0=pfRow(g,FIDIC,FX('row'),pkHave()?FX('on'):FX('off'),function(){},'','#cfa551');
+    var r=mk('div','pfrow pkrow swrow');while(b0.firstChild)r.appendChild(b0.firstChild);b0.parentNode.replaceChild(r,b0);
+    var sub=r.querySelector('.pftx small,.pftx em,.pftx i')||null;
+    var sw=cvSwitch(pkHave(),async function(v){
+      sw.disabled=true;
+      if(v){var ok=await pkTurnOn();sw.checked=ok}
+      else{var x=await NXAuth.pkRemove();if(x.ok)msg(FX('removed'));else{sw.checked=true;msg(E(x.error||'server'))}}
+      sw.disabled=false;if(sub)sub.textContent=sw.checked?FX('on'):FX('off');
+    });
+    r.appendChild(sw);r.onclick=function(ev){if(ev.target!==sw&&!sw.disabled)sw.click()};
+    /* lo stato vero arriva dal server (Face ID puo' essere stato attivato da un altro telefono) */
+    NXAuth.me().then(function(m){if(m&&m.ok&&!sw.disabled){sw.checked=(m.user.pk||0)>0;if(sub)sub.textContent=sw.checked?FX('on'):FX('off')}});
+  }
+  /* invito, una volta sola: dopo la registrazione o dopo un accesso con la password */
+  function pkInvite(){
+    if(!NXAuth.pkOk()||pkHave()||window.NX_ADMIN_APP)return;
+    var seen=null;try{seen=localStorage.getItem('nx_pkask')}catch(e){}if(seen)return;
+    try{localStorage.setItem('nx_pkask','1')}catch(e){}
+    setTimeout(function(){openSheet(function(s){
+      var d=mk('div','ntask nxfid');d.innerHTML='<i>'+FIDIC+'</i><b></b><span></span>';d.children[1].textContent=FX('ask');d.children[2].textContent=FX('asksub');s.appendChild(d);
+      var ok=mk('button','gdok');ok.textContent=FX('yes');ok.onclick=async function(){closeSheet();await pkTurnOn()};s.appendChild(ok);
+      var no=mk('button','ntlater');no.textContent=FX('later');no.onclick=closeSheet;s.appendChild(no);
+    })},1600);
+  }
+  window.NXpkInvite=pkInvite;
 
   /* ---------- all'apertura: chi ha gia' una sessione entra da solo ---------- */
   (function(){
