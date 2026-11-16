@@ -13886,18 +13886,16 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     var u=NXAuth.user()||ACCT||{};
     oRP.apply(this,arguments);
     try{
-      var sub=p.querySelector('.pfsub');if(sub)sub.textContent='@'+(u.username||'');
+      if(!PF.page){var sub=p.querySelector('.pfsub');if(sub)sub.textContent='@'+(u.username||'');}
       /* il pannello amministratore sta solo in NexusAdmin */
       if(!window.NX_ADMIN_APP){var adc=p.querySelector('.adcard');if(adc)adc.remove()}
       /* niente gruppo codici amici per gli account normali */
       if(!admKey()){[].slice.call(p.querySelectorAll('.pfl')).forEach(function(l){if(l.textContent===pt('friends')){var g=l.nextElementSibling;l.remove();if(g&&g.classList.contains('pfg'))g.remove()}})}
-      /* sezione Account prima di "Esci" */
-      var rows=[].slice.call(p.querySelectorAll('.pfrow')),outRow=null;
-      rows.forEach(function(r){if(r.textContent.trim()===t('logout'))outRow=r});
-      var hook=outRow?outRow.closest('.pfg'):null;
+      /* 1.0.2: la sezione Account sta solo nelle Impostazioni, in fondo */
+      if(PF.page!=='settings')return;
       var lbl=mk('div','pfl');lbl.textContent=T('acc');
       var g=mk('div','pfg');
-      if(hook){hook.parentNode.insertBefore(lbl,hook);hook.parentNode.insertBefore(g,hook)}else{p.appendChild(lbl);p.appendChild(g)}
+      p.appendChild(lbl);p.appendChild(g);
       pfRow(g,PIC.inbox||PIC.chat,T('em'),u.email||'',function(){pfGo('acc_email')}).classList.add('chev');
       pfRow(g,PIC.lock||PIC.gear,T('pw'),T('pwsub'),function(){pfGo('acc_pw')}).classList.add('chev');
       pfRow(g,PIC.shield||PIC.gear,T('privrow'),T('privsub'),function(){openPrivacy()}).classList.add('chev');
@@ -13921,7 +13919,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
         var c=input(g,'000000','text','one-time-code');c.inputMode='numeric';c.maxLength=6;c.style.letterSpacing='.4em';c.style.textAlign='center';c.style.fontSize='22px';
         var b2=pbtn(g,T('confirm'));var er2=line(g);
         b2.onclick=async function(){er2.textContent='';b2.disabled=true;var r=await NXAuth.changeEmail({code:c.value.replace(/\D/g,'')});b2.disabled=false;
-          if(r.ok){PF.accStep=null;ACCT=r.user||ACCT;msg('✓ '+T('emok'));PF.page=null;renderProfile()}else er2.textContent=E(r.error)};
+          if(r.ok){PF.accStep=null;ACCT=r.user||ACCT;msg('✓ '+T('emok'));PF.page='settings';renderProfile()}else er2.textContent=E(r.error)};
       }
       return;
     }
@@ -13931,7 +13929,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
       var b3=pbtn(g2,T('savebtn'));var er3=line(g2);
       b3.onclick=async function(){er3.textContent='';if(!strength(n.value,u.username,u.email).ok){er3.textContent=E('weak');return}if(n.value!==n2.value){er3.textContent=E('mismatch');return}
         b3.disabled=true;var r=await NXAuth.changePassword({old:o.value,password:n.value});b3.disabled=false;
-        if(r.ok){msg('✓ '+T('pwok'));PF.page=null;renderProfile()}else er3.textContent=E(r.error)};
+        if(r.ok){msg('✓ '+T('pwok'));PF.page='settings';renderProfile()}else er3.textContent=E(r.error)};
       return;
     }
     if(page==='acc_del'){
@@ -13945,7 +13943,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     }
   }
   var oPS=pfSub;
-  pfSub=function(p,title){oPS.apply(this,arguments);try{if(PF.page&&String(PF.page).indexOf('acc_')===0){var bk=p.querySelector('.pfback');if(bk){bk.onclick=function(){PF.page=null;PF.accStep=null;renderProfile();p.classList.add('pfout');setTimeout(function(){p.classList.remove('pfout')},400)}}}}catch(e){}};
+  pfSub=function(p,title){oPS.apply(this,arguments);try{if(PF.page&&String(PF.page).indexOf('acc_')===0){/* 1.0.2: si torna alle Impostazioni */var bk=p.querySelector('.pfback');if(bk){bk.lastChild.textContent=pt('settings');bk.onclick=function(){PF.page='settings';PF.accStep=null;renderProfile();p.classList.add('pfout');setTimeout(function(){p.classList.remove('pfout')},400)}}}}catch(e){}};
 
   /* ---------- all'apertura: chi ha gia' una sessione entra da solo ---------- */
   (function(){
