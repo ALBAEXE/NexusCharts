@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v0.45.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v0.46.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -58,7 +58,7 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 | | |
 |---|---|
-| ⚡ **Prezzi live** | Quotazioni e candele si aggiornano da sole ogni pochi secondi |
+| ⚡ **Prezzi live** | I prezzi arrivano in diretta dal nostro server dati, spesso più volte al secondo |
 | 📈 **42 indicatori + i tuoi script** | Libreria integrata e un motore compatibile con Pine Script™ |
 | 🔔 **Alert veri** | Notifiche push anche ad app chiusa |
 | 📱 **Come un'app vera** | Tutto schermo, vibrazione al tocco, animazioni fluide, niente barre del browser |
@@ -67,7 +67,16 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 0.45.0 — Design 3.0 dentro l'app, più watchlist e Segnali
+### 🆕 Novità della 0.46.0 — Il nostro server dati e 72 strumenti
+
+- 📡 **Prezzi in diretta**: i prezzi arrivano dal server dati di NexusCharts nel momento in cui cambiano (spesso più volte al secondo), uguali su tutti i telefoni.
+- 🌐 **72 strumenti**: 43 coppie Forex, metalli (oro in USD, EUR, GBP e AUD, argento, platino, palladio, rame), petrolio WTI e Brent, gas naturale, 10 indici (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, Dollar Index) e 7 criptovalute. Le azioni arrivano presto.
+- ⏱️ **Timeframe in secondi dai prezzi in diretta**: 1s, 5s, 10s e gli altri ora sono costruiti con ogni prezzo in diretta.
+- 🛟 **Paracadute automatico**: se il server dati non risponde, il grafico torna da solo alla fonte di prima. Due fonti non si mescolano mai sullo stesso grafico.
+- 🗂️ **Fonti dati** nel Profilo: da dove arrivano prezzi e candele, e cosa arriverà dopo.
+- 🏷️ **Nomi degli strumenti in tutte e cinque le lingue** (per esempio *Oro spot / Dollaro USA*), **icone nuove** per rame, petrolio, gas naturale e Dollar Index, e le **icone cripto originali**.
+
+### In precedenza, nella 0.45.0 — Design 3.0 dentro l'app, più watchlist e Segnali
 
 - 🪐 **Design 3.0 dentro l'app**: Watchlist, menu del Grafico, Indicatori, Editor script, Bar Replay e Profilo ora hanno lo stesso stile a orbite dell'accesso, in tema scuro e chiaro. Le candele del grafico restano pulite.
 - 📋 **Più watchlist**: crea, rinomina ed elimina le tue liste da *Tutte le watchlist*. La lista di sempre resta la **Watchlist** principale, quindi aggiornando non perdi niente.
@@ -77,12 +86,15 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 📤 **Condividi**: prima un'anteprima Design 3.0 del grafico, poi il foglio di condivisione con la sola immagine.
 - 🧩 **Minimappa dell'editor**: una panoramica colorata del codice a destra; tocca o trascina per spostarti.
 
-### In precedenza, nella 0.44.0 — Tedesco
+<details>
+<summary>In precedenza, nella 0.44.0 — Tedesco</summary>
 
 - 🇩🇪 Il **tedesco** è la quinta lingua dell'app: accesso, schermate di benvenuto, watchlist, grafico, indicatori, editor degli script, alert, profilo e guida all'installazione.
 - 🔢 Numeri e date nel **formato tedesco** (per esempio 1.234,56).
 - 🪐 Il **menu lingue a orbita** ora ha cinque bandiere rotonde.
 - 📲 Il tasto **Installa** nelle schermate di accesso ora mostra solo l'icona, su tutti i dispositivi e in tutte le lingue, grande quanto la bandiera.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 0.43.0 — Accesso Design 3.0</summary>
@@ -112,7 +124,7 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 ## 🚀 Funzioni
 
 ### 📋 Watchlist
-- Forex, materie prime, cripto, indici e azioni, divisi per categoria
+- 72 strumenti: Forex, metalli, energia, indici e cripto, divisi per categoria (azioni in arrivo)
 - Cerca qualsiasi simbolo e aggiungilo con un tocco
 - Prezzo live, variazione giornaliera in punti e percentuale, icone con bandiere e monete
 - Mini player in basso con il simbolo selezionato e il suo grafichino
@@ -241,6 +253,7 @@ Eri già dentro? Dopo un aggiornamento potresti vedere una volta le schermate di
 
 - 🚫 **Nessun dato personale richiesto** per usare l'app con un codice.
 - 📱 Disegni, layout, indicatori, script e impostazioni restano **solo sul tuo dispositivo**.
+- 📡 Il server dati conserva solo i prezzi di mercato: nessun indirizzo IP e nessun dato personale.
 - 🔔 Se attivi le notifiche, i tuoi alert attivi vengono tenuti sul server solo per avvisarti; elimini l'alert e sparisce.
 - 🔐 In questo repository non ci sono password né chiavi private.
 - 🎟️ I codici di accesso sono legati a un solo dispositivo e si possono revocare in qualsiasi momento.
@@ -252,7 +265,7 @@ Eri già dentro? Dopo un aggiornamento potresti vedere una volta le schermate di
 ## 🏗️ Come è fatta
 
 - 🖥️ **L'app** (quello che vedi sullo schermo) sta in questo repository ed è pubblicata come web app.
-- ⚙️ **Il motore** gira su Cloudflare: controlla i codici di accesso, porta i prezzi live e invia gli alert. È gestito a parte e non fa parte di questo repository.
+- ⚙️ **Il motore** gira su Cloudflare: controlla i codici di accesso e invia gli alert, e un **server dati** separato manda i prezzi in diretta e conserva lo storico delle candele. Sono gestiti a parte e non fanno parte di questo repository.
 - 🔐 Chiavi e password stanno solo nelle impostazioni cifrate del motore, mai nel codice.
 
 ---
@@ -324,7 +337,9 @@ Non ancora: restano sul dispositivo dove li hai creati.
 | ✅ | Design 3.0: schermate di benvenuto, animazione del logo, menu lingue a orbita |
 | ✅ | Accesso Design 3.0: logo a orbite, codice in 8 caselle, bandiere rotonde |
 | ✅ | Design 3.0 dentro l'app, più watchlist, Segnali, spessore/stile dei disegni e Annulla |
-| 🔜 | Caricamento dati più veloce |
+| ✅ | Server dati nostro: prezzi in diretta, 72 strumenti, nomi in 5 lingue |
+| 🔜 | Storico delle candele più lungo (anni) |
+| 🔜 | Azioni |
 | 🔜 | Versione completa per computer |
 | 💡 | Sincronizzazione tra dispositivi |
 
@@ -333,6 +348,8 @@ Non ancora: restano sul dispositivo dove li hai creati.
 ## 🙏 Riconoscimenti
 
 - Grafici realizzati con [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache 2.0).
+- Dati di mercato da [biquote.io](https://biquote.io). I prezzi servono per l'analisi e possono essere diversi da quelli del tuo broker.
+- Icone cripto da [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons) (CC0 1.0).
 - TradingView e Pine Script sono marchi di TradingView, Inc. NexusCharts non è affiliata a TradingView.
 
 ---

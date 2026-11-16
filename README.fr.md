@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v0.45.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v0.46.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -58,7 +58,7 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 | | |
 |---|---|
-| ⚡ **Prix en direct** | Cotations et bougies se mettent à jour toutes seules toutes les quelques secondes |
+| ⚡ **Prix en direct** | Les prix arrivent en direct depuis notre serveur de données, souvent plusieurs fois par seconde |
 | 📈 **42 indicateurs + tes scripts** | Bibliothèque intégrée et un moteur compatible Pine Script™ |
 | 🔔 **De vraies alertes** | Notifications push même quand l'app est fermée |
 | 📱 **Comme une vraie app** | Plein écran, vibration au toucher, animations fluides, pas de barres du navigateur |
@@ -67,7 +67,16 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 0.45.0 — Design 3.0 dans l'app, plusieurs watchlists et Signaux
+### 🆕 Nouveautés de la 0.46.0 — Notre propre serveur de données et 72 instruments
+
+- 📡 **Prix en direct** : les prix arrivent du serveur de données de NexusCharts au moment où ils changent (souvent plusieurs fois par seconde), identiques sur tous les téléphones.
+- 🌐 **72 instruments** : 43 paires Forex, métaux (or en USD, EUR, GBP et AUD, argent, platine, palladium, cuivre), pétrole WTI et Brent, gaz naturel, 10 indices (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, Dollar Index) et 7 cryptomonnaies. Les actions arrivent bientôt.
+- ⏱️ **Unités de temps en secondes avec les prix en direct** : 1s, 5s, 10s et les autres sont maintenant construites avec chaque prix en direct.
+- 🛟 **Secours automatique** : si le serveur de données ne répond pas, le graphique revient tout seul à la source précédente. Deux sources ne sont jamais mélangées sur le même graphique.
+- 🗂️ **Sources des données** dans le Profil : d'où viennent les prix et les bougies, et ce qui arrive ensuite.
+- 🏷️ **Noms des instruments dans les cinq langues** (par exemple *Or spot / Dollar US*), **nouvelles icônes** pour le cuivre, le pétrole, le gaz naturel et le Dollar Index, et les **icônes crypto originales**.
+
+### Auparavant, dans la 0.45.0 — Design 3.0 dans l'app, plusieurs watchlists et Signaux
 
 - 🪐 **Design 3.0 dans l'app** : Watchlist, menus du Graphique, Indicateurs, Éditeur de scripts, Bar Replay et Profil ont maintenant le même style en orbite que la connexion, en thème sombre et clair. Les bougies du graphique restent épurées.
 - 📋 **Plusieurs watchlists** : crée, renomme et supprime tes listes depuis *Toutes les watchlists*. Ta liste habituelle reste la **Watchlist** principale, donc la mise à jour ne fait rien perdre.
@@ -77,12 +86,15 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 📤 **Partager** : d'abord un aperçu Design 3.0 du graphique, puis la feuille de partage du système avec l'image seule.
 - 🧩 **Minicarte de l'éditeur** : un aperçu en couleurs du code à droite ; touche ou fais glisser pour te déplacer.
 
-### Auparavant, dans la 0.44.0 — Allemand
+<details>
+<summary>Auparavant, dans la 0.44.0 — Allemand</summary>
 
 - 🇩🇪 L'**allemand** est la cinquième langue de l'app : connexion, écrans de bienvenue, watchlist, graphique, indicateurs, éditeur de scripts, alertes, profil et guide d'installation.
 - 🔢 Nombres et dates au **format allemand** (par exemple 1.234,56).
 - 🪐 Le **menu des langues en orbite** a maintenant cinq drapeaux ronds.
 - 📲 Le bouton **Installer** des écrans de connexion n'affiche plus que son icône, sur tous les appareils et dans toutes les langues, de la même taille que le drapeau.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 0.43.0 — Connexion Design 3.0</summary>
@@ -112,7 +124,7 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 ## 🚀 Fonctions
 
 ### 📋 Watchlist
-- Forex, matières premières, crypto, indices et actions, classés par catégorie
+- 72 instruments : Forex, métaux, énergie, indices et crypto, classés par catégorie (actions bientôt)
 - Cherche n'importe quel symbole et ajoute-le d'un toucher
 - Prix en direct, variation du jour en points et en pourcentage, icônes avec drapeaux et pièces
 - Mini lecteur en bas avec le symbole sélectionné et son mini-graphique
@@ -241,6 +253,7 @@ Tu étais déjà connecté ? Après une mise à jour, tu verras peut-être une f
 
 - 🚫 **Aucune donnée personnelle demandée** pour utiliser l'app avec un code.
 - 📱 Dessins, mises en page, indicateurs, scripts et réglages restent **uniquement sur ton appareil**.
+- 📡 Le serveur de données ne conserve que les prix du marché : aucune adresse IP ni donnée personnelle.
 - 🔔 Si tu actives les notifications, tes alertes actives sont gardées sur le serveur uniquement pour te prévenir ; supprime l'alerte et elle disparaît.
 - 🔐 Ce dépôt ne contient aucun mot de passe ni clé privée.
 - 🎟️ Les codes d'accès sont liés à un seul appareil et peuvent être révoqués à tout moment.
@@ -252,7 +265,7 @@ Tu étais déjà connecté ? Après une mise à jour, tu verras peut-être une f
 ## 🏗️ Comment elle est faite
 
 - 🖥️ **L'app** (ce que tu vois à l'écran) se trouve dans ce dépôt et est publiée comme web app.
-- ⚙️ **Le moteur** tourne sur Cloudflare : il vérifie les codes d'accès, transmet les prix en direct et envoie les alertes. Il est géré à part et ne fait pas partie de ce dépôt.
+- ⚙️ **Le moteur** tourne sur Cloudflare : il vérifie les codes d'accès et envoie les alertes, et un **serveur de données** séparé diffuse les prix en direct et conserve l'historique des bougies. Ils sont gérés à part et ne font pas partie de ce dépôt.
 - 🔐 Les clés et mots de passe se trouvent uniquement dans les réglages chiffrés du moteur, jamais dans le code.
 
 ---
@@ -324,7 +337,9 @@ Pas encore : ils restent sur l'appareil où tu les as créés.
 | ✅ | Design 3.0 : écrans de bienvenue, animation du logo, menu des langues en orbite |
 | ✅ | Connexion Design 3.0 : logo en orbite, code en 8 cases, drapeaux ronds |
 | ✅ | Design 3.0 dans l'app, plusieurs watchlists, Signaux, épaisseur/style des dessins et Annuler |
-| 🔜 | Chargement des données plus rapide |
+| ✅ | Notre propre serveur de données : prix en direct, 72 instruments, noms en 5 langues |
+| 🔜 | Historique des bougies plus long (des années) |
+| 🔜 | Actions |
 | 🔜 | Version complète pour ordinateur |
 | 💡 | Synchronisation entre appareils |
 
@@ -333,6 +348,8 @@ Pas encore : ils restent sur l'appareil où tu les as créés.
 ## 🙏 Crédits
 
 - Graphiques réalisés avec [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache 2.0).
+- Données de marché de [biquote.io](https://biquote.io). Les prix servent à l'analyse et peuvent différer de ceux de ton courtier.
+- Icônes crypto de [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons) (CC0 1.0).
 - TradingView et Pine Script sont des marques de TradingView, Inc. NexusCharts n'est pas affiliée à TradingView.
 
 ---
