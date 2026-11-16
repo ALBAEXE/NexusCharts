@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v0.46.2-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.0.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,18 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 0.46.0 — Our own data server and 72 instruments
+### 🆕 New in 1.0.0 — NexusCharts accounts, a new address, only our own data
+
+- 🌐 **New address**: NexusCharts now lives at **[nexuscharts.app](https://nexuscharts.app)**. The old address takes you there automatically.
+- 👤 **NexusCharts accounts**: sign-up open to everyone with a username, email and password. Unique usernames, strong passwords and a 6-digit email code to confirm the address.
+- 🔐 **Easier sign-in**: sign in with username or email, **Forgot password** with an email code, **Face ID** through the iPhone keychain, and on iPhone the email code appears right above the keyboard.
+- ⚙️ **Account section** in Profile: change email, change password, Privacy Policy, Sign out and **Delete account**.
+- 📧 **Emails in 5 languages**: verification code, welcome, security notices (password or email changed) and account deletion confirmation.
+- 📡 **Only our own data**: instrument list, candles and prices all come from the NexusCharts data server. Alerts with the app closed use the same prices as the chart.
+- 📜 **[Privacy Policy](https://nexuscharts.app/privacy.html)** in 5 languages, also readable inside the app.
+- ⚠️ With the new address the app is installed again on the Home Screen, and watchlists, drawings, scripts and alerts start from scratch.
+
+### Previously in 0.46.0 — Our own data server and 72 instruments
 
 - 📡 **Live streaming**: prices now come from the NexusCharts data server the moment they change (often several times per second), the same on every phone.
 - 🌐 **72 instruments**: 43 Forex pairs, metals (gold in USD, EUR, GBP and AUD, silver, platinum, palladium, copper), WTI and Brent oil, natural gas, 10 indices (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, US Dollar Index) and 7 cryptocurrencies. Stocks are coming soon.
@@ -196,6 +207,8 @@ Select a drawing to move it, change its color, **line width and style** or delet
 
 ## 📲 Installation
 
+> 🌐 The app lives at **[nexuscharts.app](https://nexuscharts.app)**.
+
 > NexusCharts is installed from the browser — no App Store or Play Store needed.
 
 ### 🍎 iPhone (Safari)
@@ -220,17 +233,15 @@ Select a drawing to move it, change its color, **line width and style** or delet
 
 ## 🔑 How to get access
 
-NexusCharts uses **personal access codes** — no sign-up, no broker account needed.
+1. Open **[nexuscharts.app](https://nexuscharts.app)** and tap **Create an account**.
+2. Pick a username, email and password, and confirm you are 18 or older and have read the Privacy Policy.
+3. Enter the 6-digit code sent by email and you're in.
 
-1. Ask for your code on Telegram 👉 **[t.me/albaexe](https://t.me/albaexe)**
-2. Open the app and tap **Sign in without a broker**.
-3. Type your code (format `XXXX-XXXX`) — you're in.
+From then on the app signs you in by itself. On a new phone just sign in with your username or email and password.
 
-From then on the app signs you in automatically.
+Have a **friend code**? Tap **Use a code** and type it (format `XXXX-XXXX`): it works on one device only.
 
-Already signed in? After an update you may see the welcome screens once: your code stays saved and the app signs you in as usual.
-
-> ⚠️ Every code works on **one device only**, like a license. If you change phone or reset the app, just ask for a new one.
+> 💬 Need help? Write to **support@nexuscharts.app**.
 
 ---
 
@@ -251,7 +262,8 @@ Already signed in? After an update you may see the welcome screens once: your co
 
 ## 🔒 Privacy & security
 
-- 🚫 **No personal data required** to use the app with a code.
+- 👤 An account needs only a **username, email and password**. We never see your password: the server keeps only an encrypted fingerprint of it.
+- 📜 All the details are in the **[Privacy Policy](https://nexuscharts.app/privacy.html)**.
 - 📱 Drawings, layouts, indicators, scripts and settings are saved **only on your device**.
 - 📡 The data server stores only market prices: no IP addresses and no personal data.
 - 🔔 If you turn on notifications, your active price alerts are kept on the server only to notify you; delete an alert and it's gone.
@@ -265,7 +277,7 @@ Already signed in? After an update you may see the welcome screens once: your co
 ## 🏗️ How it's built
 
 - 🖥️ **The app** (what you see on your screen) lives in this repository and is published as a web app.
-- ⚙️ **The engine** runs on Cloudflare: it checks access codes and sends alerts, and a separate **data server** streams live prices and keeps the candle history. Both are managed separately and are not part of this repository.
+- ⚙️ **The engine** runs on Cloudflare: an **account server** (sign-up, sign-in, emails), a **data server** that streams live prices and keeps the candle history, and a server for friend codes and alerts. They are managed separately and are not part of this repository.
 - 🔐 Keys and passwords live only in the engine's encrypted settings, never in the code.
 
 ---
@@ -338,6 +350,7 @@ Not yet: they're saved on the device where you made them.
 | ✅ | Design 3.0 sign-in: orbit logo, 8-box access code, round flags |
 | ✅ | Design 3.0 inside the app, multiple watchlists, Signals, drawing width/style and Undo |
 | ✅ | Our own data server: live streaming, 72 instruments, names in 5 languages |
+| ✅ | NexusCharts accounts, new address nexuscharts.app, Privacy Policy |
 | 🔜 | Longer candle history (years) |
 | 🔜 | Stocks |
 | 🔜 | Full desktop version |

@@ -1,4 +1,4 @@
-const VERSION='0.46.2';
+const VERSION='1.0.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -13278,4 +13278,714 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   /* misure (solo per noi): NXData.stats() */
   S.stats=function(){var a=S.lat.slice().sort(function(x,y){return x-y}),p=function(k){return a.length?a[Math.min(a.length-1,Math.floor(a.length*k))]:null};return{live:live(),n:a.length,p50:p(.5),p95:p(.95),frames:S.frames,clock:S.srv}};
   setTimeout(open,1500);
+})();
+
+/* ================= 1.0.0: account NexusCharts (username, email, password) ================= */
+/* Al posto dell'accesso col conto demo: Accedi, Registrati, verifica email, password dimenticata.
+   Stesso stile DESIGN 3.0 del login (righe da console, pillola oro con la manopola, alone con gli otto segmenti).
+   Il codice amico resta com'era. Le chiamate al server passano tutte da NXAuth. */
+(function(){
+  if(!document.getElementById('login'))return;
+  var API='https://nexus-auth.nexuscharts.workers.dev/v1/';
+  var KT='nx_tok',KU='nx_user',KL='nx_lastu';
+  function sget(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function sset(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){}}
+  function L2(){try{return LANGS_OK(lang)}catch(e){return 'en'}}
+  function LANGS_OK(l){return ['it','en','es','fr','de'].indexOf(l)>=0?l:'en'}
+
+  /* ---------- client del server account ---------- */
+  async function call(fn,body,method){
+    var h={'content-type':'application/json'},t=sget(KT);if(t)h.authorization='Bearer '+t;
+    var r;try{r=await fetch(API+fn,{method:method||'POST',headers:h,body:method==='GET'?undefined:JSON.stringify(body||{}),cache:'no-store'})}
+    catch(e){return {ok:false,error:'network'}}
+    var j;try{j=await r.json()}catch(e){j={ok:false,error:'server'}}
+    if(!j)j={ok:false,error:'server'};
+    if(j.error==='auth'){sset(KT,null);sset(KU,null)}
+    if(j.token)sset(KT,j.token);
+    if(j.user){sset(KU,JSON.stringify(j.user));sset(KL,j.user.username)}
+    delete j.token;return j;
+  }
+  window.NXAuth={
+    token:function(){return sget(KT)},
+    user:function(){try{return JSON.parse(sget(KU)||'null')}catch(e){return null}},
+    signedIn:function(){return !!sget(KT)},
+    checkUsername:function(u){return call('check',{username:u})},
+    register:function(o){return call('register',{username:o.username,email:o.email,password:o.password,lang:L2()})},
+    verify:function(o){return call('verify',{email:o.email,code:o.code})},
+    resend:function(email){return call('resend',{email:email,lang:L2()})},
+    login:function(o){return call('login',{id:o.id,password:o.password})},
+    forgot:function(email){return call('forgot',{email:email,lang:L2()})},
+    reset:function(o){return call('reset',{email:o.email,code:o.code,password:o.password})},
+    me:function(){return call('me',null,'GET')},
+    logout:async function(){await call('logout',{});sset(KT,null);sset(KU,null);return {ok:true}},
+    /* due passi: {email,password} -> codice alla nuova email -> {code} */
+    changeEmail:function(o){return call('changeEmail',o.code!==undefined?{code:o.code}:{email:o.email,password:o.password,lang:L2()})},
+    changePassword:function(o){return call('changePassword',{old:o.old,password:o.password})},
+    deleteAccount:async function(o){var r=await call('deleteAccount',{password:o&&o.password});if(r.ok){sset(KT,null);sset(KU,null)}return r}
+  };
+
+  /* ---------- testi ---------- */
+  var TX={
+  it:{user:'Utente',userph:'username o email',pass:'Password',login:'Accedi',forgot:'Password dimenticata?',create:'Crea un account',createsub:'Gratis, in un minuto',code:'Entra con un codice',codesub:'Hai un codice amico?',
+    regt:'Nuovo account',uname:'Username',unameph:'3-20 caratteri',email:'Email',emailph:'nome@email.com',pw2:'Conferma',pw2ph:'ripeti la password',r_len:'10+ caratteri',r_let:'una lettera',r_num:'un numero',st:['Debole','Debole','Discreta','Buona','Forte'],free:'libero',taken:'già usato',checking:'controllo…',
+    privpre:'Ho almeno 18 anni e ho letto l’',privlink:'Informativa Privacy',createbtn:'Crea account',have:'Hai già un account?',havebtn:'Accedi',back:'Indietro',
+    vert:'Verifica email',versub:'Abbiamo mandato un codice di 6 cifre a',verbtn:'Conferma',resend:'Rinvia il codice',resendin:'Rinvia tra {s} s',chg:'Cambia email',spam:'Non lo trovi? Guarda anche in Spam.',
+    fgt:'Password dimenticata',fgsub:'Scrivi l’email del tuo account: ti mandiamo un codice per sceglierne una nuova.',send:'Invia il codice',fgcode:'Codice dall’email',newpw:'Nuova',save:'Salva e accedi',
+    e:{taken:'Questo username è già usato.',email_taken:'Questa email ha già un account. Accedi o usa «Password dimenticata?».',weak:'Password troppo debole: almeno 10 caratteri, con lettere e numeri.',mismatch:'Le due password non coincidono.',badcode:'Codice sbagliato.',expired:'Codice scaduto: chiedine uno nuovo.',limit:'Troppi tentativi. Riprova tra qualche minuto.',wait:'Aspetta qualche secondo prima di chiedere un altro codice.',bad_login:'Username o password sbagliati.',invalid_username:'Username non valido: 3-20 caratteri tra lettere, numeri, punto e trattino basso.',reserved:'Questo username è riservato: scegline un altro.',invalid_email:'Controlla l’email: non sembra valida.',network:'Nessuna connessione. Controlla internet e riprova.',server:'Il server non risponde. Riprova tra poco.',mail:'Non riusciamo a mandare l’email. Riprova tra poco.',priv:'Per continuare conferma di avere almeno 18 anni e di aver letto l’Informativa Privacy.',bad_password:'Password sbagliata.',same_email:'È già la tua email.',need:'Compila tutti i campi.',auth:'Sessione scaduta: accedi di nuovo.'},
+    sent:'Codice inviato.',welcome:'Benvenuto, {u}!',
+    acc:'Account',accsub:'Email, password e privacy',em:'Email',pw:'Password',pwsub:'Cambia la password',privrow:'Informativa Privacy',privsub:'Come trattiamo i tuoi dati',out:'Esci',del:'Elimina account',delsub:'Cancella account e dati dal server',
+    cet:'Cambia email',cenote:'Ti mandiamo un codice alla nuova email. Finché non lo confermi resta quella di adesso.',newem:'Nuova email',curpw:'Password attuale',cecode:'Codice arrivato alla nuova email',confirm:'Conferma',emok:'Email aggiornata.',
+    cpt:'Cambia password',cpnote:'Gli altri telefoni collegati a questo account usciranno.',oldpw:'Password attuale',newpw2:'Nuova password',newpw3:'Ripeti la nuova password',savebtn:'Salva',pwok:'Password aggiornata.',
+    dt:'Elimina account',dnote:'Cancelliamo per sempre il tuo account e i dati sul nostro server. Watchlist, disegni e impostazioni restano su questo telefono finché non disinstalli l’app.',dpw:'Scrivi la password per confermare',dbtn:'Elimina per sempre',dsure:'Tocca di nuovo per confermare',dok:'Account eliminato.',
+    signed:'Account'},
+  en:{user:'User',userph:'username or email',pass:'Password',login:'Sign in',forgot:'Forgot password?',create:'Create an account',createsub:'Free, in a minute',code:'Use a code',codesub:'Have a friend code?',
+    regt:'New account',uname:'Username',unameph:'3-20 characters',email:'Email',emailph:'name@email.com',pw2:'Confirm',pw2ph:'repeat the password',r_len:'10+ characters',r_let:'a letter',r_num:'a number',st:['Weak','Weak','Fair','Good','Strong'],free:'available',taken:'taken',checking:'checking…',
+    privpre:'I am 18 or older and have read the ',privlink:'Privacy Policy',createbtn:'Create account',have:'Already have an account?',havebtn:'Sign in',back:'Back',
+    vert:'Verify email',versub:'We sent a 6-digit code to',verbtn:'Confirm',resend:'Resend code',resendin:'Resend in {s} s',chg:'Change email',spam:'Can’t find it? Check your Spam folder.',
+    fgt:'Forgot password',fgsub:'Enter your account email: we’ll send you a code to choose a new one.',send:'Send code',fgcode:'Code from the email',newpw:'New',save:'Save and sign in',
+    e:{taken:'This username is already taken.',email_taken:'This email already has an account. Sign in or use “Forgot password?”.',weak:'Password too weak: at least 10 characters, with letters and numbers.',mismatch:'The two passwords don’t match.',badcode:'Wrong code.',expired:'Code expired: ask for a new one.',limit:'Too many attempts. Try again in a few minutes.',wait:'Wait a few seconds before asking for another code.',bad_login:'Wrong username or password.',invalid_username:'Invalid username: 3-20 letters, numbers, dots and underscores.',reserved:'This username is reserved: pick another one.',invalid_email:'Check the email: it doesn’t look valid.',network:'No connection. Check your internet and try again.',server:'The server isn’t responding. Try again shortly.',mail:'We can’t send the email right now. Try again shortly.',priv:'To continue, confirm you are 18 or older and have read the Privacy Policy.',bad_password:'Wrong password.',same_email:'That’s already your email.',need:'Fill in all the fields.',auth:'Session expired: sign in again.'},
+    sent:'Code sent.',welcome:'Welcome, {u}!',
+    acc:'Account',accsub:'Email, password and privacy',em:'Email',pw:'Password',pwsub:'Change your password',privrow:'Privacy Policy',privsub:'How we handle your data',out:'Sign out',del:'Delete account',delsub:'Remove your account and data from the server',
+    cet:'Change email',cenote:'We’ll send a code to the new email. Until you confirm it, your current email stays.',newem:'New email',curpw:'Current password',cecode:'Code sent to the new email',confirm:'Confirm',emok:'Email updated.',
+    cpt:'Change password',cpnote:'Other phones signed in to this account will be signed out.',oldpw:'Current password',newpw2:'New password',newpw3:'Repeat the new password',savebtn:'Save',pwok:'Password updated.',
+    dt:'Delete account',dnote:'We permanently delete your account and the data on our server. Watchlists, drawings and settings stay on this phone until you uninstall the app.',dpw:'Enter your password to confirm',dbtn:'Delete permanently',dsure:'Tap again to confirm',dok:'Account deleted.',
+    signed:'Account'},
+  es:{user:'Usuario',userph:'usuario o correo',pass:'Contraseña',login:'Entrar',forgot:'¿Olvidaste la contraseña?',create:'Crear una cuenta',createsub:'Gratis, en un minuto',code:'Entrar con un código',codesub:'¿Tienes un código de amigo?',
+    regt:'Nueva cuenta',uname:'Usuario',unameph:'3-20 caracteres',email:'Correo',emailph:'nombre@correo.com',pw2:'Confirmar',pw2ph:'repite la contraseña',r_len:'10+ caracteres',r_let:'una letra',r_num:'un número',st:['Débil','Débil','Aceptable','Buena','Fuerte'],free:'libre',taken:'en uso',checking:'comprobando…',
+    privpre:'Tengo al menos 18 años y he leído la ',privlink:'Política de Privacidad',createbtn:'Crear cuenta',have:'¿Ya tienes cuenta?',havebtn:'Entrar',back:'Atrás',
+    vert:'Verifica el correo',versub:'Hemos enviado un código de 6 cifras a',verbtn:'Confirmar',resend:'Reenviar el código',resendin:'Reenviar en {s} s',chg:'Cambiar correo',spam:'¿No lo encuentras? Mira también en Spam.',
+    fgt:'Contraseña olvidada',fgsub:'Escribe el correo de tu cuenta: te enviamos un código para elegir una nueva.',send:'Enviar el código',fgcode:'Código del correo',newpw:'Nueva',save:'Guardar y entrar',
+    e:{taken:'Este nombre de usuario ya está en uso.',email_taken:'Este correo ya tiene una cuenta. Entra o usa «¿Olvidaste la contraseña?».',weak:'Contraseña demasiado débil: al menos 10 caracteres, con letras y números.',mismatch:'Las dos contraseñas no coinciden.',badcode:'Código incorrecto.',expired:'Código caducado: pide uno nuevo.',limit:'Demasiados intentos. Inténtalo de nuevo en unos minutos.',wait:'Espera unos segundos antes de pedir otro código.',bad_login:'Usuario o contraseña incorrectos.',invalid_username:'Usuario no válido: 3-20 letras, números, puntos y guiones bajos.',reserved:'Este usuario está reservado: elige otro.',invalid_email:'Revisa el correo: no parece válido.',network:'Sin conexión. Revisa internet e inténtalo de nuevo.',server:'El servidor no responde. Inténtalo en un momento.',mail:'Ahora no podemos enviar el correo. Inténtalo en un momento.',priv:'Para continuar, confirma que tienes al menos 18 años y que has leído la Política de Privacidad.',bad_password:'Contraseña incorrecta.',same_email:'Ya es tu correo.',need:'Rellena todos los campos.',auth:'Sesión caducada: vuelve a entrar.'},
+    sent:'Código enviado.',welcome:'¡Bienvenido, {u}!',
+    acc:'Cuenta',accsub:'Correo, contraseña y privacidad',em:'Correo',pw:'Contraseña',pwsub:'Cambia la contraseña',privrow:'Política de Privacidad',privsub:'Cómo tratamos tus datos',out:'Salir',del:'Eliminar cuenta',delsub:'Borra la cuenta y los datos del servidor',
+    cet:'Cambiar correo',cenote:'Te enviamos un código al nuevo correo. Hasta que lo confirmes se mantiene el actual.',newem:'Nuevo correo',curpw:'Contraseña actual',cecode:'Código enviado al nuevo correo',confirm:'Confirmar',emok:'Correo actualizado.',
+    cpt:'Cambiar contraseña',cpnote:'Los demás teléfonos conectados a esta cuenta saldrán.',oldpw:'Contraseña actual',newpw2:'Nueva contraseña',newpw3:'Repite la nueva contraseña',savebtn:'Guardar',pwok:'Contraseña actualizada.',
+    dt:'Eliminar cuenta',dnote:'Borramos para siempre tu cuenta y los datos de nuestro servidor. La watchlist, los dibujos y los ajustes se quedan en este teléfono hasta que desinstales la app.',dpw:'Escribe la contraseña para confirmar',dbtn:'Eliminar para siempre',dsure:'Toca otra vez para confirmar',dok:'Cuenta eliminada.',
+    signed:'Cuenta'},
+  fr:{user:'Utilisateur',userph:'nom d’utilisateur ou e-mail',pass:'Mot de passe',login:'Se connecter',forgot:'Mot de passe oublié ?',create:'Créer un compte',createsub:'Gratuit, en une minute',code:'Entrer avec un code',codesub:'Vous avez un code ami ?',
+    regt:'Nouveau compte',uname:'Pseudo',unameph:'3-20 caractères',email:'E-mail',emailph:'nom@email.com',pw2:'Confirmer',pw2ph:'répétez le mot de passe',r_len:'10+ caractères',r_let:'une lettre',r_num:'un chiffre',st:['Faible','Faible','Moyen','Bon','Fort'],free:'libre',taken:'déjà pris',checking:'vérification…',
+    privpre:'J’ai au moins 18 ans et j’ai lu la ',privlink:'Politique de Confidentialité',createbtn:'Créer le compte',have:'Vous avez déjà un compte ?',havebtn:'Se connecter',back:'Retour',
+    vert:'Vérifier l’e-mail',versub:'Nous avons envoyé un code à 6 chiffres à',verbtn:'Confirmer',resend:'Renvoyer le code',resendin:'Renvoyer dans {s} s',chg:'Changer d’e-mail',spam:'Introuvable ? Regardez aussi dans les spams.',
+    fgt:'Mot de passe oublié',fgsub:'Saisissez l’e-mail de votre compte : nous vous envoyons un code pour en choisir un nouveau.',send:'Envoyer le code',fgcode:'Code reçu par e-mail',newpw:'Nouveau',save:'Enregistrer et entrer',
+    e:{taken:'Ce pseudo est déjà pris.',email_taken:'Cet e-mail a déjà un compte. Connectez-vous ou utilisez « Mot de passe oublié ? ».',weak:'Mot de passe trop faible : au moins 10 caractères, avec lettres et chiffres.',mismatch:'Les deux mots de passe ne correspondent pas.',badcode:'Code incorrect.',expired:'Code expiré : demandez-en un nouveau.',limit:'Trop de tentatives. Réessayez dans quelques minutes.',wait:'Attendez quelques secondes avant de demander un autre code.',bad_login:'Pseudo ou mot de passe incorrect.',invalid_username:'Pseudo non valide : 3-20 lettres, chiffres, points et tirets bas.',reserved:'Ce pseudo est réservé : choisissez-en un autre.',invalid_email:'Vérifiez l’e-mail : il ne semble pas valide.',network:'Pas de connexion. Vérifiez internet et réessayez.',server:'Le serveur ne répond pas. Réessayez bientôt.',mail:'Impossible d’envoyer l’e-mail pour l’instant. Réessayez bientôt.',priv:'Pour continuer, confirmez avoir au moins 18 ans et avoir lu la Politique de Confidentialité.',bad_password:'Mot de passe incorrect.',same_email:'C’est déjà votre e-mail.',need:'Remplissez tous les champs.',auth:'Session expirée : reconnectez-vous.'},
+    sent:'Code envoyé.',welcome:'Bienvenue, {u} !',
+    acc:'Compte',accsub:'E-mail, mot de passe et confidentialité',em:'E-mail',pw:'Mot de passe',pwsub:'Changer le mot de passe',privrow:'Politique de Confidentialité',privsub:'Comment nous traitons vos données',out:'Se déconnecter',del:'Supprimer le compte',delsub:'Efface le compte et les données du serveur',
+    cet:'Changer d’e-mail',cenote:'Nous envoyons un code au nouvel e-mail. Tant que vous ne le confirmez pas, l’actuel reste.',newem:'Nouvel e-mail',curpw:'Mot de passe actuel',cecode:'Code envoyé au nouvel e-mail',confirm:'Confirmer',emok:'E-mail mis à jour.',
+    cpt:'Changer le mot de passe',cpnote:'Les autres téléphones connectés à ce compte seront déconnectés.',oldpw:'Mot de passe actuel',newpw2:'Nouveau mot de passe',newpw3:'Répétez le nouveau mot de passe',savebtn:'Enregistrer',pwok:'Mot de passe mis à jour.',
+    dt:'Supprimer le compte',dnote:'Nous supprimons définitivement votre compte et les données sur notre serveur. Watchlist, dessins et réglages restent sur ce téléphone jusqu’à la désinstallation de l’app.',dpw:'Saisissez le mot de passe pour confirmer',dbtn:'Supprimer définitivement',dsure:'Touchez encore pour confirmer',dok:'Compte supprimé.',
+    signed:'Compte'},
+  de:{user:'Nutzer',userph:'Benutzername oder E-Mail',pass:'Passwort',login:'Anmelden',forgot:'Passwort vergessen?',create:'Konto erstellen',createsub:'Kostenlos, in einer Minute',code:'Mit Code eintreten',codesub:'Hast du einen Freundescode?',
+    regt:'Neues Konto',uname:'Name',unameph:'3-20 Zeichen',email:'E-Mail',emailph:'name@email.com',pw2:'Erneut',pw2ph:'Passwort wiederholen',r_len:'10+ Zeichen',r_let:'ein Buchstabe',r_num:'eine Zahl',st:['Schwach','Schwach','Mittel','Gut','Stark'],free:'frei',taken:'vergeben',checking:'prüfe…',
+    privpre:'Ich bin mindestens 18 Jahre alt und habe die ',privlink:'Datenschutzerklärung gelesen',createbtn:'Konto erstellen',have:'Schon ein Konto?',havebtn:'Anmelden',back:'Zurück',
+    vert:'E-Mail bestätigen',versub:'Wir haben einen 6-stelligen Code gesendet an',verbtn:'Bestätigen',resend:'Code erneut senden',resendin:'Erneut senden in {s} s',chg:'E-Mail ändern',spam:'Nicht gefunden? Sieh auch im Spam nach.',
+    fgt:'Passwort vergessen',fgsub:'Gib die E-Mail deines Kontos ein: Wir senden dir einen Code, um ein neues zu wählen.',send:'Code senden',fgcode:'Code aus der E-Mail',newpw:'Neu',save:'Speichern und anmelden',
+    e:{taken:'Dieser Benutzername ist schon vergeben.',email_taken:'Für diese E-Mail gibt es schon ein Konto. Melde dich an oder nutze „Passwort vergessen?“.',weak:'Passwort zu schwach: mindestens 10 Zeichen, mit Buchstaben und Zahlen.',mismatch:'Die beiden Passwörter stimmen nicht überein.',badcode:'Falscher Code.',expired:'Code abgelaufen: Fordere einen neuen an.',limit:'Zu viele Versuche. Versuche es in ein paar Minuten erneut.',wait:'Warte ein paar Sekunden, bevor du einen neuen Code anforderst.',bad_login:'Benutzername oder Passwort falsch.',invalid_username:'Ungültiger Name: 3-20 Buchstaben, Zahlen, Punkte und Unterstriche.',reserved:'Dieser Name ist reserviert: Wähle einen anderen.',invalid_email:'Prüfe die E-Mail: Sie scheint ungültig.',network:'Keine Verbindung. Prüfe das Internet und versuche es erneut.',server:'Der Server antwortet nicht. Versuche es gleich noch einmal.',mail:'Wir können die E-Mail gerade nicht senden. Versuche es gleich noch einmal.',priv:'Bestätige zum Fortfahren, dass du mindestens 18 Jahre alt bist und die Datenschutzerklärung gelesen hast.',bad_password:'Falsches Passwort.',same_email:'Das ist schon deine E-Mail.',need:'Fülle alle Felder aus.',auth:'Sitzung abgelaufen: Melde dich erneut an.'},
+    sent:'Code gesendet.',welcome:'Willkommen, {u}!',
+    acc:'Konto',accsub:'E-Mail, Passwort und Datenschutz',em:'E-Mail',pw:'Passwort',pwsub:'Passwort ändern',privrow:'Datenschutzerklärung',privsub:'Wie wir deine Daten verarbeiten',out:'Abmelden',del:'Konto löschen',delsub:'Konto und Daten vom Server löschen',
+    cet:'E-Mail ändern',cenote:'Wir senden einen Code an die neue E-Mail. Bis du ihn bestätigst, bleibt die aktuelle.',newem:'Neue E-Mail',curpw:'Aktuelles Passwort',cecode:'Code an die neue E-Mail gesendet',confirm:'Bestätigen',emok:'E-Mail aktualisiert.',
+    cpt:'Passwort ändern',cpnote:'Andere Telefone mit diesem Konto werden abgemeldet.',oldpw:'Aktuelles Passwort',newpw2:'Neues Passwort',newpw3:'Neues Passwort wiederholen',savebtn:'Speichern',pwok:'Passwort aktualisiert.',
+    dt:'Konto löschen',dnote:'Wir löschen dein Konto und die Daten auf unserem Server endgültig. Watchlist, Zeichnungen und Einstellungen bleiben auf diesem Telefon, bis du die App deinstallierst.',dpw:'Gib zur Bestätigung dein Passwort ein',dbtn:'Endgültig löschen',dsure:'Zum Bestätigen erneut tippen',dok:'Konto gelöscht.',
+    signed:'Konto'}
+  };
+  /* in tedesco "Ich habe die Datenschutzerklärung gelesen": il link e' gia' l'intera frase */
+  function T(k){var d=TX[LANGS_OK(typeof lang!=='undefined'?lang:'en')];return d[k]!==undefined?d[k]:TX.en[k]}
+  function E(code){var e=T('e');return e[code]||e.server}
+  var PRIVACY_URL='privacy.html';
+  /* l'informativa si apre dentro l'app (niente uscita verso Safari), nella lingua dell'app */
+  function openPrivacy(ev){
+    if(ev&&ev.preventDefault){ev.preventDefault();ev.stopPropagation()}
+    var o=document.getElementById('nxpriv');if(o)o.remove();
+    o=document.createElement('div');o.id='nxpriv';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');
+    o.innerHTML='<div class="pbar"><button type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><span></span></div>';
+    o.querySelector('span').textContent=T('privlink');
+    var f=document.createElement('iframe');f.title=T('privlink');var lg='en';try{lg=LANGS_OK(lang)}catch(e){}
+    try{localStorage.setItem('nx_privacy_lang',lg)}catch(e){}
+    f.src=PRIVACY_URL+'#'+lg;
+    /* stesso tema dell'app: nero nelle schermate di accesso, quello scelto dentro l'app */
+    f.addEventListener('load',function(){try{var th=document.body.classList.contains('inapp')?(document.documentElement.dataset.theme||'dark'):'dark';f.contentDocument.documentElement.dataset.theme=th;o.style.background=th==='light'?'#f7f6f2':'#000'}catch(e){}});
+    o.appendChild(f);document.body.appendChild(o);
+    requestAnimationFrame(function(){requestAnimationFrame(function(){o.classList.add('on')})});
+    var close=function(){o.classList.remove('on');setTimeout(function(){o.remove()},reduced&&reduced.matches?0:300)};
+    o.querySelector('button').onclick=close;
+    o.querySelector('button').focus();
+  }
+  window.NXPrivacy=openPrivacy;
+
+  /* ---------- stile: le regole di #go, #fopen e #fcode valgono anche per i nuovi elementi ---------- */
+  function cloneRules(pairs){
+    var out=[];
+    function conv(s){var ns=s;pairs.forEach(function(p){ns=ns.replace(new RegExp(p[0]+'(?![\\w-])','g'),p[1])});return ns}
+    function hit(s){return pairs.some(function(p){return new RegExp(p[0]+'(?![\\w-])').test(s)})}
+    function walk(rules,wrap){
+      for(var i=0;i<rules.length;i++){var r=rules[i];
+        if(r.type===1&&r.selectorText&&hit(r.selectorText))out.push(wrap(conv(r.selectorText)+'{'+r.style.cssText+'}'));
+        else if(r.type===4&&r.cssRules){(function(m){walk(m.cssRules,function(x){return wrap('@media '+m.media.mediaText+'{'+x+'}')})})(r)}
+      }
+    }
+    for(var k=0;k<document.styleSheets.length;k++){try{walk(document.styleSheets[k].cssRules,function(x){return x})}catch(e){}}
+    return out.join('\n');
+  }
+  var MONO="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Roboto Mono','Liberation Mono',monospace";
+  var P='body.d3l:not(.inapp) ';
+  var css=cloneRules([['#go','.accgo'],['#fopen','.acccard'],['#fcode','.acccode'],['#fid','.accfid']])+'\n'+[
+    'body.nxacc #lform,body.nxacc #forget{display:none!important}',
+    P+'#acc{display:flex;flex-direction:column;gap:10px}',P+'#acc[hidden]{display:none!important}',
+    P+'.accv{display:flex;flex-direction:column;gap:10px}',P+'.accv[hidden]{display:none!important}',
+    P+'.accform{display:flex;flex-direction:column;padding:2px 4px}',
+    /* titoletto mono con il ritorno */
+    P+'.acchead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 4px;min-height:34px}',
+    P+'.acchead .ttl{color:#8a8a8c;font-family:'+MONO+';font-size:11.5px;letter-spacing:3px;text-transform:uppercase;font-weight:600}',
+    P+'.acchead .stp{color:#cfa551;font-family:'+MONO+';font-size:12px;letter-spacing:1px}',
+    P+'.accnote{color:#8f8f91;font-size:14px;line-height:1.45;padding:0 4px}',P+'.accnote b{display:block;margin-top:2px;color:#f2f2f2;font-weight:600;font-size:15px;overflow-wrap:anywhere}',
+    /* link testuali */
+    P+'#login button.acclnk{all:unset;box-sizing:border-box;cursor:pointer;color:#a9a9ac;font-size:14px;font-weight:600;padding:10px 6px;border-radius:10px;-webkit-tap-highlight-color:transparent;text-align:center}',
+    P+'#login button.acclnk::before,'+P+'#login button.acclnk::after{display:none!important}',
+    P+'#login button.acclnk:active{color:#fff}',P+'#login button.acclnk[disabled]{color:#4a4a4c;cursor:default}',
+    P+'#login button.acclnk.gold{color:#ceb067}',
+    P+'.accrow{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}',
+    P+'.acccenter{display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap;color:#6f6f72;font-size:14px}',
+    /* ritorno: freccia come nel codice amico */
+    P+'#login button.accback{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;color:#a9a9ac;font-size:14.5px;font-weight:600;padding:8px 6px;-webkit-tap-highlight-color:transparent}',
+    P+'#login button.accback::before,'+P+'#login button.accback::after{display:none!important}',
+    P+'#login button.accback svg{width:18px;height:18px}',P+'#login button.accback:active{color:#fff}',
+    /* stato del campo: username libero / usato, righe in errore */
+    P+'.d3-f .st{flex:none;font-family:'+MONO+';font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:#6f6f72;display:inline-flex;align-items:center;gap:6px}',
+    P+'.d3-f .st i{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}',
+    P+'.d3-f .st.ok{color:#3ddc84}',P+'.d3-f .st.no{color:#e06860}',
+    P+'.d3-f.bad::before{background:#e06860!important}',P+'.d3-f.bad .k{color:#e06860!important}',
+    /* forza della password: quattro barrette e le regole */
+    P+'.accpw{display:flex;flex-direction:column;gap:8px;padding:10px 4px 2px}',
+    P+'.accpw .bars{display:flex;gap:6px}',P+'.accpw .bars i{flex:1;height:3px;border-radius:3px;background:#1e1e1e;transition:background-color 260ms}',
+    P+'.accpw[data-s="1"] .bars i:nth-child(-n+1),'+P+'.accpw[data-s="2"] .bars i:nth-child(-n+2){background:#e06860}',
+    P+'.accpw[data-s="3"] .bars i:nth-child(-n+3){background:#cfa551}',P+'.accpw[data-s="4"] .bars i{background:#3ddc84}',
+    P+'.accpw .rules{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:'+MONO+';font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:#5c5c5e}',
+    P+'.accpw .rules span{display:inline-flex;align-items:center;gap:6px;transition:color 200ms}',
+    P+'.accpw .rules span::before{content:"";width:6px;height:6px;border-radius:50%;border:1px solid currentColor}',
+    P+'.accpw .rules span.ok{color:#3ddc84}',P+'.accpw .rules span.ok::before{background:currentColor}',
+    P+'.accpw .top{display:flex;align-items:center;gap:12px}',P+'.accpw .top .bars{flex:1}',
+    P+'.accpw .lvl{flex:none;min-width:64px;text-align:right;font-family:'+MONO+';font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:#6f6f72;transition:color 200ms}',
+    P+'.accpw[data-s="1"] .lvl,'+P+'.accpw[data-s="2"] .lvl{color:#e06860}',P+'.accpw[data-s="3"] .lvl{color:#cfa551}',P+'.accpw[data-s="4"] .lvl{color:#3ddc84}',
+    P+'#login .accgo:focus,'+P+'#login .accgo:focus-visible{outline:none!important}',
+    /* privacy: casella tonda */
+    P+'#login button.acccheck{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:flex-start;gap:12px;padding:14px 4px 4px;color:#a9a9ac;font-size:14px;line-height:1.4;-webkit-tap-highlight-color:transparent}',
+    P+'#login button.acccheck::before,'+P+'#login button.acccheck::after{display:none!important}',
+    P+'.acccheck .bx{flex:none;width:22px;height:22px;border-radius:7px;border:1.5px solid #3a3a3c;display:grid;place-items:center;transition:background-color 200ms,border-color 200ms}',
+    P+'.acccheck .bx svg{width:14px;height:14px;opacity:0;transform:scale(.4);transition:opacity 200ms,transform 260ms cubic-bezier(.34,1.56,.64,1)}',
+    P+'.acccheck[aria-checked="true"] .bx{background:#cfa551;border-color:#cfa551}',P+'.acccheck[aria-checked="true"] .bx svg{opacity:1;transform:none}',
+    P+'.acccheck.bad .bx{border-color:#e06860}',
+    P+'.acccheck a{color:#ceb067;text-decoration:none;font-weight:600}',
+    /* errore sotto il modulo */
+    P+'.accerr{min-height:0;color:#e06860;font-size:13.5px;line-height:1.4;text-align:center;padding:0 6px}',P+'.accerr:empty{display:none}',
+    P+'.accok{color:#3ddc84;font-size:13.5px;text-align:center}',P+'.accok:empty{display:none}',
+    /* codice a 6 cifre: stesse caselle del codice amico, in oro */
+    P+'.accv .d3-slots .slot.f::before{background:#cfa551}',
+    P+'.accv .d3-slots .slots{gap:9px}',P+'.accv .d3-slots .slot{max-width:46px}',
+    'body.d3l.d3code.accgold #d3segs .seg.on{stroke:#cfa551;filter:drop-shadow(0 0 3px rgba(207,165,81,.8))}',
+    'body.d3l.d3code.accgold #d3segs.full .seg{stroke:#fff}',
+    /* carta "Crea un account": portale oro */
+    P+'#login .acccard.gold .pic::before{background:#cfa551}',P+'#login .acccard.gold .pic>svg.ic{color:#1d1406!important}',
+    P+'#login .acccard.gold .pic-orb circle{stroke:#cfa551}',P+'#login .acccard.gold .pic-orb .pd{fill:#f0d9a8}',
+    /* bottone occupato */
+    P+'#login .accgo.busy{pointer-events:none;opacity:.75}',
+    P+'#login .accgo[disabled]{opacity:.45}',
+    /* informativa privacy dentro l'app, a tutto schermo */
+    '#nxpriv{position:fixed;left:0;top:0;right:0;bottom:0;z-index:260;background:#000;display:flex;flex-direction:column;opacity:0;transform:translateY(24px);transition:opacity 280ms,transform 420ms cubic-bezier(.16,1,.3,1)}',
+    '#nxpriv.on{opacity:1;transform:none}',
+    '#nxpriv .pbar{flex:none;display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 10px) max(14px,env(safe-area-inset-right,0px)) 10px max(14px,env(safe-area-inset-left,0px));border-bottom:1px solid #1d1d1d}',
+    '#nxpriv .pbar button{all:unset;box-sizing:border-box;cursor:pointer;width:44px;height:44px;border-radius:50%;border:1px solid #2a2a2a;display:grid;place-items:center;color:#f2f2f2;-webkit-tap-highlight-color:transparent}',
+    '#nxpriv .pbar button:active{transform:scale(.94);border-color:#cfa551}',
+    '#nxpriv .pbar svg{width:20px;height:20px}',
+    '#nxpriv .pbar span{color:#8a8a8c;font-family:'+MONO+';font-size:11.5px;letter-spacing:3px;text-transform:uppercase;font-weight:600}',
+    '#nxpriv iframe{flex:1;width:100%;border:0;background:#000}',
+    '@media (prefers-reduced-motion:reduce){#nxpriv{transition:none}}',
+    '@media (max-height:700px) and (orientation:portrait){'+P+'.acchead{min-height:28px}'+P+'.accpw{padding-top:6px}}',
+    '@media (prefers-reduced-motion:reduce){'+P+'.accpw .bars i,'+P+'.acccheck .bx svg{transition:none!important}}'
+  ].join('\n');
+  var st=document.createElement('style');st.id='nxacccss';st.textContent=css;document.head.appendChild(st);
+  document.body.classList.add('nxacc');
+
+  /* ---------- pezzi riusati ---------- */
+  var reduced=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  function mk(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
+  function flash(el,cls,ms){if(reduced.matches||!el)return;el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls);setTimeout(function(){el.classList.remove(cls)},ms)}
+  var EYE='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+  var EYE_OFF='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.7 10.7 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7c1.6 0 3-.4 4.3-1M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>';
+  var RING='<svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23.5"/></svg>';
+  var ARR='<svg class="d3-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+  var BACKIC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
+  var USERIC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.6-4 4.5-6 8-6s6.4 2 8 6"/><path d="M19 3v4M17 5h4"/></svg>';
+  var CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="#1d1406" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
+  function field(id,type,ac,extra){
+    var row=mk('div','d3-f'),lb=mk('label','k');lb.htmlFor=id;
+    var inp=mk('input');inp.id=id;inp.type=type||'text';inp.autocomplete=ac||'off';inp.autocapitalize='off';inp.spellcheck=false;inp.setAttribute('autocorrect','off');
+    if(extra)Object.keys(extra).forEach(function(k){inp.setAttribute(k,extra[k])});
+    row.appendChild(lb);row.appendChild(inp);
+    if(type==='password'){var eye=mk('button','eye');eye.type='button';row.appendChild(eye);
+      var paint=function(){var on=inp.type==='text';eye.innerHTML=on?EYE_OFF:EYE;eye.setAttribute('aria-pressed',String(on))};
+      eye.addEventListener('click',function(){inp.type=inp.type==='password'?'text':'password';paint()});paint()}
+    row.appendChild(mk('i','ul'));
+    inp.addEventListener('input',function(){row.classList.remove('bad')});
+    return {row:row,lb:lb,inp:inp};
+  }
+  function goBtn(id){var b=mk('button','accgo');b.type='submit';if(id)b.id=id;var tx=mk('span','gtx');b.appendChild(tx);
+    var r=mk('span','d3ring',RING);r.setAttribute('aria-hidden','true');b.appendChild(r);
+    b.addEventListener('click',function(){flash(b,'go',700)});b.tx=tx;return b}
+  function lnk(cls){var b=mk('button','acclnk'+(cls?' '+cls:''));b.type='button';return b}
+  function back(){var b=mk('button','accback',BACKIC+'<span></span>');b.type='button';return b}
+  function codeBox(id){
+    var box=mk('div','d3-slots','<div class="slots" aria-hidden="true"><span class="slot"></span><span class="slot"></span><span class="slot"></span><span class="slash"></span><span class="slot"></span><span class="slot"></span><span class="slot"></span></div>');
+    var inp=mk('input','acccode');inp.id=id;inp.setAttribute('inputmode','numeric');inp.setAttribute('pattern','[0-9]*');inp.autocomplete='one-time-code';inp.maxLength=7;inp.setAttribute('aria-label','Code');
+    box.appendChild(inp);
+    var slots=[].slice.call(box.querySelectorAll('.slot')),prev='';
+    function paint(){
+      var raw=String(inp.value||'').replace(/\D/g,'').slice(0,6),focused=document.activeElement===inp;
+      if(inp.value!==raw)inp.value=raw;
+      slots.forEach(function(c,i){var ch=raw.charAt(i);c.textContent=ch||'0';c.classList.toggle('f',!!ch);c.classList.toggle('ph',!ch);
+        c.classList.toggle('cur',focused&&i===raw.length&&raw.length<6);
+        if(ch&&i>=prev.length&&!reduced.matches){c.classList.remove('drop');void c.offsetWidth;c.classList.add('drop')}});
+      segsShow(raw.length,6);prev=raw;
+    }
+    inp.addEventListener('input',function(){setTimeout(paint,0);box.classList.remove('bad')});inp.addEventListener('focus',paint);inp.addEventListener('blur',paint);
+    box.paint=paint;box.inp=inp;
+    box.bad=function(){box.classList.remove('bad');void box.offsetWidth;box.classList.add('bad');var sg=$('d3segs');if(sg){sg.classList.remove('bad');void sg.offsetWidth;sg.classList.add('bad');setTimeout(function(){sg.classList.remove('bad')},1600)}setTimeout(function(){box.classList.remove('bad')},1600)};
+    return box;
+  }
+  /* alone del logo: gli otto segmenti seguono cifre o forza della password */
+  function segsShow(n,of){var sg=$('d3segs');if(!sg)return;var segs=[].slice.call(sg.querySelectorAll('.seg')),k=Math.round(n*segs.length/of);
+    segs.forEach(function(s,i){s.classList.toggle('on',i<k)});sg.classList.toggle('full',n>=of)}
+  function gold(on){document.body.classList.toggle('d3code',!!on);document.body.classList.toggle('accgold',!!on);if(!on)segsShow(0,1)}
+
+  /* forza della password, stesse regole del server */
+  var COMMON=['1234567890','password12','password123','qwerty1234','1q2w3e4r5t','trading123','forex12345','bitcoin123','juventus12','ciao123456'];
+  function strength(p,u,e){
+    p=String(p||'');var s=0;if(!p)return {s:0,ok:false,len:false,let:false,num:false};
+    var len=p.length>=10,le=/[A-Za-z]/.test(p),nu=/[0-9]/.test(p);
+    s=(len?1:0)+(le?1:0)+(nu?1:0);if(p.length>=14&&/[^A-Za-z0-9]/.test(p)&&/[A-Z]/.test(p)&&/[a-z]/.test(p))s++;
+    if(p.length>=12&&s===3&&(/[^A-Za-z0-9]/.test(p)||(/[A-Z]/.test(p)&&/[a-z]/.test(p))))s=Math.max(s,4);
+    var bad=COMMON.indexOf(p.toLowerCase())>=0||/^(.)\1+$/.test(p)||(u&&u.length>=3&&p.toLowerCase().indexOf(u.toLowerCase())>=0);
+    if(bad)s=Math.min(s,1);
+    return {s:Math.max(1,s),ok:len&&le&&nu&&!bad,len:len,let:le,num:nu};
+  }
+  function pwMeter(){
+    var w=mk('div','accpw','<div class="top"><div class="bars"><i></i><i></i><i></i><i></i></div><span class="lvl"></span></div><div class="rules"><span data-r="len"></span><span data-r="let"></span><span data-r="num"></span></div>');
+    w.upd=function(p,u,e){var r=strength(p,u,e);w.dataset.s=p?r.s:0;['len','let','num'].forEach(function(k){w.querySelector('[data-r="'+k+'"]').classList.toggle('ok',!!r[k])});
+      w.querySelector('.lvl').textContent=p?T('st')[r.s]:'';segsShow(p?r.s:0,4);return r};
+    w.txt=function(){w.querySelector('[data-r="len"]').textContent=T('r_len');w.querySelector('[data-r="let"]').textContent=T('r_let');w.querySelector('[data-r="num"]').textContent=T('r_num')};
+    return w;
+  }
+
+  /* ---------- schermate ---------- */
+  var login=$('login'),acc=mk('div');acc.id='acc';
+  var lor=$('lor');login.insertBefore(acc,lor);
+  /* il vecchio modulo (conto demo) resta nascosto e non propone piu' le password salvate */
+  ['email','pass','server'].forEach(function(id){var x=$(id);if(x){x.autocomplete='off';x.tabIndex=-1}});
+
+  /* 1. ACCEDI */
+  var vIn=mk('div','accv');vIn.dataset.v='in';
+  var fIn=mk('form','accform');fIn.noValidate=true;fIn.autocomplete='on';
+  var fU=field('aid','text','username',{name:'username',inputmode:'email'}),fP=field('apw','password','current-password',{name:'password'});
+  fIn.appendChild(fU.row);fIn.appendChild(fP.row);
+  var rowF=mk('div','accrow');var bForgot=lnk('gold');rowF.appendChild(mk('span'));rowF.appendChild(bForgot);rowF.style.justifyContent='flex-end';
+  var errIn=mk('div','accerr'),bIn=goBtn('ago');
+  fIn.appendChild(rowF);fIn.appendChild(bIn);
+  vIn.appendChild(fIn);vIn.appendChild(errIn);
+  acc.appendChild(vIn);
+
+  /* carta "Crea un account" sotto OPPURE, prima del codice amico */
+  var cNew=mk('button','acccard gold');cNew.type='button';cNew.id='anew';
+  cNew.innerHTML='<span class="pic"><svg class="pic-orb" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><circle class="pd" cx="28" cy="2" r="2.6"/></svg>'+USERIC.replace('<svg','<svg class="ic"')+'</span><span class="d3-tx"><span class="t1"></span><small class="t2"></small></span>'+ARR;
+  var fo=$('fopen');fo.parentNode.insertBefore(cNew,fo);
+
+  /* 2. REGISTRATI */
+  var vReg=mk('div','accv');vReg.dataset.v='reg';vReg.hidden=true;
+  var hReg=mk('div','acchead');var bkReg=back();var tReg=mk('span','ttl');hReg.appendChild(bkReg);hReg.appendChild(tReg);
+  var fReg=mk('form','accform');fReg.noValidate=true;fReg.autocomplete='on';
+  var rU=field('runame','text','username',{name:'username',maxlength:'20'}),rE=field('remail','email','email',{name:'email',inputmode:'email'}),
+      rP=field('rpw','password','new-password',{name:'new-password'}),rP2=field('rpw2','password','new-password',{name:'confirm-password'});
+  var uSt=mk('span','st');rU.row.insertBefore(uSt,rU.row.querySelector('.ul'));
+  var meter=pwMeter();
+  var chk=mk('button','acccheck');chk.type='button';chk.setAttribute('role','checkbox');chk.setAttribute('aria-checked','false');
+  chk.innerHTML='<span class="bx">'+CHECK+'</span><span class="ct"></span>';
+  var errReg=mk('div','accerr'),bReg=goBtn('areg');
+  fReg.appendChild(rU.row);fReg.appendChild(rE.row);fReg.appendChild(rP.row);fReg.appendChild(meter);fReg.appendChild(rP2.row);fReg.appendChild(chk);fReg.appendChild(bReg);
+  var rowHave=mk('div','acccenter');var tHave=mk('span'),bHave=lnk('gold');rowHave.appendChild(tHave);rowHave.appendChild(bHave);
+  vReg.appendChild(hReg);vReg.appendChild(fReg);vReg.appendChild(errReg);vReg.appendChild(rowHave);
+  acc.appendChild(vReg);
+
+  /* 3. VERIFICA EMAIL */
+  var vVer=mk('div','accv');vVer.dataset.v='ver';vVer.hidden=true;
+  var hVer=mk('div','acchead');var bkVer=back(),tVer=mk('span','ttl');hVer.appendChild(bkVer);hVer.appendChild(tVer);
+  var nVer=mk('div','accnote');
+  var fVer=mk('form','accform');fVer.noValidate=true;
+  var cVer=codeBox('vcode');var bVer=goBtn('aver');
+  fVer.appendChild(cVer);fVer.appendChild(bVer);
+  var errVer=mk('div','accerr'),okVer=mk('div','accok');
+  var rowVer=mk('div','acccenter');var bResend=lnk('gold'),bChg=lnk();rowVer.appendChild(bResend);rowVer.appendChild(mk('span','','·'));rowVer.appendChild(bChg);
+  var nSpam=mk('div','accnote');nSpam.style.textAlign='center';nSpam.style.fontSize='12.5px';
+  vVer.appendChild(hVer);vVer.appendChild(nVer);vVer.appendChild(fVer);vVer.appendChild(errVer);vVer.appendChild(okVer);vVer.appendChild(rowVer);vVer.appendChild(nSpam);
+  acc.appendChild(vVer);
+
+  /* 4. PASSWORD DIMENTICATA (email -> codice + nuova password) */
+  var vFg=mk('div','accv');vFg.dataset.v='fg';vFg.hidden=true;
+  var hFg=mk('div','acchead');var bkFg=back(),tFg=mk('span','ttl'),sFg=mk('span','stp');hFg.appendChild(bkFg);hFg.appendChild(tFg);
+  var nFg=mk('div','accnote');
+  var fFg1=mk('form','accform');fFg1.noValidate=true;
+  var gE=field('femail','email','email',{name:'email',inputmode:'email'});var bFg1=goBtn('afg1');
+  fFg1.appendChild(gE.row);fFg1.appendChild(bFg1);
+  var fFg2=mk('form','accform');fFg2.noValidate=true;fFg2.hidden=true;fFg2.autocomplete='on';
+  var cFg=codeBox('fgcode');var gHidden=mk('input');gHidden.type='text';gHidden.autocomplete='username';gHidden.name='username';gHidden.style.cssText='position:absolute;width:1px;height:1px;opacity:0;pointer-events:none';gHidden.tabIndex=-1;gHidden.setAttribute('aria-hidden','true');
+  var gP=field('fpw','password','new-password',{name:'new-password'}),gP2=field('fpw2','password','new-password',{name:'confirm-password'});var meter2=pwMeter();var bFg2=goBtn('afg2');
+  fFg2.appendChild(gHidden);fFg2.appendChild(cFg);fFg2.appendChild(gP.row);fFg2.appendChild(meter2);fFg2.appendChild(gP2.row);fFg2.appendChild(bFg2);
+  var errFg=mk('div','accerr'),okFg=mk('div','accok');
+  var rowFg=mk('div','acccenter');var bFgRe=lnk('gold');rowFg.appendChild(bFgRe);rowFg.hidden=true;
+  vFg.appendChild(hFg);vFg.appendChild(nFg);vFg.appendChild(fFg1);vFg.appendChild(fFg2);vFg.appendChild(errFg);vFg.appendChild(okFg);vFg.appendChild(rowFg);
+  acc.appendChild(vFg);
+
+  /* ---------- cambio vista, con l'ingresso ad arco del Design 3.0 ---------- */
+  var V='in',VIEWS={in:vIn,reg:vReg,ver:vVer,fg:vFg};
+  function show(v,noAnim){
+    if(V===v&&!noAnim)return;V=v;
+    Object.keys(VIEWS).forEach(function(k){VIEWS[k].hidden=k!==v});
+    var start=v==='in';
+    /* la prima schermata mostra anche Face ID, OPPURE e le due carte */
+    $('fid').hidden=!start;lor.hidden=!start;cNew.hidden=!start;fo.hidden=!start;
+    gold(v==='ver'||(v==='fg'&&!fFg2.hidden));
+    if(v==='reg'){segsShow(0,1);document.body.classList.add('d3code','accgold');meter.upd(rP.inp.value,rU.inp.value,rE.inp.value)}
+    try{msg('')}catch(e){}
+    if(!noAnim&&!reduced.matches){login.classList.remove('swap-in');void login.offsetWidth;login.classList.add('swap-in');setTimeout(function(){login.classList.remove('swap-in')},500)}
+    [errIn,errReg,errVer,errFg,okVer,okFg].forEach(function(x){x.textContent=''});
+  }
+  function busy(b,on){b.classList.toggle('busy',!!on);b.disabled=!!on}
+  function err(box,code,row){box.textContent=code?E(code):'';if(row)row.classList.add('bad');if(typeof haptic==='function'&&code)try{haptic()}catch(e){}}
+
+  /* ---------- entrata nell'app con l'account ---------- */
+  var ACCT=null;
+  window.NXACCT=function(){return ACCT};
+  function acctMode(u){ACCT=u||NXAuth.user()||{};try{FRIEND=null;tok='acct';accId='me';accNum='me';sess=null}catch(e){}}
+  /* con l'account niente broker: l'elenco viene dal nostro registro, i dati dal nostro server */
+  var oApi=api;
+  /* nomi salvati col broker (GER40, NAS100, BTCUSD.NX...) -> nomi del nostro registro (DE30, USTEC, BTCUSD): watchlist, simbolo aperto, allarmi, disegni e note */
+  function migrateNames(){
+    try{if(localStorage.getItem('nx_mig1'))return}catch(e){return}
+    var to=function(n){try{var r=NXReg.regOf(n);return r&&r.k?r.k:n}catch(e){return n}};
+    try{
+      var w=JSON.parse(localStorage.getItem('tc_watch')||'null');
+      if(Array.isArray(w)){var out=[];w.forEach(function(n){var k=to(n);if(out.indexOf(k)<0)out.push(k)});localStorage.setItem('tc_watch',JSON.stringify(out))}
+      var sy=localStorage.getItem('tc_sym');if(sy)localStorage.setItem('tc_sym',to(sy));
+      var al=JSON.parse(localStorage.getItem('tc_alerts')||'null');if(Array.isArray(al)){al.forEach(function(a){if(a&&a.sym)a.sym=to(a.sym)});localStorage.setItem('tc_alerts',JSON.stringify(al))}
+      var ks=[];for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(/^tc_(draw|note)_/.test(k))ks.push(k)}
+      ks.forEach(function(k){var m=/^(tc_(?:draw|note)_)(.+)$/.exec(k),nk=m[1]+to(m[2]);if(nk!==k&&localStorage.getItem(nk)==null){localStorage.setItem(nk,localStorage.getItem(k));localStorage.removeItem(k)}});
+      localStorage.setItem('nx_mig1','1');
+    }catch(e){}
+    try{if(typeof ALERTS!=='undefined'&&Array.isArray(ALERTS))ALERTS.forEach(function(a){if(a&&a.sym)a.sym=to(a.sym)})}catch(e){}
+    try{if(typeof cur!=='undefined'&&cur)cur=to(cur)}catch(e){}
+  }
+  async function friendCheck(){
+    var r=await fetch(WORKER+'/code/check',{headers:{Authorization:'Bearer '+FRIEND,'X-Device':devId()},cache:'no-store'});
+    if(r.ok)return;
+    var j=null;try{j=await r.json()}catch(e){}
+    var e=new Error((j&&j.error)||('HTTP '+r.status));e.status=r.status;e.body=j;if(r.status===429)e.retry=retryOf(r,j);throw e;
+  }
+  api=function(path,opt){
+    /* 1.0.0: account e codice amico non passano piu' dal broker */
+    if(ACCT||FRIEND){
+      var p=String(path||'');
+      if(/\/instruments(\?|$)/.test(p)){
+        var build=function(){
+        migrateNames();
+        var CL={fx:'FOREX',com:'COMMODITY',cry:'CRYPTO',idx:'INDEX'},list=[];
+        try{(NXReg.list||[]).forEach(function(r,i){if(r&&r.k)list.push({name:r.k,tradableInstrumentId:-1000-i,description:'',type:CL[r.cls]||'',routes:[{type:'INFO',id:0}]})})}catch(e){}
+        return {d:{instruments:list}};};
+        if(!ACCT&&FRIEND)return friendCheck().then(build);
+        return Promise.resolve(build());
+      }
+      var er=new Error('inactive');er.status=0;er.inactive=true;return Promise.reject(er);
+    }
+    return oApi.apply(this,arguments);
+  };
+  var entering=false;
+  async function acctEnter(u,quiet){
+    if(entering)return;entering=true;
+    try{
+      if(!quiet)try{msg(t('logging'))}catch(e){}
+      acctMode(u);
+      await loadInstruments();
+      try{INST.forEach(function(it){it.nx=1})}catch(e){}
+      try{var rs=JSON.parse(sessionStorage.getItem('nx_acct_resume')||'null');sessionStorage.removeItem('nx_acct_resume');
+        if(rs){if(rs.res)res=rs.res;if(rs.cur&&BYN[rs.cur])cur=rs.cur;if(rs.tab)tab=rs.tab}}catch(e){}
+      start();
+      if(!quiet&&ACCT&&ACCT.username)setTimeout(function(){try{msg(T('welcome').replace('{u}',ACCT.username))}catch(e){}},900);
+    }catch(e){
+      ACCT=null;try{msg(e&&e.message?e.message:E('server'))}catch(_){}
+    }finally{entering=false}
+  }
+  /* aggiornamento dell'app: si rientra da soli, senza tenere token nella sessione del browser */
+  var oSnap=saveSnap;
+  saveSnap=function(){if(ACCT){try{sessionStorage.setItem('nx_acct_resume',JSON.stringify({res:res,cur:cur,tab:tab}))}catch(e){}return}return oSnap.apply(this,arguments)};
+  var oOut=logout;
+  logout=function(){if(ACCT){NXAuth.logout().finally(function(){oOut()});return}return oOut.apply(this,arguments)};
+
+  /* ---------- azioni ---------- */
+  fIn.addEventListener('submit',async function(ev){
+    ev.preventDefault();errIn.textContent='';
+    var id=fU.inp.value.trim(),pw=fP.inp.value;
+    if(!id||!pw){err(errIn,'need',!id?fU.row:fP.row);return}
+    busy(bIn,true);
+    var r=await NXAuth.login({id:id,password:pw});busy(bIn,false);
+    if(r.ok){fP.inp.value='';acctEnter(r.user);return}
+    if(r.error==='unverified'){pend.email=r.email;pend.pw=pw;pend.user=id;toVerify();return}
+    err(errIn,r.error,r.error==='bad_login'?fP.row:null);
+  });
+  /* Face ID: tocchi, iPhone propone l'account salvato nel portachiavi, lo riempie e si entra da soli */
+  (function(){
+    var f=$('fid');if(!f)return;var nf=f.cloneNode(true);f.parentNode.replaceChild(nf,f);
+    vIn.insertBefore(nf,fIn);
+    nf.addEventListener('click',function(){flash(nf,'scanning',950);fU.inp.focus();try{msg(t('afhint'))}catch(e){}});
+    var lens={aid:0,apw:0},tmr=0;
+    function chk(e){var el=e.target,len=el.value.length,jump=len-lens[el.id];lens[el.id]=len;var it=e.inputType||'';
+      var auto=e.type==='change'?jump>1:(it==='insertReplacementText'||it==='insertFromPaste'||(it===''&&jump>1));if(!auto)return;
+      clearTimeout(tmr);tmr=setTimeout(function(){if(!document.body.classList.contains('inapp')&&fU.inp.value&&fP.inp.value){if(fIn.requestSubmit)fIn.requestSubmit();else bIn.click()}},450)}
+    [fU.inp,fP.inp].forEach(function(x){x.addEventListener('input',chk);x.addEventListener('change',chk)});
+  })();
+  bForgot.onclick=function(){if(fU.inp.value.indexOf('@')>0)gE.inp.value=fU.inp.value.trim();fFg1.hidden=false;fFg2.hidden=true;rowFg.hidden=true;show('fg');setTimeout(function(){if(!gE.inp.value)gE.inp.focus()},80)};
+  cNew.onclick=function(){show('reg');setTimeout(function(){if(!rU.inp.value)rU.inp.focus()},80)};
+  bkReg.onclick=bHave.onclick=function(){show('in')};
+  bkFg.onclick=function(){if(!fFg2.hidden){fFg2.hidden=true;fFg1.hidden=false;rowFg.hidden=true;gold(false);sFg.textContent='1/2';fixFgText();errFg.textContent='';return}show('in')};
+  bkVer.onclick=function(){stopTimer();show(pend.from||'reg')};
+  bChg.onclick=function(){stopTimer();if(pend.from==='in'){show('in');return}show('reg');setTimeout(function(){rE.inp.focus();rE.inp.select&&rE.inp.select()},80)};
+
+  /* username: controllo dal vivo */
+  var uT=0,uLast='';
+  rU.inp.addEventListener('input',function(){
+    var u=rU.inp.value.trim();clearTimeout(uT);uSt.className='st';uSt.innerHTML='';
+    if(u.length<3){uLast='';return}
+    if(!/^[A-Za-z0-9._]{3,20}$/.test(u)||/^[._]|[._]$|[._]{2}/.test(u)){uSt.className='st no';uSt.innerHTML='<i></i>'+T('e').invalid_username.split(':')[0].toLowerCase();return}
+    uSt.innerHTML=T('checking');
+    uT=setTimeout(async function(){uLast=u;var r=await NXAuth.checkUsername(u);if(rU.inp.value.trim()!==u)return;
+      if(r.ok){uSt.className='st ok';uSt.innerHTML='<i></i>'+T('free')}
+      else if(r.error==='network'||r.error==='server'){uSt.className='st';uSt.innerHTML=''}
+      else{uSt.className='st no';uSt.innerHTML='<i></i>'+(r.error==='taken'?T('taken'):r.error==='reserved'?T('e').reserved.split(':')[0].toLowerCase():T('e').invalid_username.split(':')[0].toLowerCase())}},420);
+  });
+  function meterUpd(){meter.upd(rP.inp.value,rU.inp.value,rE.inp.value)}
+  [rP.inp,rU.inp,rE.inp].forEach(function(x){x.addEventListener('input',meterUpd)});
+  gP.inp.addEventListener('input',function(){meter2.upd(gP.inp.value,'',gE.inp.value)});
+  chk.onclick=function(ev){if(ev.target&&ev.target.tagName==='A')return;var on=chk.getAttribute('aria-checked')!=='true';chk.setAttribute('aria-checked',String(on));chk.classList.remove('bad')};
+
+  var pend={email:'',pw:'',user:'',from:'reg'};
+  fReg.addEventListener('submit',async function(ev){
+    ev.preventDefault();errReg.textContent='';
+    var u=rU.inp.value.trim(),e=rE.inp.value.trim(),p=rP.inp.value,p2=rP2.inp.value;
+    if(!u){err(errReg,'invalid_username',rU.row);return}
+    if(!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(e)){err(errReg,'invalid_email',rE.row);return}
+    if(!strength(p,u,e).ok){err(errReg,'weak',rP.row);return}
+    if(p!==p2){err(errReg,'mismatch',rP2.row);return}
+    if(chk.getAttribute('aria-checked')!=='true'){chk.classList.add('bad');err(errReg,'priv');return}
+    busy(bReg,true);
+    var r=await NXAuth.register({username:u,email:e,password:p});busy(bReg,false);
+    if(r.ok){pend.email=r.email||e;pend.pw=p;pend.user=u;pend.from='reg';toVerify(true);return}
+    var map={taken:rU.row,reserved:rU.row,invalid_username:rU.row,email_taken:rE.row,invalid_email:rE.row,weak:rP.row};
+    err(errReg,r.error,map[r.error]);
+  });
+  var tmr=0,left=0;
+  function stopTimer(){clearInterval(tmr);tmr=0}
+  function startTimer(s){stopTimer();left=s||60;paintResend();tmr=setInterval(function(){left--;paintResend();if(left<=0)stopTimer()},1000)}
+  function paintResend(){bResend.disabled=left>0;bResend.textContent=left>0?T('resendin').replace('{s}',left):T('resend')}
+  function toVerify(sent){
+    pend.from=pend.from||'reg';if(V==='in')pend.from='in';
+    cVer.inp.value='';cVer.paint();nVer.innerHTML='';nVer.appendChild(document.createTextNode(T('versub')+' '));var b=mk('b');b.textContent=pend.email;nVer.appendChild(b);
+    show('ver');startTimer(60);setTimeout(function(){cVer.inp.focus()},120);
+  }
+  fVer.addEventListener('submit',async function(ev){
+    ev.preventDefault();errVer.textContent='';okVer.textContent='';
+    var c=cVer.inp.value.replace(/\D/g,'');if(c.length!==6){cVer.bad();return}
+    busy(bVer,true);var r=await NXAuth.verify({email:pend.email,code:c});busy(bVer,false);
+    if(r.ok){stopTimer();segsShow(6,6);var u=r.user;setTimeout(function(){gold(false);acctEnter(u)},350);return}
+    cVer.bad();err(errVer,r.error);if(r.error==='badcode'){cVer.inp.value='';cVer.paint();cVer.inp.focus()}
+  });
+  cVer.inp.addEventListener('input',function(){if(cVer.inp.value.replace(/\D/g,'').length===6&&!bVer.disabled)setTimeout(function(){if(fVer.requestSubmit)fVer.requestSubmit();else bVer.click()},120)});
+  bResend.onclick=async function(){
+    if(bResend.disabled)return;errVer.textContent='';okVer.textContent='';bResend.disabled=true;
+    var r=await NXAuth.resend(pend.email);
+    if(r.ok){okVer.textContent=T('sent');startTimer(60)}else{err(errVer,r.error);startTimer(r.wait||20)}
+  };
+  fFg1.addEventListener('submit',async function(ev){
+    ev.preventDefault();errFg.textContent='';var e=gE.inp.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(e)){err(errFg,'invalid_email',gE.row);return}
+    busy(bFg1,true);var r=await NXAuth.forgot(e);busy(bFg1,false);
+    if(!r.ok){err(errFg,r.error);return}
+    pend.email=e;gHidden.value=e;fFg1.hidden=true;fFg2.hidden=false;rowFg.hidden=false;sFg.textContent='2/2';gold(true);fixFgText();
+    cFg.inp.value='';cFg.paint();setTimeout(function(){cFg.inp.focus()},120);fgLeft=60;fgTick();
+  });
+  var fgT=0,fgLeft=0;
+  function fgTick(){clearInterval(fgT);paintFg();fgT=setInterval(function(){fgLeft--;paintFg();if(fgLeft<=0)clearInterval(fgT)},1000)}
+  function paintFg(){bFgRe.disabled=fgLeft>0;bFgRe.textContent=fgLeft>0?T('resendin').replace('{s}',fgLeft):T('resend')}
+  bFgRe.onclick=async function(){if(bFgRe.disabled)return;bFgRe.disabled=true;var r=await NXAuth.forgot(pend.email);if(r.ok){okFg.textContent=T('sent');fgLeft=60}else{err(errFg,r.error);fgLeft=20}fgTick()};
+  cFg.inp.addEventListener('input',function(){if(cFg.inp.value.replace(/\D/g,'').length===6)setTimeout(function(){gP.inp.focus()},150)});
+  fFg2.addEventListener('submit',async function(ev){
+    ev.preventDefault();errFg.textContent='';okFg.textContent='';
+    var c=cFg.inp.value.replace(/\D/g,''),p=gP.inp.value,p2=gP2.inp.value;
+    if(c.length!==6){cFg.bad();return}
+    if(!strength(p,'',pend.email).ok){err(errFg,'weak',gP.row);return}
+    if(p!==p2){err(errFg,'mismatch',gP2.row);return}
+    busy(bFg2,true);var r=await NXAuth.reset({email:pend.email,code:c,password:p});busy(bFg2,false);
+    if(r.ok){clearInterval(fgT);gold(false);acctEnter(r.user);return}
+    if(r.error==='badcode'||r.error==='expired'||r.error==='limit')cFg.bad();
+    err(errFg,r.error,r.error==='weak'?gP.row:null);
+  });
+
+  /* ---------- il codice amico: la sua schermata nasconde quelle dell'account ---------- */
+  var oFU=friendUI;
+  friendUI=function(on){oFU.apply(this,arguments);acc.hidden=!!on;cNew.hidden=!!on||V!=='in';if(!on){gold(false);show(V,true)}};
+  fo.addEventListener('click',function(){acc.hidden=true;cNew.hidden=true},true);
+
+  /* ---------- testi ---------- */
+  function fixFgText(){nFg.textContent=fFg2.hidden?T('fgsub'):T('fgcode')+' · '+pend.email}
+  function texts(){
+    fU.lb.textContent=T('user');fU.inp.placeholder=T('userph');fP.lb.textContent=T('pass');fP.inp.placeholder='••••••••';
+    bForgot.textContent=T('forgot');bIn.tx.textContent=T('login');
+    cNew.querySelector('.t1').textContent=T('create');cNew.querySelector('.t2').textContent=T('createsub');
+    try{$('fopentx').textContent=T('code');var sm=fo.querySelector('.d3-tx small');if(sm)sm.textContent=T('codesub')}catch(e){}
+    tReg.textContent=T('regt');bkReg.lastChild.textContent=T('back');
+    rU.lb.textContent=T('uname');rU.inp.placeholder=T('unameph');rE.lb.textContent=T('email');rE.inp.placeholder=T('emailph');
+    rP.lb.textContent=T('pass');rP.inp.placeholder='••••••••';rP2.lb.textContent=T('pw2');rP2.inp.placeholder=T('pw2ph');
+    meter.txt();meter2.txt();meterUpd();
+    var ct=chk.querySelector('.ct');ct.innerHTML='';ct.appendChild(document.createTextNode(T('privpre')));var a=mk('a');a.href=PRIVACY_URL;a.textContent=T('privlink');a.addEventListener('click',openPrivacy);ct.appendChild(a);
+    bReg.tx.textContent=T('createbtn');tHave.textContent=T('have');bHave.textContent=T('havebtn');
+    tVer.textContent=T('vert');bkVer.lastChild.textContent=T('back');bVer.tx.textContent=T('verbtn');bChg.textContent=T('chg');nSpam.textContent=T('spam');paintResend();
+    if(pend.email&&V==='ver'){nVer.firstChild&&(nVer.firstChild.textContent=T('versub')+' ')}
+    tFg.textContent=T('fgt');bkFg.lastChild.textContent=T('back');gE.lb.textContent=T('email');gE.inp.placeholder=T('emailph');bFg1.tx.textContent=T('send');
+    gP.lb.textContent=T('newpw');gP.inp.placeholder='••••••••';gP2.lb.textContent=T('pw2');gP2.inp.placeholder=T('pw2ph');bFg2.tx.textContent=T('save');paintFg();fixFgText();
+    if(!sFg.textContent)sFg.textContent='1/2';
+  }
+  var oAL=applyLang;applyLang=function(){oAL.apply(this,arguments);try{texts()}catch(e){}};
+  texts();show('in',true);
+
+  /* ---------- profilo: username in alto e sezione Account ---------- */
+  var oRP=renderProfile;
+  renderProfile=function(){
+    if(ACCT&&ACCT.admin){
+      /* NexusAdmin: una sola sezione, il pannello; le Impostazioni si aprono da li' */
+      if(!PF.page)PF.page='admin';
+      oRP.apply(this,arguments);
+      try{
+        var ps=$('pf-screen');
+        if(PF.page==='admin'){
+          var bk=ps.querySelector('.pfbar .pfback');if(bk)bk.style.visibility='hidden';
+          var ttl=ps.querySelector('.pfbar .pftitle');if(ttl)ttl.textContent='NexusAdmin';
+          if(!ps.querySelector('.nxadm-set')){var lb=mk('div','pfl');lb.textContent=pt('settings');var gg=mk('div','pfg nxadm-set');
+            var note=ps.querySelector('.adnote');if(note){ps.insertBefore(lb,note);ps.insertBefore(gg,note)}else{ps.appendChild(lb);ps.appendChild(gg)}
+            pfRow(gg,PIC.gear,pt('settings'),pt('setsub'),function(){pfGo('settings')}).classList.add('chev')}
+        }else if(PF.page==='settings'){var bk2=ps.querySelector('.pfbar .pfback span');if(bk2)bk2.textContent='NexusAdmin'}
+      }catch(e){}
+      return;
+    }
+    if(!ACCT){oRP.apply(this,arguments);return}
+    var p=$('pf-screen');
+    if(PF.page&&String(PF.page).indexOf('acc_')===0){var st=PF.keep?p.scrollTop:0;PF.keep=false;p.innerHTML='';renderAcc(p,PF.page);p.scrollTop=st;return}
+    var keepF=FRIEND;
+    var u=NXAuth.user()||ACCT||{};
+    oRP.apply(this,arguments);
+    try{
+      var sub=p.querySelector('.pfsub');if(sub)sub.textContent='@'+(u.username||'');
+      /* il pannello amministratore sta solo in NexusAdmin */
+      if(!window.NX_ADMIN_APP){var adc=p.querySelector('.adcard');if(adc)adc.remove()}
+      /* niente gruppo codici amici per gli account normali */
+      if(!admKey()){[].slice.call(p.querySelectorAll('.pfl')).forEach(function(l){if(l.textContent===pt('friends')){var g=l.nextElementSibling;l.remove();if(g&&g.classList.contains('pfg'))g.remove()}})}
+      /* sezione Account prima di "Esci" */
+      var rows=[].slice.call(p.querySelectorAll('.pfrow')),outRow=null;
+      rows.forEach(function(r){if(r.textContent.trim()===t('logout'))outRow=r});
+      var hook=outRow?outRow.closest('.pfg'):null;
+      var lbl=mk('div','pfl');lbl.textContent=T('acc');
+      var g=mk('div','pfg');
+      if(hook){hook.parentNode.insertBefore(lbl,hook);hook.parentNode.insertBefore(g,hook)}else{p.appendChild(lbl);p.appendChild(g)}
+      pfRow(g,PIC.inbox||PIC.chat,T('em'),u.email||'',function(){pfGo('acc_email')}).classList.add('chev');
+      pfRow(g,PIC.lock||PIC.gear,T('pw'),T('pwsub'),function(){pfGo('acc_pw')}).classList.add('chev');
+      pfRow(g,PIC.shield||PIC.gear,T('privrow'),T('privsub'),function(){openPrivacy()}).classList.add('chev');
+      var dr=pfRow(g,PIC.reset||PIC.out,T('del'),T('delsub'),function(){pfGo('acc_del')});dr.classList.add('chev');var dt=dr.querySelector('.pftx>span,.pftx b,.pftx');if(dr.querySelector('.pftx span'))dr.querySelector('.pftx span').style.color='#e06860'
+    }catch(e){}
+  };
+  function input(g,ph,type,ac){var i=mk('input','pfin2');i.type=type||'text';i.placeholder=ph;i.autocomplete=ac||'off';i.autocapitalize='off';i.spellcheck=false;g.appendChild(i);return i}
+  function pbtn(g,txt,danger){var b=mk('button','pfbtn');b.textContent=txt;if(danger){b.style.background='#e06860';b.style.color='#fff'}g.appendChild(b);return b}
+  function line(g,cls){var d=mk('div',cls||'accerr');d.style.cssText='color:#e06860;font-size:13.5px;line-height:1.4;padding:8px 2px 0';g.appendChild(d);return d}
+  function renderAcc(p,page){
+    var u=NXAuth.user()||ACCT||{};
+    if(page==='acc_email'){
+      pfSub(p,T('cet'));var g=pfGroup(p,'');g.classList.add('pfpad');
+      shEl(g,'pfnote',T('cenote'));
+      if(!PF.accStep){
+        var e=input(g,T('newem'),'email','email');var pw=input(g,T('curpw'),'password','current-password');var b=pbtn(g,T('send'));var er=line(g);
+        b.onclick=async function(){er.textContent='';b.disabled=true;var r=await NXAuth.changeEmail({email:e.value.trim(),password:pw.value});b.disabled=false;
+          if(r.ok){PF.accStep=e.value.trim();PF.keep=true;renderProfile()}else er.textContent=E(r.error)};
+      }else{
+        shEl(g,'pfnote',T('cecode')+': '+PF.accStep);
+        var c=input(g,'000000','text','one-time-code');c.inputMode='numeric';c.maxLength=6;c.style.letterSpacing='.4em';c.style.textAlign='center';c.style.fontSize='22px';
+        var b2=pbtn(g,T('confirm'));var er2=line(g);
+        b2.onclick=async function(){er2.textContent='';b2.disabled=true;var r=await NXAuth.changeEmail({code:c.value.replace(/\D/g,'')});b2.disabled=false;
+          if(r.ok){PF.accStep=null;ACCT=r.user||ACCT;msg('✓ '+T('emok'));PF.page=null;renderProfile()}else er2.textContent=E(r.error)};
+      }
+      return;
+    }
+    if(page==='acc_pw'){
+      pfSub(p,T('cpt'));var g2=pfGroup(p,'');g2.classList.add('pfpad');shEl(g2,'pfnote',T('cpnote'));
+      var o=input(g2,T('oldpw'),'password','current-password'),n=input(g2,T('newpw2'),'password','new-password'),n2=input(g2,T('newpw3'),'password','new-password');
+      var b3=pbtn(g2,T('savebtn'));var er3=line(g2);
+      b3.onclick=async function(){er3.textContent='';if(!strength(n.value,u.username,u.email).ok){er3.textContent=E('weak');return}if(n.value!==n2.value){er3.textContent=E('mismatch');return}
+        b3.disabled=true;var r=await NXAuth.changePassword({old:o.value,password:n.value});b3.disabled=false;
+        if(r.ok){msg('✓ '+T('pwok'));PF.page=null;renderProfile()}else er3.textContent=E(r.error)};
+      return;
+    }
+    if(page==='acc_del'){
+      pfSub(p,T('dt'));var g3=pfGroup(p,'');g3.classList.add('pfpad');shEl(g3,'pfnote',T('dnote'));
+      var dp=input(g3,T('dpw'),'password','current-password');var b4=pbtn(g3,T('dbtn'),true);var er4=line(g3),armed=false;
+      b4.onclick=async function(){er4.textContent='';if(!dp.value){er4.textContent=E('bad_password');return}
+        if(!armed){armed=true;b4.textContent=T('dsure');setTimeout(function(){armed=false;b4.textContent=T('dbtn')},4000);return}
+        b4.disabled=true;var r=await NXAuth.deleteAccount({password:dp.value});b4.disabled=false;
+        if(r.ok){ACCT=null;sset(KL,null);try{sessionStorage.setItem('noSplash','1');sessionStorage.setItem('nx_acc_msg','dok')}catch(e){}location.reload()}else{armed=false;b4.textContent=T('dbtn');er4.textContent=E(r.error)}};
+      return;
+    }
+  }
+  var oPS=pfSub;
+  pfSub=function(p,title){oPS.apply(this,arguments);try{if(PF.page&&String(PF.page).indexOf('acc_')===0){var bk=p.querySelector('.pfback');if(bk){bk.onclick=function(){PF.page=null;PF.accStep=null;renderProfile();p.classList.add('pfout');setTimeout(function(){p.classList.remove('pfout')},400)}}}}catch(e){}};
+
+  /* ---------- all'apertura: chi ha gia' una sessione entra da solo ---------- */
+  (function(){
+    var m=null;try{m=sessionStorage.getItem('nx_acc_msg');sessionStorage.removeItem('nx_acc_msg')}catch(e){}
+    if(m)setTimeout(function(){try{msg(T(m))}catch(e){}},400);
+    var na=false;try{na=sessionStorage.getItem('noAuto')==='1'}catch(e){}
+    var fc=null;try{fc=localStorage.getItem('tc_fcode')}catch(e){}
+    if(window.NX_ADMIN_APP)return;
+    if(!NXAuth.signedIn()||fc||FRIEND||document.body.classList.contains('inapp'))return;
+    var u=NXAuth.user();if(u&&u.username&&!fU.inp.value)fU.inp.value=u.username;
+    if(na)return;
+    acctEnter(u,true);
+    /* la sessione si controlla in sottofondo: se e' scaduta si torna al login */
+    NXAuth.me().then(function(r){if(!r.ok&&r.error==='auth'){try{sessionStorage.setItem('noSplash','1');sessionStorage.setItem('nx_acc_msg','e_auth')}catch(e){}location.reload()}});
+  })();
+  TX.it.e_auth=TX.it.e.auth;TX.en.e_auth=TX.en.e.auth;TX.es.e_auth=TX.es.e.auth;TX.fr.e_auth=TX.fr.e.auth;TX.de.e_auth=TX.de.e.auth;
+  /* ---------- NexusAdmin e app pubblica ---------- */
+  if(!window.NX_ADMIN_APP){
+    /* app pubblica: niente pannello amministratore (sta solo in NexusAdmin) */
+    try{localStorage.removeItem('tc_admin')}catch(e){}
+    admKey=function(){return ''};
+  }else{
+    /* NexusAdmin: stessa app, si apre direttamente sul pannello; i dati passano con la chiave amministratore */
+    document.title='NexusAdmin';
+    document.body.classList.add('nxadmin');
+    /* logo e orbite dell'apertura in rosso (lo sfondo resta nero); niente barra in basso: una sola sezione */
+    (function(){
+      var f=document.createElementNS('http://www.w3.org/2000/svg','svg');f.setAttribute('width','0');f.setAttribute('height','0');f.setAttribute('aria-hidden','true');f.style.position='absolute';
+      f.innerHTML='<filter id="nxred" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0  0 .165 0 0 0  0 0 .165 0 0  0 0 0 1 0"/></filter>';
+      document.body.appendChild(f);
+      var st2=document.createElement('style');st2.textContent='body.nxadmin #nx3 .nx-mark{color:#ff2a2a!important}body.nxadmin #nx3 .nx-orbit{border-color:#ff2a2a!important}body.nxadmin #nx3 .nx-slash{background:#ff2a2a!important}body.nxadmin #splash{filter:url(#nxred)}body.nxadmin #tabbar,body.nxadmin #mini{display:none!important}';
+      document.head.appendChild(st2);
+    })();
+    try{$('brandname').textContent='NexusAdmin'}catch(e){}
+    setTimeout(function(){
+      acctEnter({username:'NexusAdmin',admin:true},true).then(function(){
+        try{showTab('pf');pfGo('admin')}catch(e){}
+      });
+    },0);
+  }
+  /* l'ultimo utente che ha usato questo telefono: il campo e' gia' pronto */
+  try{var lu=sget(KL);if(lu&&!fU.inp.value)fU.inp.value=lu}catch(e){}
 })();
