@@ -19,16 +19,16 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 <div align="center">
 <table>
   <tr>
-    <td align="center" width="25%"><img src="screenshots/de/01-welcome.webp" width="190" alt="Willkommen"><br><sub>1. Willkommen</sub></td>
-    <td align="center" width="25%"><img src="screenshots/de/02-sign-in.webp" width="190" alt="Anmeldung"><br><sub>2. Anmeldung</sub></td>
-    <td align="center" width="25%"><img src="screenshots/de/03-watchlist.webp" width="190" alt="Watchlist"><br><sub>3. Watchlist</sub></td>
-    <td align="center" width="25%"><img src="screenshots/de/04-signals.webp" width="190" alt="Signale"><br><sub>4. Signale</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/01-welcome.png" width="190" alt="Willkommen"><br><sub>1. Willkommen</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/02-sign-in.png" width="190" alt="Anmeldung"><br><sub>2. Anmeldung</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/03-watchlist.png" width="190" alt="Watchlist"><br><sub>3. Watchlist</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/04-signals.png" width="190" alt="Signale"><br><sub>4. Signale</sub></td>
   </tr>
   <tr>
-    <td align="center" width="25%"><img src="screenshots/de/05-chart-drawings.webp" width="190" alt="Chart & Zeichnungen"><br><sub>5. Chart & Zeichnungen</sub></td>
-    <td align="center" width="25%"><img src="screenshots/de/06-indicators.webp" width="190" alt="Indikatoren"><br><sub>6. Indikatoren</sub></td>
-    <td align="center" width="25%"><img src="screenshots/de/07-script-editor.webp" width="190" alt="Skript-Editor"><br><sub>7. Skript-Editor</sub></td>
-    <td align="center" width="25%"><img src="screenshots/de/08-bar-replay.webp" width="190" alt="Bar Replay"><br><sub>8. Bar Replay</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/05-chart-drawings.png" width="190" alt="Chart & Zeichnungen"><br><sub>5. Chart & Zeichnungen</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/06-indicators.png" width="190" alt="Indikatoren"><br><sub>6. Indikatoren</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/07-script-editor.png" width="190" alt="Skript-Editor"><br><sub>7. Skript-Editor</sub></td>
+    <td align="center" width="25%"><img src="screenshots/de/08-bar-replay.png" width="190" alt="Bar Replay"><br><sub>8. Bar Replay</sub></td>
   </tr>
 </table>
 </div>
