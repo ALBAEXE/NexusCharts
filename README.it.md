@@ -69,7 +69,7 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 ### 🆕 Novità della 1.0.1 — Schermata di benvenuto aggiornata
 
-- 👤 L'ultima schermata di benvenuto ora presenta gli **account NexusCharts**: due campi (username e password) al posto del vecchio codice di accesso, con un testo nuovo in tutte e 5 le lingue.
+- 👤 L'ultima schermata di benvenuto ora presenta gli **account NexusCharts**: due campi (username e password), con un testo nuovo in tutte e 5 le lingue.
 
 ### In precedenza, nella 1.0.0 — Account NexusCharts, nuovo indirizzo, solo dati nostri
 

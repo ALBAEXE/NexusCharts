@@ -69,7 +69,7 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 ### 🆕 Novedades de la 1.0.1 — Pantalla de bienvenida actualizada
 
-- 👤 La última pantalla de bienvenida ahora presenta las **cuentas NexusCharts**: dos campos (usuario y contraseña) en lugar del antiguo código de acceso, con un texto nuevo en los 5 idiomas.
+- 👤 La última pantalla de bienvenida ahora presenta las **cuentas NexusCharts**: dos campos (usuario y contraseña), con un texto nuevo en los 5 idiomas.
 
 ### Anteriormente, en la 1.0.0 — Cuentas NexusCharts, nueva dirección, solo datos propios
 
