@@ -1,4 +1,4 @@
-const VERSION='1.1.2';
+const VERSION='1.1.3';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -3431,28 +3431,27 @@ function pageOpen(b){
    PROFILO 2: icone colorate, Codici amici, Social, Segnalazioni
    ===================================================================== */
 var PF2={
- it:{social:"Social",socsub:"Seguici e resta aggiornato",tgch:"Canale Telegram",tgchsub:"Novità e aggiornamenti",tgpr:"Contatto Telegram",tgprsub:"Scrivimi direttamente",soon:"In arrivo",fb:"Segnala o proponi",fbsub:"Un problema, un'idea, un consiglio",   ref_ok:"Dati aggiornati. Hai già l'ultima versione",ref_new:"Nuova versione trovata, aggiorno…",ref_err:"Non riesco ad aggiornare adesso, riprova tra poco.",
+ it:{social:"Social",socsub:"Seguici e resta aggiornato",tgch:"Canale Telegram",tgchsub:"Novità e aggiornamenti",soon:"In arrivo",fb:"Segnala o proponi",fbsub:"Un problema, un'idea, un consiglio",   ref_ok:"Dati aggiornati. Hai già l'ultima versione",ref_new:"Nuova versione trovata, aggiorno…",ref_err:"Non riesco ad aggiornare adesso, riprova tra poco.",
   t_bug:"Problema",t_idea:"Idea",t_other:"Altro",fbph:"Descrivi cosa succede o cosa vorresti…",fbcontact:"Il tuo Telegram (facoltativo)",fbsend:"Invia",fbsent:"Grazie! Il messaggio è arrivato.",fbnote:"Insieme al messaggio inviamo solo la versione dell'app, il tipo di telefono e la lingua, per capire meglio il problema.",fbshort:"Scrivi almeno qualche parola.",fbmany:"Hai già inviato molti messaggi oggi. Riprova domani.",fbagain:"Scrivi un altro messaggio"
               
            },
- es:{social:"Redes sociales",socsub:"Síguenos y mantente al día",tgch:"Canal de Telegram",tgchsub:"Novedades y actualizaciones",tgpr:"Contacto de Telegram",tgprsub:"Escríbeme directamente",soon:"Próximamente",fb:"Informar o proponer",fbsub:"Un problema, una idea, un consejo",   ref_ok:"Datos actualizados. Ya tienes la última versión",ref_new:"Nueva versión encontrada, actualizando…",ref_err:"No puedo actualizar ahora, inténtalo en un momento.",
+ es:{social:"Redes sociales",socsub:"Síguenos y mantente al día",tgch:"Canal de Telegram",tgchsub:"Novedades y actualizaciones",soon:"Próximamente",fb:"Informar o proponer",fbsub:"Un problema, una idea, un consejo",   ref_ok:"Datos actualizados. Ya tienes la última versión",ref_new:"Nueva versión encontrada, actualizando…",ref_err:"No puedo actualizar ahora, inténtalo en un momento.",
   t_bug:"Problema",t_idea:"Idea",t_other:"Otro",fbph:"Describe qué pasa o qué te gustaría…",fbcontact:"Tu Telegram (opcional)",fbsend:"Enviar",fbsent:"¡Gracias! El mensaje ha llegado.",fbnote:"Con el mensaje solo enviamos la versión de la app, el tipo de teléfono y el idioma, para entender mejor el problema.",fbshort:"Escribe al menos unas palabras.",fbmany:"Ya has enviado muchos mensajes hoy. Inténtalo mañana.",fbagain:"Escribir otro mensaje"
               
            },
- en:{social:"Social",socsub:"Follow us and stay updated",tgch:"Telegram channel",tgchsub:"News and updates",tgpr:"Telegram contact",tgprsub:"Message me directly",soon:"Coming soon",fb:"Report or suggest",fbsub:"A problem, an idea, some advice",   ref_ok:"Data refreshed. You already have the latest version",ref_new:"New version found, updating…",ref_err:"Can't refresh right now, try again shortly.",
+ en:{social:"Social",socsub:"Follow us and stay updated",tgch:"Telegram channel",tgchsub:"News and updates",soon:"Coming soon",fb:"Report or suggest",fbsub:"A problem, an idea, some advice",   ref_ok:"Data refreshed. You already have the latest version",ref_new:"New version found, updating…",ref_err:"Can't refresh right now, try again shortly.",
   t_bug:"Problem",t_idea:"Idea",t_other:"Other",fbph:"Describe what happens or what you'd like…",fbcontact:"Your Telegram (optional)",fbsend:"Send",fbsent:"Thanks! Your message has arrived.",fbnote:"Along with the message we only send the app version, the phone type and the language, to better understand the problem.",fbshort:"Write at least a few words.",fbmany:"You've already sent many messages today. Try again tomorrow.",fbagain:"Write another message"
               
            },
- fr:{social:"Réseaux sociaux",socsub:"Suis-nous et reste informé",tgch:"Canal Telegram",tgchsub:"Nouveautés et mises à jour",tgpr:"Contact Telegram",tgprsub:"Écris-moi directement",soon:"Bientôt",fb:"Signaler ou proposer",fbsub:"Un problème, une idée, un conseil",   ref_ok:"Données à jour. Tu as déjà la dernière version",ref_new:"Nouvelle version trouvée, mise à jour…",ref_err:"Impossible d'actualiser maintenant, réessaie dans un instant.",
+ fr:{social:"Réseaux sociaux",socsub:"Suis-nous et reste informé",tgch:"Canal Telegram",tgchsub:"Nouveautés et mises à jour",soon:"Bientôt",fb:"Signaler ou proposer",fbsub:"Un problème, une idée, un conseil",   ref_ok:"Données à jour. Tu as déjà la dernière version",ref_new:"Nouvelle version trouvée, mise à jour…",ref_err:"Impossible d'actualiser maintenant, réessaie dans un instant.",
   t_bug:"Problème",t_idea:"Idée",t_other:"Autre",fbph:"Décris ce qui se passe ou ce que tu voudrais…",fbcontact:"Ton Telegram (facultatif)",fbsend:"Envoyer",fbsent:"Merci ! Le message est bien arrivé.",fbnote:"Avec le message nous envoyons seulement la version de l'app, le type de téléphone et la langue, pour mieux comprendre le problème.",fbshort:"Écris au moins quelques mots.",fbmany:"Tu as déjà envoyé beaucoup de messages aujourd'hui. Réessaie demain.",fbagain:"Écrire un autre message"
               
-           },de:{"social":"Soziale Netzwerke","socsub":"Folge uns und bleib auf dem Laufenden","tgch":"Telegram-Kanal","tgchsub":"Neuigkeiten und Updates","tgpr":"Telegram-Kontakt","tgprsub":"Schreib mir direkt","soon":"Demnächst","fb":"Melden oder vorschlagen","fbsub":"Ein Problem, eine Idee, ein Tipp",   "ref_ok":"Daten aktualisiert. Du hast schon die neueste Version","ref_new":"Neue Version gefunden, wird aktualisiert…","ref_err":"Aktualisieren gerade nicht möglich, versuche es gleich noch einmal.","t_bug":"Problem","t_idea":"Idee","t_other":"Sonstiges","fbph":"Beschreibe, was passiert oder was du dir wünschst…","fbcontact":"Dein Telegram (optional)","fbsend":"Senden","fbsent":"Danke! Deine Nachricht ist angekommen.","fbnote":"Mit der Nachricht senden wir nur die App-Version, den Telefontyp und die Sprache, um das Problem besser zu verstehen.","fbshort":"Schreib wenigstens ein paar Worte.","fbmany":"Du hast heute schon viele Nachrichten gesendet. Versuche es morgen wieder.","fbagain":"Weitere Nachricht schreiben"                     }
+           },de:{"social":"Soziale Netzwerke","socsub":"Folge uns und bleib auf dem Laufenden","tgch":"Telegram-Kanal","tgchsub":"Neuigkeiten und Updates","soon":"Demnächst","fb":"Melden oder vorschlagen","fbsub":"Ein Problem, eine Idee, ein Tipp",   "ref_ok":"Daten aktualisiert. Du hast schon die neueste Version","ref_new":"Neue Version gefunden, wird aktualisiert…","ref_err":"Aktualisieren gerade nicht möglich, versuche es gleich noch einmal.","t_bug":"Problem","t_idea":"Idee","t_other":"Sonstiges","fbph":"Beschreibe, was passiert oder was du dir wünschst…","fbcontact":"Dein Telegram (optional)","fbsend":"Senden","fbsent":"Danke! Deine Nachricht ist angekommen.","fbnote":"Mit der Nachricht senden wir nur die App-Version, den Telefontyp und die Sprache, um das Problem besser zu verstehen.","fbshort":"Schreib wenigstens ein paar Worte.","fbmany":"Du hast heute schon viele Nachrichten gesendet. Versuche es morgen wieder.","fbagain":"Weitere Nachricht schreiben"                     }
 };
 function p2(k){return(PF2[lang]&&PF2[lang][k])||PF2.it[k]||k}
 /* link social: il canale si aggiunge qui quando e' pronto */
 var SOCIAL=[
-  {k:'tgch',url:'',ic:'tg',col:'#29a9eb'},
-  {k:'tgpr',url:'https://t.me/'+TG_USER,ic:'tgu',col:'#29a9eb'}
+  {k:'tgch',url:'',ic:'tg',col:'#29a9eb'}
 ];
 Object.assign(PIC,{
   tg:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.4 4.3 2.9 11.4c-1.3.5-1.3 1.2-.2 1.6l4.7 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.5zM8.8 14.2l9.6-6c.5-.3.9-.1.5.2l-8.2 7.4-.3 3.4-1.6-5z"/></svg>',
@@ -3822,7 +3821,6 @@ function renderLegal(p){
     if(PF.lgOpen===k){
       const ul=document.createElement('ul');ul.className='lglist';
       items.forEach(t=>{const li=document.createElement('li');li.textContent=t;ul.appendChild(li)});
-      if(k==='contact'){const b=document.createElement('button');b.className='pfmini on';b.style.margin='4px 0 6px 0';b.textContent='Telegram';b.onclick=()=>{const u='https://t.me/'+TG_USER;const w=window.open(u,'_blank');if(!w)location.href=u};ul.appendChild(b)}
       box.appendChild(ul);
     }
     p.appendChild(box);
@@ -10128,16 +10126,16 @@ ${B}#d3guide .gr svg{position:absolute;inset:0;width:30px;height:30px;overflow:v
 ${B}#d3guide .gr .o{fill:none;stroke:var(--d3o);stroke-width:1.2}
 ${B}#d3guide .gr .a{fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;transition:stroke-dasharray .45s ${OUT}}
 ${B}#d3guide .gr .c{fill:var(--fg)}
-${B}#d3guide .gt{flex:1 1 auto;min-width:0;font-size:12.5px;line-height:1.25;font-weight:550;color:var(--fg);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;padding:2px 0}
+${B}#d3guide .gt{flex:1 1 auto;min-width:0;font-size:12.5px;line-height:1.25;font-weight:550;color:var(--fg);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;padding:2px 0}
 ${B}#d3guide .gt em{font-style:normal;font-family:var(--d3m,monospace);font-size:10.5px;letter-spacing:.06em;color:var(--goldfg,var(--gold));font-weight:600;white-space:nowrap}
 ${B}#d3guide .gt i{font-style:normal;color:var(--muted);padding:0 4px}
 ${B}#d3guide .gx{flex:0 0 32px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--danger);display:flex;align-items:center;justify-content:center;padding:0;transition:transform .3s ${EASE}}
 ${B}#d3guide .gx:active{transform:scale(.88)}
 ${B}#d3guide .gx svg{width:17px;height:17px}
-@media (max-width:360px){${B}#d3guide .gp{gap:7px;padding:3px 3px 3px 4px}${B}#d3guide .gr,${B}#d3guide .gr svg{flex-basis:26px;width:26px;height:26px}${B}#d3guide .gt{font-size:12px;line-height:1.2;-webkit-line-clamp:3}${B}#d3guide .gt em{font-size:10px;letter-spacing:.03em}${B}#d3guide .gx{flex-basis:30px;width:30px;height:30px}}
+@media (max-width:360px){${B}#d3guide .gp{gap:7px;padding:3px 3px 3px 4px}${B}#d3guide .gr,${B}#d3guide .gr svg{flex-basis:26px;width:26px;height:26px}${B}#d3guide .gt{font-size:11.5px;line-height:1.2;-webkit-line-clamp:3}${B}#d3guide .gt em{font-size:10px;letter-spacing:.03em}${B}#d3guide .gx{flex-basis:30px;width:30px;height:30px}}
 ${B}#d3dbar{position:absolute;left:var(--side,10px);right:var(--side,10px);height:50px;z-index:7;display:flex;align-items:center;gap:8px;animation:d3i6up .42s ${EASE} both}
 ${B}#d3dbar[hidden]{display:none}
-${B}#d3dbar>button{height:50px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0;color:var(--fg);font:inherit;transition:transform .3s ${EASE},opacity .2s}
+${B}#d3dbar>button{height:50px;margin:0;box-sizing:border-box;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0;color:var(--fg);font:inherit;transition:transform .3s ${EASE},opacity .2s}
 ${B}#d3dbar>button:active{transform:scale(.94)}
 ${B}#d3dbar .db{flex:0 0 50px;width:50px}
 ${B}#d3dbar .db svg{width:20px;height:20px}
@@ -10148,7 +10146,11 @@ ${B}#d3dbar .dt .ri svg{width:21px;height:21px}
 ${B}#d3dbar .dt span{flex:1 1 auto;min-width:0;text-align:left;font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 ${B}#d3dbar .dt b{flex:0 0 auto;width:16px;height:16px;opacity:.6}
 ${B}#d3dbar .dt b svg{width:16px;height:16px}
-${B}#d3dbar .df{flex:0 0 auto;padding:0 20px;background:var(--gold)!important;color:var(--ongold)!important;border:0!important;font-size:15px;font-weight:650;box-shadow:0 0 18px var(--d3gl)}
+${B}#d3dbar .df{flex:0 0 auto;width:auto;min-width:50px;max-width:40%;gap:7px;padding:0 18px 0 15px;background:var(--gold)!important;color:var(--ongold)!important;border:0!important;font-size:15px;font-weight:650;white-space:nowrap;overflow:hidden;box-shadow:0 0 18px var(--d3gl)}
+${B}#d3dbar .df svg{flex:0 0 18px;width:18px;height:18px}
+${B}#d3dbar .df span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:359px){${B}#d3dbar .df{width:50px;min-width:50px;padding:0;gap:0;justify-content:center}${B}#d3dbar .df span{display:none}${B}#d3dbar .df svg{width:21px;height:21px;flex-basis:21px}}
+@media (max-width:340px){${B}#d3dbar .dt{gap:8px;padding:0 12px 0 6px}${B}#d3dbar .dt span{font-size:14px}${B}#d3guide .gt{-webkit-line-clamp:4}}
 ${B}#d3dbar .df[disabled]{opacity:.35;box-shadow:none}
 ${B}#d3dbar .df[hidden]{display:none}
 ${B}#dedit.d3e{position:absolute!important;right:auto!important;bottom:auto!important;margin:0!important;transform:none;width:auto!important;height:52px!important;min-height:0!important;padding:0 6px 0 2px!important;gap:2px!important;border-radius:999px!important;align-items:center;flex-wrap:nowrap!important;animation:d3i6arc .42s ${EASE} both;touch-action:none}
@@ -10174,6 +10176,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   var scr=document.getElementById('ch-screen');
   var TRASH='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>';
   var BACK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+  var CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
   var CHEV='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>';
   var MORE='<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg>';
   var GRIP='<svg viewBox="0 0 12 20" fill="currentColor"><circle cx="3" cy="4" r="1.5"/><circle cx="9" cy="4" r="1.5"/><circle cx="3" cy="10" r="1.5"/><circle cx="9" cy="10" r="1.5"/><circle cx="3" cy="16" r="1.5"/><circle cx="9" cy="16" r="1.5"/></svg>';
@@ -10222,7 +10225,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     var C=2*Math.PI*12;gArc.setAttribute('stroke-dasharray',(C*frac).toFixed(1)+' '+C.toFixed(1));
     gX.setAttribute('aria-label',tt('g_clr'));
     placeGuide();
-    if(dTool==='path'){bDone.hidden=false;bDone.textContent=t('done');bDone.disabled=P.k<2}else bDone.hidden=true;
+    if(dTool==='path'){bDone.hidden=false;if(bDone.dataset.l!==lang){bDone.dataset.l=lang;bDone.innerHTML=CHECK+'<span>'+esc(t('done'))+'</span>'}bDone.setAttribute('aria-label',t('done'));bDone.disabled=P.k<2}else bDone.hidden=true;
   }
   function placeGuide(){
     var sr=scr.getBoundingClientRect(),top=0;
