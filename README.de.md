@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.2.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.3.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,15 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.1.1 — Leichter und aufgeräumter
+### 🆕 Neu in 1.3.0 — Aktien
+
+- 📈 **Aktien sind da**: Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta und Tesla, mit Live-Preisen während der New Yorker Handelszeit und Kerzenverlauf.
+- 🍎 **Firmenlogos** als runde Icons, direkt in der App gespeichert.
+- 🕘 **Börsenstatus**: Neben *Aktien* in der Watchlist siehst du, ob die New Yorker Börse Geöffnet, in der Vorbörse oder Geschlossen ist. Bei geschlossener Börse siehst du den letzten Preis der Sitzung; Feiertage und verkürzte Handelstage sind berücksichtigt.
+- 🔎 Die Kategorie *Aktien* gibt es jetzt auch in der Suche und bei der Einrichtung beim ersten Start, wie die anderen.
+- 📘 FAQ für NexusCharts-Konten aktualisiert.
+
+### Vorher in 1.1.1 — Leichter und aufgeräumter
 
 - 🪶 **Leichtere App**: Nicht mehr genutzter Code wurde entfernt, die App lädt dadurch weniger.
 - 📜 **Datenschutzerklärung** mit der Anmeldung per Face ID ergänzt (was wir speichern und wie lange).
@@ -141,12 +149,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 ## 🚀 Funktionen
 
 ### 📋 Watchlist
-- 72 Instrumente: Forex, Metalle, Energie, Indizes und Krypto, nach Kategorien gruppiert (Aktien folgen bald)
+- 79 Instrumente: Forex, Metalle, Energie, Indizes, Krypto und 7 US-Aktien, nach Kategorien gruppiert
 - Suche jedes Symbol und füge es mit einem Tipp hinzu
 - Live-Preis, Tagesveränderung in Punkten und Prozent, Flaggen- und Münzsymbole
 - Mini-Player unten mit dem ausgewählten Symbol und seinem Verlauf
 - **Mehrere Watchlists** (*Alle Watchlists*: erstellen, umbenennen, löschen) und farbige **Signale** mit eigenen Tabs
 - Paar gedrückt halten für Signal und Entfernen
+- Bei Aktien steht neben dem Kategorienamen der Status der New Yorker Börse (Geöffnet, Vorbörse, Geschlossen)
 
 ### 📊 Chart
 - Vollbild-Chart mit **Live-Aktualisierung** und **Countdown** der Kerze
@@ -275,7 +284,6 @@ Du hast einen **Freundescode**? Tippe auf **Mit Code eintreten** und gib ihn ein
 - 📡 Der Datenserver speichert nur Marktpreise: keine IP-Adressen und keine persönlichen Daten.
 - 🔔 Wenn du Benachrichtigungen aktivierst, bleiben deine aktiven Preisalarme nur auf dem Server, um dich zu benachrichtigen; löschst du einen Alarm, ist er weg.
 - 🔐 In diesem Repository sind keine Passwörter oder privaten Schlüssel gespeichert.
-- 🎟️ Zugangscodes sind an ein einziges Gerät gebunden und können jederzeit widerrufen werden.
 - 🛡️ **Schutz gegen das Erraten von Codes**: nach zu vielen falschen Codes aus demselben Netz pausiert die Anmeldung eine Weile und die App zeigt eine klare Meldung. Gültige Codes und verbundene Geräte sind nie betroffen.
 - 🧹 **App zurücksetzen** löscht alles, was auf dem Gerät gespeichert ist.
 
@@ -303,12 +311,12 @@ Versionen haben drei Zahlen, **MAJOR.MINOR.PATCH** (zum Beispiel 0.44.0):
 
 <details>
 <summary><b>Muss ich bezahlen oder ein Abo abschließen?</b></summary>
-Nein. Installation und Nutzung von NexusCharts sind kostenlos — du brauchst nur einen Zugangscode.
+Nein. Installation und Nutzung von NexusCharts sind kostenlos — du brauchst nur ein kostenloses Konto mit Benutzername, E-Mail und Passwort.
 </details>
 
 <details>
 <summary><b>Brauche ich ein Broker-Konto?</b></summary>
-Nein. Mit einem Zugangscode meldest du dich ohne Registrierung bei einem Broker an.
+Nein. Du meldest dich mit deinem NexusCharts-Konto an, ohne Registrierung bei einem Broker.
 </details>
 
 <details>
@@ -327,8 +335,8 @@ Ja, mit aktiven Push-Benachrichtigungen. Auf dem iPhone muss die App auf dem Hom
 </details>
 
 <details>
-<summary><b>Mein Code wird angeblich schon auf einem anderen Gerät verwendet.</b></summary>
-Jeder Code gilt nur auf einem Gerät. Frag auf Telegram nach einem neuen.
+<summary><b>Mein Freundescode wird angeblich schon auf einem anderen Gerät verwendet.</b></summary>
+Jeder Freundescode gilt nur auf einem Gerät. Auf einem anderen Gerät meldest du dich mit einem kostenlosen NexusCharts-Konto an: Es funktioniert auf allen deinen Geräten.
 </details>
 
 <details>
@@ -359,8 +367,8 @@ Noch nicht: sie werden auf dem Gerät gespeichert, auf dem du sie erstellt hast.
 | ✅ | Design 3.0 in der App, mehrere Watchlists, Signale, Linienstärke/-stil und Rückgängig |
 | ✅ | Eigener Datenserver: Live-Preise, 72 Instrumente, Namen in 5 Sprachen |
 | ✅ | NexusCharts-Konten, neue Adresse nexuscharts.app, Datenschutzerklärung |
+| ✅ | Aktien: Apple, Microsoft, NVIDIA, Amazon, Alphabet, Meta, Tesla, mit Börsenzeiten |
 | 🔜 | Längerer Kerzenverlauf (Jahre) |
-| 🔜 | Aktien |
 | 🔜 | Volle Computer-Version |
 | 💡 | Synchronisierung zwischen Geräten |
 
@@ -371,6 +379,7 @@ Noch nicht: sie werden auf dem Gerät gespeichert, auf dem du sie erstellt hast.
 - Charts mit [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache 2.0).
 - Marktdaten von [biquote.io](https://biquote.io). Die Preise dienen der Analyse und können von denen deines Brokers abweichen.
 - Krypto-Icons von [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons) (CC0 1.0).
+- Aktien-Logos: Apple, NVIDIA, Google, Meta und Tesla von [Simple Icons](https://simpleicons.org) (CC0 1.0); Microsoft und Amazon von [Wikimedia Commons](https://commons.wikimedia.org) (gemeinfrei). Die Logos sind Marken ihrer jeweiligen Inhaber und dienen nur dazu, die Aktie zu erkennen; NexusCharts ist mit diesen Unternehmen nicht verbunden.
 - TradingView und Pine Script sind Marken von TradingView, Inc. NexusCharts ist nicht mit TradingView verbunden.
 
 ---

@@ -1,4 +1,4 @@
-const VERSION='1.2.1';
+const VERSION='1.3.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -3207,6 +3207,16 @@ var MKT={
  fr:{open:"Marché ouvert",closed:"Marché fermé",okOpen:"Tout va bien. Le marché est ouvert.",okClosed:"Le marché est fermé.",closes:"Il fermera dans",opens:"Il ouvrira dans",always:"Ce marché est ouvert 24 h sur 24, 7 jours sur 7.",tz:"Fuseau horaire de la bourse : New York",h:"heures",h1:"heure",m:"minutes",m1:"minute",d:"jours",d1:"jour",and:"et"},de:{"open":"Markt geöffnet","closed":"Markt geschlossen","okOpen":"Alles in Ordnung. Der Markt ist geöffnet.","okClosed":"Der Markt ist geschlossen.","closes":"Er schließt in","opens":"Er öffnet in","always":"Dieser Markt ist 24 Stunden am Tag, 7 Tage die Woche geöffnet.","tz":"Zeitzone der Börse: New York","h":"Stunden","h1":"Stunde","m":"Minuten","m1":"Minute","d":"Tagen","d1":"Tag","and":"und"}
 };
 function mk(k){return(MKT[lang]&&MKT[lang][k])||MKT.it[k]}
+/* 1.3.0: testi in piu' per le azioni */
+var MKT2={
+ it:{pre:"Pre-market",okPre:"Pre-market: la seduta apre alle 9:30 di New York. Fino ad allora i prezzi si muovono poco.",okClosedS:"La Borsa è chiusa: vedi l'ultimo prezzo della seduta.",hol:"Oggi la Borsa di New York è chiusa per festività: vedi l'ultimo prezzo della seduta.",hrs:"Seduta: dalle 9:30 alle 16:00 di New York, dal lunedì al venerdì.",half:"Oggi la seduta chiude prima, alle 13:00 di New York.",bOpen:"Aperta",bClosed:"Chiusa"},
+ en:{pre:"Pre-market",okPre:"Pre-market: the session opens at 9:30 New York time. Until then prices barely move.",okClosedS:"The exchange is closed: you see the last price of the session.",hol:"The New York exchange is closed today for a holiday: you see the last price of the session.",hrs:"Session: 9:30 to 16:00 New York time, Monday to Friday.",half:"Today the session closes early, at 13:00 New York time.",bOpen:"Open",bClosed:"Closed"},
+ es:{pre:"Pre-market",okPre:"Pre-market: la sesión abre a las 9:30 de Nueva York. Hasta entonces los precios se mueven poco.",okClosedS:"La Bolsa está cerrada: ves el último precio de la sesión.",hol:"Hoy la Bolsa de Nueva York cierra por festivo: ves el último precio de la sesión.",hrs:"Sesión: de 9:30 a 16:00 de Nueva York, de lunes a viernes.",half:"Hoy la sesión cierra antes, a las 13:00 de Nueva York.",bOpen:"Abierta",bClosed:"Cerrada"},
+ fr:{pre:"Pré-marché",okPre:"Pré-marché : la séance ouvre à 9 h 30, heure de New York. D'ici là, les prix bougent peu.",okClosedS:"La Bourse est fermée : tu vois le dernier prix de la séance.",hol:"La Bourse de New York est fermée aujourd'hui (jour férié) : tu vois le dernier prix de la séance.",hrs:"Séance : de 9 h 30 à 16 h, heure de New York, du lundi au vendredi.",half:"Aujourd'hui la séance ferme plus tôt, à 13 h, heure de New York.",bOpen:"Ouverte",bClosed:"Fermée"},
+ de:{pre:"Vorbörse",okPre:"Vorbörse: Der Handel beginnt um 9:30 Uhr New Yorker Zeit. Bis dahin bewegen sich die Preise kaum.",okClosedS:"Die Börse ist geschlossen: Du siehst den letzten Preis der Sitzung.",hol:"Die New Yorker Börse ist heute wegen eines Feiertags geschlossen: Du siehst den letzten Preis der Sitzung.",hrs:"Handel: 9:30 bis 16:00 Uhr New Yorker Zeit, Montag bis Freitag.",half:"Heute schließt der Handel früher, um 13:00 Uhr New Yorker Zeit.",bOpen:"Geöffnet",bClosed:"Geschlossen"}
+};
+function mk2(k){return(MKT2[lang]&&MKT2[lang][k])||MKT2.it[k]}
+
 const NYF=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hourCycle:'h23',weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
 const WDN={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
 function nyParts(ms){
@@ -3218,11 +3228,28 @@ function mktKind(name){
   const it=BYN[name];const cat=it?info(it).cat:'oth';
   if(cat==='cry')return'always';
   if(cat==='fx')return'fx';
+  if(cat==='stk')return'stk';   /* 1.3.0: azioni USA, seduta 9:30-16:00 di New York */
   return'daily';   /* metalli e indici: domenica 18:00 - venerdi' 17:00, pausa ogni giorno 17:00-18:00 */
+}
+/* 1.3.0: Borsa di New York (NYSE/Nasdaq). Festivita' e chiusure anticipate dal calendario ufficiale NYSE 2026-2027 */
+const NYSE_HOL={'2026-01-01':1,'2026-01-19':1,'2026-02-16':1,'2026-04-03':1,'2026-05-25':1,'2026-06-19':1,'2026-07-03':1,'2026-09-07':1,'2026-11-26':1,'2026-12-25':1,
+ '2027-01-01':1,'2027-01-18':1,'2027-02-15':1,'2027-03-26':1,'2027-05-31':1,'2027-06-18':1,'2027-07-05':1,'2027-09-06':1,'2027-11-25':1,'2027-12-24':1};
+const NYSE_HALF={'2026-11-27':1,'2026-12-24':1,'2027-11-26':1};
+function nyDay(p){return p.y?p.y+'-'+String(p.mo).padStart(2,'0')+'-'+String(p.d).padStart(2,'0'):''}
+function stkHol(p){return p.wd>=1&&p.wd<=5&&!!NYSE_HOL[nyDay(p)]}
+function stkClose(p){return NYSE_HALF[nyDay(p)]?13*60:16*60}
+/* pre-market: 4:00-9:30 di New York nei giorni di Borsa (sulla fonte i prezzi si muovono poco e non sempre) */
+function stkPre(p){const m=p.h*60+p.mi;return p.wd>=1&&p.wd<=5&&!stkHol(p)&&m>=4*60&&m<9*60+30}
+function mktState(name,ms){
+  const k=mktKind(name),p=nyParts(ms||Date.now());
+  if(mktOpenAt(k,p))return'open';
+  if(k==='stk'){if(stkHol(p))return'hol';if(stkPre(p))return'pre'}
+  return'closed';
 }
 function mktOpenAt(kind,p){
   if(kind==='always')return true;
   const mins=p.h*60+p.mi;
+  if(kind==='stk')return p.wd>=1&&p.wd<=5&&!stkHol(p)&&mins>=9*60+30&&mins<stkClose(p);
   if(p.wd===6)return false;                       /* sabato */
   if(p.wd===0)return mins>=(kind==='fx'?17:18)*60; /* domenica sera */
   if(p.wd===5)return mins<17*60;                   /* venerdi' fino alle 17 */
@@ -3247,6 +3274,7 @@ function mktDur(ms){
 function mktDot(){
   const d=$('lgdot');if(!d||!cur)return;
   const o=mktOpen(cur);d.classList.toggle('on',o);d.classList.toggle('off',!o);
+  d.classList.toggle('pre',!o&&mktState(cur)==='pre');
 }
 setInterval(()=>{if(tab==='ch')mktDot()},30000);
 function openMarket(){
@@ -3258,9 +3286,11 @@ function openMarket(){
     hd.innerHTML='<div class="mkt-t"></div><button class="mkx" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
     hd.firstChild.textContent=cur;hd.lastChild.onclick=closeSheet;s.appendChild(hd);
     const st=document.createElement('div');st.className='mkst'+(o?' on':'');
-    st.innerHTML='<i></i><span></span>';st.lastChild.textContent=o?mk('open'):mk('closed');s.appendChild(st);
+    const ms=k==='stk'?mktState(cur):'';if(ms==='pre')st.classList.add('pre');
+    st.innerHTML='<i></i><span></span>';st.lastChild.textContent=o?mk('open'):(ms==='pre'?mk2('pre'):mk('closed'));s.appendChild(st);
     const tx=document.createElement('div');tx.className='mktx';
-    const a=document.createElement('div');a.textContent=k==='always'?mk('always'):(o?mk('okOpen'):mk('okClosed'));tx.appendChild(a);
+    const a=document.createElement('div');a.textContent=k==='always'?mk('always'):(o?mk('okOpen'):(k==='stk'?mk2(ms==='hol'?'hol':ms==='pre'?'okPre':'okClosedS'):mk('okClosed')));tx.appendChild(a);
+    if(k==='stk'){const h2=document.createElement('div');h2.className='mkhrs';h2.textContent=NYSE_HALF[nyDay(p)]?mk2('half'):mk2('hrs');tx.appendChild(h2)}
     if(nx){const b=document.createElement('b');b.textContent=(o?mk('closes'):mk('opens'))+' '+mktDur(nx-now)+'.';tx.appendChild(b)}
     s.appendChild(tx);
     /* barra della giornata a New York: tratti aperti in verde, chiusi in grigio, linea su "adesso" */
@@ -3270,7 +3300,7 @@ function openMarket(){
     const bar=document.createElement('div');bar.className='mkbar';
     const segs=[];let prev=null,startM=0;
     for(let m=0;m<=1440;m+=15){
-      const v=m<1440?mktOpenAt(k,{wd:p.wd,h:Math.floor(m/60),mi:m%60}):null;
+      const v=m<1440?mktOpenAt(k,{wd:p.wd,h:Math.floor(m/60),mi:m%60,y:p.y,mo:p.mo,d:p.d}):null;
       if(v!==prev){if(prev!==null)segs.push([startM,m,prev]);prev=v;startM=m}
     }
     segs.forEach(([a1,b1,v])=>{const e=document.createElement('i');e.className=v?'o':'c';e.style.left=(a1/14.4)+'%';e.style.width='calc('+((b1-a1)/14.4)+'% - 4px)';bar.appendChild(e)});
@@ -9634,7 +9664,7 @@ ${B}#pf-screen.d3main .pfrow:active .pfic::before{opacity:1;transform:scale(1) r
     if(!res.length){
       if(S.f==='stk'&&!norm(S.q))lst.appendChild(emptyStk(true));
       else if(window.NXReg&&NXReg.soonCat(S.f)&&!norm(S.q))lst.appendChild(NXReg.soonCard(S.f));
-      else{var n=document.createElement('div');n.className='d3s-nores';n.textContent=t('noresult');lst.appendChild(n);if(S.f==='stk')lst.appendChild(emptyStk(true))}
+      else{var n=document.createElement('div');n.className='d3s-nores';n.textContent=t('noresult');lst.appendChild(n);if(S.f==='stk'&&!(window.NXReg&&NXReg.hasStk&&NXReg.hasStk()))lst.appendChild(emptyStk(true))}
       return;
     }
     var k=norm(S.q),i=0;
@@ -9673,7 +9703,8 @@ ${B}#pf-screen.d3main .pfrow:active .pfic::before{opacity:1;transform:scale(1) r
       if(window.NXLists&&NXLists.isMainList&&!NXLists.isMainList())return;
       var h=document.createElement('div');h.className='sec';h.textContent=t('cat_stk');h.dataset.cat='stk';
       var oth=null,oT=t('cat_oth');[].forEach.call(box.querySelectorAll('.sec'),function(s){if(s.textContent===oT)oth=s});
-      var em=emptyStk(false);
+      /* 1.3.0: con le azioni vere il riquadro e' quello delle altre categorie, con il suo «Cerca» */
+      var em=(window.NXReg&&NXReg.hasStk&&NXReg.hasStk()&&window.NXEmptyCat)?NXEmptyCat('stk'):emptyStk(false);
       if(oth){box.insertBefore(h,oth);box.insertBefore(em,oth)}else{box.appendChild(h);box.appendChild(em)}
     }catch(e){}
   };
@@ -10559,11 +10590,11 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   var COL=['red','blue','green','orange','violet','sky','pink'];
   var HEX={red:['#f23645','#e0273a'],blue:['#3b82f6','#1f66e5'],green:['#22c55e','#16a34a'],orange:['#ff9f1a','#e07b00'],violet:['#a96bff','#8b3fe8'],sky:['#38bdf8','#0b9bd8'],pink:['#ff5fa2','#e23d88']};
   var T={
-    it:{cE:{fx:'Nessuna coppia Forex, per ora',com:'Nessuna Commodity, per ora',cry:'Nessuna Cripto, per ora',idx:'Nessun Indice, per ora'},cT:'Ancora nessun simbolo',cD:'Cerca e tocca la stella per aggiungerne uno.',cB:'Cerca',all:'Tutte le watchlist',create:'Crea nuova lista',menu:'Liste',newT:'Nuova lista',name:'Nome della lista',def:'Lista',ok:'Crea',save:'Salva',cancel:'Annulla',ren:'Rinomina',del:'Elimina',renT:'Rinomina lista',delT:'Eliminare la lista?',delD:'«{l}» sparisce. I simboli restano nelle altre liste e nella ricerca.',mainNo:'La Watchlist principale non si elimina.',dup:'Esiste già una lista con questo nome.',empty:'Scrivi un nome.',max:'Hai raggiunto 20 liste.',sym1:'simbolo',symN:'simboli',active:'Attiva',main:'Principale',eK:'Lista vuota',eT:'Ancora nessun simbolo',eD:'Apri la ricerca e tocca la stella per aggiungere simboli a questa lista.',eB:'Cerca un simbolo',add:'{n} aggiunto a «{l}»',rem:'{n} tolto da «{l}»',sig:'Segnale',sigOff:'Togli segnale',sigSet:'{n} · segnale {c}',sigRem:'{n} · segnale tolto',sigsec:'Segnali',hold:'Tieni premuto una lista o un Segnale per rinominarlo o eliminarlo.',created:'Lista «{l}» creata',deleted:'Lista «{l}» eliminata',c:{red:'rosso',blue:'blu',green:'verde',orange:'arancio',violet:'viola',sky:'celeste',pink:'rosa'}},
-    en:{cE:{fx:'No Forex pairs yet',com:'No Commodities yet',cry:'No Crypto yet',idx:'No Indices yet'},cT:'No symbols yet',cD:'Search and tap the star to add one.',cB:'Search',all:'All watchlists',create:'Create new list',menu:'Lists',newT:'New list',name:'List name',def:'List',ok:'Create',save:'Save',cancel:'Cancel',ren:'Rename',del:'Delete',renT:'Rename list',delT:'Delete this list?',delD:'“{l}” will be removed. Its symbols stay in your other lists and in search.',mainNo:'The main Watchlist can’t be deleted.',dup:'A list with this name already exists.',empty:'Type a name.',max:'You’ve reached 20 lists.',sym1:'symbol',symN:'symbols',active:'Active',main:'Main',eK:'Empty list',eT:'No symbols yet',eD:'Open search and tap the star to add symbols to this list.',eB:'Search a symbol',add:'{n} added to “{l}”',rem:'{n} removed from “{l}”',sig:'Signal',sigOff:'Clear signal',sigSet:'{n} · {c} signal',sigRem:'{n} · signal cleared',sigsec:'Signals',hold:'Press and hold a list or a signal to rename or delete it.',created:'List “{l}” created',deleted:'List “{l}” deleted',c:{red:'red',blue:'blue',green:'green',orange:'orange',violet:'purple',sky:'sky blue',pink:'pink'}},
-    es:{cE:{fx:'Ning\u00fan par Forex, por ahora',com:'Ninguna Materia prima, por ahora',cry:'Ninguna Cripto, por ahora',idx:'Ning\u00fan \u00cdndice, por ahora'},cT:'A\u00fan no hay s\u00edmbolos',cD:'Busca y toca la estrella para a\u00f1adir uno.',cB:'Buscar',all:'Todas las watchlists',create:'Crear lista nueva',menu:'Listas',newT:'Lista nueva',name:'Nombre de la lista',def:'Lista',ok:'Crear',save:'Guardar',cancel:'Cancelar',ren:'Renombrar',del:'Eliminar',renT:'Renombrar lista',delT:'¿Eliminar la lista?',delD:'«{l}» desaparece. Los símbolos siguen en las otras listas y en la búsqueda.',mainNo:'La Watchlist principal no se puede eliminar.',dup:'Ya existe una lista con este nombre.',empty:'Escribe un nombre.',max:'Has llegado a 20 listas.',sym1:'símbolo',symN:'símbolos',active:'Activa',main:'Principal',eK:'Lista vacía',eT:'Todavía no hay símbolos',eD:'Abre la búsqueda y toca la estrella para añadir símbolos a esta lista.',eB:'Buscar un símbolo',add:'{n} añadido a «{l}»',rem:'{n} quitado de «{l}»',sig:'Señal',sigOff:'Quitar señal',sigSet:'{n} · señal {c}',sigRem:'{n} · señal quitada',sigsec:'Señales',hold:'Mantén pulsada una lista o una señal para renombrarla o eliminarla.',created:'Lista «{l}» creada',deleted:'Lista «{l}» eliminada',c:{red:'roja',blue:'azul',green:'verde',orange:'naranja',violet:'violeta',sky:'celeste',pink:'rosa'}},
-    fr:{cE:{fx:'Aucune paire Forex pour l\u2019instant',com:'Aucune Mati\u00e8re premi\u00e8re pour l\u2019instant',cry:'Aucune Crypto pour l\u2019instant',idx:'Aucun Indice pour l\u2019instant'},cT:'Aucun symbole pour l\u2019instant',cD:'Cherche et touche l\u2019\u00e9toile pour en ajouter un.',cB:'Chercher',all:'Toutes les watchlists',create:'Créer une liste',menu:'Listes',newT:'Nouvelle liste',name:'Nom de la liste',def:'Liste',ok:'Créer',save:'Enregistrer',cancel:'Annuler',ren:'Renommer',del:'Supprimer',renT:'Renommer la liste',delT:'Supprimer la liste ?',delD:'« {l} » disparaît. Les symboles restent dans tes autres listes et dans la recherche.',mainNo:'La Watchlist principale ne peut pas être supprimée.',dup:'Une liste porte déjà ce nom.',empty:'Écris un nom.',max:'Tu as atteint 20 listes.',sym1:'symbole',symN:'symboles',active:'Active',main:'Principale',eK:'Liste vide',eT:'Aucun symbole pour l’instant',eD:'Ouvre la recherche et touche l’étoile pour ajouter des symboles à cette liste.',eB:'Rechercher un symbole',add:'{n} ajouté à « {l} »',rem:'{n} retiré de « {l} »',sig:'Signal',sigOff:'Retirer le signal',sigSet:'{n} · signal {c}',sigRem:'{n} · signal retiré',sigsec:'Signaux',hold:'Appuie longuement sur une liste ou un signal pour le renommer ou le supprimer.',created:'Liste « {l} » créée',deleted:'Liste « {l} » supprimée',c:{red:'rouge',blue:'bleu',green:'vert',orange:'orange',violet:'violet',sky:'bleu ciel',pink:'rose'}},
-    de:{cE:{fx:'Noch kein Forex-Paar',com:'Noch kein Rohstoff',cry:'Noch keine Krypto',idx:'Noch kein Index'},cT:'Noch keine Symbole',cD:'Suche und tippe auf den Stern, um eins hinzuzuf\u00fcgen.',cB:'Suchen',all:'Alle Watchlists',create:'Neue Liste erstellen',menu:'Listen',newT:'Neue Liste',name:'Name der Liste',def:'Liste',ok:'Erstellen',save:'Speichern',cancel:'Abbrechen',ren:'Umbenennen',del:'Löschen',renT:'Liste umbenennen',delT:'Liste löschen?',delD:'„{l}“ wird entfernt. Die Symbole bleiben in deinen anderen Listen und in der Suche.',mainNo:'Die Haupt-Watchlist kann nicht gelöscht werden.',dup:'Es gibt schon eine Liste mit diesem Namen.',empty:'Gib einen Namen ein.',max:'Du hast 20 Listen erreicht.',sym1:'Symbol',symN:'Symbole',active:'Aktiv',main:'Haupt',eK:'Leere Liste',eT:'Noch keine Symbole',eD:'Öffne die Suche und tippe auf den Stern, um Symbole hinzuzufügen.',eB:'Symbol suchen',add:'{n} zu „{l}“ hinzugefügt',rem:'{n} aus „{l}“ entfernt',sig:'Signal',sigOff:'Signal entfernen',sigSet:'{n} · Signal {c}',sigRem:'{n} · Signal entfernt',sigsec:'Signale',hold:'Liste oder Signal lange drücken zum Umbenennen oder Löschen.',created:'Liste „{l}“ erstellt',deleted:'Liste „{l}“ gelöscht',c:{red:'Rot',blue:'Blau',green:'Grün',orange:'Orange',violet:'Violett',sky:'Himmelblau',pink:'Rosa'}}
+    it:{cE:{fx:'Nessuna coppia Forex, per ora',com:'Nessuna Commodity, per ora',cry:'Nessuna Cripto, per ora',idx:'Nessun Indice, per ora',stk:'Nessuna Azione, per ora'},cT:'Ancora nessun simbolo',cD:'Cerca e tocca la stella per aggiungerne uno.',cB:'Cerca',all:'Tutte le watchlist',create:'Crea nuova lista',menu:'Liste',newT:'Nuova lista',name:'Nome della lista',def:'Lista',ok:'Crea',save:'Salva',cancel:'Annulla',ren:'Rinomina',del:'Elimina',renT:'Rinomina lista',delT:'Eliminare la lista?',delD:'«{l}» sparisce. I simboli restano nelle altre liste e nella ricerca.',mainNo:'La Watchlist principale non si elimina.',dup:'Esiste già una lista con questo nome.',empty:'Scrivi un nome.',max:'Hai raggiunto 20 liste.',sym1:'simbolo',symN:'simboli',active:'Attiva',main:'Principale',eK:'Lista vuota',eT:'Ancora nessun simbolo',eD:'Apri la ricerca e tocca la stella per aggiungere simboli a questa lista.',eB:'Cerca un simbolo',add:'{n} aggiunto a «{l}»',rem:'{n} tolto da «{l}»',sig:'Segnale',sigOff:'Togli segnale',sigSet:'{n} · segnale {c}',sigRem:'{n} · segnale tolto',sigsec:'Segnali',hold:'Tieni premuto una lista o un Segnale per rinominarlo o eliminarlo.',created:'Lista «{l}» creata',deleted:'Lista «{l}» eliminata',c:{red:'rosso',blue:'blu',green:'verde',orange:'arancio',violet:'viola',sky:'celeste',pink:'rosa'}},
+    en:{cE:{fx:'No Forex pairs yet',com:'No Commodities yet',cry:'No Crypto yet',idx:'No Indices yet',stk:'No Stocks yet'},cT:'No symbols yet',cD:'Search and tap the star to add one.',cB:'Search',all:'All watchlists',create:'Create new list',menu:'Lists',newT:'New list',name:'List name',def:'List',ok:'Create',save:'Save',cancel:'Cancel',ren:'Rename',del:'Delete',renT:'Rename list',delT:'Delete this list?',delD:'“{l}” will be removed. Its symbols stay in your other lists and in search.',mainNo:'The main Watchlist can’t be deleted.',dup:'A list with this name already exists.',empty:'Type a name.',max:'You’ve reached 20 lists.',sym1:'symbol',symN:'symbols',active:'Active',main:'Main',eK:'Empty list',eT:'No symbols yet',eD:'Open search and tap the star to add symbols to this list.',eB:'Search a symbol',add:'{n} added to “{l}”',rem:'{n} removed from “{l}”',sig:'Signal',sigOff:'Clear signal',sigSet:'{n} · {c} signal',sigRem:'{n} · signal cleared',sigsec:'Signals',hold:'Press and hold a list or a signal to rename or delete it.',created:'List “{l}” created',deleted:'List “{l}” deleted',c:{red:'red',blue:'blue',green:'green',orange:'orange',violet:'purple',sky:'sky blue',pink:'pink'}},
+    es:{cE:{fx:'Ning\u00fan par Forex, por ahora',com:'Ninguna Materia prima, por ahora',cry:'Ninguna Cripto, por ahora',idx:'Ning\u00fan \u00cdndice, por ahora',stk:'Ninguna Acci\u00f3n, por ahora'},cT:'A\u00fan no hay s\u00edmbolos',cD:'Busca y toca la estrella para a\u00f1adir uno.',cB:'Buscar',all:'Todas las watchlists',create:'Crear lista nueva',menu:'Listas',newT:'Lista nueva',name:'Nombre de la lista',def:'Lista',ok:'Crear',save:'Guardar',cancel:'Cancelar',ren:'Renombrar',del:'Eliminar',renT:'Renombrar lista',delT:'¿Eliminar la lista?',delD:'«{l}» desaparece. Los símbolos siguen en las otras listas y en la búsqueda.',mainNo:'La Watchlist principal no se puede eliminar.',dup:'Ya existe una lista con este nombre.',empty:'Escribe un nombre.',max:'Has llegado a 20 listas.',sym1:'símbolo',symN:'símbolos',active:'Activa',main:'Principal',eK:'Lista vacía',eT:'Todavía no hay símbolos',eD:'Abre la búsqueda y toca la estrella para añadir símbolos a esta lista.',eB:'Buscar un símbolo',add:'{n} añadido a «{l}»',rem:'{n} quitado de «{l}»',sig:'Señal',sigOff:'Quitar señal',sigSet:'{n} · señal {c}',sigRem:'{n} · señal quitada',sigsec:'Señales',hold:'Mantén pulsada una lista o una señal para renombrarla o eliminarla.',created:'Lista «{l}» creada',deleted:'Lista «{l}» eliminada',c:{red:'roja',blue:'azul',green:'verde',orange:'naranja',violet:'violeta',sky:'celeste',pink:'rosa'}},
+    fr:{cE:{fx:'Aucune paire Forex pour l\u2019instant',com:'Aucune Mati\u00e8re premi\u00e8re pour l\u2019instant',cry:'Aucune Crypto pour l\u2019instant',idx:'Aucun Indice pour l\u2019instant',stk:'Aucune Action pour l\u2019instant'},cT:'Aucun symbole pour l\u2019instant',cD:'Cherche et touche l\u2019\u00e9toile pour en ajouter un.',cB:'Chercher',all:'Toutes les watchlists',create:'Créer une liste',menu:'Listes',newT:'Nouvelle liste',name:'Nom de la liste',def:'Liste',ok:'Créer',save:'Enregistrer',cancel:'Annuler',ren:'Renommer',del:'Supprimer',renT:'Renommer la liste',delT:'Supprimer la liste ?',delD:'« {l} » disparaît. Les symboles restent dans tes autres listes et dans la recherche.',mainNo:'La Watchlist principale ne peut pas être supprimée.',dup:'Une liste porte déjà ce nom.',empty:'Écris un nom.',max:'Tu as atteint 20 listes.',sym1:'symbole',symN:'symboles',active:'Active',main:'Principale',eK:'Liste vide',eT:'Aucun symbole pour l’instant',eD:'Ouvre la recherche et touche l’étoile pour ajouter des symboles à cette liste.',eB:'Rechercher un symbole',add:'{n} ajouté à « {l} »',rem:'{n} retiré de « {l} »',sig:'Signal',sigOff:'Retirer le signal',sigSet:'{n} · signal {c}',sigRem:'{n} · signal retiré',sigsec:'Signaux',hold:'Appuie longuement sur une liste ou un signal pour le renommer ou le supprimer.',created:'Liste « {l} » créée',deleted:'Liste « {l} » supprimée',c:{red:'rouge',blue:'bleu',green:'vert',orange:'orange',violet:'violet',sky:'bleu ciel',pink:'rose'}},
+    de:{cE:{fx:'Noch kein Forex-Paar',com:'Noch kein Rohstoff',cry:'Noch keine Krypto',idx:'Noch kein Index',stk:'Noch keine Aktie'},cT:'Noch keine Symbole',cD:'Suche und tippe auf den Stern, um eins hinzuzuf\u00fcgen.',cB:'Suchen',all:'Alle Watchlists',create:'Neue Liste erstellen',menu:'Listen',newT:'Neue Liste',name:'Name der Liste',def:'Liste',ok:'Erstellen',save:'Speichern',cancel:'Abbrechen',ren:'Umbenennen',del:'Löschen',renT:'Liste umbenennen',delT:'Liste löschen?',delD:'„{l}“ wird entfernt. Die Symbole bleiben in deinen anderen Listen und in der Suche.',mainNo:'Die Haupt-Watchlist kann nicht gelöscht werden.',dup:'Es gibt schon eine Liste mit diesem Namen.',empty:'Gib einen Namen ein.',max:'Du hast 20 Listen erreicht.',sym1:'Symbol',symN:'Symbole',active:'Aktiv',main:'Haupt',eK:'Leere Liste',eT:'Noch keine Symbole',eD:'Öffne die Suche und tippe auf den Stern, um Symbole hinzuzufügen.',eB:'Symbol suchen',add:'{n} zu „{l}“ hinzugefügt',rem:'{n} aus „{l}“ entfernt',sig:'Signal',sigOff:'Signal entfernen',sigSet:'{n} · Signal {c}',sigRem:'{n} · Signal entfernt',sigsec:'Signale',hold:'Liste oder Signal lange drücken zum Umbenennen oder Löschen.',created:'Liste „{l}“ erstellt',deleted:'Liste „{l}“ gelöscht',c:{red:'Rot',blue:'Blau',green:'Grün',orange:'Orange',violet:'Violett',sky:'Himmelblau',pink:'Rosa'}}
   };
   function lx(){try{return T[lang]?T[lang]:T.it}catch(e){return T.it}}
   function fm(s,o){return s.replace(/\{(\w)\}/g,function(a,k){return o[k]!=null?o[k]:''})}
@@ -10929,7 +10960,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
       var cats=['fx','com','cry','idx'].filter(function(c){return INST.some(function(it){try{return info(it).cat===c}catch(x){return false}})});
       cats.forEach(function(c){var h=document.createElement('div');h.className='sec';h.textContent=t('cat_'+c);h.dataset.cat=c;box.appendChild(h);box.appendChild(emptyCat(c))});
       var hs=document.createElement('div');hs.className='sec';hs.textContent=t('cat_stk');hs.dataset.cat='stk';box.appendChild(hs);
-      try{box.appendChild(NXSearch.emptyStk(false))}catch(x){}
+      try{box.appendChild((window.NXReg&&NXReg.hasStk&&NXReg.hasStk())?emptyCat('stk'):NXSearch.emptyStk(false))}catch(x){}
       prevE={fx:1,com:1,cry:1,idx:1};
       return;
     }
@@ -10970,6 +11001,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     b.onclick=function(){hap();try{NXSearch.open(c)}catch(x){}};e.appendChild(b);
     return e;
   }
+  window.NXEmptyCat=emptyCat;
   var oR=renderWL;
   renderWL=function(){oR.apply(this,arguments);try{decorate()}catch(e){}};
 
@@ -11804,7 +11836,15 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     {k:'XRPUSD',cls:'cry',active:true,src:'biquote.io'},
     {k:'LTCUSD',cls:'cry',active:true,src:'biquote.io'},
     {k:'BCHUSD',cls:'cry',active:true,src:'biquote.io'},
-    {k:'BNBUSD',cls:'cry',active:true,src:'biquote.io'}
+    {k:'BNBUSD',cls:'cry',active:true,src:'biquote.io'},
+    /* 1.3.0: azioni USA, quotazione del titolo sulla fonte (non le versioni tokenizzate *USDT) */
+    {k:'AAPL',cls:'stk',active:true,src:'biquote.io'},
+    {k:'MSFT',cls:'stk',active:true,src:'biquote.io'},
+    {k:'NVDA',cls:'stk',active:true,src:'biquote.io'},
+    {k:'AMZN',cls:'stk',active:true,src:'biquote.io'},
+    {k:'GOOGL',cls:'stk',active:true,src:'biquote.io'},
+    {k:'META',cls:'stk',active:true,src:'biquote.io'},
+    {k:'TSLA',cls:'stk',active:true,src:'biquote.io'}
   ];
 
   var nrm=function(s){return String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'')};
@@ -11833,7 +11873,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     var m=pick(),n=0;
     REG.forEach(function(r,i){
       if(!r.active||m[r.k]!==undefined||BYN[r.k])return;
-      var it={name:r.k,tid:-1000-i,route:0,desc:'',type:{fx:'FOREX',com:'COMMODITY',cry:'CRYPTO',idx:'INDEX'}[r.cls]||'',nx:1};
+      var it={name:r.k,tid:-1000-i,route:0,desc:'',type:{fx:'FOREX',com:'COMMODITY',cry:'CRYPTO',idx:'INDEX',stk:'STOCK'}[r.cls]||'',nx:1};
       INST.push(it);BYN[it.name]=it;n++;
     });
     CH.n=-1;return n;
@@ -11882,11 +11922,11 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
      come quello delle Azioni. Le righe dei simboli non attivi o fuori dal registro non si disegnano,
      ma restano salvate nelle liste e tornano quando lo strumento si attiva. */
   var CE={
-    it:{w:'in arrivo',b:'Cerca',t:{fx:'Nessuna coppia Forex, per ora',com:'Nessuna Commodity, per ora',cry:'Nessuna Cripto, per ora',idx:'Nessun Indice, per ora'},d:{fx:'Quando le coppie Forex saranno disponibili le troverai qui e nella ricerca.',cry:'Quando le Cripto saranno disponibili le troverai qui e nella ricerca.',idx:'Quando gli Indici saranno disponibili li troverai qui e nella ricerca.',com:'Cerca e tocca la stella per aggiungerne uno.'}},
-    en:{w:'coming',b:'Search',t:{fx:'No Forex pairs yet',com:'No Commodities yet',cry:'No Crypto yet',idx:'No Indices yet'},d:{fx:'When Forex pairs become available you will find them here and in search.',cry:'When Crypto becomes available you will find it here and in search.',idx:'When Indices become available you will find them here and in search.',com:'Search and tap the star to add one.'}},
+    it:{w:'in arrivo',b:'Cerca',t:{fx:'Nessuna coppia Forex, per ora',com:'Nessuna Commodity, per ora',cry:'Nessuna Cripto, per ora',idx:'Nessun Indice, per ora',stk:'Nessuna Azione, per ora'},d:{fx:'Quando le coppie Forex saranno disponibili le troverai qui e nella ricerca.',cry:'Quando le Cripto saranno disponibili le troverai qui e nella ricerca.',idx:'Quando gli Indici saranno disponibili li troverai qui e nella ricerca.',com:'Cerca e tocca la stella per aggiungerne uno.'}},
+    en:{w:'coming',b:'Search',t:{fx:'No Forex pairs yet',com:'No Commodities yet',cry:'No Crypto yet',idx:'No Indices yet',stk:'No Stocks yet'},d:{fx:'When Forex pairs become available you will find them here and in search.',cry:'When Crypto becomes available you will find it here and in search.',idx:'When Indices become available you will find them here and in search.',com:'Search and tap the star to add one.'}},
     es:{w:'próximamente',b:'Buscar',t:{fx:'Ningún par Forex, por ahora',com:'Ninguna Materia prima, por ahora',cry:'Ninguna Cripto, por ahora',idx:'Ningún Índice, por ahora'},d:{fx:'Cuando haya pares Forex disponibles los encontrarás aquí y en la búsqueda.',cry:'Cuando haya Cripto disponibles las encontrarás aquí y en la búsqueda.',idx:'Cuando haya Índices disponibles los encontrarás aquí y en la búsqueda.',com:'Busca y toca la estrella para añadir uno.'}},
     fr:{w:'bientôt',b:'Chercher',t:{fx:'Aucune paire Forex pour l’instant',com:'Aucune Matière première pour l’instant',cry:'Aucune Crypto pour l’instant',idx:'Aucun Indice pour l’instant'},d:{fx:'Quand des paires Forex seront disponibles, tu les trouveras ici et dans la recherche.',cry:'Quand des Cryptos seront disponibles, tu les trouveras ici et dans la recherche.',idx:'Quand des Indices seront disponibles, tu les trouveras ici et dans la recherche.',com:'Cherche et touche l’étoile pour en ajouter un.'}},
-    de:{w:'bald',b:'Suchen',t:{fx:'Noch kein Forex-Paar',com:'Noch kein Rohstoff',cry:'Noch keine Krypto',idx:'Noch kein Index'},d:{fx:'Sobald Forex-Paare verfügbar sind, findest du sie hier und in der Suche.',cry:'Sobald Krypto verfügbar ist, findest du sie hier und in der Suche.',idx:'Sobald Indizes verfügbar sind, findest du sie hier und in der Suche.',com:'Suche und tippe auf den Stern, um eins hinzuzufügen.'}}
+    de:{w:'bald',b:'Suchen',t:{fx:'Noch kein Forex-Paar',com:'Noch kein Rohstoff',cry:'Noch keine Krypto',idx:'Noch kein Index',stk:'Noch keine Aktie'},d:{fx:'Sobald Forex-Paare verfügbar sind, findest du sie hier und in der Suche.',cry:'Sobald Krypto verfügbar ist, findest du sie hier und in der Suche.',idx:'Sobald Indizes verfügbar sind, findest du sie hier und in der Suche.',com:'Suche und tippe auf den Stern, um eins hinzuzufügen.'}}
   };
   function C(){try{return CE[lang]||CE.it}catch(e){return CE.it}}
   /* categoria «in arrivo»: nessuno strumento attivo di quella classe */
@@ -11923,6 +11963,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   try{var oRW=renderWL;renderWL=function(){var r=oRW.apply(this,arguments);try{decorate()}catch(e){}return r}}catch(e){}
   window.NXReg.soonCat=soonCat;
   window.NXReg.soonCard=function(c){return card(c,true,true)};
+  window.NXReg.hasStk=function(){for(var i=0;i<REG.length;i++)if(REG[i].cls==='stk'&&REG[i].active)return true;return false};
 
   /* ---------- Profilo: pagina «Fonti dati» ---------- */
   PIC.sources='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/></svg>';
@@ -11932,6 +11973,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   var SIC={
     px:['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>','#22ab94'],
     next:['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>','#f59e0b'],
+    logo:['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12.5l2 2 4-5"/></svg>','#a855f7'],
     chart:['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v16M16 4v16"/><rect x="5.5" y="8" width="5" height="7" rx="1"/><rect x="13.5" y="6" width="5" height="9" rx="1"/></svg>','#3b82f6']
   };
   function renderSources(p){
@@ -11945,6 +11987,9 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
       ['next',l.next,[(nxt.length?nxt.map(function(r){return r.k}).join(', '):t('cat_stk'))+'.',l.nextD]],
       ['chart',l.chart,[l.lw,'TradingView Lightweight Charts™ Copyright (c) 2025 TradingView, Inc.']]
     ];
+    /* 1.3.0: con le Azioni attive non resta niente «in arrivo»; i loghi delle azioni hanno i loro crediti */
+    if(!nxt.length&&REG.some(function(r){return r.cls==='stk'&&r.active}))secs.splice(1,1);
+    if(window.NXLogoCredits)secs.push(['logo',NXLogoCredits.title(),NXLogoCredits.lines()]);
     secs.forEach(function(x){
       var k=x[0],box=document.createElement('div');box.className='lgbox'+(PF.srcOpen===k?' open':'');
       var hd=document.createElement('button');hd.className='lghd';
@@ -12044,6 +12089,63 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
       return d;
     };
   }catch(e){}
+})();
+
+/* ---------- 1.3.0: Azioni. Nomi, loghi delle aziende salvati dentro l'app, stato della Borsa nella Watchlist ----------
+   Loghi: Simple Icons (CC0) per Apple, NVIDIA, Google, Meta e Tesla; Wikimedia Commons (pubblico dominio) per Microsoft e Amazon.
+   Sono marchi dei rispettivi proprietari: servono solo a riconoscere il titolo, come sulle piattaforme di trading. */
+(function(){
+  var NM={AAPL:'Apple',MSFT:'Microsoft',NVDA:'NVIDIA',AMZN:'Amazon',GOOGL:'Alphabet (Google)',META:'Meta Platforms',TSLA:'Tesla'};
+  var LG={"AAPL": "<svg class=\"nxci nxsi\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><circle cx=\"16\" cy=\"16\" r=\"15.5\" fill=\"#1C1C1E\" stroke=\"rgba(255,255,255,.22)\" stroke-width=\"1\"/><path transform=\"translate(7.60 7.20) scale(0.7)\" fill=\"#FFFFFF\" d=\"M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701\"/></svg>", "MSFT": "<svg class=\"nxci nxsi\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><circle cx=\"16\" cy=\"16\" r=\"15.5\" fill=\"#1C1C1E\" stroke=\"rgba(255,255,255,.22)\" stroke-width=\"1\"/><path fill=\"#F35325\" d=\"M8.9 8.9h6.6v6.6H8.9z\"/><path fill=\"#81BC06\" d=\"M16.5 8.9h6.6v6.6H16.5z\"/><path fill=\"#05A6F0\" d=\"M8.9 16.5h6.6v6.6H8.9z\"/><path fill=\"#FFBA08\" d=\"M16.5 16.5h6.6v6.6H16.5z\"/></svg>", "NVDA": "<svg class=\"nxci nxsi\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><circle cx=\"16\" cy=\"16\" r=\"16\" fill=\"#76B900\"/><path transform=\"translate(7.36 7.36) scale(0.72)\" fill=\"#FFFFFF\" d=\"M8.948 8.798v-1.43a6.7 6.7 0 0 1 .424-.018c3.922-.124 6.493 3.374 6.493 3.374s-2.774 3.851-5.75 3.851c-.398 0-.787-.062-1.158-.185v-4.346c1.528.185 1.837.857 2.747 2.385l2.04-1.714s-1.492-1.952-4-1.952a6.016 6.016 0 0 0-.796.035m0-4.735v2.138l.424-.027c5.45-.185 9.01 4.47 9.01 4.47s-4.08 4.964-8.33 4.964c-.37 0-.733-.035-1.095-.097v1.325c.3.035.61.062.91.062 3.957 0 6.82-2.023 9.593-4.408.459.371 2.34 1.263 2.73 1.652-2.633 2.208-8.772 3.984-12.253 3.984-.335 0-.653-.018-.971-.053v1.864H24V4.063zm0 10.326v1.131c-3.657-.654-4.673-4.46-4.673-4.46s1.758-1.944 4.673-2.262v1.237H8.94c-1.528-.186-2.73 1.245-2.73 1.245s.68 2.412 2.739 3.11M2.456 10.9s2.164-3.197 6.5-3.533V6.201C4.153 6.59 0 10.653 0 10.653s2.35 6.802 8.948 7.42v-1.237c-4.84-.6-6.492-5.936-6.492-5.936z\"/></svg>", "AMZN": "<svg class=\"nxci nxsi\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><circle cx=\"16\" cy=\"16\" r=\"16\" fill=\"#232F3E\"/><g transform=\"translate(7.160 7.271) scale(0.06923)\"><path fill=\"#FF9900\" d=\"m221.503 210.324c-105.235 50.083-170.545 8.18-212.352-17.271-2.587-1.604-6.984.375-3.169 4.757 13.928 16.888 59.573 57.593 119.153 57.593 59.621 0 95.09-32.532 99.527-38.207 4.407-5.627 1.294-8.731-3.16-6.872zm29.555-16.322c-2.826-3.68-17.184-4.366-26.22-3.256-9.05 1.078-22.634 6.609-21.453 9.93.606 1.244 1.843.686 8.06.127 6.234-.622 23.698-2.826 27.337 1.931 3.656 4.79-5.57 27.608-7.255 31.288-1.628 3.68.622 4.629 3.68 2.178 3.016-2.45 8.476-8.795 12.14-17.774 3.639-9.028 5.858-21.622 3.71-24.424z\"/><path fill=\"#FFFFFF\" d=\"m150.744 108.13c0 13.141.332 24.1-6.31 35.77-5.361 9.489-13.853 15.324-23.341 15.324-12.952 0-20.495-9.868-20.495-24.432 0-28.75 25.76-33.968 50.146-33.968zm34.015 82.216c-2.23 1.992-5.456 2.135-7.97.806-11.196-9.298-13.189-13.615-19.356-22.487-18.502 18.882-31.596 24.527-55.601 24.527-28.37 0-50.478-17.506-50.478-52.565 0-27.373 14.85-46.018 35.96-55.126 18.313-8.066 43.884-9.489 63.43-11.718v-4.365c0-8.018.616-17.506-4.08-24.432-4.128-6.215-12.003-8.777-18.93-8.777-12.856 0-24.337 6.594-27.136 20.257-.57 3.037-2.799 6.026-5.835 6.168l-32.735-3.51c-2.751-.618-5.787-2.847-5.028-7.07 7.543-39.66 43.36-51.616 75.43-51.616 16.415 0 37.858 4.365 50.81 16.795 16.415 15.323 14.849 35.77 14.849 58.02v52.565c0 15.798 6.547 22.724 12.714 31.264 2.182 3.036 2.657 6.69-.095 8.966-6.879 5.74-19.119 16.415-25.855 22.393l-.095-.095\"/></g></svg>", "GOOGL": "<svg class=\"nxci nxsi\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><circle cx=\"16\" cy=\"16\" r=\"16\" fill=\"#4285F4\"/><path transform=\"translate(8.08 8.08) scale(0.66)\" fill=\"#FFFFFF\" d=\"M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z\"/></svg>", "META": "<svg class=\"nxci nxsi\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><circle cx=\"16\" cy=\"16\" r=\"16\" fill=\"#0467DF\"/><path transform=\"translate(7.36 7.36) scale(0.72)\" fill=\"#FFFFFF\" d=\"M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z\"/></svg>", "TSLA": "<svg class=\"nxci nxsi\" style=\"width:100%;height:100%\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><circle cx=\"16\" cy=\"16\" r=\"16\" fill=\"#CC0000\"/><path transform=\"translate(8.08 8.08) scale(0.66)\" fill=\"#FFFFFF\" d=\"M12 5.362l2.475-3.026s4.245.09 8.471 2.054c-1.082 1.636-3.231 2.438-3.231 2.438-.146-1.439-1.154-1.79-4.354-1.79L12 24 8.619 5.034c-3.18 0-4.188.354-4.335 1.792 0 0-2.146-.795-3.229-2.43C5.28 2.431 9.525 2.34 9.525 2.34L12 5.362l-.004.002H12v-.002zm0-3.899c3.415-.03 7.326.528 11.328 2.28.535-.968.672-1.395.672-1.395C19.625.612 15.528.015 12 0 8.472.015 4.375.61 0 2.349c0 0 .195.525.672 1.396C4.674 1.989 8.585 1.435 12 1.46v.003z\"/></svg>"};
+  function keyOf(b){b=String(b||'');for(var k in NM)if(b===k||b.indexOf(k)===0&&!/^[A-Z]/.test(b.charAt(k.length)))return k;return null}
+  try{
+    var oI=info;
+    info=function(it){var r=oI.apply(this,arguments);try{if(r.cat==='stk'){var k=keyOf(r.b);if(k)r.desc=NM[k]}}catch(e){}return r};
+  }catch(e){}
+  try{
+    var oIc=iconEl;
+    iconEl=function(it){
+      var d=oIc.apply(this,arguments);
+      try{var r=info(it);if(r.cat==='stk'){var k=keyOf(r.b);if(k&&LG[k]){d.textContent='';d.style.background='transparent';d.innerHTML=LG[k]}}}catch(e){}
+      return d;
+    };
+  }catch(e){}
+  var CR={
+    it:{t:'Loghi delle azioni',a:'Apple, NVIDIA, Google, Meta e Tesla: icone di Simple Icons (simpleicons.org), licenza CC0.',b:'Microsoft e Amazon: loghi di Wikimedia Commons, pubblico dominio.',c:'I loghi sono marchi dei rispettivi proprietari. Servono solo a riconoscere il titolo e non indicano un legame con le aziende né un loro sostegno.'},
+    en:{t:'Stock logos',a:'Apple, NVIDIA, Google, Meta and Tesla: icons from Simple Icons (simpleicons.org), CC0 licence.',b:'Microsoft and Amazon: logos from Wikimedia Commons, public domain.',c:'The logos are trademarks of their respective owners. They are only used to identify the stock and do not imply any affiliation with or endorsement by the companies.'},
+    es:{t:'Logotipos de las acciones',a:'Apple, NVIDIA, Google, Meta y Tesla: iconos de Simple Icons (simpleicons.org), licencia CC0.',b:'Microsoft y Amazon: logotipos de Wikimedia Commons, dominio público.',c:'Los logotipos son marcas de sus respectivos propietarios. Solo sirven para reconocer el valor y no indican relación con las empresas ni su respaldo.'},
+    fr:{t:'Logos des actions',a:'Apple, NVIDIA, Google, Meta et Tesla : icônes de Simple Icons (simpleicons.org), licence CC0.',b:'Microsoft et Amazon : logos de Wikimedia Commons, domaine public.',c:'Les logos sont des marques de leurs propriétaires respectifs. Ils servent seulement à reconnaître le titre et n\u2019indiquent aucun lien avec les entreprises ni leur soutien.'},
+    de:{t:'Aktien-Logos',a:'Apple, NVIDIA, Google, Meta und Tesla: Icons von Simple Icons (simpleicons.org), Lizenz CC0.',b:'Microsoft und Amazon: Logos von Wikimedia Commons, gemeinfrei.',c:'Die Logos sind Marken ihrer jeweiligen Inhaber. Sie dienen nur dazu, die Aktie zu erkennen, und bedeuten keine Verbindung zu den Unternehmen oder deren Unterstützung.'}
+  };
+  function cr(){try{return CR[lang]||CR.it}catch(e){return CR.it}}
+  window.NXLogoCredits={title:function(){return cr().t},lines:function(){var c=cr();return[c.a,c.b,c.c]}};
+  /* stato della Borsa accanto al titolo «Azioni» nella Watchlist */
+  try{var st=document.createElement('style');st.textContent=
+    '#wl .sec .nxmk{margin-left:auto;flex:none;padding:3px 9px;border-radius:999px;border:1px solid var(--line);font-size:9.5px;letter-spacing:.08em;line-height:1.3;color:var(--muted);white-space:nowrap}'+
+    '#wl .sec .nxmk i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#8e8e93;margin-right:6px;vertical-align:1px}'+
+    '#wl .sec .nxmk.s-open{color:var(--up)}#wl .sec .nxmk.s-open i{background:var(--up)}'+
+    '#wl .sec .nxmk.s-pre{color:#f59e0b}#wl .sec .nxmk.s-pre i{background:#f59e0b}'+
+    '#wl .sec.nxmkh{display:flex;align-items:center}'+
+    '#lgdot.pre{background:#f59e0b!important}.mkst.pre{color:#f59e0b}.mkst.pre i{background:rgba(245,158,11,.22)}.mkst.pre i::after{background:#f59e0b}'+
+    '.mkhrs{margin-top:6px;color:var(--muted);font-size:14px}';
+    document.head.appendChild(st)}catch(e){}
+  function state(){var o={wd:0};try{var a=Object.keys(NM)[0];if(BYN[a])return mktState(a);var p=nyParts(Date.now());var k='stk';if(mktOpenAt(k,p))return'open';if(stkHol(p))return'hol';if(stkPre(p))return'pre'}catch(e){}return'closed'}
+  function badge(){
+    try{
+      if(!(window.NXReg&&NXReg.hasStk&&NXReg.hasStk()))return;
+      var box=document.getElementById('wl');if(!box)return;
+      var ct=t('cat_stk');
+      [].forEach.call(box.querySelectorAll('.sec'),function(h){
+        var isS=h.dataset.cat==='stk'||(!h.querySelector('.nxmk')&&h.textContent===ct);if(!isS)return;
+        h.dataset.cat='stk';
+        var b=h.querySelector('.nxmk');if(!b){b=document.createElement('span');b.innerHTML='<i></i><span></span>';h.appendChild(b);h.classList.add('nxmkh')}
+        var s=state();b.className='nxmk s-'+s;b.lastChild.textContent=s==='open'?mk2('bOpen'):s==='pre'?mk2('pre'):mk2('bClosed');
+      });
+    }catch(e){}
+  }
+  try{var oRW=renderWL;renderWL=function(){var r=oRW.apply(this,arguments);badge();return r}}catch(e){}
+  setInterval(function(){try{if(tab==='wl')badge()}catch(e){}},30000);
+  window.NXStk={names:NM,badge:badge};
 })();
 
 /* ================= Motore nostro · fase 1: prezzi e candele dal server NexusCharts ================= */
@@ -12661,7 +12763,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
       if(/\/instruments(\?|$)/.test(p)){
         var build=function(){
         migrateNames();
-        var CL={fx:'FOREX',com:'COMMODITY',cry:'CRYPTO',idx:'INDEX'},list=[];
+        var CL={fx:'FOREX',com:'COMMODITY',cry:'CRYPTO',idx:'INDEX',stk:'STOCK'},list=[];
         try{(NXReg.list||[]).forEach(function(r,i){if(r&&r.k)list.push({name:r.k,tradableInstrumentId:-1000-i,description:'',type:CL[r.cls]||'',routes:[{type:'INFO',id:0}]})})}catch(e){}
         return {d:{instruments:list}};};
         if(!ACCT&&FRIEND)return friendCheck().then(build);
@@ -12967,4 +13069,11 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   TX.it.e_auth=TX.it.e.auth;TX.en.e_auth=TX.en.e.auth;TX.es.e_auth=TX.es.e.auth;TX.fr.e_auth=TX.fr.e.auth;TX.de.e_auth=TX.de.e.auth;
   /* l'ultimo utente che ha usato questo telefono: il campo e' gia' pronto */
   try{var lu=sget(KL);if(lu&&!fU.inp.value)fU.inp.value=lu}catch(e){}
+})();
+
+/* 1.3.0: prezzi delle azioni sempre con 2 decimali, come in Borsa (dopo il motore, che sostituisce quoteFor) */
+(function(){
+  function isStk(n){try{return !!(BYN[n]&&info(BYN[n]).cat==='stk')}catch(e){return false}}
+  try{var oSD=setDec;setDec=function(d){return oSD.call(this,isStk(cur)?2:d)}}catch(e){}
+  try{var oQF=quoteFor;quoteFor=function(n){return Promise.resolve(oQF.apply(this,arguments)).then(function(r){try{if(isStk(n)&&QUOTE[n])QUOTE[n].dec=2}catch(e){}return r})}}catch(e){}
 })();

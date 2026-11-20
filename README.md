@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.2.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.3.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,15 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.1.1 — Lighter and tidier
+### 🆕 New in 1.3.0 — Stocks
+
+- 📈 **Stocks are here**: Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta and Tesla, with live prices during the New York session and candle history.
+- 🍎 **Company logos** as round icons, saved inside the app.
+- 🕘 **Exchange status**: next to *Stocks* in the Watchlist you see whether the New York exchange is Open, in Pre-market or Closed. With the exchange closed you see the last price of the session; holidays and early closes are taken into account.
+- 🔎 The *Stocks* category is now in Search and in the first-launch setup, like the other categories.
+- 📘 FAQ updated for NexusCharts accounts.
+
+### Previously in 1.1.1 — Lighter and tidier
 
 - 🪶 **Lighter app**: code that is no longer used has been removed, so the app loads less.
 - 📜 **Privacy Policy** updated with sign-in with Face ID (what we store and for how long).
@@ -152,12 +160,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 ## 🚀 Features
 
 ### 📋 Watchlist
-- 72 instruments: Forex, metals, energy, indices and crypto, grouped by category (stocks coming soon)
+- 79 instruments: Forex, metals, energy, indices, crypto and 7 US stocks, grouped by category
 - Search any symbol and add it with one tap
 - Live price, daily change in points and percent, flag/coin icons
 - Mini player at the bottom with the selected symbol and its sparkline
 - **Multiple watchlists** (*All watchlists*: create, rename, delete) and colour **Signals** with their own tabs
 - Long-press a pair for Signal and Remove
+- Stocks show the New York exchange status (Open, Pre-market, Closed) next to the category name
 
 ### 📊 Chart
 - Full-screen chart with **live updates** and a candle **countdown**
@@ -285,7 +294,6 @@ Have a **friend code**? Tap **Use a code** and type it (format `XXXX-XXXX`): it 
 - 📡 The data server stores only market prices: no IP addresses and no personal data.
 - 🔔 If you turn on notifications, your active price alerts are kept on the server only to notify you; delete an alert and it's gone.
 - 🔐 No passwords or private keys are stored in this repository.
-- 🎟️ Access codes are tied to a single device and can be revoked at any time.
 - 🛡️ **Protection against code guessing**: after too many wrong codes from the same network, sign-in pauses for a while and the app shows a clear message. Valid codes and linked devices are never affected.
 - 🧹 **Reset app** erases everything saved on the device.
 
@@ -313,12 +321,12 @@ Versions use three numbers, **MAJOR.MINOR.PATCH** (for example 0.43.0):
 
 <details>
 <summary><b>Do I need to pay or subscribe?</b></summary>
-No. Installing and using NexusCharts is free — you only need an access code.
+No. Installing and using NexusCharts is free — just create a free account with a username, email and password.
 </details>
 
 <details>
 <summary><b>Do I need a broker account?</b></summary>
-No. With an access code you sign in without any broker registration.
+No. You sign in with your NexusCharts account, without any broker registration.
 </details>
 
 <details>
@@ -337,8 +345,8 @@ Yes, with push notifications on. On iPhone the app must be installed on the Home
 </details>
 
 <details>
-<summary><b>My code says it's already used on another device.</b></summary>
-Each code works on one device only. Ask for a new one on Telegram.
+<summary><b>My friend code says it's already used on another device.</b></summary>
+Each friend code works on one device only. On another device, sign in with a free NexusCharts account: it works on all your devices.
 </details>
 
 <details>
@@ -368,8 +376,8 @@ Not yet: they're saved on the device where you made them.
 | ✅ | Design 3.0 inside the app, multiple watchlists, Signals, drawing width/style and Undo |
 | ✅ | Our own data server: live streaming, 72 instruments, names in 5 languages |
 | ✅ | NexusCharts accounts, new address nexuscharts.app, Privacy Policy |
+| ✅ | Stocks: Apple, Microsoft, NVIDIA, Amazon, Alphabet, Meta, Tesla, with exchange hours |
 | 🔜 | Longer candle history (years) |
-| 🔜 | Stocks |
 | 🔜 | Full desktop version |
 | 💡 | Sync between devices |
 
@@ -380,6 +388,7 @@ Not yet: they're saved on the device where you made them.
 - Charts powered by [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache 2.0).
 - Market data from [biquote.io](https://biquote.io). Prices are for analysis and may differ from your broker's.
 - Crypto icons from [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons) (CC0 1.0).
+- Stock logos: Apple, NVIDIA, Google, Meta and Tesla from [Simple Icons](https://simpleicons.org) (CC0 1.0); Microsoft and Amazon from [Wikimedia Commons](https://commons.wikimedia.org) (public domain). The logos are trademarks of their respective owners and are only used to identify the stock; NexusCharts is not affiliated with these companies.
 - TradingView and Pine Script are trademarks of TradingView, Inc. NexusCharts is not affiliated with TradingView.
 
 ---
