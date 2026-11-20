@@ -1,4 +1,4 @@
-const VERSION='1.1.1';
+const VERSION='1.1.2';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -2059,26 +2059,9 @@ function renderEdit(){
   mk(esc(t('ok')),t('ok'),()=>{dSel=null;setMode('idle')},'wide on');
 }
 
-/* foglio con gli strumenti */
-function openDrawTools(){
-  openSheet(s=>{
-    shEl(s,'sh-t',t('tools'));
-    DTOOLS.forEach(g=>{
-      shEl(s,'sh-l',t(g.sec));
-      const grid=document.createElement('div');grid.className='tgrid';
-      g.items.forEach(k=>{
-        const b=document.createElement('button');b.className='tile';
-        b.innerHTML=DICON[k]+'<span></span>';b.lastChild.textContent=t('d_'+k);
-        b.onclick=()=>startTool(k);grid.appendChild(b);
-      });
-      s.appendChild(grid);
-    });
-    if(drawings.length){
-      shEl(s,'sh-sep','');
-      shItem(s,t('delall')+' ('+cur+')',{danger:true,on:()=>{drawings=[];dSel=null;dSave();setMode('idle');closeSheet()}});
-    }
-  });
-}
+/* 1.1.2: la scelta degli strumenti apre sempre il pannello «Disegni» Design 3.0 (lo stesso della matita);
+   il vecchio foglio «Strumenti di disegno» non c'e' piu'. Lo strumento in corso resta finche' non se ne sceglie un altro. */
+function openDrawTools(){openHub('draw',true)}
 
 /* disegna a ogni fotogramma, cosi' segue scorrimento e zoom del grafico */
 function dFrame(){
@@ -2430,9 +2413,9 @@ var HIC={
 };
 function hubSetY(y,anim){const h=$('hub');h.style.transition=anim?'transform .28s cubic-bezier(.2,.8,.2,1)':'none';HUB.y=Math.max(0,y);h.style.transform='translateY('+HUB.y+'px)'}
 function hubHalf(){return Math.round($('hub').getBoundingClientRect().height*0.42)}
-function openHub(mode){
+function openHub(mode,keep){
   mode=mode==='draw'?'draw':'hub';
-  if(window.dMode&&dMode!=='idle'){dTemp=null;dSel=null;setMode('idle')}
+  if(!keep&&window.dMode&&dMode!=='idle'){dTemp=null;dSel=null;setMode('idle')}
   HUB.open=true;HUB.stack=[];HUB.mode=mode;
   $('hub').classList.toggle('draw',mode==='draw');
   $('hubbg').hidden=false;$('hub').hidden=false;
@@ -7470,7 +7453,7 @@ pageInd=function(b){
   };
   window.openInd=function(){ISRCH='';openHub('hub');HUB.mode='ind';$('hub').classList.add('ind');hubRender()};
   const oO=openHub;
-  openHub=function(m){$('hub').classList.remove('ind');oO(m)};
+  openHub=function(m,k){$('hub').classList.remove('ind');oO(m,k)};
   $('inds').onclick=openInd;
   const oH=hubRoot;
   hubRoot=function(b){oH(b);b.querySelectorAll('.htile[data-k="ind"]').forEach(t=>t.remove())};
@@ -9555,11 +9538,11 @@ ${B}#pf-screen.d3main .pfrow:active .pfic::before{opacity:1;transform:scale(1) r
   var st=document.createElement('style');st.id='d3inner3css';st.textContent=css;document.head.appendChild(st);
 
   var TX={
-    it:{k:'Simboli',title:'Cerca un simbolo',ph:'Simbolo o nome',close:'Chiudi',all:'Tutto',add:'Aggiungi alla Watchlist',rem:'Togli dalla Watchlist',inwl:'Nella Watchlist',others:'Altri simboli',remove:'Rimuovi',last:'Nella Watchlist deve restare almeno un simbolo.',added:'aggiunto alla Watchlist',removed:'tolto dalla Watchlist',stkK:'Azioni · in arrivo',stkT:'Nessuna Azione, per ora',stkD:'Quando le Azioni saranno disponibili le troverai qui e nella ricerca.',stkB:'Cerca Azioni',menu:'Azioni sul simbolo'},
-    en:{k:'Symbols',title:'Search a symbol',ph:'Symbol or name',close:'Close',all:'All',add:'Add to Watchlist',rem:'Remove from Watchlist',inwl:'In your Watchlist',others:'Other symbols',remove:'Remove',last:'Your Watchlist needs at least one symbol.',added:'added to Watchlist',removed:'removed from Watchlist',stkK:'Stocks · coming',stkT:'No Stocks yet',stkD:'When Stocks become available you will find them here and in search.',stkB:'Search Stocks',menu:'Symbol actions'},
-    es:{k:'S\u00edmbolos',title:'Buscar un s\u00edmbolo',ph:'S\u00edmbolo o nombre',close:'Cerrar',all:'Todo',add:'A\u00f1adir a la Watchlist',rem:'Quitar de la Watchlist',inwl:'En tu Watchlist',others:'Otros s\u00edmbolos',remove:'Quitar',last:'En la Watchlist debe quedar al menos un s\u00edmbolo.',added:'a\u00f1adido a la Watchlist',removed:'quitado de la Watchlist',stkK:'Acciones \u00b7 pr\u00f3ximamente',stkT:'Todav\u00eda no hay Acciones',stkD:'Cuando haya Acciones disponibles las encontrar\u00e1s aqu\u00ed y en la b\u00fasqueda.',stkB:'Buscar Acciones',menu:'Acciones del s\u00edmbolo'},
-    fr:{k:'Symboles',title:'Rechercher un symbole',ph:'Symbole ou nom',close:'Fermer',all:'Tout',add:'Ajouter \u00e0 la Watchlist',rem:'Retirer de la Watchlist',inwl:'Dans ta Watchlist',others:'Autres symboles',remove:'Retirer',last:'La Watchlist doit garder au moins un symbole.',added:'ajout\u00e9 \u00e0 la Watchlist',removed:'retir\u00e9 de la Watchlist',stkK:'Actions \u00b7 bient\u00f4t',stkT:'Pas encore d\u2019Actions',stkD:'Quand des Actions seront disponibles, tu les trouveras ici et dans la recherche.',stkB:'Chercher des Actions',menu:'Actions sur le symbole'},
-    de:{k:'Symbole',title:'Symbol suchen',ph:'Symbol oder Name',close:'Schlie\u00dfen',all:'Alle',add:'Zur Watchlist hinzuf\u00fcgen',rem:'Aus der Watchlist entfernen',inwl:'In deiner Watchlist',others:'Weitere Symbole',remove:'Entfernen',last:'In der Watchlist muss mindestens ein Symbol bleiben.',added:'zur Watchlist hinzugef\u00fcgt',removed:'aus der Watchlist entfernt',stkK:'Aktien \u00b7 bald',stkT:'Noch keine Aktien',stkD:'Sobald Aktien verf\u00fcgbar sind, findest du sie hier und in der Suche.',stkB:'Aktien suchen',menu:'Symbolaktionen'}
+    it:{k:'Simboli',title:'Cerca un simbolo',ph:'Simbolo o nome',close:'Chiudi',all:'Tutto',add:'Aggiungi alla Watchlist',rem:'Togli dalla Watchlist',inwl:'Nella Watchlist',others:'Altri simboli',remove:'Rimuovi',last:'Nella Watchlist deve restare almeno un simbolo.',added:'aggiunto alla Watchlist',removed:'tolto dalla Watchlist',stkK:'Azioni · in arrivo',stkT:'Nessuna Azione, per ora',stkD:'Quando le Azioni saranno disponibili le troverai qui e nella ricerca.',stkB:'Cerca Azioni',stkD0:'Cerca e tocca la stella per aggiungerne una.',menu:'Azioni sul simbolo'},
+    en:{k:'Symbols',title:'Search a symbol',ph:'Symbol or name',close:'Close',all:'All',add:'Add to Watchlist',rem:'Remove from Watchlist',inwl:'In your Watchlist',others:'Other symbols',remove:'Remove',last:'Your Watchlist needs at least one symbol.',added:'added to Watchlist',removed:'removed from Watchlist',stkK:'Stocks · coming',stkT:'No Stocks yet',stkD:'When Stocks become available you will find them here and in search.',stkB:'Search Stocks',stkD0:'Search and tap the star to add one.',menu:'Symbol actions'},
+    es:{k:'S\u00edmbolos',title:'Buscar un s\u00edmbolo',ph:'S\u00edmbolo o nombre',close:'Cerrar',all:'Todo',add:'A\u00f1adir a la Watchlist',rem:'Quitar de la Watchlist',inwl:'En tu Watchlist',others:'Otros s\u00edmbolos',remove:'Quitar',last:'En la Watchlist debe quedar al menos un s\u00edmbolo.',added:'a\u00f1adido a la Watchlist',removed:'quitado de la Watchlist',stkK:'Acciones \u00b7 pr\u00f3ximamente',stkT:'Todav\u00eda no hay Acciones',stkD:'Cuando haya Acciones disponibles las encontrar\u00e1s aqu\u00ed y en la b\u00fasqueda.',stkB:'Buscar Acciones',stkD0:'Busca y toca la estrella para a\u00f1adir una.',menu:'Acciones del s\u00edmbolo'},
+    fr:{k:'Symboles',title:'Rechercher un symbole',ph:'Symbole ou nom',close:'Fermer',all:'Tout',add:'Ajouter \u00e0 la Watchlist',rem:'Retirer de la Watchlist',inwl:'Dans ta Watchlist',others:'Autres symboles',remove:'Retirer',last:'La Watchlist doit garder au moins un symbole.',added:'ajout\u00e9 \u00e0 la Watchlist',removed:'retir\u00e9 de la Watchlist',stkK:'Actions \u00b7 bient\u00f4t',stkT:'Pas encore d\u2019Actions',stkD:'Quand des Actions seront disponibles, tu les trouveras ici et dans la recherche.',stkB:'Chercher des Actions',stkD0:'Cherche et touche l\u2019\u00e9toile pour en ajouter une.',menu:'Actions sur le symbole'},
+    de:{k:'Symbole',title:'Symbol suchen',ph:'Symbol oder Name',close:'Schlie\u00dfen',all:'Alle',add:'Zur Watchlist hinzuf\u00fcgen',rem:'Aus der Watchlist entfernen',inwl:'In deiner Watchlist',others:'Weitere Symbole',remove:'Entfernen',last:'In der Watchlist muss mindestens ein Symbol bleiben.',added:'zur Watchlist hinzugef\u00fcgt',removed:'aus der Watchlist entfernt',stkK:'Aktien \u00b7 bald',stkT:'Noch keine Aktien',stkD:'Sobald Aktien verf\u00fcgbar sind, findest du sie hier und in der Suche.',stkB:'Aktien suchen',stkD0:'Suche und tippe auf den Stern, um eine hinzuzuf\u00fcgen.',menu:'Symbolaktionen'}
   };
   function lx(){try{return TX[lang]?TX[lang]:TX.it}catch(e){return TX.it}}
   var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
@@ -9568,9 +9551,11 @@ ${B}#pf-screen.d3main .pfrow:active .pfic::before{opacity:1;transform:scale(1) r
   function catOf(it){try{return info(it).cat}catch(e){return 'oth'}}
   function orbSvg(w,h){return '<svg viewBox="0 0 100 60" aria-hidden="true"><ellipse class="o" cx="50" cy="30" rx="46" ry="15" transform="rotate(-12 50 30)"/><g class="r"><ellipse class="od" cx="50" cy="30" rx="30" ry="24" transform="rotate(24 50 30)"/><circle class="sat" cx="74" cy="14" r="2.6"/></g><circle class="core" cx="50" cy="30" r="7"/></svg>'}
   function emptyStk(inSearch){
-    var l=lx(),e=document.createElement('div');e.className='d3empty';e.setAttribute('data-cat','stk');
+    /* 1.1.2: nella Watchlist il riquadro Azioni vuoto e' come quello delle altre categorie (contatore «· 0» e «tocca la stella»);
+       nella ricerca resta quello «in arrivo» */
+    var l=lx(),e=document.createElement('div');e.className='d3empty'+(inSearch?'':' d3cate');e.setAttribute('data-cat','stk');
     e.innerHTML='<div class="d3e-o">'+orbSvg()+'</div><span class="d3e-k"></span><b></b><p></p>';
-    e.querySelector('.d3e-k').textContent=l.stkK;e.querySelector('b').textContent=l.stkT;e.querySelector('p').textContent=l.stkD;
+    e.querySelector('.d3e-k').textContent=inSearch?l.stkK:t('cat_stk')+' \u00b7 0';e.querySelector('b').textContent=l.stkT;e.querySelector('p').textContent=inSearch?l.stkD:l.stkD0;
     if(!inSearch){var b=document.createElement('button');b.type='button';b.innerHTML='<span></span><i aria-hidden="true"></i>';b.firstChild.textContent=l.stkB;b.onclick=function(){openSearch('stk')};e.appendChild(b)}
     return e;
   }
@@ -9686,7 +9671,7 @@ ${B}#pf-screen.d3main .pfrow:active .pfic::before{opacity:1;transform:scale(1) r
       var box=document.getElementById('wl');if(!box)return;
       var has=WATCH.some(function(n){return BYN[n]&&catOf(BYN[n])==='stk'});
       if(has)return;
-      /* 0.45.0: la sezione «Azioni · in arrivo» solo nella Watchlist principale; Segnali e liste mostrano solo quello che contengono */
+      /* 0.45.0: la sezione Azioni solo nella Watchlist principale; Segnali e liste mostrano solo quello che contengono */
       if(window.NXLists&&NXLists.isMainList&&!NXLists.isMainList())return;
       var h=document.createElement('div');h.className='sec';h.textContent=t('cat_stk');h.dataset.cat='stk';
       var oth=null,oT=t('cat_oth');[].forEach.call(box.querySelectorAll('.sec'),function(s){if(s.textContent===oT)oth=s});
