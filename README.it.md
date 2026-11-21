@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.3.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.3.1-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.3.0 — Azioni
+### 🆕 Novità della 1.3.1 — Più chiara nei risultati di Google
+
+- 🔎 **Nome del sito**: nei risultati di Google e nelle anteprime dei link il sito si chiama semplicemente *NexusCharts*.
+- 📝 **Descrizione aggiornata**: ora cita Gold, Forex, Crypto, Indices e Stocks, senza il vecchio «Stocks coming soon».
+
+### In precedenza, nella 1.3.0 — Azioni
 
 - 📈 **Arrivano le azioni**: Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta e Tesla, con prezzi in diretta durante la seduta di New York e lo storico delle candele.
 - 🍎 **Loghi delle aziende** come icone rotonde, salvati dentro l'app.

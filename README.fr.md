@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.3.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.3.1-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.3.0 — Actions
+### 🆕 Nouveautés de la 1.3.1 — Plus claire dans les résultats Google
+
+- 🔎 **Nom du site** : dans les résultats Google et les aperçus de liens, le site s'appelle simplement *NexusCharts*.
+- 📝 **Description mise à jour** : elle cite désormais Gold, Forex, Crypto, Indices et Stocks, sans l'ancien « Stocks coming soon ».
+
+### Auparavant, dans la 1.3.0 — Actions
 
 - 📈 **Les actions arrivent** : Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta et Tesla, avec les prix en direct pendant la séance de New York et l'historique des bougies.
 - 🍎 **Logos des entreprises** en icônes rondes, enregistrés dans l'app.

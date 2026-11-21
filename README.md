@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.3.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.3.1-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.3.0 — Stocks
+### 🆕 New in 1.3.1 — Clearer in Google results
+
+- 🔎 **Site name**: Google results and link previews now name the site simply *NexusCharts*.
+- 📝 **Updated description**: it now lists Gold, Forex, Crypto, Indices and Stocks, without the old “Stocks coming soon”.
+
+### Previously in 1.3.0 — Stocks
 
 - 📈 **Stocks are here**: Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta and Tesla, with live prices during the New York session and candle history.
 - 🍎 **Company logos** as round icons, saved inside the app.

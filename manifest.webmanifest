@@ -1,7 +1,7 @@
 {
   "name": "NexusCharts",
   "short_name": "NexusCharts",
-  "description": "Grafici e watchlist personali",
+  "description": "Real-time charts for Gold, Forex, Crypto, Indices and Stocks, with indicators, drawing tools, Bar Replay and alerts.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
