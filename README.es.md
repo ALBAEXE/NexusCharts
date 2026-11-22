@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.6.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.7.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.6.0 — Avisos legales en Design 3.0
+### 🆕 Novedades de la 1.7.0 — Estado en línea más rápido
+
+- ⚡ La app avisa al servidor en cuanto se abre y luego cada pocos segundos, y lo avisa de forma fiable cuando la cierras, también en iPhone.
+
+### Anteriormente, en la 1.6.0 — Avisos legales en Design 3.0
 
 - ⚖️ **Perfil › Avisos legales** tiene el mismo estilo que el resto de la app: un menú de secciones (advertencia de riesgo, términos, privacidad, contribuciones, créditos, contacto) y cada una abre su propia página.
 - 💬 **Contacto**: escríbenos por Telegram o a support@nexuscharts.app. Son los únicos canales oficiales.
@@ -76,9 +80,12 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - 📣 **Perfil › Redes sociales**: canal oficial de Telegram, Instagram, TikTok, YouTube y X, cada uno con su icono. Con un toque se abre la app de la red social directamente en nuestra página (o la web, si la app no está instalada).
 
-### Anteriormente, en la 1.4.2 — Páginas más estables
+<details>
+<summary>Anteriormente, en la 1.4.2 — Páginas más estables</summary>
 
 - 📋 **Watchlist y Perfil** solo se desplazan arriba y abajo: al arrastrar un par hacia un lado la página ya no se mueve.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.4.1 — Perfil más sencillo</summary>
@@ -93,13 +100,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🕯️ **Velas diarias como en los brókers**: oro, metales, energía, Forex e índices cierran el día a las 17:00 de Nueva York. El domingo por la noche forma parte del lunes y la vela en vivo pasa al nuevo día justo al cierre.
 - 🪙 Las cripto siguen cerrando a medianoche UTC; las acciones siguen la sesión de Nueva York.
 - 📡 **Fuentes de datos** lo explica; el histórico diario anterior al 12 de noviembre de 2026 sigue cerrando a medianoche UTC.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.3.5 — Todos los puntos laten</summary>
-
-- 🪐 **Órbita del mercado**: ahora late el punto de cada instrumento, no solo el del mejor y el peor.
 
 </details>
 

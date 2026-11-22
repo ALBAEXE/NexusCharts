@@ -1,9 +1,7 @@
-# v1.6.0 — Legal in Design 3.0
+# v1.7.0 — Quicker online status
 ### Changed
-- Profile › Legal now uses the Design 3.0 style: a menu of sections, each opening its own page, ordered risk disclaimer, terms, privacy, contributions, credits, contact.
-
-### Added
-- Contact: message the team on Telegram or write to support@nexuscharts.app, the only official channels.
+- The app tells the server it is open right away and every few seconds (before: once a minute).
+- When the app is closed or sent to the background, the signal is sent reliably, also on iPhone.
 
 ### Documentation
-- README updated in 5 languages: new in 1.6.0.
+- README updated in 5 languages: new in 1.7.0.

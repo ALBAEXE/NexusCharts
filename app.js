@@ -1,4 +1,4 @@
-const VERSION='1.6.0';
+const VERSION='1.7.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -7823,11 +7823,14 @@ function presSend(off){
   Object.assign(h,acctH());
   PRES.last=Date.now();
   try{fetch(WORKER+'/hello',{method:'POST',headers:h,body:JSON.stringify({dev:devId(),plat:presPlat(),ver:VERSION,off:!!off}),keepalive:true,cache:'no-store'}).catch(()=>{})}catch(e){}
+  /* 1.7.0: all'uscita anche un segnale «beacon», che l'iPhone manda anche mentre chiude l'app */
+  if(off&&navigator.sendBeacon){try{const b={dev:devId(),plat:presPlat(),ver:VERSION,off:true};if(h.Authorization)b.code=h.Authorization.replace(/^Bearer\s+/,'');if(h['X-Account'])b.acct=h['X-Account'];
+    navigator.sendBeacon(WORKER+'/hello',new Blob([JSON.stringify(b)],{type:'text/plain'}))}catch(e){}}
 }
-setInterval(()=>{if(!document.hidden)presSend(false)},60000);
+setInterval(()=>{if(!document.hidden)presSend(false)},15000);   /* 1.7.0: ogni 15 secondi (prima ogni minuto) */
 document.addEventListener('visibilitychange',()=>{presSend(document.hidden)});
 window.addEventListener('pagehide',()=>presSend(true));
-(function(){const o=start;start=function(){const r=o.apply(this,arguments);setTimeout(()=>presSend(false),2500);return r}})();
+(function(){const o=start;start=function(){const r=o.apply(this,arguments);setTimeout(()=>presSend(false),300);return r}})();
 
 /* =====================================================================
    0.41.0: tutti i timeframe (secondi, minuti, ore, giorni, settimane, mesi)
