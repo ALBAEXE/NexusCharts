@@ -1,4 +1,4 @@
-const VERSION='1.4.1';
+const VERSION='1.4.2';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -8974,6 +8974,7 @@ else{
   B+'#wlsrch:active{transform:scale(.9) rotate(-12deg)}'+
   B+'#wlsrch:focus-visible{outline:2px solid #3B82F6;outline-offset:3px}'+
   B+'#wlhdt{position:relative;z-index:1;margin:8px 0 0;font-size:32px;line-height:1.08;font-weight:300;letter-spacing:-.02em;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100% - 96px)}'+
+  B+'#wl-screen,'+B+'#pf-screen{overflow-x:hidden;overscroll-behavior-x:none}'+/* 1.4.2: la pagina scorre solo su e giù */
   B+'#wlhd .d3orb{position:absolute;right:-28px;top:14px;width:156px;height:78px;background:var(--d3o);pointer-events:none;'+M(ORB)+'}'+
   B+'#wlhd .d3sat{position:absolute;right:38px;top:44px;width:7px;height:7px;border-radius:50%;background:var(--d3sat);box-shadow:0 0 0 4px rgba(127,127,127,.12);pointer-events:none;animation:d3sat 8s ease-in-out infinite}'+
   '@keyframes d3sat{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,18px)}}'+

@@ -1,7 +1,6 @@
-# v1.4.1 — Simpler Profile
-### Changed
-- Profile: the Data sources page has been removed.
-- Chart and stock logo credits moved to Legal, under Credits.
+# v1.4.2 — Steadier pages
+### Fixed
+- Watchlist and Profile only scroll up and down: dragging a pair sideways no longer moves the whole page.
 
 ### Documentation
-- README updated in 5 languages: new in 1.4.1.
+- README updated in 5 languages: new in 1.4.2.

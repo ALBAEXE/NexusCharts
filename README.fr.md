@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.4.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.4.2-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.4.1 — Profil plus simple
+### 🆕 Nouveautés de la 1.4.2 — Pages plus stables
+
+- 📋 **Watchlist et Profil** défilent seulement vers le haut et le bas : en faisant glisser une paire sur le côté, la page ne bouge plus.
+
+### Auparavant, dans la 1.4.1 — Profil plus simple
 
 - 👤 **Profil** : la page *Sources des données* a été retirée. Les crédits du graphique et des logos sont maintenant dans *Mentions légales*, sous *Crédits*.
 
@@ -77,9 +81,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🪙 Les cryptos clôturent toujours à minuit UTC ; les actions suivent la séance de New York.
 - 📡 **Sources des données** l'explique ; l'historique journalier avant le 12 novembre 2026 clôture encore à minuit UTC.
 
-### Auparavant, dans la 1.3.5 — Tous les points pulsent
+<details>
+<summary>Auparavant, dans la 1.3.5 — Tous les points pulsent</summary>
 
 - 🪐 **Orbite du marché** : le point de chaque instrument pulse désormais, pas seulement celui du meilleur et du pire.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.3.4 — Orbite du marché plus rapide</summary>
@@ -93,15 +100,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 <summary>Auparavant, dans la 1.3.3 — Bougies journalières plus nettes</summary>
 
 - 🕯️ **Graphique journalier** : la petite bougie du dimanche soir (réouverture du marché) fait désormais partie de la bougie du lundi, comme sur les plateformes de trading. Les bougies hebdomadaires et mensuelles en profitent aussi. Les cryptos, qui s'échangent aussi le week-end, gardent leurs bougies du samedi et du dimanche.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.3.2 — Mieux rangée</summary>
-
-- 📋 **Watchlist** : la catégorie *Actions* s'affiche comme les autres, sans l'état de la Bourse à côté du nom.
-- 🧹 Retrait des derniers restes de l'ancienne connexion au courtier : message d'erreur de connexion plus clair et « Compte NexusCharts » dans le Profil.
-- 📖 README : la feuille de route indique maintenant 79 instruments.
 
 </details>
 

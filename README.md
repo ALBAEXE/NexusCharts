@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.4.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.4.2-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.4.1 — Simpler Profile
+### 🆕 New in 1.4.2 — Steadier pages
+
+- 📋 **Watchlist and Profile** only scroll up and down: dragging a pair sideways no longer moves the whole page.
+
+### Previously in 1.4.1 — Simpler Profile
 
 - 👤 **Profile**: the *Data sources* page is gone. The chart and logo credits are now in *Legal*, under *Credits*.
 
@@ -77,9 +81,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🪙 Crypto keeps closing at midnight UTC, stocks follow the New York session.
 - 📡 **Data sources** explains it; the daily history before 12 November 2026 still closes at midnight UTC.
 
-### Previously in 1.3.5 — Every dot pulses
+<details>
+<summary>Previously in 1.3.5 — Every dot pulses</summary>
 
 - 🪐 **Market orbit**: every instrument's dot now pulses, not just the best and the worst.
+
+</details>
 
 <details>
 <summary>Previously in 1.3.4 — Faster market orbit</summary>
@@ -93,15 +100,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 <summary>Previously in 1.3.3 — Cleaner daily candles</summary>
 
 - 🕯️ **Daily chart**: the short Sunday-evening candle (market reopening) is now part of Monday's candle, as on trading platforms. Weekly and monthly candles benefit too. Crypto, which also trades at weekends, keeps its Saturday and Sunday candles.
-
-</details>
-
-<details>
-<summary>Previously in 1.3.2 — Tidier</summary>
-
-- 📋 **Watchlist**: the *Stocks* category is shown just like the others, without the exchange status next to its name.
-- 🧹 Removed the last leftovers of the old broker connection: clearer connection error message and "NexusCharts account" in Profile.
-- 📖 README: the roadmap now shows 79 instruments.
 
 </details>
 

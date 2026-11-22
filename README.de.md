@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.4.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.4.2-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.4.1 — Einfacheres Profil
+### 🆕 Neu in 1.4.2 — Ruhigere Seiten
+
+- 📋 **Watchlist und Profil** scrollen nur nach oben und unten: Wenn man ein Paar seitlich zieht, bewegt sich die Seite nicht mehr.
+
+### Vorher in 1.4.1 — Einfacheres Profil
 
 - 👤 **Profil**: Die Seite *Datenquellen* ist weg. Die Angaben zu Chart und Logos stehen jetzt unter *Rechtliches* › *Danksagungen*.
 
@@ -77,9 +81,12 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🪙 Krypto schließt weiterhin um Mitternacht UTC, Aktien folgen der New Yorker Sitzung.
 - 📡 **Datenquellen** erklärt es; die Tageshistorie vor dem 12. November 2026 schließt noch um Mitternacht UTC.
 
-### Vorher in 1.3.5 — Alle Punkte pulsieren
+<details>
+<summary>Vorher in 1.3.5 — Alle Punkte pulsieren</summary>
 
 - 🪐 **Marktorbit**: Jetzt pulsiert der Punkt jedes Instruments, nicht nur der des besten und des schwächsten.
+
+</details>
 
 <details>
 <summary>Vorher in 1.3.4 — Schnellerer Marktorbit</summary>
@@ -93,15 +100,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 <summary>Vorher in 1.3.3 — Sauberere Tageskerzen</summary>
 
 - 🕯️ **Tageschart**: Die kleine Kerze vom Sonntagabend (Wiedereröffnung des Marktes) gehört jetzt zur Montagskerze, wie auf Trading-Plattformen. Auch Wochen- und Monatskerzen profitieren davon. Krypto, das auch am Wochenende gehandelt wird, behält seine Samstags- und Sonntagskerzen.
-
-</details>
-
-<details>
-<summary>Vorher in 1.3.2 — Aufgeräumter</summary>
-
-- 📋 **Watchlist**: Die Kategorie *Aktien* sieht aus wie die anderen, ohne den Börsenstatus neben dem Namen.
-- 🧹 Die letzten Reste der alten Broker-Verbindung entfernt: klarere Meldung bei Verbindungsfehlern und „NexusCharts-Konto“ im Profil.
-- 📖 README: Die Roadmap zeigt jetzt 79 Instrumente.
 
 </details>
 
