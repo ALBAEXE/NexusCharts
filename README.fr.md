@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.7.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.8.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.7.0 — Connexion plus stable
+### 🆕 Nouveautés de la 1.8.0 — Rapports d'erreurs automatiques
+
+- 🛠️ Si quelque chose ne marche pas dans l'app, de l'écran d'accueil au graphique, ton appareil nous envoie tout seul un court rapport technique, pour qu'on puisse corriger même si personne ne nous le dit.
+- 🔒 Données techniques uniquement (message d'erreur, écran, version de l'app, type d'appareil et navigateur) : ni nom, ni compte, ni adresse IP. Les rapports sont supprimés après 30 jours. La politique de confidentialité l'explique.
+
+### Auparavant, dans la 1.7.0 — Connexion plus stable
 
 - ⚡ La connexion de l'app avec le serveur est plus rapide et plus fiable, même quand tu la fermes sur iPhone.
 
@@ -76,9 +81,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - ⚖️ **Profil › Mentions légales** a le même style que le reste de l'app : un menu de sections (risques, conditions, confidentialité, contributions, crédits, contact), chacune avec sa page.
 - 💬 **Contact** : écris-nous sur Telegram ou à support@nexuscharts.app. Ce sont les seuls canaux officiels.
 
-### Auparavant, dans la 1.5.0 — Nos réseaux sociaux
+<details>
+<summary>Auparavant, dans la 1.5.0 — Nos réseaux sociaux</summary>
 
 - 📣 **Profil › Réseaux sociaux** : chaîne Telegram officielle, Instagram, TikTok, YouTube et X, chacun avec son icône. Un toucher ouvre l'app du réseau directement sur notre page (ou le site, si l'app n'est pas installée).
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.4.2 — Pages plus stables</summary>
@@ -91,15 +99,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 <summary>Auparavant, dans la 1.4.1 — Profil plus simple</summary>
 
 - 👤 **Profil** : la page *Sources des données* a été retirée. Les crédits du graphique et des logos sont maintenant dans *Mentions légales*, sous *Crédits*.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.4.0 — Clôture journalière à 17 h New York</summary>
-
-- 🕯️ **Bougies journalières comme chez les courtiers** : or, métaux, énergie, Forex et indices clôturent la journée à 17 h heure de New York. Le dimanche soir fait partie du lundi et la bougie en direct passe au nouveau jour juste à la clôture.
-- 🪙 Les cryptos clôturent toujours à minuit UTC ; les actions suivent la séance de New York.
-- 📡 **Sources des données** l'explique ; l'historique journalier avant le 12 novembre 2026 clôture encore à minuit UTC.
 
 </details>
 

@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.7.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.8.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.7.0 — Steadier connection
+### 🆕 New in 1.8.0 — Automatic error reports
+
+- 🛠️ If something breaks in the app, from the welcome screen to the chart, your device sends us a short technical report on its own, so we can fix it even if nobody tells us.
+- 🔒 Technical data only (error message, screen, app version, device type and browser): no name, account or IP address. Reports are deleted after 30 days. The privacy policy explains it.
+
+### Previously in 1.7.0 — Steadier connection
 
 - ⚡ The app's connection with the server is quicker and more reliable, also when you close it on iPhone.
 
@@ -76,9 +81,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - ⚖️ **Profile › Legal** now looks like the rest of the app: a menu of sections (risk disclaimer, terms, privacy, contributions, credits, contact), each opening its own page.
 - 💬 **Contact**: message us on Telegram or write to support@nexuscharts.app. These are the only official channels.
 
-### Previously in 1.5.0 — Our social profiles
+<details>
+<summary>Previously in 1.5.0 — Our social profiles</summary>
 
 - 📣 **Profile › Social**: the official Telegram channel, Instagram, TikTok, YouTube and X, each with its own icon. A tap opens the social app straight on our page (or the website if the app isn't installed).
+
+</details>
 
 <details>
 <summary>Previously in 1.4.2 — Steadier pages</summary>
@@ -91,15 +99,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 <summary>Previously in 1.4.1 — Simpler Profile</summary>
 
 - 👤 **Profile**: the *Data sources* page is gone. The chart and logo credits are now in *Legal*, under *Credits*.
-
-</details>
-
-<details>
-<summary>Previously in 1.4.0 — Daily close at 5 pm New York</summary>
-
-- 🕯️ **Daily candles like the brokers'**: gold, metals, energy, Forex and indices now close their day at 5 pm New York time (11 pm in Italy). Sunday evening is part of Monday, and the live candle switches to the new day right at the close.
-- 🪙 Crypto keeps closing at midnight UTC, stocks follow the New York session.
-- 📡 **Data sources** explains it; the daily history before 12 November 2026 still closes at midnight UTC.
 
 </details>
 

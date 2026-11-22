@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.7.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.8.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.7.0 — Stabilere Verbindung
+### 🆕 Neu in 1.8.0 — Automatische Fehlerberichte
+
+- 🛠️ Wenn in der App etwas kaputtgeht, vom Willkommensbildschirm bis zum Chart, sendet dein Gerät uns von selbst einen kurzen technischen Bericht, damit wir es beheben können, auch wenn uns niemand Bescheid sagt.
+- 🔒 Nur technische Daten (Fehlermeldung, Bildschirm, App-Version, Gerätetyp und Browser): kein Name, kein Konto, keine IP-Adresse. Die Berichte werden nach 30 Tagen gelöscht. Die Datenschutzerklärung erklärt es.
+
+### Vorher in 1.7.0 — Stabilere Verbindung
 
 - ⚡ Die Verbindung der App mit dem Server ist schneller und zuverlässiger, auch wenn du sie auf dem iPhone schließt.
 
@@ -76,9 +81,12 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - ⚖️ **Profil › Rechtliches** sieht jetzt aus wie der Rest der App: ein Menü mit Abschnitten (Risikohinweis, Bedingungen, Datenschutz, Beiträge, Danksagungen, Kontakt), jeder mit eigener Seite.
 - 💬 **Kontakt**: Schreib uns auf Telegram oder an support@nexuscharts.app. Das sind die einzigen offiziellen Kanäle.
 
-### Vorher in 1.5.0 — Unsere Social-Media-Profile
+<details>
+<summary>Vorher in 1.5.0 — Unsere Social-Media-Profile</summary>
 
 - 📣 **Profil › Soziale Netzwerke**: offizieller Telegram-Kanal, Instagram, TikTok, YouTube und X, jeweils mit eigenem Icon. Ein Tipp öffnet die App direkt auf unserer Seite (oder die Website, wenn die App nicht installiert ist).
+
+</details>
 
 <details>
 <summary>Vorher in 1.4.2 — Ruhigere Seiten</summary>
@@ -91,15 +99,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 <summary>Vorher in 1.4.1 — Einfacheres Profil</summary>
 
 - 👤 **Profil**: Die Seite *Datenquellen* ist weg. Die Angaben zu Chart und Logos stehen jetzt unter *Rechtliches* › *Danksagungen*.
-
-</details>
-
-<details>
-<summary>Vorher in 1.4.0 — Tagesschluss um 17 Uhr New York</summary>
-
-- 🕯️ **Tageskerzen wie bei Brokern**: Gold, Metalle, Energie, Forex und Indizes schließen den Tag um 17 Uhr New Yorker Zeit. Der Sonntagabend gehört zum Montag, und die Live-Kerze wechselt genau beim Schluss zum neuen Tag.
-- 🪙 Krypto schließt weiterhin um Mitternacht UTC, Aktien folgen der New Yorker Sitzung.
-- 📡 **Datenquellen** erklärt es; die Tageshistorie vor dem 12. November 2026 schließt noch um Mitternacht UTC.
 
 </details>
 

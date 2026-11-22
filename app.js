@@ -1,4 +1,4 @@
-const VERSION='1.7.0';
+const VERSION='1.8.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -3873,6 +3873,17 @@ LIC.credits=['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
     de:['Für Fragen, Anfragen zu deinen Daten oder Meldungen nutze „Melden oder vorschlagen“, schreib uns auf Telegram oder sende eine E-Mail an den Support.','Das sind die einzigen offiziellen Kanäle von NexusCharts.']
   };
   for(var k in T){try{LEGAL[k].s.forEach(function(x){if(x[0]==='contact')x[2]=T[k]})}catch(e){}}
+})();
+/* 1.8.0: Privacy: i rapporti tecnici sugli errori */
+(function(){
+  var T={
+    it:"Se qualcosa si rompe nell\u2019app, il dispositivo manda da solo un rapporto tecnico: messaggio d\u2019errore, schermata, versione dell\u2019app, tipo di dispositivo e browser. Niente nome, account o indirizzo IP; i rapporti si cancellano dopo 30 giorni.",
+    en:"If something breaks in the app, your device automatically sends a technical report: error message, screen, app version, device type and browser. No name, account or IP address; reports are deleted after 30 days.",
+    es:"Si algo falla en la app, el dispositivo envía automáticamente un informe técnico: mensaje de error, pantalla, versión de la app, tipo de dispositivo y navegador. Sin nombre, cuenta ni dirección IP; los informes se borran a los 30 días.",
+    fr:"Si quelque chose ne fonctionne pas dans l\u2019app, l\u2019appareil envoie automatiquement un rapport technique : message d\u2019erreur, écran, version de l\u2019app, type d\u2019appareil et navigateur. Ni nom, ni compte, ni adresse IP ; les rapports sont supprimés après 30 jours.",
+    de:"Wenn in der App etwas kaputtgeht, sendet dein Gerät automatisch einen technischen Bericht: Fehlermeldung, Bildschirm, App-Version, Gerätetyp und Browser. Kein Name, kein Konto, keine IP-Adresse; die Berichte werden nach 30 Tagen gelöscht."
+  };
+  for(var k in T){try{LEGAL[k].s.forEach(function(x){if(x[0]==='privacy'){var i=x[2].findIndex(function(t){return /IP/.test(t)});x[2].splice(i<0?x[2].length:i+1,0,T[k])}})}catch(e){}}
 })();
 
 /* 1.6.0: Note legali in stile Design 3.0: un menu di voci (come Profilo e Social); ogni voce apre la sua pagina. */
@@ -7831,6 +7842,7 @@ setInterval(()=>{if(!document.hidden)presSend(false)},15000);   /* 1.7.0: ogni 1
 document.addEventListener('visibilitychange',()=>{presSend(document.hidden)});
 window.addEventListener('pagehide',()=>presSend(true));
 (function(){const o=start;start=function(){const r=o.apply(this,arguments);setTimeout(()=>presSend(false),300);return r}})();
+
 
 /* =====================================================================
    0.41.0: tutti i timeframe (secondi, minuti, ore, giorni, settimane, mesi)

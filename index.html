@@ -2,6 +2,52 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
+<script>
+/* 1.8.0: controllo automatico degli errori (parte prima di tutto: benvenuto, accesso, iscrizione e tutta l'app).
+   Manda al server solo dati tecnici: messaggio, punto del codice, schermata, versione, tipo di dispositivo e browser.
+   Lo stesso errore dallo stesso dispositivo si manda al massimo una volta al giorno; al massimo 10 per apertura. */
+(function(){
+  var U='https://tradingcharts.nexuscharts.workers.dev/err',N=0,K='nx_errsent';
+  function ver(){try{return VERSION}catch(e){return ''}}
+  function plat(){var u=navigator.userAgent||'';if(/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1))return 'ios';if(/Android/.test(u))return 'android';return 'desktop'}
+  function br(){var u=navigator.userAgent||'',m;
+    if(m=u.match(/SamsungBrowser\/(\d+)/))return 'Samsung '+m[1];
+    if(m=u.match(/(?:Edg|EdgA|EdgiOS)\/(\d+)/))return 'Edge '+m[1];
+    if(m=u.match(/(?:CriOS|Chrome)\/(\d+)/))return 'Chrome '+m[1];
+    if(m=u.match(/(?:FxiOS|Firefox)\/(\d+)/))return 'Firefox '+m[1];
+    if(m=u.match(/Version\/(\d+)[^ ]* (?:Mobile\/\S+ )?Safari/))return 'Safari '+m[1];
+    if(/AppleWebKit/.test(u))return 'WebKit';return 'altro'}
+  function scr(){try{var l=document.getElementById('login');if(l&&!l.hidden&&l.offsetParent!==null)return 'accesso';
+    var t=typeof tab!=='undefined'?tab:'';var p=(typeof PF!=='undefined'&&PF&&PF.page)?'/'+PF.page:'';return (t||'avvio')+p}catch(e){return 'avvio'}}
+  function h(s){var x=5381;for(var i=0;i<s.length;i++)x=((x*33)^s.charCodeAt(i))>>>0;return x.toString(36)}
+  function clean(s){return String(s||'').replace(/https?:\/\/[^\s)]*?\/([^\/\s)?#]+)(\?[^\s)]*)?/g,'$1').slice(0,1500)}
+  function send(msg,loc,stack){
+    try{
+      msg=String(msg||'').replace(/^Uncaught\s+/,'').slice(0,300);if(!msg)return;
+      if(/^Script error\.?$/.test(msg)&&!loc)return;
+      if(/ResizeObserver loop|extension:\/\/|^Network ?Error$|Load failed$|NetworkError when attempting/i.test(msg+' '+(stack||'')))return;
+      if(++N>10)return;
+      var fp=h(msg.replace(/\d+/g,'#')+'|'+loc);
+      var d=new Date().toISOString().slice(0,10),m={};try{m=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+      if(m[fp]===d)return;m[fp]=d;var ks=Object.keys(m);if(ks.length>60)delete m[ks[0]];try{localStorage.setItem(K,JSON.stringify(m))}catch(e){}
+      var b=JSON.stringify({fp:fp,msg:msg,loc:String(loc||'').slice(0,160),scr:scr(),stack:clean(stack),ver:ver(),plat:plat(),br:br()});
+      if(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([b],{type:'text/plain'})))return;
+      fetch(U,{method:'POST',body:b,keepalive:true,headers:{'Content-Type':'text/plain'}}).catch(function(){});
+    }catch(e){}
+  }
+  window.NXErr=send;
+  /* errori del codice e file che non si caricano */
+  addEventListener('error',function(e){
+    var t=e&&e.target;
+    if(t&&t!==window&&(t.tagName==='SCRIPT'||t.tagName==='LINK')){send('File non caricato: '+clean(t.src||t.href),'','');return}
+    var er=e&&e.error;send((er&&er.message)||e.message,(e.lineno?('riga '+e.lineno+':'+(e.colno||0)):''),er&&er.stack);
+  },true);
+  addEventListener('unhandledrejection',function(e){var r=e&&e.reason;send('Promise: '+((r&&r.message)||String(r)),'',r&&r.stack)});
+  /* risposte di errore dei nostri server (accesso, iscrizione, dati) */
+  try{var of=window.fetch;window.fetch=function(u,o){var p=of.apply(this,arguments);try{var s=String((u&&u.url)||u);
+    if(/nexuscharts\.(app|workers\.dev)/.test(s)&&s.indexOf('/err')<0)p.then(function(r){if(r&&r.status>=500)send('Server '+r.status+': '+s.replace(/^https?:\/\//,'').replace(/[?#].*$/,''),'','')},function(){});}catch(e){}return p};}catch(e){}
+})();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -81,6 +127,7 @@ fetch('app.js?t='+Date.now(),{cache:'no-store'})
     var r=document.getElementById('root');
     r.style.padding='24px';
     r.textContent='Impossibile caricare l\'app: '+e.message+'. Controlla la connessione e riapri.';
+    try{window.NXErr&&NXErr('App non caricata: '+e.message,'','')}catch(_){}
   });
 </script>
 </body>
