@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.4.2-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.5.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.4.2 — Ruhigere Seiten
+### 🆕 Neu in 1.5.0 — Unsere Social-Media-Profile
+
+- 📣 **Profil › Soziale Netzwerke**: offizieller Telegram-Kanal, Instagram, TikTok, YouTube und X, jeweils mit eigenem Icon. Ein Tipp öffnet die App direkt auf unserer Seite (oder die Website, wenn die App nicht installiert ist).
+
+### Vorher in 1.4.2 — Ruhigere Seiten
 
 - 📋 **Watchlist und Profil** scrollen nur nach oben und unten: Wenn man ein Paar seitlich zieht, bewegt sich die Seite nicht mehr.
 
@@ -75,11 +79,14 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - 👤 **Profil**: Die Seite *Datenquellen* ist weg. Die Angaben zu Chart und Logos stehen jetzt unter *Rechtliches* › *Danksagungen*.
 
-### Vorher in 1.4.0 — Tagesschluss um 17 Uhr New York
+<details>
+<summary>Vorher in 1.4.0 — Tagesschluss um 17 Uhr New York</summary>
 
 - 🕯️ **Tageskerzen wie bei Brokern**: Gold, Metalle, Energie, Forex und Indizes schließen den Tag um 17 Uhr New Yorker Zeit. Der Sonntagabend gehört zum Montag, und die Live-Kerze wechselt genau beim Schluss zum neuen Tag.
 - 🪙 Krypto schließt weiterhin um Mitternacht UTC, Aktien folgen der New Yorker Sitzung.
 - 📡 **Datenquellen** erklärt es; die Tageshistorie vor dem 12. November 2026 schließt noch um Mitternacht UTC.
+
+</details>
 
 <details>
 <summary>Vorher in 1.3.5 — Alle Punkte pulsieren</summary>
@@ -93,13 +100,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - 🪐 **Marktorbit** in der Watchlist: aktualisiert sich, sobald sich ein Preis ändert, und ein Paar bei −0,00 % zählt jetzt als fallend, wie in seiner Zeile.
 - 📡 **Datenquellen**: Preise und Kerzen werden als *Powered by NexusCharts* angezeigt.
-
-</details>
-
-<details>
-<summary>Vorher in 1.3.3 — Sauberere Tageskerzen</summary>
-
-- 🕯️ **Tageschart**: Die kleine Kerze vom Sonntagabend (Wiedereröffnung des Marktes) gehört jetzt zur Montagskerze, wie auf Trading-Plattformen. Auch Wochen- und Monatskerzen profitieren davon. Krypto, das auch am Wochenende gehandelt wird, behält seine Samstags- und Sonntagskerzen.
 
 </details>
 
@@ -175,6 +175,7 @@ Wähle eine Zeichnung aus, um sie zu verschieben, ihre Farbe, **Linienstärke un
 ### 👤 Profil & Einstellungen
 - Design (dunkel/hell), Sprache und Benachrichtigungen
 - Formular, um ein Problem zu melden oder eine Idee vorzuschlagen
+- Soziale Netzwerke: Telegram-Kanal, Instagram, TikTok, YouTube und X, die sich direkt in ihren Apps öffnen
 - Daten aktualisieren, sicheres Zurücksetzen, Abmelden
 
 ---
