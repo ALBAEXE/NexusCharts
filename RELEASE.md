@@ -1,7 +1,9 @@
-# v1.5.0 — Our social profiles
+# v1.6.0 — Legal in Design 3.0
+### Changed
+- Profile › Legal now uses the Design 3.0 style: a menu of sections, each opening its own page, ordered risk disclaimer, terms, privacy, contributions, credits, contact.
+
 ### Added
-- Profile › Social: official Telegram channel, Instagram, TikTok, YouTube and X, each with its own icon.
-- A tap opens the social app straight on the NexusCharts page, or the website if the app isn't installed.
+- Contact: message the team on Telegram or write to support@nexuscharts.app, the only official channels.
 
 ### Documentation
-- README updated in 5 languages: new in 1.5.0, Social in the Profile features.
+- README updated in 5 languages: new in 1.6.0.

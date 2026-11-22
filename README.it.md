@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.5.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.6.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.5.0 — I nostri profili social
+### 🆕 Novità della 1.6.0 — Note legali in Design 3.0
+
+- ⚖️ **Profilo › Note legali** ha lo stesso stile del resto dell'app: un menu di voci (avvertenza sul rischio, termini, privacy, contributi, crediti, contatti) e ogni voce apre la sua pagina.
+- 💬 **Contatti**: scrivici su Telegram o all'email support@nexuscharts.app. Sono gli unici canali ufficiali.
+
+### In precedenza, nella 1.5.0 — I nostri profili social
 
 - 📣 **Profilo › Social**: canale Telegram ufficiale, Instagram, TikTok, YouTube e X, ognuno con la sua icona. Con un tocco si apre l'app del social direttamente sulla nostra pagina (o il sito, se l'app non è installata).
 
@@ -75,9 +80,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 - 📋 **Watchlist e Profilo** scorrono solo su e giù: trascinando un pair di lato la pagina non si sposta più.
 
-### In precedenza, nella 1.4.1 — Profilo più semplice
+<details>
+<summary>In precedenza, nella 1.4.1 — Profilo più semplice</summary>
 
 - 👤 **Profilo**: tolta la pagina *Fonti dati*. I crediti del grafico e dei loghi ora sono in *Note legali*, alla voce *Crediti*.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.4.0 — Chiusura giornaliera alle 17:00 di New York</summary>
@@ -92,14 +100,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 <summary>In precedenza, nella 1.3.5 — Tutte le palline pulsano</summary>
 
 - 🪐 **Orbita del mercato**: ora pulsa la pallina di ogni strumento, non solo quella del migliore e del peggiore.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.3.4 — Orbita del mercato più rapida</summary>
-
-- 🪐 **Orbita del mercato** nella Watchlist: si aggiorna appena cambia un prezzo, e una coppia a −0,00% ora conta come in ribasso, come nella sua riga.
-- 📡 **Fonti dati**: prezzi e candele sono indicati come *Powered by NexusCharts*.
 
 </details>
 

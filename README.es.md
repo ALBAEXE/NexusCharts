@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.5.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.6.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.5.0 — Nuestros perfiles sociales
+### 🆕 Novedades de la 1.6.0 — Avisos legales en Design 3.0
+
+- ⚖️ **Perfil › Avisos legales** tiene el mismo estilo que el resto de la app: un menú de secciones (advertencia de riesgo, términos, privacidad, contribuciones, créditos, contacto) y cada una abre su propia página.
+- 💬 **Contacto**: escríbenos por Telegram o a support@nexuscharts.app. Son los únicos canales oficiales.
+
+### Anteriormente, en la 1.5.0 — Nuestros perfiles sociales
 
 - 📣 **Perfil › Redes sociales**: canal oficial de Telegram, Instagram, TikTok, YouTube y X, cada uno con su icono. Con un toque se abre la app de la red social directamente en nuestra página (o la web, si la app no está instalada).
 
@@ -75,9 +80,12 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - 📋 **Watchlist y Perfil** solo se desplazan arriba y abajo: al arrastrar un par hacia un lado la página ya no se mueve.
 
-### Anteriormente, en la 1.4.1 — Perfil más sencillo
+<details>
+<summary>Anteriormente, en la 1.4.1 — Perfil más sencillo</summary>
 
 - 👤 **Perfil**: se quitó la página *Fuentes de datos*. Los créditos del gráfico y de los logotipos ahora están en *Avisos legales*, en *Créditos*.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.4.0 — Cierre diario a las 17:00 de Nueva York</summary>
@@ -92,14 +100,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 <summary>Anteriormente, en la 1.3.5 — Todos los puntos laten</summary>
 
 - 🪐 **Órbita del mercado**: ahora late el punto de cada instrumento, no solo el del mejor y el peor.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.3.4 — Órbita del mercado más rápida</summary>
-
-- 🪐 **Órbita del mercado** en la Watchlist: se actualiza en cuanto cambia un precio, y un par a −0,00 % ahora cuenta como a la baja, igual que en su fila.
-- 📡 **Fuentes de datos**: precios y velas aparecen como *Powered by NexusCharts*.
 
 </details>
 
