@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.3.3-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.3.4-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.3.3 — Sauberere Tageskerzen
+### 🆕 Neu in 1.3.4 — Schnellerer Marktorbit
+
+- 🪐 **Marktorbit** in der Watchlist: aktualisiert sich, sobald sich ein Preis ändert, und ein Paar bei −0,00 % zählt jetzt als fallend, wie in seiner Zeile.
+- 📡 **Datenquellen**: Preise und Kerzen werden als *Powered by NexusCharts* angezeigt.
+
+### Vorher in 1.3.3 — Sauberere Tageskerzen
 
 - 🕯️ **Tageschart**: Die kleine Kerze vom Sonntagabend (Wiedereröffnung des Marktes) gehört jetzt zur Montagskerze, wie auf Trading-Plattformen. Auch Wochen- und Monatskerzen profitieren davon. Krypto, das auch am Wochenende gehandelt wird, behält seine Samstags- und Sonntagskerzen.
 
@@ -391,7 +396,7 @@ Noch nicht: sie werden auf dem Gerät gespeichert, auf dem du sie erstellt hast.
 ## 🙏 Danksagungen
 
 - Charts mit [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache 2.0).
-- Marktdaten von [biquote.io](https://biquote.io). Die Preise dienen der Analyse und können von denen deines Brokers abweichen.
+- Marktdaten von den NexusCharts-Servern. Die Preise dienen der Analyse und können von denen deines Brokers abweichen.
 - Krypto-Icons von [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons) (CC0 1.0).
 - Aktien-Logos: Apple, NVIDIA, Google, Meta und Tesla von [Simple Icons](https://simpleicons.org) (CC0 1.0); Microsoft und Amazon von [Wikimedia Commons](https://commons.wikimedia.org) (gemeinfrei). Die Logos sind Marken ihrer jeweiligen Inhaber und dienen nur dazu, die Aktie zu erkennen; NexusCharts ist mit diesen Unternehmen nicht verbunden.
 - TradingView und Pine Script sind Marken von TradingView, Inc. NexusCharts ist nicht mit TradingView verbunden.

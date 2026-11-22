@@ -1,4 +1,4 @@
-const VERSION='1.3.3';
+const VERSION='1.3.4';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -9251,16 +9251,17 @@ ${B}.pfrow.pflang{padding-right:18px!important}
     var sig=L2()+'|'+list.map(function(a){return a[0]+':'+a[1].toFixed(3)}).join(',');
     if(sig===lastSig)return;lastSig=sig;
     document.getElementById('d3sumt').textContent=l.orb;
+    /* 1.3.4: stesso segno della riga della Watchlist (anche -0,00% conta come ribasso) */
     var up=0,dn=0,best=null,worst=null,mx=0.25;
-    list.forEach(function(a){if(a[1]>=0.005)up++;else if(a[1]<=-0.005)dn++;if(!best||a[1]>best[1])best=a;if(!worst||a[1]<worst[1])worst=a;mx=Math.max(mx,Math.abs(a[1]))});
+    list.forEach(function(a){if(a[1]>0)up++;else if(a[1]<0)dn++;if(!best||a[1]>best[1])best=a;if(!worst||a[1]<worst[1])worst=a;mx=Math.max(mx,Math.abs(a[1]))});
     var c=document.getElementById('d3sumc').children;c[0].firstChild.textContent=up;c[0].lastChild.textContent=l.up;c[1].firstChild.textContent=dn;c[1].lastChild.textContent=l.dn;
     var k=document.getElementById('d3sumk').children;
     k[0].innerHTML='';k[1].innerHTML='';
-    if(best&&best[1]>=0.005){k[0].innerHTML='<i></i>';k[0].firstChild.textContent=l.best+' ';var em=document.createElement('em');em.textContent=best[0]+' '+fmtPc(best[1]);k[0].appendChild(em)}
-    if(worst&&worst[1]<=-0.005){k[1].innerHTML='<i></i>';k[1].firstChild.textContent=l.worst+' ';var em2=document.createElement('em');em2.textContent=worst[0]+' '+fmtPc(worst[1]);k[1].appendChild(em2)}
+    if(best&&best[1]>0){k[0].innerHTML='<i></i>';k[0].firstChild.textContent=l.best+' ';var em=document.createElement('em');em.textContent=best[0]+' '+fmtPc(best[1]);k[0].appendChild(em)}
+    if(worst&&worst[1]<0){k[1].innerHTML='<i></i>';k[1].firstChild.textContent=l.worst+' ';var em2=document.createElement('em');em2.textContent=worst[0]+' '+fmtPc(worst[1]);k[1].appendChild(em2)}
     var g=document.getElementById('d3sats'),have={},fl=0;
     [].slice.call(g.children).forEach(function(n){have[n.getAttribute('data-n')]=n});
-    var pos=list.map(function(a){var h=a[1]>=0.005?-1:a[1]<=-0.005?1:0,x;
+    var pos=list.map(function(a){var h=a[1]>0?-1:a[1]<0?1:0,x;
       if(!h){var k=fl++;x=(k%2?CX+RX-4-Math.floor(k/2)*11:CX-RX+4+Math.floor(k/2)*11)}
       else{var f=Math.max(-1,Math.min(1,a[1]/mx));x=CX+Math.sign(f)*Math.max(.12,Math.abs(f))*(RX-12)}
       return {a:a,h:h,x:x}});
@@ -9355,6 +9356,8 @@ ${B}.pfrow.pflang{padding-right:18px!important}
     addEventListener('resize',function(){tabSat(false)});
     setTimeout(function(){tabSat(false)},60);
     setInterval(function(){if(document.hidden)return;var w=document.getElementById('wl-screen');if(w&&!w.hidden){drawSum();markCur()}if(!tLast)tabSat(false)},2000);
+    /* 1.3.4: l'orbita si aggiorna appena cambia un prezzo nella Watchlist (prima solo ogni 2 secondi) */
+    try{var oFQ=fillQuote,sumT=0;fillQuote=function(){var r=oFQ.apply(this,arguments);if(!sumT)sumT=setTimeout(function(){sumT=0;try{var w=document.getElementById('wl-screen');if(w&&!w.hidden&&!document.hidden)drawSum()}catch(e){}},120);return r}}catch(e){}
   }
   function boot(){if(document.body.classList.contains('inapp')&&document.getElementById('wl')){wire();tabSat(false);return true}return false}
   if(!boot()){var iv=setInterval(function(){if(boot())clearInterval(iv)},300)}
@@ -11887,11 +11890,11 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   function firstActive(){try{var g=findBase('XAUUSD');if(g&&active(g.name))return g.name;for(var i=0;i<INST.length;i++)if(active(INST[i].name))return INST[i].name}catch(e){}return null}
 
   var TX={
-    it:{soon:'In arrivo',soonT:'{n} arriva presto.',title:'Fonti dati',sub:'Da dove arrivano prezzi e grafici',act:'Strumenti attivi',next:'In arrivo',chart:'Grafico',src:'prezzi e candele da {s}',tmp:'Fonte temporanea: la stiamo sostituendo con una fonte indipendente.',nextD:'Arriveranno uno alla volta, ognuno con la sua fonte.',lw:'Il grafico è disegnato con questa libreria open source (licenza Apache 2.0):',site:'Apri tradingview.com',note:'Prezzi e grafici servono per l\'analisi: possono essere diversi da quelli del tuo broker.'},
-    en:{soon:'Coming soon',soonT:'{n} is coming soon.',title:'Data sources',sub:'Where prices and charts come from',act:'Active instruments',next:'Coming soon',chart:'Chart',src:'prices and candles from {s}',tmp:'Temporary source: we are replacing it with an independent one.',nextD:'They will arrive one at a time, each with its own source.',lw:'The chart is drawn with this open-source library (Apache 2.0 license):',site:'Open tradingview.com',note:'Prices and charts are for analysis: they may differ from your broker\'s.'},
-    es:{soon:'Próximamente',soonT:'{n} llegará pronto.',title:'Fuentes de datos',sub:'De dónde vienen precios y gráficos',act:'Instrumentos activos',next:'Próximamente',chart:'Gráfico',src:'precios y velas de {s}',tmp:'Fuente temporal: la estamos sustituyendo por una fuente independiente.',nextD:'Llegarán uno a uno, cada uno con su fuente.',lw:'El gráfico se dibuja con esta biblioteca de código abierto (licencia Apache 2.0):',site:'Abrir tradingview.com',note:'Precios y gráficos sirven para el análisis: pueden ser distintos de los de tu bróker.'},
-    fr:{soon:'Bientôt',soonT:'{n} arrive bientôt.',title:'Sources des données',sub:'D\'où viennent les prix et les graphiques',act:'Instruments actifs',next:'Bientôt',chart:'Graphique',src:'prix et bougies de {s}',tmp:'Source temporaire : nous la remplaçons par une source indépendante.',nextD:'Ils arriveront un par un, chacun avec sa source.',lw:'Le graphique est dessiné avec cette bibliothèque open source (licence Apache 2.0) :',site:'Ouvrir tradingview.com',note:'Les prix et les graphiques servent à l\'analyse : ils peuvent différer de ceux de ton courtier.'},
-    de:{soon:'Demnächst',soonT:'{n} kommt bald.',title:'Datenquellen',sub:'Woher Preise und Charts kommen',act:'Aktive Instrumente',next:'Demnächst',chart:'Chart',src:'Preise und Kerzen von {s}',tmp:'Vorübergehende Quelle: wir ersetzen sie durch eine unabhängige Quelle.',nextD:'Sie kommen nacheinander, jedes mit seiner eigenen Quelle.',lw:'Der Chart wird mit dieser Open-Source-Bibliothek gezeichnet (Apache-2.0-Lizenz):',site:'tradingview.com öffnen',note:'Preise und Charts dienen der Analyse: sie können von denen deines Brokers abweichen.'}
+    it:{soon:'In arrivo',soonT:'{n} arriva presto.',title:'Fonti dati',sub:'Da dove arrivano prezzi e grafici',act:'Strumenti attivi',next:'In arrivo',chart:'Grafico',src:'Powered by {s}',tmp:'Fonte temporanea: la stiamo sostituendo con una fonte indipendente.',nextD:'Arriveranno uno alla volta, ognuno con la sua fonte.',lw:'Il grafico è disegnato con questa libreria open source (licenza Apache 2.0):',site:'Apri tradingview.com',note:'Prezzi e grafici servono per l\'analisi: possono essere diversi da quelli del tuo broker.'},
+    en:{soon:'Coming soon',soonT:'{n} is coming soon.',title:'Data sources',sub:'Where prices and charts come from',act:'Active instruments',next:'Coming soon',chart:'Chart',src:'Powered by {s}',tmp:'Temporary source: we are replacing it with an independent one.',nextD:'They will arrive one at a time, each with its own source.',lw:'The chart is drawn with this open-source library (Apache 2.0 license):',site:'Open tradingview.com',note:'Prices and charts are for analysis: they may differ from your broker\'s.'},
+    es:{soon:'Próximamente',soonT:'{n} llegará pronto.',title:'Fuentes de datos',sub:'De dónde vienen precios y gráficos',act:'Instrumentos activos',next:'Próximamente',chart:'Gráfico',src:'Powered by {s}',tmp:'Fuente temporal: la estamos sustituyendo por una fuente independiente.',nextD:'Llegarán uno a uno, cada uno con su fuente.',lw:'El gráfico se dibuja con esta biblioteca de código abierto (licencia Apache 2.0):',site:'Abrir tradingview.com',note:'Precios y gráficos sirven para el análisis: pueden ser distintos de los de tu bróker.'},
+    fr:{soon:'Bientôt',soonT:'{n} arrive bientôt.',title:'Sources des données',sub:'D\'où viennent les prix et les graphiques',act:'Instruments actifs',next:'Bientôt',chart:'Graphique',src:'Powered by {s}',tmp:'Source temporaire : nous la remplaçons par une source indépendante.',nextD:'Ils arriveront un par un, chacun avec sa source.',lw:'Le graphique est dessiné avec cette bibliothèque open source (licence Apache 2.0) :',site:'Ouvrir tradingview.com',note:'Les prix et les graphiques servent à l\'analyse : ils peuvent différer de ceux de ton courtier.'},
+    de:{soon:'Demnächst',soonT:'{n} kommt bald.',title:'Datenquellen',sub:'Woher Preise und Charts kommen',act:'Aktive Instrumente',next:'Demnächst',chart:'Chart',src:'Powered by {s}',tmp:'Vorübergehende Quelle: wir ersetzen sie durch eine unabhängige Quelle.',nextD:'Sie kommen nacheinander, jedes mit seiner eigenen Quelle.',lw:'Der Chart wird mit dieser Open-Source-Bibliothek gezeichnet (Apache-2.0-Lizenz):',site:'tradingview.com öffnen',note:'Preise und Charts dienen der Analyse: sie können von denen deines Brokers abweichen.'}
   };
   function L(){try{return TX[lang]||TX.it}catch(e){return TX.it}}
   window.NXReg={list:REG,regOf:regOf,listed:listed,active:active,pathOk:pathOk,firstActive:firstActive,fill:fill,tx:L};
@@ -12314,7 +12317,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   try{
     NXReg.list.forEach(function(r){
       if(r.src!=='biquote.io')return;
-      Object.defineProperty(r,'src',{configurable:true,enumerable:true,get:function(){return 'biquote.io'}});
+      Object.defineProperty(r,'src',{configurable:true,enumerable:true,get:function(){return 'NexusCharts'}});   /* 1.3.4: la fonte non va citata (condizioni di biquote): si mostra il nostro server */
       /* "fonte temporanea" solo quando si sta usando ancora la fonte di prima */
       Object.defineProperty(r,'tmp',{configurable:true,enumerable:true,get:function(){return false}});
     });

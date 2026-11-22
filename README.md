@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.3.3-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.3.4-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.3.3 — Cleaner daily candles
+### 🆕 New in 1.3.4 — Faster market orbit
+
+- 🪐 **Market orbit** in the Watchlist updates as soon as a price changes, and a pair at −0.00% now counts as down, matching its row.
+- 📡 **Data sources**: prices and candles are shown as *Powered by NexusCharts*.
+
+### Previously in 1.3.3 — Cleaner daily candles
 
 - 🕯️ **Daily chart**: the short Sunday-evening candle (market reopening) is now part of Monday's candle, as on trading platforms. Weekly and monthly candles benefit too. Crypto, which also trades at weekends, keeps its Saturday and Sunday candles.
 
@@ -400,7 +405,7 @@ Not yet: they're saved on the device where you made them.
 ## 🙏 Credits
 
 - Charts powered by [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache 2.0).
-- Market data from [biquote.io](https://biquote.io). Prices are for analysis and may differ from your broker's.
+- Market data served by the NexusCharts servers. Prices are for analysis and may differ from your broker's.
 - Crypto icons from [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons) (CC0 1.0).
 - Stock logos: Apple, NVIDIA, Google, Meta and Tesla from [Simple Icons](https://simpleicons.org) (CC0 1.0); Microsoft and Amazon from [Wikimedia Commons](https://commons.wikimedia.org) (public domain). The logos are trademarks of their respective owners and are only used to identify the stock; NexusCharts is not affiliated with these companies.
 - TradingView and Pine Script are trademarks of TradingView, Inc. NexusCharts is not affiliated with TradingView.

@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.3.3-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.3.4-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.3.3 — Candele giornaliere più pulite
+### 🆕 Novità della 1.3.4 — Orbita del mercato più rapida
+
+- 🪐 **Orbita del mercato** nella Watchlist: si aggiorna appena cambia un prezzo, e una coppia a −0,00% ora conta come in ribasso, come nella sua riga.
+- 📡 **Fonti dati**: prezzi e candele sono indicati come *Powered by NexusCharts*.
+
+### In precedenza, nella 1.3.3 — Candele giornaliere più pulite
 
 - 🕯️ **Grafico giornaliero**: la piccola candela della domenica sera (riapertura del mercato) ora fa parte della candela del lunedì, come sulle piattaforme di trading. Ne beneficiano anche le candele settimanali e mensili. Le cripto, che si scambiano anche nel weekend, mantengono le candele di sabato e domenica.
 
@@ -400,7 +405,7 @@ Non ancora: restano sul dispositivo dove li hai creati.
 ## 🙏 Riconoscimenti
 
 - Grafici realizzati con [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache 2.0).
-- Dati di mercato da [biquote.io](https://biquote.io). I prezzi servono per l'analisi e possono essere diversi da quelli del tuo broker.
+- Dati di mercato forniti dai server NexusCharts. I prezzi servono per l'analisi e possono essere diversi da quelli del tuo broker.
 - Icone cripto da [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons) (CC0 1.0).
 - Loghi delle azioni: Apple, NVIDIA, Google, Meta e Tesla da [Simple Icons](https://simpleicons.org) (CC0 1.0); Microsoft e Amazon da [Wikimedia Commons](https://commons.wikimedia.org) (pubblico dominio). I loghi sono marchi dei rispettivi proprietari e servono solo a riconoscere il titolo; NexusCharts non è legata a queste aziende.
 - TradingView e Pine Script sono marchi di TradingView, Inc. NexusCharts non è affiliata a TradingView.

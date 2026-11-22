@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.3.3-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.3.4-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.3.3 — Bougies journalières plus nettes
+### 🆕 Nouveautés de la 1.3.4 — Orbite du marché plus rapide
+
+- 🪐 **Orbite du marché** dans la Watchlist : elle se met à jour dès qu'un prix change, et une paire à −0,00 % compte désormais comme en baisse, comme sur sa ligne.
+- 📡 **Sources des données** : prix et bougies sont indiqués *Powered by NexusCharts*.
+
+### Auparavant, dans la 1.3.3 — Bougies journalières plus nettes
 
 - 🕯️ **Graphique journalier** : la petite bougie du dimanche soir (réouverture du marché) fait désormais partie de la bougie du lundi, comme sur les plateformes de trading. Les bougies hebdomadaires et mensuelles en profitent aussi. Les cryptos, qui s'échangent aussi le week-end, gardent leurs bougies du samedi et du dimanche.
 
@@ -400,7 +405,7 @@ Pas encore : ils restent sur l'appareil où tu les as créés.
 ## 🙏 Crédits
 
 - Graphiques réalisés avec [TradingView Lightweight Charts™](https://www.tradingview.com/lightweight-charts/) (Apache 2.0).
-- Données de marché de [biquote.io](https://biquote.io). Les prix servent à l'analyse et peuvent différer de ceux de ton courtier.
+- Données de marché fournies par les serveurs NexusCharts. Les prix servent à l'analyse et peuvent différer de ceux de ton courtier.
 - Icônes crypto de [cryptocurrency-icons](https://github.com/spothq/cryptocurrency-icons) (CC0 1.0).
 - Logos des actions : Apple, NVIDIA, Google, Meta et Tesla de [Simple Icons](https://simpleicons.org) (CC0 1.0) ; Microsoft et Amazon de [Wikimedia Commons](https://commons.wikimedia.org) (domaine public). Les logos sont des marques de leurs propriétaires respectifs et servent seulement à reconnaître le titre ; NexusCharts n'est pas liée à ces entreprises.
 - TradingView et Pine Script sont des marques de TradingView, Inc. NexusCharts n'est pas affiliée à TradingView.
