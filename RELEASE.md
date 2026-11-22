@@ -1,8 +1,6 @@
-# v1.3.4
+# v1.3.5
 ### Changed
-- Watchlist market orbit updates as soon as a price changes (before: every 2 seconds).
-- A pair at -0.00% now counts as down in the market orbit, matching the colour of its row.
-- Data sources: prices and candles are shown as "Powered by NexusCharts".
+- Market orbit: every instrument's dot now pulses, not just the best and the worst.
 
 ### Documentation
-- README updated in 5 languages: new in 1.3.4; market data line updated.
+- README updated in 5 languages: new in 1.3.5.

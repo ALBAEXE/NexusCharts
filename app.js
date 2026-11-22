@@ -1,4 +1,4 @@
-const VERSION='1.3.4';
+const VERSION='1.3.5';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -9101,7 +9101,8 @@ ${B}#d3sum .st.up circle{fill:#22ab94}
 ${B}#d3sum .st.down circle{fill:#f23645}
 ${B}#d3sum .st.flat circle{fill:var(--bg);stroke:var(--muted);stroke-width:1.2}
 ${B}#d3sum .st circle.h{fill:none!important;stroke:none}
-${B}#d3sum .st.top circle.h{stroke:currentColor;stroke-width:1;opacity:.6;animation:d3halo 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}
+${B}#d3sum .st circle.h{stroke:currentColor;stroke-width:1;opacity:.6;animation:d3halo 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}
+${B}#d3sum .st.flat{color:var(--muted)}
 ${B}#d3sum .st.up{color:#22ab94}${B}#d3sum .st.down{color:#f23645}
 @keyframes d3halo{0%{transform:scale(.6);opacity:.8}100%{transform:scale(1.9);opacity:0}}
 ${B}#d3sumc{position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);display:flex;align-items:flex-start;gap:22px;font-family:var(--d3m);font-variant-numeric:tabular-nums;white-space:nowrap;pointer-events:none}
@@ -9221,7 +9222,7 @@ ${B}.pfrow.danger .pfic::after{display:none}
 ${B}.pfrow.pflang{padding-right:18px!important}
 @media (max-width:340px){${B}#d3sum{height:118px}${B}#d3sumc b{font-size:21px}${B}.pfhead .d3sys{width:190px;height:130px}${B}#d3cats button{padding:0 12px 0 10px;letter-spacing:.1em}}
 @media (min-width:700px){${B}#d3sum{height:150px;margin:8px 18px 4px}}
-@media (prefers-reduced-motion:reduce){${B}#d3tsat b,${B}#d3cats button.on i,${B}#mini .d3knob::before,${B}#rpbar #rpplay::after,${B}.pfhead .d3sys .r1,${B}.pfhead .d3sys .r2,${B}#d3sum .st.top circle.h,body #hub:not([hidden])>*{animation:none!important}${B}#d3sum .st{transition:none}}
+@media (prefers-reduced-motion:reduce){${B}#d3tsat b,${B}#d3cats button.on i,${B}#mini .d3knob::before,${B}#rpbar #rpplay::after,${B}.pfhead .d3sys .r1,${B}.pfhead .d3sys .r2,${B}#d3sum .st circle.h,body #hub:not([hidden])>*{animation:none!important}${B}#d3sum .st{transition:none}}
 `;
   var st=document.createElement('style');st.id='d3inner2css';st.textContent=css;document.head.appendChild(st);
   var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}

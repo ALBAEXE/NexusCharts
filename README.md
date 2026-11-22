@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.3.4-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.3.5-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.3.4 — Faster market orbit
+### 🆕 New in 1.3.5 — Every dot pulses
+
+- 🪐 **Market orbit**: every instrument's dot now pulses, not just the best and the worst.
+
+### Previously in 1.3.4 — Faster market orbit
 
 - 🪐 **Market orbit** in the Watchlist updates as soon as a price changes, and a pair at −0.00% now counts as down, matching its row.
 - 📡 **Data sources**: prices and candles are shown as *Powered by NexusCharts*.
