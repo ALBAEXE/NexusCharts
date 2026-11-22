@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.4.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.4.1-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.4.0 — Tagesschluss um 17 Uhr New York
+### 🆕 Neu in 1.4.1 — Einfacheres Profil
+
+- 👤 **Profil**: Die Seite *Datenquellen* ist weg. Die Angaben zu Chart und Logos stehen jetzt unter *Rechtliches* › *Danksagungen*.
+
+### Vorher in 1.4.0 — Tagesschluss um 17 Uhr New York
 
 - 🕯️ **Tageskerzen wie bei Brokern**: Gold, Metalle, Energie, Forex und Indizes schließen den Tag um 17 Uhr New Yorker Zeit. Der Sonntagabend gehört zum Montag, und die Live-Kerze wechselt genau beim Schluss zum neuen Tag.
 - 🪙 Krypto schließt weiterhin um Mitternacht UTC, Aktien folgen der New Yorker Sitzung.
@@ -77,10 +81,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - 🪐 **Marktorbit**: Jetzt pulsiert der Punkt jedes Instruments, nicht nur der des besten und des schwächsten.
 
-### Vorher in 1.3.4 — Schnellerer Marktorbit
+<details>
+<summary>Vorher in 1.3.4 — Schnellerer Marktorbit</summary>
 
 - 🪐 **Marktorbit** in der Watchlist: aktualisiert sich, sobald sich ein Preis ändert, und ein Paar bei −0,00 % zählt jetzt als fallend, wie in seiner Zeile.
 - 📡 **Datenquellen**: Preise und Kerzen werden als *Powered by NexusCharts* angezeigt.
+
+</details>
 
 <details>
 <summary>Vorher in 1.3.3 — Sauberere Tageskerzen</summary>
@@ -95,14 +102,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 📋 **Watchlist**: Die Kategorie *Aktien* sieht aus wie die anderen, ohne den Börsenstatus neben dem Namen.
 - 🧹 Die letzten Reste der alten Broker-Verbindung entfernt: klarere Meldung bei Verbindungsfehlern und „NexusCharts-Konto“ im Profil.
 - 📖 README: Die Roadmap zeigt jetzt 79 Instrumente.
-
-</details>
-
-<details>
-<summary>Vorher in 1.3.1 — Klarer in den Google-Ergebnissen</summary>
-
-- 🔎 **Name der Website**: In den Google-Ergebnissen und in Link-Vorschauen heißt die Website jetzt einfach *NexusCharts*.
-- 📝 **Aktualisierte Beschreibung**: Sie nennt jetzt Gold, Forex, Crypto, Indices und Stocks, ohne das alte „Stocks coming soon“.
 
 </details>
 

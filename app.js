@@ -1,4 +1,4 @@
-const VERSION='1.4.0';
+const VERSION='1.4.1';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -3840,6 +3840,21 @@ var LIC={
   donate:['<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.4C1 8.2 3 4.5 6.8 4.5c2.2 0 3.6 1.2 5.2 3 1.6-1.8 3-3 5.2-3C21 4.5 23 8.2 21.6 11.6 19.5 16.4 12 21 12 21z"/></svg>','#ec4899'],
   contact:['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>','#a78bfa']
 };
+/* 1.4.1: crediti in «Note legali» (prima in «Fonti dati»). La licenza di TradingView Lightweight Charts chiede
+   l'avviso e il link a tradingview.com in una pagina dell'app visibile agli utenti: non toglierli. */
+LIC.credits=['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v16M16 4v16"/><rect x="5.5" y="8" width="5" height="7" rx="1"/><rect x="13.5" y="6" width="5" height="9" rx="1"/></svg>','#3b82f6'];
+(function(){
+  var TV='TradingView Lightweight Charts\u2122 Copyright (c) 2025 TradingView, Inc.';
+  var C={
+    it:['credits','Crediti',['Il grafico è disegnato con TradingView Lightweight Charts\u2122, libreria open source con licenza Apache 2.0.',TV,'I loghi delle azioni sono marchi dei rispettivi proprietari: servono solo a riconoscere il titolo e non indicano un legame con le aziende né un loro sostegno.']],
+    en:['credits','Credits',['The chart is drawn with TradingView Lightweight Charts\u2122, an open-source library under the Apache 2.0 licence.',TV,'Stock logos are trademarks of their respective owners: they are only used to identify the stock and do not imply any affiliation with or endorsement by the companies.']],
+    es:['credits','Créditos',['El gráfico se dibuja con TradingView Lightweight Charts\u2122, biblioteca de código abierto con licencia Apache 2.0.',TV,'Los logotipos de las acciones son marcas de sus respectivos propietarios: solo sirven para reconocer el valor y no indican relación con las empresas ni su respaldo.']],
+    fr:['credits','Crédits',['Le graphique est dessiné avec TradingView Lightweight Charts\u2122, bibliothèque open source sous licence Apache 2.0.',TV,'Les logos des actions sont des marques de leurs propriétaires respectifs : ils servent seulement à reconnaître le titre et n\u2019indiquent aucun lien avec les entreprises ni leur soutien.']],
+    de:['credits','Danksagungen',['Der Chart wird mit TradingView Lightweight Charts\u2122 gezeichnet, einer Open-Source-Bibliothek unter der Apache-2.0-Lizenz.',TV,'Aktien-Logos sind Marken ihrer jeweiligen Inhaber: Sie dienen nur dazu, die Aktie zu erkennen, und bedeuten keine Verbindung zu den Unternehmen oder deren Unterstützung.']]
+  };
+  for(var k in C){try{LEGAL[k].s.push(C[k])}catch(e){}}
+})();
+
 function renderLegal(p){
   const L=lg();pfSub(p,L.title);
   L.s.forEach(([k,title,items])=>{
@@ -3851,6 +3866,8 @@ function renderLegal(p){
     if(PF.lgOpen===k){
       const ul=document.createElement('ul');ul.className='lglist';
       items.forEach(t=>{const li=document.createElement('li');li.textContent=t;ul.appendChild(li)});
+      if(k==='credits'){const b=document.createElement('button');b.className='pfmini on';b.style.margin='4px 0 6px 0';b.textContent='tradingview.com';
+        b.onclick=()=>{const u='https://www.tradingview.com/';let w=null;try{w=window.open(u,'_blank','noopener')}catch(e){}if(!w)location.href=u};ul.appendChild(b)}
       box.appendChild(ul);
     }
     p.appendChild(box);
@@ -12021,7 +12038,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
         /* subito dopo «Note legali» */
         var lgRow=null;[].forEach.call(p2.querySelectorAll('.pfrow'),function(b){var s=b.querySelector('.pftx span');if(s&&s.textContent===lg().title)lgRow=b});
         var l=L();
-        if(lgRow){var g=lgRow.parentNode;var row=pfRow(g,PIC.sources,l.title,l.sub,function(){pfGo('sources')},'chev',PCOL.sources);row.classList.add('nxsrcrow');g.insertBefore(row,lgRow.nextSibling)}
+        /* 1.4.1: voce «Fonti dati» tolta dal Profilo (i crediti obbligatori sono in «Note legali») */
       }catch(e){}
       return r;
     };

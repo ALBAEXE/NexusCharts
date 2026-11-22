@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.4.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.4.1-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.4.0 — Clôture journalière à 17 h New York
+### 🆕 Nouveautés de la 1.4.1 — Profil plus simple
+
+- 👤 **Profil** : la page *Sources des données* a été retirée. Les crédits du graphique et des logos sont maintenant dans *Mentions légales*, sous *Crédits*.
+
+### Auparavant, dans la 1.4.0 — Clôture journalière à 17 h New York
 
 - 🕯️ **Bougies journalières comme chez les courtiers** : or, métaux, énergie, Forex et indices clôturent la journée à 17 h heure de New York. Le dimanche soir fait partie du lundi et la bougie en direct passe au nouveau jour juste à la clôture.
 - 🪙 Les cryptos clôturent toujours à minuit UTC ; les actions suivent la séance de New York.
@@ -77,10 +81,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 - 🪐 **Orbite du marché** : le point de chaque instrument pulse désormais, pas seulement celui du meilleur et du pire.
 
-### Auparavant, dans la 1.3.4 — Orbite du marché plus rapide
+<details>
+<summary>Auparavant, dans la 1.3.4 — Orbite du marché plus rapide</summary>
 
 - 🪐 **Orbite du marché** dans la Watchlist : elle se met à jour dès qu'un prix change, et une paire à −0,00 % compte désormais comme en baisse, comme sur sa ligne.
 - 📡 **Sources des données** : prix et bougies sont indiqués *Powered by NexusCharts*.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.3.3 — Bougies journalières plus nettes</summary>
@@ -95,14 +102,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 📋 **Watchlist** : la catégorie *Actions* s'affiche comme les autres, sans l'état de la Bourse à côté du nom.
 - 🧹 Retrait des derniers restes de l'ancienne connexion au courtier : message d'erreur de connexion plus clair et « Compte NexusCharts » dans le Profil.
 - 📖 README : la feuille de route indique maintenant 79 instruments.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.3.1 — Plus claire dans les résultats Google</summary>
-
-- 🔎 **Nom du site** : dans les résultats Google et les aperçus de liens, le site s'appelle simplement *NexusCharts*.
-- 📝 **Description mise à jour** : elle cite désormais Gold, Forex, Crypto, Indices et Stocks, sans l'ancien « Stocks coming soon ».
 
 </details>
 
