@@ -67,9 +67,9 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.7.0 — Quicker online status
+### 🆕 New in 1.7.0 — Steadier connection
 
-- ⚡ The app now tells the server it is open right away and every few seconds, and says so reliably when you close it, even on iPhone.
+- ⚡ The app's connection with the server is quicker and more reliable, also when you close it on iPhone.
 
 ### Previously in 1.6.0 — Legal in Design 3.0
 

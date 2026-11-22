@@ -1,7 +1,6 @@
-# v1.7.0 — Quicker online status
+# v1.7.0 — Steadier connection
 ### Changed
-- The app tells the server it is open right away and every few seconds (before: once a minute).
-- When the app is closed or sent to the background, the signal is sent reliably, also on iPhone.
+- The app's connection with the server is quicker and more reliable, also when you close it on iPhone.
 
 ### Documentation
 - README updated in 5 languages: new in 1.7.0.

@@ -67,9 +67,9 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.7.0 — Schnellerer Online-Status
+### 🆕 Neu in 1.7.0 — Stabilere Verbindung
 
-- ⚡ Die App meldet sich beim Server sofort beim Öffnen und dann alle paar Sekunden, und zuverlässig auch beim Schließen, selbst auf dem iPhone.
+- ⚡ Die Verbindung der App mit dem Server ist schneller und zuverlässiger, auch wenn du sie auf dem iPhone schließt.
 
 ### Vorher in 1.6.0 — Rechtliches im Design 3.0
 

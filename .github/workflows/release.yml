@@ -1,6 +1,7 @@
 name: Release
 
 # Creates the GitHub release when RELEASE.md changes on main.
+# If the release already exists, its title and text are updated from RELEASE.md.
 # First line of RELEASE.md: "# vX.Y.Z — Title". The rest is the release text.
 # Release name: "NexusCharts X.Y.Z — Title".
 # .github/release-titles.txt ("vX.Y.Z|Full release name", one per line) fixes names of releases that already exist.
@@ -36,7 +37,7 @@ jobs:
           fi
           tail -n +2 RELEASE.md > notes.md
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release edit "$TAG" --title "$NAME"
+            gh release edit "$TAG" --title "$NAME" --notes-file notes.md
           else
             gh release create "$TAG" --target "$GITHUB_SHA" --title "$NAME" --notes-file notes.md --latest
           fi

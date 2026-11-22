@@ -67,9 +67,9 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.7.0 — Stato online più rapido
+### 🆕 Novità della 1.7.0 — Collegamento più stabile
 
-- ⚡ L'app avvisa il server subito quando si apre e poi ogni pochi secondi, e lo avvisa in modo affidabile quando la chiudi, anche su iPhone.
+- ⚡ Il collegamento dell'app con il server è più rapido e affidabile, anche quando la chiudi su iPhone.
 
 ### In precedenza, nella 1.6.0 — Note legali in Design 3.0
 

@@ -67,9 +67,9 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.7.0 — Statut en ligne plus rapide
+### 🆕 Nouveautés de la 1.7.0 — Connexion plus stable
 
-- ⚡ L'app prévient le serveur dès son ouverture puis toutes les quelques secondes, et de façon fiable quand tu la fermes, même sur iPhone.
+- ⚡ La connexion de l'app avec le serveur est plus rapide et plus fiable, même quand tu la fermes sur iPhone.
 
 ### Auparavant, dans la 1.6.0 — Mentions légales en Design 3.0
 
