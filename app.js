@@ -1,4 +1,4 @@
-const VERSION='1.3.5';
+const VERSION='1.4.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -11891,11 +11891,11 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   function firstActive(){try{var g=findBase('XAUUSD');if(g&&active(g.name))return g.name;for(var i=0;i<INST.length;i++)if(active(INST[i].name))return INST[i].name}catch(e){}return null}
 
   var TX={
-    it:{soon:'In arrivo',soonT:'{n} arriva presto.',title:'Fonti dati',sub:'Da dove arrivano prezzi e grafici',act:'Strumenti attivi',next:'In arrivo',chart:'Grafico',src:'Powered by {s}',tmp:'Fonte temporanea: la stiamo sostituendo con una fonte indipendente.',nextD:'Arriveranno uno alla volta, ognuno con la sua fonte.',lw:'Il grafico è disegnato con questa libreria open source (licenza Apache 2.0):',site:'Apri tradingview.com',note:'Prezzi e grafici servono per l\'analisi: possono essere diversi da quelli del tuo broker.'},
-    en:{soon:'Coming soon',soonT:'{n} is coming soon.',title:'Data sources',sub:'Where prices and charts come from',act:'Active instruments',next:'Coming soon',chart:'Chart',src:'Powered by {s}',tmp:'Temporary source: we are replacing it with an independent one.',nextD:'They will arrive one at a time, each with its own source.',lw:'The chart is drawn with this open-source library (Apache 2.0 license):',site:'Open tradingview.com',note:'Prices and charts are for analysis: they may differ from your broker\'s.'},
-    es:{soon:'Próximamente',soonT:'{n} llegará pronto.',title:'Fuentes de datos',sub:'De dónde vienen precios y gráficos',act:'Instrumentos activos',next:'Próximamente',chart:'Gráfico',src:'Powered by {s}',tmp:'Fuente temporal: la estamos sustituyendo por una fuente independiente.',nextD:'Llegarán uno a uno, cada uno con su fuente.',lw:'El gráfico se dibuja con esta biblioteca de código abierto (licencia Apache 2.0):',site:'Abrir tradingview.com',note:'Precios y gráficos sirven para el análisis: pueden ser distintos de los de tu bróker.'},
-    fr:{soon:'Bientôt',soonT:'{n} arrive bientôt.',title:'Sources des données',sub:'D\'où viennent les prix et les graphiques',act:'Instruments actifs',next:'Bientôt',chart:'Graphique',src:'Powered by {s}',tmp:'Source temporaire : nous la remplaçons par une source indépendante.',nextD:'Ils arriveront un par un, chacun avec sa source.',lw:'Le graphique est dessiné avec cette bibliothèque open source (licence Apache 2.0) :',site:'Ouvrir tradingview.com',note:'Les prix et les graphiques servent à l\'analyse : ils peuvent différer de ceux de ton courtier.'},
-    de:{soon:'Demnächst',soonT:'{n} kommt bald.',title:'Datenquellen',sub:'Woher Preise und Charts kommen',act:'Aktive Instrumente',next:'Demnächst',chart:'Chart',src:'Powered by {s}',tmp:'Vorübergehende Quelle: wir ersetzen sie durch eine unabhängige Quelle.',nextD:'Sie kommen nacheinander, jedes mit seiner eigenen Quelle.',lw:'Der Chart wird mit dieser Open-Source-Bibliothek gezeichnet (Apache-2.0-Lizenz):',site:'tradingview.com öffnen',note:'Preise und Charts dienen der Analyse: sie können von denen deines Brokers abweichen.'}
+    it:{soon:'In arrivo',soonT:'{n} arriva presto.',title:'Fonti dati',sub:'Da dove arrivano prezzi e grafici',act:'Strumenti attivi',next:'In arrivo',chart:'Grafico',src:'Powered by {s}',tmp:'Fonte temporanea: la stiamo sostituendo con una fonte indipendente.',nextD:'Arriveranno uno alla volta, ognuno con la sua fonte.',lw:'Il grafico è disegnato con questa libreria open source (licenza Apache 2.0):',site:'Apri tradingview.com',d17:'Candele giornaliere: oro, metalli, energia, Forex e indici chiudono alle 17:00 di New York (23:00 in Italia), come sui broker; cripto a mezzanotte UTC; azioni con la seduta di New York. Prima del 12 novembre 2026 lo storico giornaliero chiude a mezzanotte UTC.',note:'Prezzi e grafici servono per l\'analisi: possono essere diversi da quelli del tuo broker.'},
+    en:{soon:'Coming soon',soonT:'{n} is coming soon.',title:'Data sources',sub:'Where prices and charts come from',act:'Active instruments',next:'Coming soon',chart:'Chart',src:'Powered by {s}',tmp:'Temporary source: we are replacing it with an independent one.',nextD:'They will arrive one at a time, each with its own source.',lw:'The chart is drawn with this open-source library (Apache 2.0 license):',site:'Open tradingview.com',d17:'Daily candles: gold, metals, energy, Forex and indices close at 5 pm New York time, as with brokers; crypto at midnight UTC; stocks with the New York session. Before 12 November 2026 the daily history closes at midnight UTC.',note:'Prices and charts are for analysis: they may differ from your broker\'s.'},
+    es:{soon:'Próximamente',soonT:'{n} llegará pronto.',title:'Fuentes de datos',sub:'De dónde vienen precios y gráficos',act:'Instrumentos activos',next:'Próximamente',chart:'Gráfico',src:'Powered by {s}',tmp:'Fuente temporal: la estamos sustituyendo por una fuente independiente.',nextD:'Llegarán uno a uno, cada uno con su fuente.',lw:'El gráfico se dibuja con esta biblioteca de código abierto (licencia Apache 2.0):',site:'Abrir tradingview.com',d17:'Velas diarias: oro, metales, energía, Forex e índices cierran a las 17:00 de Nueva York, como en los brókers; cripto a medianoche UTC; acciones con la sesión de Nueva York. Antes del 12 de noviembre de 2026 el histórico diario cierra a medianoche UTC.',note:'Precios y gráficos sirven para el análisis: pueden ser distintos de los de tu bróker.'},
+    fr:{soon:'Bientôt',soonT:'{n} arrive bientôt.',title:'Sources des données',sub:'D\'où viennent les prix et les graphiques',act:'Instruments actifs',next:'Bientôt',chart:'Graphique',src:'Powered by {s}',tmp:'Source temporaire : nous la remplaçons par une source indépendante.',nextD:'Ils arriveront un par un, chacun avec sa source.',lw:'Le graphique est dessiné avec cette bibliothèque open source (licence Apache 2.0) :',site:'Ouvrir tradingview.com',d17:'Bougies journalières : or, métaux, énergie, Forex et indices clôturent à 17 h heure de New York, comme chez les courtiers ; cryptos à minuit UTC ; actions avec la séance de New York. Avant le 12 novembre 2026, l\'historique journalier clôture à minuit UTC.',note:'Les prix et les graphiques servent à l\'analyse : ils peuvent différer de ceux de ton courtier.'},
+    de:{soon:'Demnächst',soonT:'{n} kommt bald.',title:'Datenquellen',sub:'Woher Preise und Charts kommen',act:'Aktive Instrumente',next:'Demnächst',chart:'Chart',src:'Powered by {s}',tmp:'Vorübergehende Quelle: wir ersetzen sie durch eine unabhängige Quelle.',nextD:'Sie kommen nacheinander, jedes mit seiner eigenen Quelle.',lw:'Der Chart wird mit dieser Open-Source-Bibliothek gezeichnet (Apache-2.0-Lizenz):',site:'tradingview.com öffnen',d17:'Tageskerzen: Gold, Metalle, Energie, Forex und Indizes schließen um 17 Uhr New Yorker Zeit, wie bei Brokern; Krypto um Mitternacht UTC; Aktien mit der New Yorker Sitzung. Vor dem 12. November 2026 schließt die Tageshistorie um Mitternacht UTC.',note:'Preise und Charts dienen der Analyse: sie können von denen deines Brokers abweichen.'}
   };
   function L(){try{return TX[lang]||TX.it}catch(e){return TX.it}}
   window.NXReg={list:REG,regOf:regOf,listed:listed,active:active,pathOk:pathOk,firstActive:firstActive,fill:fill,tx:L};
@@ -11987,7 +11987,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     var secs=[
       /* una riga per fonte: categorie attive e numero di strumenti */
       ['px',l.act,(function(){var by={},ord=[];act.forEach(function(r){var s=r.src;if(!by[s]){by[s]={n:0,c:[]};ord.push(s)}by[s].n++;if(by[s].c.indexOf(r.cls)<0)by[s].c.push(r.cls)});
-        return ord.map(function(s){var cs=CATS.filter(function(c){return by[s].c.indexOf(c)>=0}).map(function(c){return t('cat_'+c)});return cs.join(', ')+' ('+by[s].n+') · '+l.src.replace('{s}',s)})})().concat(act.some(function(r){return r.tmp})?[l.tmp]:[]).concat([l.note])],
+        return ord.map(function(s){var cs=CATS.filter(function(c){return by[s].c.indexOf(c)>=0}).map(function(c){return t('cat_'+c)});return cs.join(', ')+' ('+by[s].n+') · '+l.src.replace('{s}',s)})})().concat(act.some(function(r){return r.tmp})?[l.tmp]:[]).concat([l.d17,l.note])],
       ['next',l.next,[(nxt.length?nxt.map(function(r){return r.k}).join(', '):t('cat_stk'))+'.',l.nextD]],
       ['chart',l.chart,[l.lw,'TradingView Lightweight Charts™ Copyright (c) 2025 TradingView, Inc.']]
     ];
@@ -12158,12 +12158,22 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
 
   /* ---------- candele: risposta nello stesso formato del broker ---------- */
   async function nxCandles(sym,reso,from,to){
-    var u=NXD+'/v2/candles?symbol='+sym+'&tf='+TFM[reso]+'&from='+Math.floor(+from||0)+'&to='+Math.floor(+to||Date.now())+'&'+cred();
+    var u=NXD+'/v2/candles?symbol='+sym+'&tf='+TFM[reso]+'&from='+Math.floor(+from||0)+'&to='+Math.floor(+to||Date.now())+(TFM[reso]==='1D'?'&ny=1':'')+'&'+cred();
     var r=await fetch(u,{cache:'no-store'});
     if(!r.ok){var e=new Error('nexus '+r.status);e.status=r.status;throw e}
     var j=await r.json();
     var out=(j.candles||[]).map(function(b){return{t:b[0]*1000,o:b[1],h:b[2],l:b[3],c:b[4],v:b[5]||0}});
     return TFM[reso]==='1D'?noSun(out):out;
+  }
+  /* 1.4.0: giorno di borsa (00:00 UTC della data, in ms) per un istante in ms: data di New York di (istante + 7 ore).
+     Vale per oro, metalli, energia, Forex e indici; cripto e azioni restano come la fonte. */
+  var NYF=null,NYM={};
+  function nyKind(name){try{var r=NXReg.regOf(name);return !!(r&&r.cls!=='cry'&&r.cls!=='stk')}catch(e){return false}}
+  function nyTDay(ms){
+    var k=Math.floor(ms/3600000);if(NYM[k]!==undefined)return NYM[k];
+    if(!NYF)NYF=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'});
+    var p={};NYF.formatToParts(new Date((k+7)*3600000)).forEach(function(x){p[x.type]=x.value});
+    return NYM[k]=Date.UTC(+p.year,+p.month-1,+p.day);
   }
   /* 1.3.3: la candela della domenica sera (riapertura del mercato) si unisce al lunedì.
      Solo per i mercati chiusi nel weekend: se esiste il sabato (cripto) la domenica resta com'è. */
@@ -12275,6 +12285,11 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
         if(tfIsSec(res)){
           var nb=secBuild(name,TF_PLAN[res].n,L.t);
           nb.forEach(function(b){if(b.t===L.t){L.h=Math.max(L.h,b.h);L.l=Math.min(L.l,b.l);L.c=b.c;ch.push(L.t)}else if(b.t>L.t){lastBars.push(b);ch.push(b.t)}});
+        }else if(res==='1D'&&nyKind(name)){
+          /* 1.4.0: la giornata finisce alle 17:00 di New York: il prezzo va nella candela del suo giorno di borsa */
+          var kd=nyTDay(x.ts);
+          if(kd===L.t){L.c=px;if(px>L.h)L.h=px;if(px<L.l)L.l=px;ch.push(L.t)}
+          else if(kd>L.t){lastBars.push({t:kd,o:px,h:px,l:px,c:px,v:0});ch.push(kd)}
         }else if(x.ts>=L.t&&x.ts<L.t+sec){
           L.c=px;if(px>L.h)L.h=px;if(px<L.l)L.l=px;ch.push(L.t);
         }else if(TF_NATIVE[res]&&res!=='1D'&&x.ts>=L.t+sec){

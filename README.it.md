@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.3.5-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.4.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.3.5 — Tutte le palline pulsano
+### 🆕 Novità della 1.4.0 — Chiusura giornaliera alle 17:00 di New York
+
+- 🕯️ **Candele giornaliere come sui broker**: oro, metalli, energia, Forex e indici chiudono la giornata alle 17:00 di New York (le 23:00 in Italia). La domenica sera fa parte del lunedì e la candela dal vivo passa al giorno nuovo proprio alla chiusura.
+- 🪙 Le cripto chiudono sempre a mezzanotte UTC, le azioni seguono la seduta di New York.
+- 📡 **Fonti dati** lo spiega; lo storico giornaliero prima del 12 novembre 2026 chiude ancora a mezzanotte UTC.
+
+### In precedenza, nella 1.3.5 — Tutte le palline pulsano
 
 - 🪐 **Orbita del mercato**: ora pulsa la pallina di ogni strumento, non solo quella del migliore e del peggiore.
 
@@ -76,9 +82,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🪐 **Orbita del mercato** nella Watchlist: si aggiorna appena cambia un prezzo, e una coppia a −0,00% ora conta come in ribasso, come nella sua riga.
 - 📡 **Fonti dati**: prezzi e candele sono indicati come *Powered by NexusCharts*.
 
-### In precedenza, nella 1.3.3 — Candele giornaliere più pulite
+<details>
+<summary>In precedenza, nella 1.3.3 — Candele giornaliere più pulite</summary>
 
 - 🕯️ **Grafico giornaliero**: la piccola candela della domenica sera (riapertura del mercato) ora fa parte della candela del lunedì, come sulle piattaforme di trading. Ne beneficiano anche le candele settimanali e mensili. Le cripto, che si scambiano anche nel weekend, mantengono le candele di sabato e domenica.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.3.2 — Più ordinata</summary>
@@ -94,17 +103,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 - 🔎 **Nome del sito**: nei risultati di Google e nelle anteprime dei link il sito si chiama semplicemente *NexusCharts*.
 - 📝 **Descrizione aggiornata**: ora cita Gold, Forex, Crypto, Indices e Stocks, senza il vecchio «Stocks coming soon».
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.3.0 — Azioni</summary>
-
-- 📈 **Arrivano le azioni**: Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta e Tesla, con prezzi in diretta durante la seduta di New York e lo storico delle candele.
-- 🍎 **Loghi delle aziende** come icone rotonde, salvati dentro l'app.
-- 🕘 **Stato della Borsa**: accanto ad *Azioni* nella Watchlist vedi se la Borsa di New York è Aperta, in Pre-market o Chiusa. A Borsa chiusa vedi l'ultimo prezzo della seduta; festività e chiusure anticipate sono comprese.
-- 🔎 La categoria *Azioni* ora c'è anche nella ricerca e nella configurazione del primo avvio, come le altre.
-- 📘 FAQ aggiornate con gli account NexusCharts.
 
 </details>
 

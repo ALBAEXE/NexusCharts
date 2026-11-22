@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.3.5-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.4.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.3.5 — Tous les points pulsent
+### 🆕 Nouveautés de la 1.4.0 — Clôture journalière à 17 h New York
+
+- 🕯️ **Bougies journalières comme chez les courtiers** : or, métaux, énergie, Forex et indices clôturent la journée à 17 h heure de New York. Le dimanche soir fait partie du lundi et la bougie en direct passe au nouveau jour juste à la clôture.
+- 🪙 Les cryptos clôturent toujours à minuit UTC ; les actions suivent la séance de New York.
+- 📡 **Sources des données** l'explique ; l'historique journalier avant le 12 novembre 2026 clôture encore à minuit UTC.
+
+### Auparavant, dans la 1.3.5 — Tous les points pulsent
 
 - 🪐 **Orbite du marché** : le point de chaque instrument pulse désormais, pas seulement celui du meilleur et du pire.
 
@@ -76,9 +82,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🪐 **Orbite du marché** dans la Watchlist : elle se met à jour dès qu'un prix change, et une paire à −0,00 % compte désormais comme en baisse, comme sur sa ligne.
 - 📡 **Sources des données** : prix et bougies sont indiqués *Powered by NexusCharts*.
 
-### Auparavant, dans la 1.3.3 — Bougies journalières plus nettes
+<details>
+<summary>Auparavant, dans la 1.3.3 — Bougies journalières plus nettes</summary>
 
 - 🕯️ **Graphique journalier** : la petite bougie du dimanche soir (réouverture du marché) fait désormais partie de la bougie du lundi, comme sur les plateformes de trading. Les bougies hebdomadaires et mensuelles en profitent aussi. Les cryptos, qui s'échangent aussi le week-end, gardent leurs bougies du samedi et du dimanche.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.3.2 — Mieux rangée</summary>
@@ -94,17 +103,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 - 🔎 **Nom du site** : dans les résultats Google et les aperçus de liens, le site s'appelle simplement *NexusCharts*.
 - 📝 **Description mise à jour** : elle cite désormais Gold, Forex, Crypto, Indices et Stocks, sans l'ancien « Stocks coming soon ».
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.3.0 — Actions</summary>
-
-- 📈 **Les actions arrivent** : Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta et Tesla, avec les prix en direct pendant la séance de New York et l'historique des bougies.
-- 🍎 **Logos des entreprises** en icônes rondes, enregistrés dans l'app.
-- 🕘 **État de la Bourse** : à côté d'*Actions* dans la Watchlist, tu vois si la Bourse de New York est Ouverte, en Pré-marché ou Fermée. Bourse fermée, tu vois le dernier prix de la séance ; jours fériés et fermetures anticipées sont pris en compte.
-- 🔎 La catégorie *Actions* est maintenant aussi dans la recherche et dans la configuration du premier lancement, comme les autres.
-- 📘 FAQ mise à jour avec les comptes NexusCharts.
 
 </details>
 

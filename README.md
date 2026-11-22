@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.3.5-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.4.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.3.5 — Every dot pulses
+### 🆕 New in 1.4.0 — Daily close at 5 pm New York
+
+- 🕯️ **Daily candles like the brokers'**: gold, metals, energy, Forex and indices now close their day at 5 pm New York time (11 pm in Italy). Sunday evening is part of Monday, and the live candle switches to the new day right at the close.
+- 🪙 Crypto keeps closing at midnight UTC, stocks follow the New York session.
+- 📡 **Data sources** explains it; the daily history before 12 November 2026 still closes at midnight UTC.
+
+### Previously in 1.3.5 — Every dot pulses
 
 - 🪐 **Market orbit**: every instrument's dot now pulses, not just the best and the worst.
 
@@ -76,9 +82,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🪐 **Market orbit** in the Watchlist updates as soon as a price changes, and a pair at −0.00% now counts as down, matching its row.
 - 📡 **Data sources**: prices and candles are shown as *Powered by NexusCharts*.
 
-### Previously in 1.3.3 — Cleaner daily candles
+<details>
+<summary>Previously in 1.3.3 — Cleaner daily candles</summary>
 
 - 🕯️ **Daily chart**: the short Sunday-evening candle (market reopening) is now part of Monday's candle, as on trading platforms. Weekly and monthly candles benefit too. Crypto, which also trades at weekends, keeps its Saturday and Sunday candles.
+
+</details>
 
 <details>
 <summary>Previously in 1.3.2 — Tidier</summary>
@@ -94,17 +103,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 - 🔎 **Site name**: Google results and link previews now name the site simply *NexusCharts*.
 - 📝 **Updated description**: it now lists Gold, Forex, Crypto, Indices and Stocks, without the old “Stocks coming soon”.
-
-</details>
-
-<details>
-<summary>Previously in 1.3.0 — Stocks</summary>
-
-- 📈 **Stocks are here**: Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta and Tesla, with live prices during the New York session and candle history.
-- 🍎 **Company logos** as round icons, saved inside the app.
-- 🕘 **Exchange status**: next to *Stocks* in the Watchlist you see whether the New York exchange is Open, in Pre-market or Closed. With the exchange closed you see the last price of the session; holidays and early closes are taken into account.
-- 🔎 The *Stocks* category is now in Search and in the first-launch setup, like the other categories.
-- 📘 FAQ updated for NexusCharts accounts.
 
 </details>
 

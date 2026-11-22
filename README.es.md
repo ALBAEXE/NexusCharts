@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.3.5-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.4.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.3.5 — Todos los puntos laten
+### 🆕 Novedades de la 1.4.0 — Cierre diario a las 17:00 de Nueva York
+
+- 🕯️ **Velas diarias como en los brókers**: oro, metales, energía, Forex e índices cierran el día a las 17:00 de Nueva York. El domingo por la noche forma parte del lunes y la vela en vivo pasa al nuevo día justo al cierre.
+- 🪙 Las cripto siguen cerrando a medianoche UTC; las acciones siguen la sesión de Nueva York.
+- 📡 **Fuentes de datos** lo explica; el histórico diario anterior al 12 de noviembre de 2026 sigue cerrando a medianoche UTC.
+
+### Anteriormente, en la 1.3.5 — Todos los puntos laten
 
 - 🪐 **Órbita del mercado**: ahora late el punto de cada instrumento, no solo el del mejor y el peor.
 
@@ -76,9 +82,12 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🪐 **Órbita del mercado** en la Watchlist: se actualiza en cuanto cambia un precio, y un par a −0,00 % ahora cuenta como a la baja, igual que en su fila.
 - 📡 **Fuentes de datos**: precios y velas aparecen como *Powered by NexusCharts*.
 
-### Anteriormente, en la 1.3.3 — Velas diarias más limpias
+<details>
+<summary>Anteriormente, en la 1.3.3 — Velas diarias más limpias</summary>
 
 - 🕯️ **Gráfico diario**: la pequeña vela del domingo por la noche (reapertura del mercado) ahora forma parte de la vela del lunes, como en las plataformas de trading. También mejoran las velas semanales y mensuales. Las cripto, que cotizan también el fin de semana, mantienen sus velas de sábado y domingo.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.3.2 — Más ordenada</summary>
@@ -94,17 +103,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - 🔎 **Nombre del sitio**: en los resultados de Google y en las vistas previas de enlaces el sitio se llama simplemente *NexusCharts*.
 - 📝 **Descripción actualizada**: ahora menciona Gold, Forex, Crypto, Indices y Stocks, sin el antiguo «Stocks coming soon».
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.3.0 — Acciones</summary>
-
-- 📈 **Llegan las acciones**: Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta y Tesla, con precios en directo durante la sesión de Nueva York e historial de velas.
-- 🍎 **Logotipos de las empresas** como iconos redondos, guardados dentro de la app.
-- 🕘 **Estado de la Bolsa**: junto a *Acciones* en la Watchlist ves si la Bolsa de Nueva York está Abierta, en Pre-market o Cerrada. Con la Bolsa cerrada ves el último precio de la sesión; se tienen en cuenta festivos y cierres anticipados.
-- 🔎 La categoría *Acciones* ya está también en la búsqueda y en la configuración del primer inicio, como las demás.
-- 📘 Preguntas frecuentes actualizadas con las cuentas NexusCharts.
 
 </details>
 
