@@ -69,7 +69,7 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 ### 🆕 Novedades de la 1.4.1 — Perfil más sencillo
 
-- 👤 **Perfil**: se quitó la página *Fuentes de datos*. Los créditos del gráfico y de los logotipos ahora están en *Aviso legal*, en *Créditos*.
+- 👤 **Perfil**: se quitó la página *Fuentes de datos*. Los créditos del gráfico y de los logotipos ahora están en *Avisos legales*, en *Créditos*.
 
 ### Anteriormente, en la 1.4.0 — Cierre diario a las 17:00 de Nueva York
 
