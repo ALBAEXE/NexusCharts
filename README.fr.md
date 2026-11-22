@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.3.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.3.2-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.3.1 — Plus claire dans les résultats Google
+### 🆕 Nouveautés de la 1.3.2 — Mieux rangée
+
+- 📋 **Watchlist** : la catégorie *Actions* s'affiche comme les autres, sans l'état de la Bourse à côté du nom.
+- 🧹 Retrait des derniers restes de l'ancienne connexion au courtier : message d'erreur de connexion plus clair et « Compte NexusCharts » dans le Profil.
+- 📖 README : la feuille de route indique maintenant 79 instruments.
+
+### Auparavant, dans la 1.3.1 — Plus claire dans les résultats Google
 
 - 🔎 **Nom du site** : dans les résultats Google et les aperçus de liens, le site s'appelle simplement *NexusCharts*.
 - 📝 **Description mise à jour** : elle cite désormais Gold, Forex, Crypto, Indices et Stocks, sans l'ancien « Stocks coming soon ».
@@ -171,7 +177,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - Mini lecteur en bas avec le symbole sélectionné et son mini-graphique
 - **Plusieurs watchlists** (*Toutes les watchlists* : créer, renommer, supprimer) et **Signaux** en couleur avec leurs onglets
 - Appui long sur une paire pour Signal et Retirer
-- Pour les actions, l'état de la Bourse de New York (Ouverte, Pré-marché, Fermée) s'affiche à côté du nom de la catégorie
 
 ### 📊 Graphique
 - Graphique plein écran avec **mise à jour en direct** et **compte à rebours** de la bougie
@@ -379,7 +384,7 @@ Pas encore : ils restent sur l'appareil où tu les as créés.
 | ✅ | Design 3.0 : écrans de bienvenue, animation du logo, menu des langues en orbite |
 | ✅ | Connexion Design 3.0 : logo en orbite, code en 8 cases, drapeaux ronds |
 | ✅ | Design 3.0 dans l'app, plusieurs watchlists, Signaux, épaisseur/style des dessins et Annuler |
-| ✅ | Notre propre serveur de données : prix en direct, 72 instruments, noms en 5 langues |
+| ✅ | Notre propre serveur de données : prix en direct, 79 instruments, noms en 5 langues |
 | ✅ | Comptes NexusCharts, nouvelle adresse nexuscharts.app, Politique de Confidentialité |
 | ✅ | Actions : Apple, Microsoft, NVIDIA, Amazon, Alphabet, Meta, Tesla, avec les horaires de Bourse |
 | 🔜 | Historique des bougies plus long (des années) |

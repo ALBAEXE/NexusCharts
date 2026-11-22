@@ -1,0 +1,35 @@
+name: Release
+
+# Creates the GitHub release when RELEASE.md changes on main.
+# First line of RELEASE.md: "# vX.Y.Z". The rest is the release text.
+on:
+  push:
+    branches: [main]
+    paths: [RELEASE.md]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG=$(head -n1 RELEASE.md | sed -E 's/^#[[:space:]]*//; s/[[:space:]]+$//')
+          if ! echo "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "First line of RELEASE.md must be '# vX.Y.Z' (found: $TAG)"; exit 1
+          fi
+          APPV=$(grep -o "VERSION='[0-9.]*'" app.js | head -n1 | grep -o "[0-9.]*[0-9]")
+          if [ "v$APPV" != "$TAG" ]; then
+            echo "app.js is $APPV but RELEASE.md says $TAG"; exit 1
+          fi
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "$TAG already exists, nothing to do"; exit 0
+          fi
+          tail -n +2 RELEASE.md > notes.md
+          gh release create "$TAG" --target "$GITHUB_SHA" --title "$TAG" --notes-file notes.md --latest

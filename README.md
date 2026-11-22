@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.3.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.3.2-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.3.1 — Clearer in Google results
+### 🆕 New in 1.3.2 — Tidier
+
+- 📋 **Watchlist**: the *Stocks* category is shown just like the others, without the exchange status next to its name.
+- 🧹 Removed the last leftovers of the old broker connection: clearer connection error message and "NexusCharts account" in Profile.
+- 📖 README: the roadmap now shows 79 instruments.
+
+### Previously in 1.3.1 — Clearer in Google results
 
 - 🔎 **Site name**: Google results and link previews now name the site simply *NexusCharts*.
 - 📝 **Updated description**: it now lists Gold, Forex, Crypto, Indices and Stocks, without the old “Stocks coming soon”.
@@ -171,7 +177,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - Mini player at the bottom with the selected symbol and its sparkline
 - **Multiple watchlists** (*All watchlists*: create, rename, delete) and colour **Signals** with their own tabs
 - Long-press a pair for Signal and Remove
-- Stocks show the New York exchange status (Open, Pre-market, Closed) next to the category name
 
 ### 📊 Chart
 - Full-screen chart with **live updates** and a candle **countdown**
@@ -379,7 +384,7 @@ Not yet: they're saved on the device where you made them.
 | ✅ | Design 3.0: welcome screens, logo animation, orbit language menu |
 | ✅ | Design 3.0 sign-in: orbit logo, 8-box access code, round flags |
 | ✅ | Design 3.0 inside the app, multiple watchlists, Signals, drawing width/style and Undo |
-| ✅ | Our own data server: live streaming, 72 instruments, names in 5 languages |
+| ✅ | Our own data server: live streaming, 79 instruments, names in 5 languages |
 | ✅ | NexusCharts accounts, new address nexuscharts.app, Privacy Policy |
 | ✅ | Stocks: Apple, Microsoft, NVIDIA, Amazon, Alphabet, Meta, Tesla, with exchange hours |
 | 🔜 | Longer candle history (years) |

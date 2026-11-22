@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.3.1-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.3.2-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.3.1 — Más clara en los resultados de Google
+### 🆕 Novedades de la 1.3.2 — Más ordenada
+
+- 📋 **Watchlist**: la categoría *Acciones* se ve como las demás, sin el estado de la Bolsa junto al nombre.
+- 🧹 Eliminados los últimos restos de la antigua conexión con el bróker: mensaje de error de conexión más claro y «Cuenta NexusCharts» en el Perfil.
+- 📖 README: la hoja de ruta ahora indica 79 instrumentos.
+
+### Anteriormente, en la 1.3.1 — Más clara en los resultados de Google
 
 - 🔎 **Nombre del sitio**: en los resultados de Google y en las vistas previas de enlaces el sitio se llama simplemente *NexusCharts*.
 - 📝 **Descripción actualizada**: ahora menciona Gold, Forex, Crypto, Indices y Stocks, sin el antiguo «Stocks coming soon».
@@ -171,7 +177,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - Mini reproductor abajo con el símbolo seleccionado y su minigráfico
 - **Varias watchlists** (*Todas las watchlists*: crear, renombrar, eliminar) y **Señales** de colores con sus pestañas
 - Mantén pulsado un par para Señal y Quitar
-- En las acciones, junto al nombre de la categoría ves el estado de la Bolsa de Nueva York (Abierta, Pre-market, Cerrada)
 
 ### 📊 Gráfico
 - Gráfico a pantalla completa con **actualización en vivo** y **cuenta atrás** de la vela
@@ -379,7 +384,7 @@ Todavía no: se quedan en el dispositivo donde los creaste.
 | ✅ | Design 3.0: pantallas de bienvenida, animación del logo, menú de idiomas en órbita |
 | ✅ | Acceso Design 3.0: logo de órbitas, código en 8 casillas, banderas redondas |
 | ✅ | Design 3.0 dentro de la app, varias watchlists, Señales, grosor/estilo de dibujos y Deshacer |
-| ✅ | Servidor de datos propio: precios en directo, 72 instrumentos, nombres en 5 idiomas |
+| ✅ | Servidor de datos propio: precios en directo, 79 instrumentos, nombres en 5 idiomas |
 | ✅ | Cuentas NexusCharts, nueva dirección nexuscharts.app, Política de Privacidad |
 | ✅ | Acciones: Apple, Microsoft, NVIDIA, Amazon, Alphabet, Meta, Tesla, con horario de Bolsa |
 | 🔜 | Historial de velas más largo (años) |
