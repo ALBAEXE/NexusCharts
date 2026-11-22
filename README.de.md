@@ -80,18 +80,25 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - 🕯️ **Tageschart**: Die kleine Kerze vom Sonntagabend (Wiedereröffnung des Marktes) gehört jetzt zur Montagskerze, wie auf Trading-Plattformen. Auch Wochen- und Monatskerzen profitieren davon. Krypto, das auch am Wochenende gehandelt wird, behält seine Samstags- und Sonntagskerzen.
 
-### Vorher in 1.3.2 — Aufgeräumter
+<details>
+<summary>Vorher in 1.3.2 — Aufgeräumter</summary>
 
 - 📋 **Watchlist**: Die Kategorie *Aktien* sieht aus wie die anderen, ohne den Börsenstatus neben dem Namen.
 - 🧹 Die letzten Reste der alten Broker-Verbindung entfernt: klarere Meldung bei Verbindungsfehlern und „NexusCharts-Konto“ im Profil.
 - 📖 README: Die Roadmap zeigt jetzt 79 Instrumente.
 
-### Vorher in 1.3.1 — Klarer in den Google-Ergebnissen
+</details>
+
+<details>
+<summary>Vorher in 1.3.1 — Klarer in den Google-Ergebnissen</summary>
 
 - 🔎 **Name der Website**: In den Google-Ergebnissen und in Link-Vorschauen heißt die Website jetzt einfach *NexusCharts*.
 - 📝 **Aktualisierte Beschreibung**: Sie nennt jetzt Gold, Forex, Crypto, Indices und Stocks, ohne das alte „Stocks coming soon“.
 
-### Vorher in 1.3.0 — Aktien
+</details>
+
+<details>
+<summary>Vorher in 1.3.0 — Aktien</summary>
 
 - 📈 **Aktien sind da**: Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta und Tesla, mit Live-Preisen während der New Yorker Handelszeit und Kerzenverlauf.
 - 🍎 **Firmenlogos** als runde Icons, direkt in der App gespeichert.
@@ -99,12 +106,18 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🔎 Die Kategorie *Aktien* gibt es jetzt auch in der Suche und bei der Einrichtung beim ersten Start, wie die anderen.
 - 📘 FAQ für NexusCharts-Konten aktualisiert.
 
-### Vorher in 1.1.1 — Leichter und aufgeräumter
+</details>
+
+<details>
+<summary>Vorher in 1.1.1 — Leichter und aufgeräumter</summary>
 
 - 🪶 **Leichtere App**: Nicht mehr genutzter Code wurde entfernt, die App lädt dadurch weniger.
 - 📜 **Datenschutzerklärung** mit der Anmeldung per Face ID ergänzt (was wir speichern und wie lange).
 
-### Vorher in 1.1.0 — Anmeldung mit Face ID
+</details>
+
+<details>
+<summary>Vorher in 1.1.0 — Anmeldung mit Face ID</summary>
 
 - 🙂 **Anmeldung mit Face ID** (Passkey): ein Blick aufs Handy und du bist drin, ohne Passwort. Dein Gesicht verlässt nie das iPhone: Der Server speichert nur einen öffentlichen Schlüssel.
 - ⚙️ **Face-ID-Schalter** in Einstellungen → Konto, zum Ein- und Ausschalten, wann du willst. Nach der Registrierung schlägt die App vor, ihn zu aktivieren.
@@ -112,11 +125,17 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🗂️ E-Mail, Passwort, Datenschutzerklärung und Konto löschen stehen jetzt nur noch in **Einstellungen → Konto**.
 - 🔔 **Zuverlässigere Alarme** bei geschlossener App: Nacheinander erstellte Alarme gehen nicht mehr verloren.
 
-### Vorher in 1.0.1 — Aktualisierter Willkommensbildschirm
+</details>
+
+<details>
+<summary>Vorher in 1.0.1 — Aktualisierter Willkommensbildschirm</summary>
 
 - 👤 Der letzte Willkommensbildschirm stellt jetzt die **NexusCharts-Konten** vor: zwei Felder (Benutzername und Passwort), mit neuem Text in allen 5 Sprachen.
 
-### Vorher in 1.0.0 — NexusCharts-Konten, neue Adresse, nur eigene Daten
+</details>
+
+<details>
+<summary>Vorher in 1.0.0 — NexusCharts-Konten, neue Adresse, nur eigene Daten</summary>
 
 - 🌐 **Neue Adresse**: NexusCharts ist jetzt unter **[nexuscharts.app](https://nexuscharts.app)**. Die alte Adresse leitet automatisch dorthin weiter.
 - 👤 **NexusCharts-Konten**: Registrierung für alle mit Benutzername, E-Mail und Passwort. Eindeutige Benutzernamen, sichere Passwörter und ein 6-stelliger E-Mail-Code zur Bestätigung der Adresse.
@@ -127,7 +146,10 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 📜 **[Datenschutzerklärung](https://nexuscharts.app/privacy.html)** in 5 Sprachen, auch in der App lesbar.
 - ⚠️ Mit der neuen Adresse wird die App neu auf dem Home-Bildschirm installiert, und Watchlist, Zeichnungen, Skripte und Alarme beginnen von vorn.
 
-### Vorher in 0.46.0 — Unser eigener Datenserver und 72 Instrumente
+</details>
+
+<details>
+<summary>Vorher in 0.46.0 — Unser eigener Datenserver und 72 Instrumente</summary>
 
 - 📡 **Live-Preise**: Die Preise kommen vom NexusCharts-Datenserver in dem Moment, in dem sie sich ändern (oft mehrmals pro Sekunde), auf jedem Handy gleich.
 - 🌐 **72 Instrumente**: 43 Forex-Paare, Metalle (Gold in USD, EUR, GBP und AUD, Silber, Platin, Palladium, Kupfer), Öl WTI und Brent, Erdgas, 10 Indizes (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, US-Dollar-Index) und 7 Kryptowährungen. Aktien folgen bald.
@@ -136,7 +158,10 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🗂️ **Datenquellen** im Profil: woher Preise und Kerzen kommen und was als Nächstes kommt.
 - 🏷️ **Instrumentnamen in allen fünf Sprachen** (zum Beispiel *Gold Spot / US-Dollar*), **neue Icons** für Kupfer, Öl, Erdgas und den Dollar-Index und die **originalen Krypto-Icons**.
 
-### Vorher in 0.45.0 — Design 3.0 in der App, mehrere Watchlists und Signale
+</details>
+
+<details>
+<summary>Vorher in 0.45.0 — Design 3.0 in der App, mehrere Watchlists und Signale</summary>
 
 - 🪐 **Design 3.0 in der App**: Watchlist, Chart-Menüs, Indikatoren, Skript-Editor, Bar Replay und Profil haben jetzt denselben Umlaufbahn-Stil wie die Anmeldung, im dunklen und hellen Design. Die Kerzen im Chart bleiben schlicht.
 - 📋 **Mehrere Watchlists**: erstelle, benenne um und lösche eigene Listen unter *Alle Watchlists*. Deine bisherige Liste bleibt die **Watchlist**, beim Update geht nichts verloren.
@@ -145,6 +170,8 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - ✏️ **Zeichnungen**: Fadenkreuz, das den Punkt unter dem Finger nie verdeckt, **Linienstärke** (1–4 px) und **Stil** (durchgezogen, gestrichelt, gepunktet) und die Taste **Rückgängig** (bis zu 30 Schritte pro Symbol).
 - 📤 **Teilen**: zuerst eine Design-3.0-Vorschau des Charts, dann das Teilen-Menü des Systems nur mit dem Bild.
 - 🧩 **Minimap im Skript-Editor**: eine farbige Übersicht des Codes rechts; tippen oder ziehen zum Springen.
+
+</details>
 
 <details>
 <summary>Vorher in 0.44.0 — Deutsch</summary>

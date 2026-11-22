@@ -1,0 +1,3 @@
+v1.3.2|NexusCharts 1.3.2 — Tidier
+v1.3.3|NexusCharts 1.3.3 — Cleaner daily candles
+v1.3.4|NexusCharts 1.3.4 — Faster market orbit

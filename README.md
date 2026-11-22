@@ -80,18 +80,25 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 - 🕯️ **Daily chart**: the short Sunday-evening candle (market reopening) is now part of Monday's candle, as on trading platforms. Weekly and monthly candles benefit too. Crypto, which also trades at weekends, keeps its Saturday and Sunday candles.
 
-### Previously in 1.3.2 — Tidier
+<details>
+<summary>Previously in 1.3.2 — Tidier</summary>
 
 - 📋 **Watchlist**: the *Stocks* category is shown just like the others, without the exchange status next to its name.
 - 🧹 Removed the last leftovers of the old broker connection: clearer connection error message and "NexusCharts account" in Profile.
 - 📖 README: the roadmap now shows 79 instruments.
 
-### Previously in 1.3.1 — Clearer in Google results
+</details>
+
+<details>
+<summary>Previously in 1.3.1 — Clearer in Google results</summary>
 
 - 🔎 **Site name**: Google results and link previews now name the site simply *NexusCharts*.
 - 📝 **Updated description**: it now lists Gold, Forex, Crypto, Indices and Stocks, without the old “Stocks coming soon”.
 
-### Previously in 1.3.0 — Stocks
+</details>
+
+<details>
+<summary>Previously in 1.3.0 — Stocks</summary>
 
 - 📈 **Stocks are here**: Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta and Tesla, with live prices during the New York session and candle history.
 - 🍎 **Company logos** as round icons, saved inside the app.
@@ -99,12 +106,18 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🔎 The *Stocks* category is now in Search and in the first-launch setup, like the other categories.
 - 📘 FAQ updated for NexusCharts accounts.
 
-### Previously in 1.1.1 — Lighter and tidier
+</details>
+
+<details>
+<summary>Previously in 1.1.1 — Lighter and tidier</summary>
 
 - 🪶 **Lighter app**: code that is no longer used has been removed, so the app loads less.
 - 📜 **Privacy Policy** updated with sign-in with Face ID (what we store and for how long).
 
-### Previously in 1.1.0 — Sign in with Face ID
+</details>
+
+<details>
+<summary>Previously in 1.1.0 — Sign in with Face ID</summary>
 
 - 🙂 **Sign in with Face ID** (passkey): look at your phone and you are in, no password to type. Your face never leaves your iPhone: the server only keeps a public key.
 - ⚙️ **Face ID switch** in Settings → Account, to turn it on or off whenever you want. After signing up, the app offers to turn it on.
@@ -112,11 +125,17 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🗂️ Email, Password, Privacy Policy and Delete account are now only in **Settings → Account**.
 - 🔔 **More reliable alerts** with the app closed: alerts created one after another are no longer lost.
 
-### Previously in 1.0.1 — Updated welcome screen
+</details>
+
+<details>
+<summary>Previously in 1.0.1 — Updated welcome screen</summary>
 
 - 👤 The last welcome screen now presents **NexusCharts accounts**: two fields (username and password), with a new text in all 5 languages.
 
-### Previously in 1.0.0 — NexusCharts accounts, a new address, only our own data
+</details>
+
+<details>
+<summary>Previously in 1.0.0 — NexusCharts accounts, a new address, only our own data</summary>
 
 - 🌐 **New address**: NexusCharts now lives at **[nexuscharts.app](https://nexuscharts.app)**. The old address takes you there automatically.
 - 👤 **NexusCharts accounts**: sign-up open to everyone with a username, email and password. Unique usernames, strong passwords and a 6-digit email code to confirm the address.
@@ -127,7 +146,10 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 📜 **[Privacy Policy](https://nexuscharts.app/privacy.html)** in 5 languages, also readable inside the app.
 - ⚠️ With the new address the app is installed again on the Home Screen, and watchlists, drawings, scripts and alerts start from scratch.
 
-### Previously in 0.46.0 — Our own data server and 72 instruments
+</details>
+
+<details>
+<summary>Previously in 0.46.0 — Our own data server and 72 instruments</summary>
 
 - 📡 **Live streaming**: prices now come from the NexusCharts data server the moment they change (often several times per second), the same on every phone.
 - 🌐 **72 instruments**: 43 Forex pairs, metals (gold in USD, EUR, GBP and AUD, silver, platinum, palladium, copper), WTI and Brent oil, natural gas, 10 indices (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, US Dollar Index) and 7 cryptocurrencies. Stocks are coming soon.
@@ -136,7 +158,10 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🗂️ **Data sources** in Profile: where prices and candles come from, and what is coming next.
 - 🏷️ **Instrument names in all five languages** (for example *Gold Spot / US Dollar*), **new icons** for copper, oil, natural gas and the dollar index, and the **original crypto icons**.
 
-### Previously in 0.45.0 — Design 3.0 inside the app, multiple watchlists and Signals
+</details>
+
+<details>
+<summary>Previously in 0.45.0 — Design 3.0 inside the app, multiple watchlists and Signals</summary>
 
 - 🪐 **Design 3.0 inside the app**: Watchlist, Chart menus, Indicators, Script editor, Bar Replay and Profile now use the same orbit style as the sign-in screen, in dark and light theme. The candles on the chart stay clean.
 - 📋 **Multiple watchlists**: create, rename and delete your own lists from *All watchlists*. Your usual list stays the main **Watchlist**, so nothing is lost when you update.
@@ -145,6 +170,8 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - ✏️ **Drawings**: crosshair placement that never hides the point under your finger, **line width** (1–4 px) and **style** (solid, dashed, dotted), and an **Undo** button (up to 30 steps per symbol).
 - 📤 **Share**: a Design 3.0 preview of your chart first, then the system share sheet with the image only.
 - 🧩 **Script editor minimap**: a coloured overview of your code on the right; tap or drag to jump.
+
+</details>
 
 <details>
 <summary>Previously in 0.44.0 — German</summary>

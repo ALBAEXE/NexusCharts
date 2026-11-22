@@ -80,18 +80,25 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 - 🕯️ **Graphique journalier** : la petite bougie du dimanche soir (réouverture du marché) fait désormais partie de la bougie du lundi, comme sur les plateformes de trading. Les bougies hebdomadaires et mensuelles en profitent aussi. Les cryptos, qui s'échangent aussi le week-end, gardent leurs bougies du samedi et du dimanche.
 
-### Auparavant, dans la 1.3.2 — Mieux rangée
+<details>
+<summary>Auparavant, dans la 1.3.2 — Mieux rangée</summary>
 
 - 📋 **Watchlist** : la catégorie *Actions* s'affiche comme les autres, sans l'état de la Bourse à côté du nom.
 - 🧹 Retrait des derniers restes de l'ancienne connexion au courtier : message d'erreur de connexion plus clair et « Compte NexusCharts » dans le Profil.
 - 📖 README : la feuille de route indique maintenant 79 instruments.
 
-### Auparavant, dans la 1.3.1 — Plus claire dans les résultats Google
+</details>
+
+<details>
+<summary>Auparavant, dans la 1.3.1 — Plus claire dans les résultats Google</summary>
 
 - 🔎 **Nom du site** : dans les résultats Google et les aperçus de liens, le site s'appelle simplement *NexusCharts*.
 - 📝 **Description mise à jour** : elle cite désormais Gold, Forex, Crypto, Indices et Stocks, sans l'ancien « Stocks coming soon ».
 
-### Auparavant, dans la 1.3.0 — Actions
+</details>
+
+<details>
+<summary>Auparavant, dans la 1.3.0 — Actions</summary>
 
 - 📈 **Les actions arrivent** : Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta et Tesla, avec les prix en direct pendant la séance de New York et l'historique des bougies.
 - 🍎 **Logos des entreprises** en icônes rondes, enregistrés dans l'app.
@@ -99,12 +106,18 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🔎 La catégorie *Actions* est maintenant aussi dans la recherche et dans la configuration du premier lancement, comme les autres.
 - 📘 FAQ mise à jour avec les comptes NexusCharts.
 
-### Auparavant, dans la 1.1.1 — Plus légère et mieux rangée
+</details>
+
+<details>
+<summary>Auparavant, dans la 1.1.1 — Plus légère et mieux rangée</summary>
 
 - 🪶 **App plus légère** : le code qui ne servait plus a été retiré, l'app charge donc moins.
 - 📜 **Politique de confidentialité** mise à jour avec la connexion avec Face ID (ce que nous gardons et combien de temps).
 
-### Auparavant, dans la 1.1.0 — Connexion avec Face ID
+</details>
+
+<details>
+<summary>Auparavant, dans la 1.1.0 — Connexion avec Face ID</summary>
 
 - 🙂 **Connexion avec Face ID** (clé d'identification) : vous regardez votre téléphone et vous êtes connecté, sans saisir de mot de passe. Votre visage ne quitte jamais l'iPhone : le serveur ne garde qu'une clé publique.
 - ⚙️ **Interrupteur Face ID** dans Réglages → Compte, pour l'activer ou le désactiver quand vous voulez. Après l'inscription, l'app propose de l'activer.
@@ -112,11 +125,17 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🗂️ E-mail, Mot de passe, Politique de confidentialité et Supprimer le compte sont maintenant uniquement dans **Réglages → Compte**.
 - 🔔 **Alertes plus fiables** avec l'app fermée : les alertes créées l'une après l'autre ne se perdent plus.
 
-### Auparavant, dans la 1.0.1 — Écran de bienvenue mis à jour
+</details>
+
+<details>
+<summary>Auparavant, dans la 1.0.1 — Écran de bienvenue mis à jour</summary>
 
 - 👤 Le dernier écran de bienvenue présente désormais les **comptes NexusCharts** : deux champs (nom d'utilisateur et mot de passe), avec un nouveau texte dans les 5 langues.
 
-### Auparavant, dans la 1.0.0 — Comptes NexusCharts, nouvelle adresse, uniquement nos données
+</details>
+
+<details>
+<summary>Auparavant, dans la 1.0.0 — Comptes NexusCharts, nouvelle adresse, uniquement nos données</summary>
 
 - 🌐 **Nouvelle adresse** : NexusCharts est maintenant sur **[nexuscharts.app](https://nexuscharts.app)**. L'ancienne adresse t'y emmène toute seule.
 - 👤 **Comptes NexusCharts** : inscription ouverte à tous avec un pseudo, un e-mail et un mot de passe. Pseudo unique, mots de passe solides et un code à 6 chiffres par e-mail pour confirmer l'adresse.
@@ -127,7 +146,10 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 📜 **[Politique de Confidentialité](https://nexuscharts.app/privacy.html)** en 5 langues, lisible aussi dans l'app.
 - ⚠️ Avec la nouvelle adresse, l'app s'installe à nouveau sur l'écran d'accueil et watchlist, dessins, scripts et alertes repartent de zéro.
 
-### Auparavant, dans la 0.46.0 — Notre propre serveur de données et 72 instruments
+</details>
+
+<details>
+<summary>Auparavant, dans la 0.46.0 — Notre propre serveur de données et 72 instruments</summary>
 
 - 📡 **Prix en direct** : les prix arrivent du serveur de données de NexusCharts au moment où ils changent (souvent plusieurs fois par seconde), identiques sur tous les téléphones.
 - 🌐 **72 instruments** : 43 paires Forex, métaux (or en USD, EUR, GBP et AUD, argent, platine, palladium, cuivre), pétrole WTI et Brent, gaz naturel, 10 indices (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, Dollar Index) et 7 cryptomonnaies. Les actions arrivent bientôt.
@@ -136,7 +158,10 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🗂️ **Sources des données** dans le Profil : d'où viennent les prix et les bougies, et ce qui arrive ensuite.
 - 🏷️ **Noms des instruments dans les cinq langues** (par exemple *Or spot / Dollar US*), **nouvelles icônes** pour le cuivre, le pétrole, le gaz naturel et le Dollar Index, et les **icônes crypto originales**.
 
-### Auparavant, dans la 0.45.0 — Design 3.0 dans l'app, plusieurs watchlists et Signaux
+</details>
+
+<details>
+<summary>Auparavant, dans la 0.45.0 — Design 3.0 dans l'app, plusieurs watchlists et Signaux</summary>
 
 - 🪐 **Design 3.0 dans l'app** : Watchlist, menus du Graphique, Indicateurs, Éditeur de scripts, Bar Replay et Profil ont maintenant le même style en orbite que la connexion, en thème sombre et clair. Les bougies du graphique restent épurées.
 - 📋 **Plusieurs watchlists** : crée, renomme et supprime tes listes depuis *Toutes les watchlists*. Ta liste habituelle reste la **Watchlist** principale, donc la mise à jour ne fait rien perdre.
@@ -145,6 +170,8 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - ✏️ **Dessins** : réticule qui ne cache jamais le point sous le doigt, **épaisseur** du trait (1–4 px) et **style** (continu, tirets, pointillés), et le bouton **Annuler** (jusqu'à 30 étapes par symbole).
 - 📤 **Partager** : d'abord un aperçu Design 3.0 du graphique, puis la feuille de partage du système avec l'image seule.
 - 🧩 **Minicarte de l'éditeur** : un aperçu en couleurs du code à droite ; touche ou fais glisser pour te déplacer.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 0.44.0 — Allemand</summary>

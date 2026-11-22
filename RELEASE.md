@@ -1,4 +1,4 @@
-# v1.3.5
+# v1.3.5 — Every dot pulses
 ### Changed
 - Market orbit: every instrument's dot now pulses, not just the best and the worst.
 

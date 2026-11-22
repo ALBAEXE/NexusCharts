@@ -80,18 +80,25 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 - 🕯️ **Grafico giornaliero**: la piccola candela della domenica sera (riapertura del mercato) ora fa parte della candela del lunedì, come sulle piattaforme di trading. Ne beneficiano anche le candele settimanali e mensili. Le cripto, che si scambiano anche nel weekend, mantengono le candele di sabato e domenica.
 
-### In precedenza, nella 1.3.2 — Più ordinata
+<details>
+<summary>In precedenza, nella 1.3.2 — Più ordinata</summary>
 
 - 📋 **Watchlist**: la categoria *Azioni* si vede come le altre, senza lo stato della Borsa accanto al nome.
 - 🧹 Tolti gli ultimi resti del vecchio collegamento al broker: messaggio di errore di connessione più chiaro e «Account NexusCharts» nel Profilo.
 - 📖 README: la roadmap ora indica 79 strumenti.
 
-### In precedenza, nella 1.3.1 — Più chiara nei risultati di Google
+</details>
+
+<details>
+<summary>In precedenza, nella 1.3.1 — Più chiara nei risultati di Google</summary>
 
 - 🔎 **Nome del sito**: nei risultati di Google e nelle anteprime dei link il sito si chiama semplicemente *NexusCharts*.
 - 📝 **Descrizione aggiornata**: ora cita Gold, Forex, Crypto, Indices e Stocks, senza il vecchio «Stocks coming soon».
 
-### In precedenza, nella 1.3.0 — Azioni
+</details>
+
+<details>
+<summary>In precedenza, nella 1.3.0 — Azioni</summary>
 
 - 📈 **Arrivano le azioni**: Apple, Microsoft, NVIDIA, Amazon, Alphabet (Google), Meta e Tesla, con prezzi in diretta durante la seduta di New York e lo storico delle candele.
 - 🍎 **Loghi delle aziende** come icone rotonde, salvati dentro l'app.
@@ -99,12 +106,18 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🔎 La categoria *Azioni* ora c'è anche nella ricerca e nella configurazione del primo avvio, come le altre.
 - 📘 FAQ aggiornate con gli account NexusCharts.
 
-### In precedenza, nella 1.1.1 — Più leggera e ordinata
+</details>
+
+<details>
+<summary>In precedenza, nella 1.1.1 — Più leggera e ordinata</summary>
 
 - 🪶 **App più leggera**: tolto il codice che non serviva più, così l'app carica meno.
 - 📜 **Informativa Privacy** aggiornata con l'accesso con Face ID (cosa salviamo e per quanto tempo).
 
-### In precedenza, nella 1.1.0 — Accesso con Face ID
+</details>
+
+<details>
+<summary>In precedenza, nella 1.1.0 — Accesso con Face ID</summary>
 
 - 🙂 **Accesso con Face ID** (passkey): guardi il telefono e sei dentro, senza scrivere la password. Il tuo volto non esce mai dall'iPhone: sul server resta solo una chiave pubblica.
 - ⚙️ **Interruttore Face ID** in Impostazioni → Account, per attivarlo o disattivarlo quando vuoi. Dopo la registrazione l'app propone di attivarlo.
@@ -112,11 +125,17 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🗂️ Email, Password, Informativa Privacy ed Elimina account ora stanno solo in **Impostazioni → Account**.
 - 🔔 **Allarmi più affidabili** ad app chiusa: gli allarmi creati uno dopo l'altro non si perdono più.
 
-### In precedenza, nella 1.0.1 — Schermata di benvenuto aggiornata
+</details>
+
+<details>
+<summary>In precedenza, nella 1.0.1 — Schermata di benvenuto aggiornata</summary>
 
 - 👤 L'ultima schermata di benvenuto ora presenta gli **account NexusCharts**: due campi (username e password), con un testo nuovo in tutte e 5 le lingue.
 
-### In precedenza, nella 1.0.0 — Account NexusCharts, nuovo indirizzo, solo dati nostri
+</details>
+
+<details>
+<summary>In precedenza, nella 1.0.0 — Account NexusCharts, nuovo indirizzo, solo dati nostri</summary>
 
 - 🌐 **Nuovo indirizzo**: NexusCharts ora vive su **[nexuscharts.app](https://nexuscharts.app)**. Il vecchio indirizzo porta da solo a quello nuovo.
 - 👤 **Account NexusCharts**: registrazione aperta a tutti con username, email e password. Username unico, password sicure, codice di 6 cifre via email per confermare l'indirizzo.
@@ -127,7 +146,10 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 📜 **[Informativa Privacy](https://nexuscharts.app/privacy.html)** in 5 lingue, leggibile anche dentro l'app.
 - ⚠️ Con il nuovo indirizzo l'app si installa di nuovo sulla schermata Home e watchlist, disegni, script e alert ripartono da zero.
 
-### In precedenza, nella 0.46.0 — Il nostro server dati e 72 strumenti
+</details>
+
+<details>
+<summary>In precedenza, nella 0.46.0 — Il nostro server dati e 72 strumenti</summary>
 
 - 📡 **Prezzi in diretta**: i prezzi arrivano dal server dati di NexusCharts nel momento in cui cambiano (spesso più volte al secondo), uguali su tutti i telefoni.
 - 🌐 **72 strumenti**: 43 coppie Forex, metalli (oro in USD, EUR, GBP e AUD, argento, platino, palladio, rame), petrolio WTI e Brent, gas naturale, 10 indici (Dow Jones, S&P 500, Nasdaq 100, DAX, FTSE 100, Nikkei 225, ASX 200, CAC 40, Euro Stoxx 50, Dollar Index) e 7 criptovalute. Le azioni arrivano presto.
@@ -136,7 +158,10 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🗂️ **Fonti dati** nel Profilo: da dove arrivano prezzi e candele, e cosa arriverà dopo.
 - 🏷️ **Nomi degli strumenti in tutte e cinque le lingue** (per esempio *Oro spot / Dollaro USA*), **icone nuove** per rame, petrolio, gas naturale e Dollar Index, e le **icone cripto originali**.
 
-### In precedenza, nella 0.45.0 — Design 3.0 dentro l'app, più watchlist e Segnali
+</details>
+
+<details>
+<summary>In precedenza, nella 0.45.0 — Design 3.0 dentro l'app, più watchlist e Segnali</summary>
 
 - 🪐 **Design 3.0 dentro l'app**: Watchlist, menu del Grafico, Indicatori, Editor script, Bar Replay e Profilo ora hanno lo stesso stile a orbite dell'accesso, in tema scuro e chiaro. Le candele del grafico restano pulite.
 - 📋 **Più watchlist**: crea, rinomina ed elimina le tue liste da *Tutte le watchlist*. La lista di sempre resta la **Watchlist** principale, quindi aggiornando non perdi niente.
@@ -145,6 +170,8 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - ✏️ **Disegni**: mirino che non copre mai il punto sotto il dito, **spessore** della linea (1–4 px) e **stile** (continua, tratteggiata, punteggiata), e il pulsante **Annulla** (fino a 30 passi per simbolo).
 - 📤 **Condividi**: prima un'anteprima Design 3.0 del grafico, poi il foglio di condivisione con la sola immagine.
 - 🧩 **Minimappa dell'editor**: una panoramica colorata del codice a destra; tocca o trascina per spostarti.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 0.44.0 — Tedesco</summary>

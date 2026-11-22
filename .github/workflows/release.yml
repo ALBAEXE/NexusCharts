@@ -1,11 +1,13 @@
 name: Release
 
 # Creates the GitHub release when RELEASE.md changes on main.
-# First line of RELEASE.md: "# vX.Y.Z". The rest is the release text.
+# First line of RELEASE.md: "# vX.Y.Z — Title". The rest is the release text.
+# Release name: "NexusCharts X.Y.Z — Title".
+# .github/release-titles.txt ("vX.Y.Z|Full release name", one per line) fixes names of releases that already exist.
 on:
   push:
     branches: [main]
-    paths: [RELEASE.md]
+    paths: [RELEASE.md, .github/release-titles.txt, .github/workflows/release.yml]
 
 permissions:
   contents: write
@@ -15,21 +17,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Create release
+      - name: Create or update release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          TAG=$(head -n1 RELEASE.md | sed -E 's/^#[[:space:]]*//; s/[[:space:]]+$//')
+          HEAD=$(head -n1 RELEASE.md | sed -E 's/^#[[:space:]]*//; s/[[:space:]]+$//')
+          TAG=$(echo "$HEAD" | awk '{print $1}')
+          SUB=$(echo "$HEAD" | sed -E 's/^v[0-9.]+[[:space:]]*(—|-)?[[:space:]]*//')
           if ! echo "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
-            echo "First line of RELEASE.md must be '# vX.Y.Z' (found: $TAG)"; exit 1
+            echo "First line of RELEASE.md must be '# vX.Y.Z — Title' (found: $HEAD)"; exit 1
           fi
+          if [ -z "$SUB" ]; then echo "RELEASE.md has no title after the version"; exit 1; fi
+          NAME="NexusCharts ${TAG#v} — $SUB"
           APPV=$(grep -o "VERSION='[0-9.]*'" app.js | head -n1 | grep -o "[0-9.]*[0-9]")
           if [ "v$APPV" != "$TAG" ]; then
             echo "app.js is $APPV but RELEASE.md says $TAG"; exit 1
           fi
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            echo "$TAG already exists, nothing to do"; exit 0
-          fi
           tail -n +2 RELEASE.md > notes.md
-          gh release create "$TAG" --target "$GITHUB_SHA" --title "$TAG" --notes-file notes.md --latest
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release edit "$TAG" --title "$NAME"
+          else
+            gh release create "$TAG" --target "$GITHUB_SHA" --title "$NAME" --notes-file notes.md --latest
+          fi
+      - name: Fix names of older releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          [ -f .github/release-titles.txt ] || exit 0
+          while IFS='|' read -r T N; do
+            [ -n "${T:-}" ] && [ -n "${N:-}" ] || continue
+            if gh release view "$T" >/dev/null 2>&1; then
+              CUR=$(gh release view "$T" --json name -q .name)
+              [ "$CUR" = "$N" ] || gh release edit "$T" --title "$N"
+            fi
+          done < .github/release-titles.txt
