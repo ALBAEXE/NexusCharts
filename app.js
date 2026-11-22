@@ -1,4 +1,4 @@
-const VERSION='1.3.2';
+const VERSION='1.3.3';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -12158,7 +12158,24 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     var r=await fetch(u,{cache:'no-store'});
     if(!r.ok){var e=new Error('nexus '+r.status);e.status=r.status;throw e}
     var j=await r.json();
-    return (j.candles||[]).map(function(b){return{t:b[0]*1000,o:b[1],h:b[2],l:b[3],c:b[4],v:b[5]||0}});
+    var out=(j.candles||[]).map(function(b){return{t:b[0]*1000,o:b[1],h:b[2],l:b[3],c:b[4],v:b[5]||0}});
+    return TFM[reso]==='1D'?noSun(out):out;
+  }
+  /* 1.3.3: la candela della domenica sera (riapertura del mercato) si unisce al lunedì.
+     Solo per i mercati chiusi nel weekend: se esiste il sabato (cripto) la domenica resta com'è. */
+  function noSun(a){
+    var D=86400000,o=[],i,b,nx,pv,day=function(t){return new Date(t).getUTCDay()};
+    for(i=0;i<a.length;i++){
+      b=a[i];
+      if(day(b.t)!==0){o.push(b);continue}
+      pv=o[o.length-1];
+      if(pv&&day(pv.t)===6){o.push(b);continue}
+      nx=a[i+1];
+      if(nx&&day(nx.t)===1&&nx.t-b.t===D){a[i+1]={t:nx.t,o:b.o,h:Math.max(b.h,nx.h),l:Math.min(b.l,nx.l),c:nx.c,v:(b.v||0)+(nx.v||0)};continue}
+      if(!nx){o.push({t:b.t+D,o:b.o,h:b.h,l:b.l,c:b.c,v:b.v});continue}
+      o.push(b);
+    }
+    return o;
   }
   /* cambio di fonte (nostro server <-> fonte di prima): si ricarica tutto, così le candele non si mescolano mai */
   function srcIs(x){

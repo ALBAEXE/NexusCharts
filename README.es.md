@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.3.2-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.3.3-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.3.2 — Más ordenada
+### 🆕 Novedades de la 1.3.3 — Velas diarias más limpias
+
+- 🕯️ **Gráfico diario**: la pequeña vela del domingo por la noche (reapertura del mercado) ahora forma parte de la vela del lunes, como en las plataformas de trading. También mejoran las velas semanales y mensuales. Las cripto, que cotizan también el fin de semana, mantienen sus velas de sábado y domingo.
+
+### Anteriormente, en la 1.3.2 — Más ordenada
 
 - 📋 **Watchlist**: la categoría *Acciones* se ve como las demás, sin el estado de la Bolsa junto al nombre.
 - 🧹 Eliminados los últimos restos de la antigua conexión con el bróker: mensaje de error de conexión más claro y «Cuenta NexusCharts» en el Perfil.

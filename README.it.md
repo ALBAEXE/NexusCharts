@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.3.2-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.3.3-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.3.2 — Più ordinata
+### 🆕 Novità della 1.3.3 — Candele giornaliere più pulite
+
+- 🕯️ **Grafico giornaliero**: la piccola candela della domenica sera (riapertura del mercato) ora fa parte della candela del lunedì, come sulle piattaforme di trading. Ne beneficiano anche le candele settimanali e mensili. Le cripto, che si scambiano anche nel weekend, mantengono le candele di sabato e domenica.
+
+### In precedenza, nella 1.3.2 — Più ordinata
 
 - 📋 **Watchlist**: la categoria *Azioni* si vede come le altre, senza lo stato della Borsa accanto al nome.
 - 🧹 Tolti gli ultimi resti del vecchio collegamento al broker: messaggio di errore di connessione più chiaro e «Account NexusCharts» nel Profilo.
