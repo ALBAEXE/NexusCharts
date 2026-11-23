@@ -1,4 +1,4 @@
-const VERSION='1.8.0';
+const VERSION='1.9.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -7851,7 +7851,8 @@ window.addEventListener('pagehide',()=>presSend(true));
    - i secondi si formano dal vivo con i prezzi che arrivano ogni secondo
    ===================================================================== */
 var TF_NATIVE={'1m':1,'5m':1,'15m':1,'1H':1,'4H':1,'1D':1};
-var TF_ALL=['1s','5s','10s','15s','30s','45s','1m','3m','5m','15m','30m','45m','1H','2H','3H','4H','1D','1W','1M','3M','6M','12M'];
+/* 1.9.0: i timeframe in secondi sono tolti (non avevano storico); il piano resta per compatibilità */
+var TF_ALL=['1m','3m','5m','15m','30m','45m','1H','2H','3H','4H','1D','1W','1M','3M','6M','12M'];
 var TF_PLAN={
   '1s':{k:'s',n:1},'5s':{k:'s',n:5},'10s':{k:'s',n:10},'15s':{k:'s',n:15},'30s':{k:'s',n:30},'45s':{k:'s',n:45},
   '3m':{k:'i',base:'1m',ms:18e4},'30m':{k:'i',base:'15m',ms:18e5},'45m':{k:'i',base:'15m',ms:27e5},
@@ -7967,7 +7968,9 @@ tagText=function(){
 (function(){
   const o=chartOpts;chartOpts=function(){const x=o.apply(this,arguments);x.timeScale=Object.assign({},x.timeScale,{secondsVisible:tfIsSec(res)});return x};
   const s=setRes;setRes=function(r){
+    if(tfIsSec(r))r='1m';
     if(!SECS[r])return;
+    arguments[0]=r;
     const was=tfIsSec(res);
     s.apply(this,arguments);
     try{chart.applyOptions({timeScale:{secondsVisible:tfIsSec(r)}})}catch(e){}
@@ -7980,7 +7983,7 @@ tfList=function(){return TF_ALL.slice()};
 openTF=function(){
   openSheet(s=>{
     shEl(s,'sh-l',t('tf'));
-    ['s','m','h','d'].forEach(g=>{
+    ['m','h','d'].forEach(g=>{
       shEl(s,'sh-l',tfg(g)).style.cssText='margin-top:6px;font-size:12px;opacity:.8';
       const ch=document.createElement('div');ch.className='chips';
       TF_ALL.filter(k=>tfGroup(k)===g).forEach(k=>{
@@ -8026,7 +8029,7 @@ aggregate=function(B,plan){
   tfAgg(B,p).forEach(x=>{out.t.push(p.k==='i'?x.t:x._k);out.o.push(x.o);out.h.push(x.h);out.l.push(x.l);out.c.push(x.c);out.v.push(x.v||0)});
   return out;
 };
-TF_OPTS.length=0;['','1S','5S','15S','30S','1','3','5','15','30','45','60','120','180','240','D','W','M','3M','6M','12M'].forEach(x=>TF_OPTS.push(x));
+TF_OPTS.length=0;['','1','3','5','15','30','45','60','120','180','240','D','W','M','3M','6M','12M'].forEach(x=>TF_OPTS.push(x));
 tfLabel=function(v){
   if(v==='')return itx('tfchart');let m;
   if((m=/^(\d+)S$/.exec(v)))return m[1]+'s';
@@ -8041,7 +8044,7 @@ Object.assign(ISDT.en,{s:'Seconds',w:'Weeks',mo:'Months'});Object.assign(ISDT.fr
 isdVis=function(body,ind){
   shEl(body,'isg',isdt('showon'));
   ind.tfv=ind.tfv||{};
-  [['s','1s · 5s · 10s · 15s · 30s · 45s'],['m','1m · 3m · 5m · 15m · 30m · 45m'],['h','1H · 2H · 3H · 4H'],['d','1D'],['w','1W'],['mo','1M · 3M · 6M · 12M']].forEach(([k,sub])=>{
+  [['m','1m · 3m · 5m · 15m · 30m · 45m'],['h','1H · 2H · 3H · 4H'],['d','1D'],['w','1W'],['mo','1M · 3M · 6M · 12M']].forEach(([k,sub])=>{
     const r=isdRow(body,isdt(k),isdCheck(ind.tfv[k]!==false,v=>{ind.tfv[k]=v;indSave();indSchedule(true);indRender()}),'',true);
     const sm=document.createElement('small');sm.style.cssText='margin-left:auto;color:var(--muted);font-size:12.5px;text-align:right';sm.textContent=sub;r.appendChild(sm);
   });

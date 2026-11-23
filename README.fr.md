@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.8.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.9.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.8.0 — Rapports d'erreurs automatiques
+### 🆕 Nouveautés de la 1.9.0 — Unités de temps dès 1 minute
+
+- ⏱️ Les unités de temps commencent désormais à 1 minute. Celles en secondes ont été retirées : elles n'avaient pas d'historique et ne montraient que ce qui arrivait pendant que l'app était ouverte.
+- 🔁 Un graphique ou une disposition enregistrés en secondes s'ouvrent en 1 minute.
+
+### Auparavant, dans la 1.8.0 — Rapports d'erreurs automatiques
 
 - 🛠️ Si quelque chose ne marche pas dans l'app, de l'écran d'accueil au graphique, ton appareil nous envoie tout seul un court rapport technique, pour qu'on puisse corriger même si personne ne nous le dit.
 - 🔒 Données techniques uniquement (message d'erreur, écran, version de l'app, type d'appareil et navigateur) : ni nom, ni compte, ni adresse IP. Les rapports sont supprimés après 30 jours. La politique de confidentialité l'explique.
@@ -76,10 +81,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 - ⚡ La connexion de l'app avec le serveur est plus rapide et plus fiable, même quand tu la fermes sur iPhone.
 
-### Auparavant, dans la 1.6.0 — Mentions légales en Design 3.0
+<details>
+<summary>Auparavant, dans la 1.6.0 — Mentions légales en Design 3.0</summary>
 
 - ⚖️ **Profil › Mentions légales** a le même style que le reste de l'app : un menu de sections (risques, conditions, confidentialité, contributions, crédits, contact), chacune avec sa page.
 - 💬 **Contact** : écris-nous sur Telegram ou à support@nexuscharts.app. Ce sont les seuls canaux officiels.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.5.0 — Nos réseaux sociaux</summary>
@@ -92,13 +100,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 <summary>Auparavant, dans la 1.4.2 — Pages plus stables</summary>
 
 - 📋 **Watchlist et Profil** défilent seulement vers le haut et le bas : en faisant glisser une paire sur le côté, la page ne bouge plus.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.4.1 — Profil plus simple</summary>
-
-- 👤 **Profil** : la page *Sources des données* a été retirée. Les crédits du graphique et des logos sont maintenant dans *Mentions légales*, sous *Crédits*.
 
 </details>
 
@@ -116,7 +117,7 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 ### 📊 Graphique
 - Graphique plein écran avec **mise à jour en direct** et **compte à rebours** de la bougie
-- **Unités de temps :** secondes 1s · 5s · 10s · 15s · 30s · 45s — minutes 1m · 3m · 5m · 15m · 30m · 45m — heures 1H · 2H · 3H · 4H — jours 1D · 1W · 1M · 3M · 6M · 12M
+- **Unités de temps :** minutes 1m · 3m · 5m · 15m · 30m · 45m — heures 1H · 2H · 3H · 4H — jours 1D · 1W · 1M · 3M · 6M · 12M
 - **Types de graphique :** Bougies · Barres · Ligne · Aire · Heikin Ashi
 - **Couleurs personnalisées :** corps, bordures et mèches des bougies avec opacité, plus le fond et les échelles
 - **Sélecteur rapide :** maintiens et glisse sur la pastille du symbole ou de l'unité de temps pour la changer aussitôt

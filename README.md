@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.8.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.9.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.8.0 — Automatic error reports
+### 🆕 New in 1.9.0 — Timeframes from 1 minute
+
+- ⏱️ Timeframes now start at 1 minute. Second timeframes are gone: they had no history and only showed what arrived while the app was open.
+- 🔁 A chart or layout saved on a second timeframe opens on 1 minute.
+
+### Previously in 1.8.0 — Automatic error reports
 
 - 🛠️ If something breaks in the app, from the welcome screen to the chart, your device sends us a short technical report on its own, so we can fix it even if nobody tells us.
 - 🔒 Technical data only (error message, screen, app version, device type and browser): no name, account or IP address. Reports are deleted after 30 days. The privacy policy explains it.
@@ -76,10 +81,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 - ⚡ The app's connection with the server is quicker and more reliable, also when you close it on iPhone.
 
-### Previously in 1.6.0 — Legal in Design 3.0
+<details>
+<summary>Previously in 1.6.0 — Legal in Design 3.0</summary>
 
 - ⚖️ **Profile › Legal** now looks like the rest of the app: a menu of sections (risk disclaimer, terms, privacy, contributions, credits, contact), each opening its own page.
 - 💬 **Contact**: message us on Telegram or write to support@nexuscharts.app. These are the only official channels.
+
+</details>
 
 <details>
 <summary>Previously in 1.5.0 — Our social profiles</summary>
@@ -92,13 +100,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 <summary>Previously in 1.4.2 — Steadier pages</summary>
 
 - 📋 **Watchlist and Profile** only scroll up and down: dragging a pair sideways no longer moves the whole page.
-
-</details>
-
-<details>
-<summary>Previously in 1.4.1 — Simpler Profile</summary>
-
-- 👤 **Profile**: the *Data sources* page is gone. The chart and logo credits are now in *Legal*, under *Credits*.
 
 </details>
 
@@ -116,7 +117,7 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 ### 📊 Chart
 - Full-screen chart with **live updates** and a candle **countdown**
-- **Timeframes:** seconds 1s · 5s · 10s · 15s · 30s · 45s — minutes 1m · 3m · 5m · 15m · 30m · 45m — hours 1H · 2H · 3H · 4H — days 1D · 1W · 1M · 3M · 6M · 12M
+- **Timeframes:** minutes 1m · 3m · 5m · 15m · 30m · 45m — hours 1H · 2H · 3H · 4H — days 1D · 1W · 1M · 3M · 6M · 12M
 - **Chart types:** Candles · Bars · Line · Area · Heikin Ashi
 - **Custom colors:** candle body, borders and wicks with opacity, plus canvas background and scales
 - **Quick picker:** hold and swipe on the symbol or timeframe pill to change it instantly

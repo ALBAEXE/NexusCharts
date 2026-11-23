@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.8.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.9.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.8.0 — Informes automáticos de errores
+### 🆕 Novedades de la 1.9.0 — Temporalidades desde 1 minuto
+
+- ⏱️ Las temporalidades ahora empiezan en 1 minuto. Las de segundos se han quitado: no tenían historial y solo mostraban lo que llegaba con la app abierta.
+- 🔁 Un gráfico o diseño guardado en segundos se abre en 1 minuto.
+
+### Anteriormente, en la 1.8.0 — Informes automáticos de errores
 
 - 🛠️ Si algo falla en la app, desde la pantalla de bienvenida hasta el gráfico, tu dispositivo nos envía solo un breve informe técnico, para que podamos arreglarlo aunque nadie nos avise.
 - 🔒 Solo datos técnicos (mensaje de error, pantalla, versión de la app, tipo de dispositivo y navegador): sin nombre, cuenta ni dirección IP. Los informes se borran a los 30 días. La política de privacidad lo explica.
@@ -76,10 +81,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - ⚡ La conexión de la app con el servidor es más rápida y fiable, también cuando la cierras en iPhone.
 
-### Anteriormente, en la 1.6.0 — Avisos legales en Design 3.0
+<details>
+<summary>Anteriormente, en la 1.6.0 — Avisos legales en Design 3.0</summary>
 
 - ⚖️ **Perfil › Avisos legales** tiene el mismo estilo que el resto de la app: un menú de secciones (advertencia de riesgo, términos, privacidad, contribuciones, créditos, contacto) y cada una abre su propia página.
 - 💬 **Contacto**: escríbenos por Telegram o a support@nexuscharts.app. Son los únicos canales oficiales.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.5.0 — Nuestros perfiles sociales</summary>
@@ -92,13 +100,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 <summary>Anteriormente, en la 1.4.2 — Páginas más estables</summary>
 
 - 📋 **Watchlist y Perfil** solo se desplazan arriba y abajo: al arrastrar un par hacia un lado la página ya no se mueve.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.4.1 — Perfil más sencillo</summary>
-
-- 👤 **Perfil**: se quitó la página *Fuentes de datos*. Los créditos del gráfico y de los logotipos ahora están en *Avisos legales*, en *Créditos*.
 
 </details>
 
@@ -116,7 +117,7 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 ### 📊 Gráfico
 - Gráfico a pantalla completa con **actualización en vivo** y **cuenta atrás** de la vela
-- **Temporalidades:** segundos 1s · 5s · 10s · 15s · 30s · 45s — minutos 1m · 3m · 5m · 15m · 30m · 45m — horas 1H · 2H · 3H · 4H — días 1D · 1W · 1M · 3M · 6M · 12M
+- **Temporalidades:** minutos 1m · 3m · 5m · 15m · 30m · 45m — horas 1H · 2H · 3H · 4H — días 1D · 1W · 1M · 3M · 6M · 12M
 - **Tipos de gráfico:** Velas · Barras · Línea · Área · Heikin Ashi
 - **Colores personalizados:** cuerpo, bordes y mechas de las velas con opacidad, además del fondo y las escalas
 - **Selector rápido:** mantén pulsado y desliza sobre la píldora del símbolo o de la temporalidad para cambiarla al instante
