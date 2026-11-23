@@ -1,4 +1,4 @@
-const VERSION='1.12.2';
+const VERSION='1.12.3';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -1738,7 +1738,14 @@ function lToT(l){
   if(l<=0)return a[0]+l*per;
   const i=Math.floor(l);return a[i]+(l-i)*(a[i+1]-a[i]);
 }
-function X(t){const l=tToL(t);if(l==null)return null;const x=chart.timeScale().logicalToCoordinate(l);return x==null?null:x}
+/* 1.12.3: la libreria dà 0 per le posizioni a metà tra due candele: si calcola tra le due candele vicine */
+function lCoord(l){
+  if(l==null||!isFinite(l))return null;const ts=chart.timeScale();
+  if(Number.isInteger(l))return ts.logicalToCoordinate(l);
+  const a=Math.floor(l),xa=ts.logicalToCoordinate(a),xb=ts.logicalToCoordinate(a+1);
+  if(xa==null||xb==null)return null;return xa+(l-a)*(xb-xa);
+}
+function X(t){const l=tToL(t);if(l==null)return null;const x=lCoord(l);return x==null?null:x}
 function Y(p){const y=series.priceToCoordinate(p);return y==null?null:y}
 function px(q){return{x:X(q.t),y:Y(q.p)}}
 function toTP(x,y){
@@ -6892,7 +6899,7 @@ function pcvDraw(){
     const ov=!r.meta||r.meta.overlay;
     /* indice della prima candela del risultato nel grafico attuale */
     let off=0;if(r.times.length&&lastBars.length&&lastBars[0].t!==r.times[0]){const k=lastBars.findIndex(b=>b.t===r.times[0]);off=k>=0?k:0}
-    const X=i=>ts.logicalToCoordinate(i+off),XT=ms=>{const l=tToL(chartT(ms));return l==null?null:ts.logicalToCoordinate(l)};
+    const X=i=>lCoord(i+off),XT=ms=>{const l=tToL(chartT(ms));return l==null?null:lCoord(l)};
     const xOf=(x,xl)=>xl==='bt'?XT(x):X(x),Y=p=>series.priceToCoordinate(p);
     const inView=(a,b)=>!(Math.max(a,b)<vr.from-off-2||Math.min(a,b)>vr.to-off+2);
     const i0=Math.max(0,Math.floor(vr.from-off)-1),i1=Math.min(r.times.length-1,Math.ceil(vr.to-off)+1);

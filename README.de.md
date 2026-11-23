@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.12.2-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.12.3-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.12.2 — Unterstützung für Pine v4
+### 🆕 Neu in 1.12.3 — Beschriftungen an der richtigen Stelle
+
+- 🏷️ Beschriftungen und Zeichnungen von Indikatoren, die auf einer Zeit zwischen zwei Kerzen liegen (zum Beispiel der Name einer Sitzung in der Mitte ihrer Box), erscheinen jetzt an der richtigen Stelle statt am linken Rand des Charts.
+
+### Vorher in 1.12.2 — Unterstützung für Pine v4
 
 - 🧩 Jetzt laufen auch Pine-Script-v4-Indikatoren: Funktionen ohne ta./math./str., security(), iff(), tostring() und input(type=…).
 - ➗ Pine v5: Die Division zweier im Code geschriebener ganzer Zahlen ergibt eine ganze Zahl (5 / 2 = 2), wie bei TradingView. In v6 bleibt es 2,5.
@@ -78,10 +82,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 📊 Kerzen haben jetzt Tick-Volumen (wie oft sich der Preis geändert hat), dieselbe Art Volumen, die TradingView für Gold und Forex nutzt. Indikatoren, die das Volumen lesen, arbeiten jetzt mit echten Werten.
 - 🎨 Helles Design: Indikator-Text in der Textfarbe des Charts ist wieder sichtbar.
 
-### Vorher in 1.12.0 — 4-Stunden-Kerzen nach dem New Yorker Handelstag
+<details>
+<summary>Vorher in 1.12.0 — 4-Stunden-Kerzen nach dem New Yorker Handelstag</summary>
 
 - 🕔 Für Gold, Metalle, Energie, Forex und Indizes beginnen 4-Stunden-Kerzen um 17, 21, 1, 5, 9 und 13 Uhr New Yorker Zeit: Jeder Tag endet um 17 Uhr zusammen mit der Tageskerze, wie bei Brokern.
 - 📈 Auch die Live-Kerze öffnet zu diesen Zeiten. Krypto und Aktien bleiben wie bisher.
+
+</details>
 
 <details>
 <summary>Vorher in 1.11.0 — Gold-Minuten seit 2011</summary>
@@ -98,14 +105,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 👈 Schieb den Chart nach links: ältere Kerzen laden von selbst, ohne dass sich deine Ansicht verschiebt.
 - 🕔 Tageskerzen schließen auch in der Vergangenheit um 17 Uhr New Yorker Zeit.
 - 🙏 Ein Teil der Preishistorie stammt von Dukascopy Bank SA (Profil › Rechtliches › Danksagungen).
-
-</details>
-
-<details>
-<summary>Vorher in 1.9.0 — Zeiteinheiten ab 1 Minute</summary>
-
-- ⏱️ Zeiteinheiten beginnen jetzt bei 1 Minute. Die Sekunden-Zeiteinheiten wurden entfernt: Sie hatten keinen Verlauf und zeigten nur, was bei geöffneter App ankam.
-- 🔁 Ein Chart oder Layout, das auf Sekunden gespeichert war, öffnet sich mit 1 Minute.
 
 </details>
 

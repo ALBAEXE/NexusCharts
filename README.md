@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.12.2-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.12.3-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.12.2 — Pine v4 support
+### 🆕 New in 1.12.3 — Labels in the right place
+
+- 🏷️ Indicator labels and drawings placed at a time between two candles (for example a session name in the middle of its box) now appear where they should, instead of at the left edge of the chart.
+
+### Previously in 1.12.2 — Pine v4 support
 
 - 🧩 Pine Script v4 indicators now run too: functions without the ta./math./str. prefix, security(), iff(), tostring() and input(type=…).
 - ➗ Pine v5: dividing two whole numbers written in the code gives a whole number (5 / 2 = 2), as on TradingView. In v6 it stays 2.5.
@@ -78,10 +82,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 📊 Candles now carry tick volume (how many times the price changed), the same kind of volume TradingView uses for gold and Forex. Indicators that read volume now work with real values.
 - 🎨 Light theme: indicator text drawn with the chart's text color is visible again.
 
-### Previously in 1.12.0 — 4-hour candles on the New York day
+<details>
+<summary>Previously in 1.12.0 — 4-hour candles on the New York day</summary>
 
 - 🕔 For gold, metals, energy, Forex and indices, 4-hour candles start at 5 pm, 9 pm, 1 am, 5 am, 9 am and 1 pm New York time, so each day ends at 5 pm together with the daily candle, as with brokers.
 - 📈 The live candle opens at the same times. Crypto and stocks stay as before.
+
+</details>
 
 <details>
 <summary>Previously in 1.11.0 — Gold minutes since 2011</summary>
@@ -98,14 +105,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 👈 Scroll the chart to the left: older candles load on their own, without moving your view.
 - 🕔 Daily candles close at 5 pm New York time in the past too.
 - 🙏 Part of the price history comes from Dukascopy Bank SA (Profile › Legal › Credits).
-
-</details>
-
-<details>
-<summary>Previously in 1.9.0 — Timeframes from 1 minute</summary>
-
-- ⏱️ Timeframes now start at 1 minute. Second timeframes are gone: they had no history and only showed what arrived while the app was open.
-- 🔁 A chart or layout saved on a second timeframe opens on 1 minute.
 
 </details>
 
