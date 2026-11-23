@@ -1,4 +1,4 @@
-const VERSION='1.9.0';
+const VERSION='1.10.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -1109,7 +1109,7 @@ async function load(){
   const b=await barsFor(it,res,from,to);
   if(cur+'|'+res!==want)return;
   if(!b.length)throw new Error(t('nobars'));
-  lastBars=b;afterData.prev=null;
+  lastBars=b;afterData.prev=null;try{HIST.keep=0}catch(e){}
   setDec(decOf(b.slice(-200).flatMap(x=>[x.o,x.h,x.l,x.c])));
   setSeriesData(b);refreshAlertLines();
   if(CMP.sym===cur)cmpSet(null);else if(CMP.sym)cmpLoad().catch(()=>{});
@@ -1129,7 +1129,7 @@ async function tick(){
     if(cur+'|'+res!==want||!b.length)return;
     const map=new Map(lastBars.map(x=>[x.t,x]));
     b.forEach(x=>map.set(x.t,x));
-    lastBars=[...map.values()].sort((a,c)=>a.t-c.t).slice(-5000);
+    lastBars=[...map.values()].sort((a,c)=>a.t-c.t).slice(-Math.max(5000,(window.HIST&&HIST.keep)||0));
     updSeries(lastBars,b.map(x=>x.t));
     if(CMP.sym&&tickN%5===0)cmpLoad().catch(()=>{});
     afterData();
@@ -3863,6 +3863,17 @@ LIC.credits=['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
   };
   for(var k in C){try{LEGAL[k].s.push(C[k])}catch(e){}}
 })();
+/* 1.10.0: crediti per lo storico dei prezzi (Dukascopy, dichiarato apertamente: decisione del proprietario del 23/11/2026) */
+(function(){
+  var T={
+    it:'Parte dello storico dei prezzi (dal 2011) viene da Dukascopy Bank SA.',
+    en:'Part of the price history (from 2011) comes from Dukascopy Bank SA.',
+    es:'Parte del historial de precios (desde 2011) procede de Dukascopy Bank SA.',
+    fr:'Une partie de l\u2019historique des prix (depuis 2011) provient de Dukascopy Bank SA.',
+    de:'Ein Teil der Preishistorie (seit 2011) stammt von Dukascopy Bank SA.'
+  };
+  for(var k in T){try{LEGAL[k].s.forEach(function(x){if(x[0]==='credits')x[2].splice(2,0,T[k])})}catch(e){}}
+})();
 /* 1.6.0: «Contatti» con Telegram (messaggi diretti) ed email di supporto */
 (function(){
   var T={
@@ -3888,11 +3899,11 @@ LIC.credits=['<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
 
 /* 1.6.0: Note legali in stile Design 3.0: un menu di voci (come Profilo e Social); ogni voce apre la sua pagina. */
 var LGSUB={
- it:{risk:'Il trading comporta rischi',terms:"Regole per usare l'app",privacy:'Quali dati usiamo e perché',donate:'Come funzionano i contributi',contact:'Telegram ed email di supporto',credits:'Grafico e loghi',tg:'Scrivici su Telegram',tgsub:'Messaggi diretti al canale @NexusCharts',mail:'Email di supporto'},
- en:{risk:'Trading involves risk',terms:'Rules for using the app',privacy:'What data we use and why',donate:'How contributions work',contact:'Telegram and support email',credits:'Chart and logos',tg:'Message us on Telegram',tgsub:'Direct messages to the @NexusCharts channel',mail:'Support email'},
- es:{risk:'El trading conlleva riesgos',terms:'Reglas para usar la app',privacy:'Qué datos usamos y por qué',donate:'Cómo funcionan las contribuciones',contact:'Telegram y correo de soporte',credits:'Gráfico y logotipos',tg:'Escríbenos en Telegram',tgsub:'Mensajes directos al canal @NexusCharts',mail:'Correo de soporte'},
- fr:{risk:'Le trading comporte des risques',terms:"Règles d'utilisation de l'app",privacy:'Quelles données et pourquoi',donate:'Comment fonctionnent les contributions',contact:'Telegram et e-mail du support',credits:'Graphique et logos',tg:'Écris-nous sur Telegram',tgsub:'Messages directs à la chaîne @NexusCharts',mail:'E-mail du support'},
- de:{risk:'Trading ist mit Risiken verbunden',terms:'Regeln für die Nutzung der App',privacy:'Welche Daten wir nutzen und warum',donate:'Wie Beiträge funktionieren',contact:'Telegram und Support-E-Mail',credits:'Chart und Logos',tg:'Schreib uns auf Telegram',tgsub:'Direktnachrichten an den Kanal @NexusCharts',mail:'Support-E-Mail'}
+ it:{risk:'Il trading comporta rischi',terms:"Regole per usare l'app",privacy:'Quali dati usiamo e perché',donate:'Come funzionano i contributi',contact:'Telegram ed email di supporto',credits:'Grafico, storico e loghi',tg:'Scrivici su Telegram',tgsub:'Messaggi diretti al canale @NexusCharts',mail:'Email di supporto'},
+ en:{risk:'Trading involves risk',terms:'Rules for using the app',privacy:'What data we use and why',donate:'How contributions work',contact:'Telegram and support email',credits:'Chart, history and logos',tg:'Message us on Telegram',tgsub:'Direct messages to the @NexusCharts channel',mail:'Support email'},
+ es:{risk:'El trading conlleva riesgos',terms:'Reglas para usar la app',privacy:'Qué datos usamos y por qué',donate:'Cómo funcionan las contribuciones',contact:'Telegram y correo de soporte',credits:'Gráfico, historial y logotipos',tg:'Escríbenos en Telegram',tgsub:'Mensajes directos al canal @NexusCharts',mail:'Correo de soporte'},
+ fr:{risk:'Le trading comporte des risques',terms:"Règles d'utilisation de l'app",privacy:'Quelles données et pourquoi',donate:'Comment fonctionnent les contributions',contact:'Telegram et e-mail du support',credits:'Graphique, historique et logos',tg:'Écris-nous sur Telegram',tgsub:'Messages directs à la chaîne @NexusCharts',mail:'E-mail du support'},
+ de:{risk:'Trading ist mit Risiken verbunden',terms:'Regeln für die Nutzung der App',privacy:'Welche Daten wir nutzen und warum',donate:'Wie Beiträge funktionieren',contact:'Telegram und Support-E-Mail',credits:'Chart, Historie und Logos',tg:'Schreib uns auf Telegram',tgsub:'Direktnachrichten an den Kanal @NexusCharts',mail:'Support-E-Mail'}
 };
 var SUPPORT_MAIL='support@nexuscharts.app',TG_DIRECT='https://t.me/NexusCharts?direct';
 PIC.mail=PIC.mail||'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>';
@@ -7943,7 +7954,8 @@ var TFC={};    /* simbolo|tf -> Map(t -> candela base) */
     const f=first<=start&&M.size?Math.max(start,to-short):start;
     const B=await orig(it,p.base,f,to);
     B.forEach(b=>M.set(b.t,b));
-    if(M.size>40000){const ks=[...M.keys()].sort((a,b)=>a-b);ks.slice(0,M.size-30000).forEach(k=>M.delete(k))}
+    /* 1.10.0: con lo storico lungo la cache tiene fino a 150.000 candele base (16 anni di ore) */
+    if(M.size>150000){const ks=[...M.keys()].sort((a,b)=>a-b);ks.slice(0,M.size-120000).forEach(k=>M.delete(k))}
     const all=[...M.values()].filter(b=>b.t>=start&&b.t<=to).sort((a,b)=>a.t-b.t);
     const agg=tfAgg(all,p),kf=tfKey(from,p);
     return agg.filter(x=>x._k>=kf).map(x=>({t:x.t,o:x.o,h:x.h,l:x.l,c:x.c,v:x.v}));
@@ -8011,6 +8023,35 @@ openTF=function(){
     TF_ALL.filter(k=>!tfIsSec(k)).forEach(k=>{const x=byTxt.get(k);if(x)bar.appendChild(x)});
     if(tfIsSec(TE_TF)){const x=byTxt.get('1m');if(x)x.click()}
   };
+})();
+
+/* ---------- 1.10.0: storico che si carica scorrendo il grafico verso sinistra ----------
+   Quando restano meno di 40 candele a sinistra, chiede il pezzo più vecchio (circa 5000 candele, almeno i giorni di DAYS)
+   e lo aggiunge davanti senza spostare la vista. Si ferma quando il server non ha più niente per quel simbolo e timeframe. */
+var HIST={busy:false,end:{}};
+(function(){
+  const key=()=>cur+'|'+res;
+  async function older(){
+    if(HIST.busy||!chart||!series||!lastBars.length||(window.RP&&RP.on))return;
+    const k=key();if(HIST.end[k]&&lastBars[0].t<=HIST.end[k])return;
+    const it=BYN[cur];if(!it)return;
+    HIST.busy=true;
+    try{
+      const first=lastBars[0].t,span=Math.max((DAYS[res]||30)*864e5,(SECS[res]||60)*1000*5000);
+      const b=await barsFor(it,res,first-span,first-1);
+      if(key()!==k||!lastBars.length||lastBars[0].t!==first)return;
+      const add=b.filter(x=>x.t<first);
+      if(!add.length){HIST.end[k]=first;return}
+      const ts=chart.timeScale(),r=ts.getVisibleLogicalRange();
+      lastBars=add.concat(lastBars);HIST.keep=lastBars.length+100;
+      setSeriesData(lastBars);
+      if(r)ts.setVisibleLogicalRange({from:r.from+add.length,to:r.to+add.length});
+      afterData();
+    }catch(e){}finally{HIST.busy=false}
+  }
+  const w=setInterval(()=>{if(!chart)return;clearInterval(w);
+    try{chart.timeScale().subscribeVisibleLogicalRangeChange(r=>{if(r&&r.from<40)setTimeout(older,0)})}catch(e){}
+  },300);
 })();
 
 /* ---------- indicatori: request.security e input timeframe ---------- */
@@ -12246,7 +12287,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
 
   /* ---------- candele: risposta nello stesso formato del broker ---------- */
   async function nxCandles(sym,reso,from,to){
-    var u=NXD+'/v2/candles?symbol='+sym+'&tf='+TFM[reso]+'&from='+Math.floor(+from||0)+'&to='+Math.floor(+to||Date.now())+(TFM[reso]==='1D'?'&ny=1':'')+'&'+cred();
+    var u=NXD+'/v2/candles?symbol='+sym+'&tf='+TFM[reso]+'&from='+Math.floor(+from||0)+'&to='+Math.floor(+to||Date.now())+(TFM[reso]==='1D'?'&ny=1':'')+'&hist=1&'+cred();
     var r=await fetch(u,{cache:'no-store'});
     if(!r.ok){var e=new Error('nexus '+r.status);e.status=r.status;throw e}
     var j=await r.json();
@@ -12383,7 +12424,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
         }else if(TF_NATIVE[res]&&res!=='1D'&&x.ts>=L.t+sec){
           var t0=Math.floor(x.ts/sec)*sec;lastBars.push({t:t0,o:px,h:px,l:px,c:px,v:0});ch.push(t0);
         }
-        if(ch.length){if(lastBars.length>5000)lastBars=lastBars.slice(-5000);updSeries(lastBars,ch);afterData()}
+        if(ch.length){var KP=Math.max(5000,(window.HIST&&HIST.keep)||0);if(lastBars.length>KP)lastBars=lastBars.slice(-KP);updSeries(lastBars,ch);afterData()}
       }catch(e){}
     }}
   }

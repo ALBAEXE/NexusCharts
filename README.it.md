@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.9.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.10.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,14 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.9.0 — Timeframe da 1 minuto
+### 🆕 Novità della 1.10.0 — Storico dell'oro dal 2011
+
+- 📜 L'oro ora ha lo storico dei prezzi fino a gennaio 2011 sui grafici a 1H, 2H, 3H, 4H, giornaliero, settimanale e mensile.
+- 👈 Scorri il grafico verso sinistra: le candele più vecchie si caricano da sole, senza spostarti la vista.
+- 🕔 Le candele giornaliere chiudono alle 17:00 di New York anche nel passato.
+- 🙏 Parte dello storico dei prezzi viene da Dukascopy Bank SA (Profilo › Note legali › Crediti).
+
+### In precedenza, nella 1.9.0 — Timeframe da 1 minuto
 
 - ⏱️ I timeframe ora partono da 1 minuto. Quelli in secondi sono stati tolti: non avevano storico e mostravano solo quello che arrivava mentre l'app era aperta.
 - 🔁 Un grafico o un layout salvato su un timeframe in secondi si apre a 1 minuto.
@@ -77,9 +84,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🛠️ Se qualcosa si rompe nell'app, dalla schermata di benvenuto al grafico, il dispositivo ci manda da solo un breve rapporto tecnico, così possiamo correggerlo anche se nessuno ce lo dice.
 - 🔒 Solo dati tecnici (messaggio d'errore, schermata, versione dell'app, tipo di dispositivo e browser): niente nome, account o indirizzo IP. I rapporti si cancellano dopo 30 giorni. La privacy policy lo spiega.
 
-### In precedenza, nella 1.7.0 — Collegamento più stabile
+<details>
+<summary>In precedenza, nella 1.7.0 — Collegamento più stabile</summary>
 
 - ⚡ Il collegamento dell'app con il server è più rapido e affidabile, anche quando la chiudi su iPhone.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.6.0 — Note legali in Design 3.0</summary>
@@ -93,13 +103,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 <summary>In precedenza, nella 1.5.0 — I nostri profili social</summary>
 
 - 📣 **Profilo › Social**: canale Telegram ufficiale, Instagram, TikTok, YouTube e X, ognuno con la sua icona. Con un tocco si apre l'app del social direttamente sulla nostra pagina (o il sito, se l'app non è installata).
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.4.2 — Pagine più stabili</summary>
-
-- 📋 **Watchlist e Profilo** scorrono solo su e giù: trascinando un pair di lato la pagina non si sposta più.
 
 </details>
 
