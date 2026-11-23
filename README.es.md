@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.11.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.12.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.11.0 — Minutos del oro desde 2011
+### 🆕 Novedades de la 1.12.0 — Velas de 4 horas con la jornada de Nueva York
+
+- 🕔 Para oro, metales, energía, Forex e índices, las velas de 4 horas empiezan a las 17, 21, 1, 5, 9 y 13 de Nueva York: cada jornada termina a las 17 junto con la vela diaria, como en los brókers.
+- 📈 La vela en vivo también se abre a esas horas. Cripto y acciones siguen igual.
+
+### Anteriormente, en la 1.11.0 — Minutos del oro desde 2011
 
 - ⏱️ El oro ahora tiene historial hasta enero de 2011 también en los gráficos de minutos: 1m, 3m, 5m, 15m, 30m y 45m.
 - 👈 Como en las otras temporalidades, desliza el gráfico hacia la izquierda y las velas más antiguas se cargan solas.
@@ -79,10 +84,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🕔 Las velas diarias cierran a las 17:00 de Nueva York también en el pasado.
 - 🙏 Parte del historial de precios procede de Dukascopy Bank SA (Perfil › Avisos legales › Créditos).
 
-### Anteriormente, en la 1.9.0 — Temporalidades desde 1 minuto
+<details>
+<summary>Anteriormente, en la 1.9.0 — Temporalidades desde 1 minuto</summary>
 
 - ⏱️ Las temporalidades ahora empiezan en 1 minuto. Las de segundos se han quitado: no tenían historial y solo mostraban lo que llegaba con la app abierta.
 - 🔁 Un gráfico o diseño guardado en segundos se abre en 1 minuto.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.8.0 — Informes automáticos de errores</summary>
@@ -96,14 +104,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 <summary>Anteriormente, en la 1.7.0 — Conexión más estable</summary>
 
 - ⚡ La conexión de la app con el servidor es más rápida y fiable, también cuando la cierras en iPhone.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.6.0 — Avisos legales en Design 3.0</summary>
-
-- ⚖️ **Perfil › Avisos legales** tiene el mismo estilo que el resto de la app: un menú de secciones (advertencia de riesgo, términos, privacidad, contribuciones, créditos, contacto) y cada una abre su propia página.
-- 💬 **Contacto**: escríbenos por Telegram o a support@nexuscharts.app. Son los únicos canales oficiales.
 
 </details>
 

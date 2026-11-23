@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.11.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.12.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.11.0 — Minuti dell'oro dal 2011
+### 🆕 Novità della 1.12.0 — Candele da 4 ore sulla giornata di New York
+
+- 🕔 Per oro, metalli, energia, Forex e indici le candele da 4 ore partono alle 17, 21, 1, 5, 9 e 13 di New York: ogni giornata finisce alle 17 insieme alla candela giornaliera, come sui broker.
+- 📈 Anche la candela in diretta si apre agli stessi orari. Cripto e azioni restano come prima.
+
+### In precedenza, nella 1.11.0 — Minuti dell'oro dal 2011
 
 - ⏱️ L'oro ora ha lo storico fino a gennaio 2011 anche sui grafici in minuti: 1m, 3m, 5m, 15m, 30m e 45m.
 - 👈 Come negli altri timeframe, scorri il grafico verso sinistra e le candele più vecchie si caricano da sole.
@@ -79,10 +84,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🕔 Le candele giornaliere chiudono alle 17:00 di New York anche nel passato.
 - 🙏 Parte dello storico dei prezzi viene da Dukascopy Bank SA (Profilo › Note legali › Crediti).
 
-### In precedenza, nella 1.9.0 — Timeframe da 1 minuto
+<details>
+<summary>In precedenza, nella 1.9.0 — Timeframe da 1 minuto</summary>
 
 - ⏱️ I timeframe ora partono da 1 minuto. Quelli in secondi sono stati tolti: non avevano storico e mostravano solo quello che arrivava mentre l'app era aperta.
 - 🔁 Un grafico o un layout salvato su un timeframe in secondi si apre a 1 minuto.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.8.0 — Segnalazione automatica degli errori</summary>
@@ -96,14 +104,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 <summary>In precedenza, nella 1.7.0 — Collegamento più stabile</summary>
 
 - ⚡ Il collegamento dell'app con il server è più rapido e affidabile, anche quando la chiudi su iPhone.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.6.0 — Note legali in Design 3.0</summary>
-
-- ⚖️ **Profilo › Note legali** ha lo stesso stile del resto dell'app: un menu di voci (avvertenza sul rischio, termini, privacy, contributi, crediti, contatti) e ogni voce apre la sua pagina.
-- 💬 **Contatti**: scrivici su Telegram o all'email support@nexuscharts.app. Sono gli unici canali ufficiali.
 
 </details>
 

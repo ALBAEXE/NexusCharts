@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.11.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.12.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.11.0 — Gold minutes since 2011
+### 🆕 New in 1.12.0 — 4-hour candles on the New York day
+
+- 🕔 For gold, metals, energy, Forex and indices, 4-hour candles start at 5 pm, 9 pm, 1 am, 5 am, 9 am and 1 pm New York time, so each day ends at 5 pm together with the daily candle, as with brokers.
+- 📈 The live candle opens at the same times. Crypto and stocks stay as before.
+
+### Previously in 1.11.0 — Gold minutes since 2011
 
 - ⏱️ Gold now has history back to January 2011 on the minute charts too: 1m, 3m, 5m, 15m, 30m and 45m.
 - 👈 As with the other timeframes, scroll the chart to the left and older candles load on their own.
@@ -79,10 +84,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🕔 Daily candles close at 5 pm New York time in the past too.
 - 🙏 Part of the price history comes from Dukascopy Bank SA (Profile › Legal › Credits).
 
-### Previously in 1.9.0 — Timeframes from 1 minute
+<details>
+<summary>Previously in 1.9.0 — Timeframes from 1 minute</summary>
 
 - ⏱️ Timeframes now start at 1 minute. Second timeframes are gone: they had no history and only showed what arrived while the app was open.
 - 🔁 A chart or layout saved on a second timeframe opens on 1 minute.
+
+</details>
 
 <details>
 <summary>Previously in 1.8.0 — Automatic error reports</summary>
@@ -96,14 +104,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 <summary>Previously in 1.7.0 — Steadier connection</summary>
 
 - ⚡ The app's connection with the server is quicker and more reliable, also when you close it on iPhone.
-
-</details>
-
-<details>
-<summary>Previously in 1.6.0 — Legal in Design 3.0</summary>
-
-- ⚖️ **Profile › Legal** now looks like the rest of the app: a menu of sections (risk disclaimer, terms, privacy, contributions, credits, contact), each opening its own page.
-- 💬 **Contact**: message us on Telegram or write to support@nexuscharts.app. These are the only official channels.
 
 </details>
 

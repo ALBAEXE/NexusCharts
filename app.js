@@ -1,4 +1,4 @@
-const VERSION='1.11.0';
+const VERSION='1.12.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -12287,7 +12287,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
 
   /* ---------- candele: risposta nello stesso formato del broker ---------- */
   async function nxCandles(sym,reso,from,to){
-    var u=NXD+'/v2/candles?symbol='+sym+'&tf='+TFM[reso]+'&from='+Math.floor(+from||0)+'&to='+Math.floor(+to||Date.now())+(TFM[reso]==='1D'?'&ny=1':'')+'&hist=1&'+cred();
+    var u=NXD+'/v2/candles?symbol='+sym+'&tf='+TFM[reso]+'&from='+Math.floor(+from||0)+'&to='+Math.floor(+to||Date.now())+(TFM[reso]==='1D'||TFM[reso]==='4H'?'&ny=1':'')+'&hist=1&'+cred();
     var r=await fetch(u,{cache:'no-store'});
     if(!r.ok){var e=new Error('nexus '+r.status);e.status=r.status;throw e}
     var j=await r.json();
@@ -12303,6 +12303,15 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     if(!NYF)NYF=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'});
     var p={};NYF.formatToParts(new Date((k+7)*3600000)).forEach(function(x){p[x.type]=x.value});
     return NYM[k]=Date.UTC(+p.year,+p.month-1,+p.day);
+  }
+  /* 1.12.0: inizio della candela da 4 ore allineata alla giornata che chiude alle 17:00 di New York
+     (17, 21, 1, 5, 9, 13 ora di New York), come sul server con ny=1. Solo oro, metalli, energia, Forex e indici. */
+  var NYHF=null,NY4M={};
+  function ny4ms(ms){
+    var k=Math.floor(ms/3600000);if(NY4M[k]!==undefined)return NY4M[k];
+    if(!NYHF)NYHF=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',hour12:false});
+    var h=(+NYHF.format(new Date(k*3600000)))%24,s4=(h+7)%24;
+    return NY4M[k]=(k-(s4%4))*3600000;
   }
   /* 1.3.3: la candela della domenica sera (riapertura del mercato) si unisce al lunedì.
      Solo per i mercati chiusi nel weekend: se esiste il sabato (cripto) la domenica resta com'è. */
@@ -12419,6 +12428,11 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
           var kd=nyTDay(x.ts);
           if(kd===L.t){L.c=px;if(px>L.h)L.h=px;if(px<L.l)L.l=px;ch.push(L.t)}
           else if(kd>L.t){lastBars.push({t:kd,o:px,h:px,l:px,c:px,v:0});ch.push(kd)}
+        }else if(res==='4H'&&nyKind(name)){
+          /* 1.12.0: 4 ore allineate alle 17:00 di New York */
+          var k4=ny4ms(x.ts);
+          if(k4===L.t){L.c=px;if(px>L.h)L.h=px;if(px<L.l)L.l=px;ch.push(L.t)}
+          else if(k4>L.t){lastBars.push({t:k4,o:px,h:px,l:px,c:px,v:0});ch.push(k4)}
         }else if(x.ts>=L.t&&x.ts<L.t+sec){
           L.c=px;if(px>L.h)L.h=px;if(px<L.l)L.l=px;ch.push(L.t);
         }else if(TF_NATIVE[res]&&res!=='1D'&&x.ts>=L.t+sec){
