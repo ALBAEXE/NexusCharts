@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.12.1-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.12.2-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.12.1 — Volume a tick
+### 🆕 Novità della 1.12.2 — Supporto a Pine v4
+
+- 🧩 Ora funzionano anche gli indicatori Pine Script v4: funzioni senza ta./math./str., security(), iff(), tostring() e input(type=…).
+- ➗ Pine v5: la divisione tra due numeri interi scritti nel codice dà un intero (5 / 2 = 2), come su TradingView. In v6 resta 2,5.
+- 📊 Oro: volume a tick su tutto lo storico dal 2011.
+
+### In precedenza, nella 1.12.1 — Volume a tick
 
 - 📊 Le candele ora hanno il volume a tick (quante volte il prezzo è cambiato), lo stesso tipo di volume che TradingView usa per oro e Forex. Gli indicatori che leggono il volume ora lavorano con valori reali.
 - 🎨 Tema chiaro: il testo degli indicatori scritto con il colore del testo del grafico si vede di nuovo.
@@ -77,10 +83,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🕔 Per oro, metalli, energia, Forex e indici le candele da 4 ore partono alle 17, 21, 1, 5, 9 e 13 di New York: ogni giornata finisce alle 17 insieme alla candela giornaliera, come sui broker.
 - 📈 Anche la candela in diretta si apre agli stessi orari. Cripto e azioni restano come prima.
 
-### In precedenza, nella 1.11.0 — Minuti dell'oro dal 2011
+<details>
+<summary>In precedenza, nella 1.11.0 — Minuti dell'oro dal 2011</summary>
 
 - ⏱️ L'oro ora ha lo storico fino a gennaio 2011 anche sui grafici in minuti: 1m, 3m, 5m, 15m, 30m e 45m.
 - 👈 Come negli altri timeframe, scorri il grafico verso sinistra e le candele più vecchie si caricano da sole.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.10.0 — Storico dell'oro dal 2011</summary>
@@ -97,14 +106,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 - ⏱️ I timeframe ora partono da 1 minuto. Quelli in secondi sono stati tolti: non avevano storico e mostravano solo quello che arrivava mentre l'app era aperta.
 - 🔁 Un grafico o un layout salvato su un timeframe in secondi si apre a 1 minuto.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.8.0 — Segnalazione automatica degli errori</summary>
-
-- 🛠️ Se qualcosa si rompe nell'app, dalla schermata di benvenuto al grafico, il dispositivo ci manda da solo un breve rapporto tecnico, così possiamo correggerlo anche se nessuno ce lo dice.
-- 🔒 Solo dati tecnici (messaggio d'errore, schermata, versione dell'app, tipo di dispositivo e browser): niente nome, account o indirizzo IP. I rapporti si cancellano dopo 30 giorni. La privacy policy lo spiega.
 
 </details>
 

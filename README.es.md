@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.12.1-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.12.2-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.12.1 — Volumen de ticks
+### 🆕 Novedades de la 1.12.2 — Compatibilidad con Pine v4
+
+- 🧩 Ahora también funcionan los indicadores Pine Script v4: funciones sin ta./math./str., security(), iff(), tostring() e input(type=…).
+- ➗ Pine v5: dividir dos números enteros escritos en el código da un entero (5 / 2 = 2), como en TradingView. En v6 sigue siendo 2,5.
+- 📊 Oro: volumen de ticks en todo el historial desde 2011.
+
+### Anteriormente, en la 1.12.1 — Volumen de ticks
 
 - 📊 Las velas ahora tienen volumen de ticks (cuántas veces cambió el precio), el mismo tipo de volumen que TradingView usa para oro y Forex. Los indicadores que leen el volumen ya trabajan con valores reales.
 - 🎨 Tema claro: el texto de los indicadores con el color del texto del gráfico vuelve a verse.
@@ -77,10 +83,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🕔 Para oro, metales, energía, Forex e índices, las velas de 4 horas empiezan a las 17, 21, 1, 5, 9 y 13 de Nueva York: cada jornada termina a las 17 junto con la vela diaria, como en los brókers.
 - 📈 La vela en vivo también se abre a esas horas. Cripto y acciones siguen igual.
 
-### Anteriormente, en la 1.11.0 — Minutos del oro desde 2011
+<details>
+<summary>Anteriormente, en la 1.11.0 — Minutos del oro desde 2011</summary>
 
 - ⏱️ El oro ahora tiene historial hasta enero de 2011 también en los gráficos de minutos: 1m, 3m, 5m, 15m, 30m y 45m.
 - 👈 Como en las otras temporalidades, desliza el gráfico hacia la izquierda y las velas más antiguas se cargan solas.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.10.0 — Historial del oro desde 2011</summary>
@@ -97,14 +106,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - ⏱️ Las temporalidades ahora empiezan en 1 minuto. Las de segundos se han quitado: no tenían historial y solo mostraban lo que llegaba con la app abierta.
 - 🔁 Un gráfico o diseño guardado en segundos se abre en 1 minuto.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.8.0 — Informes automáticos de errores</summary>
-
-- 🛠️ Si algo falla en la app, desde la pantalla de bienvenida hasta el gráfico, tu dispositivo nos envía solo un breve informe técnico, para que podamos arreglarlo aunque nadie nos avise.
-- 🔒 Solo datos técnicos (mensaje de error, pantalla, versión de la app, tipo de dispositivo y navegador): sin nombre, cuenta ni dirección IP. Los informes se borran a los 30 días. La política de privacidad lo explica.
 
 </details>
 

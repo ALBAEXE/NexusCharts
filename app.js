@@ -1,4 +1,4 @@
-const VERSION='1.12.1';
+const VERSION='1.12.2';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -6368,6 +6368,9 @@ cp.ex=function(e,sc){
       const a=this.ex(e.a,sc),b=this.ex(e.b,sc);
       if(e.op==='and')return this.v6?E=>tru(a(E))&&tru(b(E)):E=>{const x=tru(a(E)),y=tru(b(E));return x&&y};
       if(e.op==='or')return this.v6?E=>tru(a(E))||tru(b(E)):E=>{const x=tru(a(E)),y=tru(b(E));return x||y};
+      /* v5 (e precedenti): due numeri interi scritti nel codice si dividono come interi (5 / 2 = 2); dalla v6 il risultato è decimale */
+      const il=x=>x&&((x.t==='lit'&&x.int)||(x.t==='un'&&x.op==='-'&&x.a&&x.a.t==='lit'&&x.a.int));
+      if(e.op==='/'&&!this.v6&&il(e.a)&&il(e.b))return E=>{const y=num(b(E));return y===0?NaN:Math.trunc(num(a(E))/y)};
       const f=BIN[e.op];return E=>f(a(E),b(E));
     }
     case 'tern':{const c=this.ex(e.c,sc),a=this.ex(e.a,sc),b=this.ex(e.b,sc);return E=>tru(c(E))?a(E):b(E)}
@@ -6408,6 +6411,9 @@ cp.name=function(e,sc){
   if(BV[n])return BV[n];
   if(CONST[n]!==undefined){const v=CONST[n];return()=>v}
   if(this.fns.has(n))throw err(e,'«'+n+'» è una funzione: aggiungi le parentesi');
+  /* v4: variabili senza «ta.» (tr, vwap, obv, …) */
+  if(this.ast.version<=4&&BV['ta.'+n])return BV['ta.'+n];
+  if(this.ast.version<=4&&BV_CALL['ta.'+n]){const[fn,args]=BV_CALL['ta.'+n];return this.call({t:'call',id:e.id,ln:e.ln,f:{t:'name',n:fn},args:args.map(x=>({t:'name',n:x})),kw:{}},sc,fn)}
   throw err(e,'nome sconosciuto «'+n+'»');
 };
 cp.mem=function(e,sc){
@@ -6443,7 +6449,24 @@ cp.args=function(e,sc,params){
   return fs;
 };
 cp.call=function(e,sc,forced){
-  const d=forced||dotted(e.f);
+  let d=forced||dotted(e.f);
+  /* 1.12.2: Pine v4 (e precedenti) — nomi senza «ta.», «math.», «str.», security(), iff(), input(type=…) come nella guida ufficiale «To Pine Script version 5» */
+  if(d!=null&&!d.includes('.')&&this.ast.version<=4&&!this.isVar(d,sc)&&!this.fns.has(d)){
+    if(d==='security')return this.security(e,sc);
+    if(d==='iff'){const c=this.ex(e.args[0],sc),x=this.ex(e.args[1],sc),y=this.ex(e.args[2],sc);return E=>tru(c(E))?x(E):y(E)}
+    if(d==='input'){
+      const T={'input.integer':'input.int','input.float':'input.float','input.bool':'input.bool','input.string':'input.string','input.source':'input.source','input.resolution':'input.timeframe','input.session':'input.session','input.color':'input.color'};
+      let tn=e.kw.type?dotted(e.kw.type):(e.args[2]?dotted(e.args[2]):null);
+      if(tn&&T[tn]){const kw=Object.assign({},e.kw);delete kw.type;const args=e.args.slice();if(!e.kw.type)args.splice(2,1);
+        const m=T[tn],P=INPUT_P[m],e2=Object.assign({},e,{kw,args});
+        /* in v4 dopo il tipo vengono minval, maxval, confirm, step, options */
+        if(!e.kw.type&&args.length>2){const v4=['minval','maxval','confirm','step','options'];const rest=args.splice(2);rest.forEach((x,i)=>{const k=v4[i];if(k&&P.includes(k))kw[k]=x})}
+        return this.input(e2,sc,m);}
+    }
+    const RN={tostring:'str.tostring',tonumber:'str.tonumber',cum:'ta.cum',sum:'math.sum',avg:'math.avg',max:'math.max',min:'math.min',abs:'math.abs',round:'math.round'};
+    if(RN[d])d=RN[d];
+    else if(!BF[d])for(const p of ['ta.','math.','str.']){if(BF[p+d]){d=p+d;break}}
+  }
   if(d!=null){
     const root=d.split('.')[0];
     if(!this.isVar(root,sc)){
