@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.12.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.12.1-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.12.0 — 4-hour candles on the New York day
+### 🆕 New in 1.12.1 — Tick volume
+
+- 📊 Candles now carry tick volume (how many times the price changed), the same kind of volume TradingView uses for gold and Forex. Indicators that read volume now work with real values.
+- 🎨 Light theme: indicator text drawn with the chart's text color is visible again.
+
+### Previously in 1.12.0 — 4-hour candles on the New York day
 
 - 🕔 For gold, metals, energy, Forex and indices, 4-hour candles start at 5 pm, 9 pm, 1 am, 5 am, 9 am and 1 pm New York time, so each day ends at 5 pm together with the daily candle, as with brokers.
 - 📈 The live candle opens at the same times. Crypto and stocks stay as before.
@@ -77,12 +82,15 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - ⏱️ Gold now has history back to January 2011 on the minute charts too: 1m, 3m, 5m, 15m, 30m and 45m.
 - 👈 As with the other timeframes, scroll the chart to the left and older candles load on their own.
 
-### Previously in 1.10.0 — Gold history since 2011
+<details>
+<summary>Previously in 1.10.0 — Gold history since 2011</summary>
 
 - 📜 Gold now has price history back to January 2011 on 1H, 2H, 3H, 4H, daily, weekly and monthly charts.
 - 👈 Scroll the chart to the left: older candles load on their own, without moving your view.
 - 🕔 Daily candles close at 5 pm New York time in the past too.
 - 🙏 Part of the price history comes from Dukascopy Bank SA (Profile › Legal › Credits).
+
+</details>
 
 <details>
 <summary>Previously in 1.9.0 — Timeframes from 1 minute</summary>
@@ -97,13 +105,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 - 🛠️ If something breaks in the app, from the welcome screen to the chart, your device sends us a short technical report on its own, so we can fix it even if nobody tells us.
 - 🔒 Technical data only (error message, screen, app version, device type and browser): no name, account or IP address. Reports are deleted after 30 days. The privacy policy explains it.
-
-</details>
-
-<details>
-<summary>Previously in 1.7.0 — Steadier connection</summary>
-
-- ⚡ The app's connection with the server is quicker and more reliable, also when you close it on iPhone.
 
 </details>
 

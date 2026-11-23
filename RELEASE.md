@@ -1,7 +1,9 @@
-# v1.12.0 — 4-hour candles on the New York day
-### Changed
-- Gold, metals, energy, Forex and indices: 4-hour candles start at 5 pm, 9 pm, 1 am, 5 am, 9 am and 1 pm New York time, so each day ends at 5 pm together with the daily candle.
-- The live 4-hour candle opens at the same times. Crypto and stocks are unchanged.
+# v1.12.1 — Tick volume
+### Added
+- Candles now carry tick volume (how many times the price changed), the same kind of volume TradingView uses for gold and Forex. Indicators that read volume work with real values.
+
+### Fixed
+- Light theme: indicator text drawn with the chart's text color is visible again.
 
 ### Documentation
-- README updated in 5 languages: new in 1.12.0.
+- README updated in 5 languages: new in 1.12.1.

@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.12.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.12.1-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.12.0 — Bougies de 4 heures sur la journée de New York
+### 🆕 Nouveautés de la 1.12.1 — Volume de ticks
+
+- 📊 Les bougies ont maintenant un volume de ticks (combien de fois le prix a changé), le même type de volume que TradingView utilise pour l'or et le Forex. Les indicateurs qui lisent le volume travaillent désormais avec des valeurs réelles.
+- 🎨 Thème clair : le texte des indicateurs dessiné avec la couleur du texte du graphique est de nouveau visible.
+
+### Auparavant, dans la 1.12.0 — Bougies de 4 heures sur la journée de New York
 
 - 🕔 Pour l'or, les métaux, l'énergie, le Forex et les indices, les bougies de 4 heures commencent à 17 h, 21 h, 1 h, 5 h, 9 h et 13 h, heure de New York : chaque journée se termine à 17 h avec la bougie journalière, comme chez les courtiers.
 - 📈 La bougie en direct s'ouvre aux mêmes heures. Cryptos et actions restent comme avant.
@@ -77,12 +82,15 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - ⏱️ L'or a désormais un historique jusqu'à janvier 2011 aussi sur les graphiques en minutes : 1m, 3m, 5m, 15m, 30m et 45m.
 - 👈 Comme pour les autres unités de temps, fais glisser le graphique vers la gauche et les bougies plus anciennes se chargent toutes seules.
 
-### Auparavant, dans la 1.10.0 — Historique de l'or depuis 2011
+<details>
+<summary>Auparavant, dans la 1.10.0 — Historique de l'or depuis 2011</summary>
 
 - 📜 L'or a désormais un historique des prix jusqu'à janvier 2011 sur les graphiques 1H, 2H, 3H, 4H, journalier, hebdomadaire et mensuel.
 - 👈 Fais glisser le graphique vers la gauche : les bougies plus anciennes se chargent toutes seules, sans déplacer ta vue.
 - 🕔 Les bougies journalières clôturent à 17 h heure de New York aussi dans le passé.
 - 🙏 Une partie de l'historique des prix provient de Dukascopy Bank SA (Profil › Mentions légales › Crédits).
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.9.0 — Unités de temps dès 1 minute</summary>
@@ -97,13 +105,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 - 🛠️ Si quelque chose ne marche pas dans l'app, de l'écran d'accueil au graphique, ton appareil nous envoie tout seul un court rapport technique, pour qu'on puisse corriger même si personne ne nous le dit.
 - 🔒 Données techniques uniquement (message d'erreur, écran, version de l'app, type d'appareil et navigateur) : ni nom, ni compte, ni adresse IP. Les rapports sont supprimés après 30 jours. La politique de confidentialité l'explique.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.7.0 — Connexion plus stable</summary>
-
-- ⚡ La connexion de l'app avec le serveur est plus rapide et plus fiable, même quand tu la fermes sur iPhone.
 
 </details>
 

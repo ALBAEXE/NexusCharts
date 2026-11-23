@@ -1,4 +1,4 @@
-const VERSION='1.12.0';
+const VERSION='1.12.1';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -5801,7 +5801,7 @@ const num=x=>(x===true?1:x===false?0:x);
 
 /* ---------- colori ---------- */
 function mkc(r,g,b,t){return{__c:1,r,g,b,t:t==null?0:t}}
-function hexc(h){h=h.replace('#','');const a=h.length===8?parseInt(h.slice(6,8),16):255;return mkc(parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16),Math.round((1-a/255)*100))}
+function hexc(h){h=h.replace('#','');if(h.length===3||h.length===4)h=h.split('').map(x=>x+x).join('');const a=h.length===8?parseInt(h.slice(6,8),16):255;return mkc(parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16),Math.round((1-a/255)*100))}
 function css(c){if(!c||!c.__c)return null;const a=Math.max(0,Math.min(1,(100-c.t)/100));return a<=0?null:'rgba('+Math.round(c.r)+','+Math.round(c.g)+','+Math.round(c.b)+','+(+a.toFixed(3))+')'}
 const COLORS={aqua:'#00BCD4',black:'#363A45',blue:'#2196F3',fuchsia:'#E040FB',gray:'#787B86',green:'#4CAF50',lime:'#00E676',maroon:'#880E4F',navy:'#311B92',olive:'#808000',orange:'#FF9800',purple:'#9C27B0',red:'#FF5252',silver:'#B2B5BE',teal:'#00897B',white:'#FFFFFF',yellow:'#FFEB3B'};
 

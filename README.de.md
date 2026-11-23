@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.12.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.12.1-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.12.0 — 4-Stunden-Kerzen nach dem New Yorker Handelstag
+### 🆕 Neu in 1.12.1 — Tick-Volumen
+
+- 📊 Kerzen haben jetzt Tick-Volumen (wie oft sich der Preis geändert hat), dieselbe Art Volumen, die TradingView für Gold und Forex nutzt. Indikatoren, die das Volumen lesen, arbeiten jetzt mit echten Werten.
+- 🎨 Helles Design: Indikator-Text in der Textfarbe des Charts ist wieder sichtbar.
+
+### Vorher in 1.12.0 — 4-Stunden-Kerzen nach dem New Yorker Handelstag
 
 - 🕔 Für Gold, Metalle, Energie, Forex und Indizes beginnen 4-Stunden-Kerzen um 17, 21, 1, 5, 9 und 13 Uhr New Yorker Zeit: Jeder Tag endet um 17 Uhr zusammen mit der Tageskerze, wie bei Brokern.
 - 📈 Auch die Live-Kerze öffnet zu diesen Zeiten. Krypto und Aktien bleiben wie bisher.
@@ -77,12 +82,15 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - ⏱️ Gold hat jetzt auch in den Minuten-Charts eine Historie bis Januar 2011: 1m, 3m, 5m, 15m, 30m und 45m.
 - 👈 Wie bei den anderen Zeiteinheiten: Schieb den Chart nach links, und ältere Kerzen laden von selbst.
 
-### Vorher in 1.10.0 — Gold-Historie seit 2011
+<details>
+<summary>Vorher in 1.10.0 — Gold-Historie seit 2011</summary>
 
 - 📜 Gold hat jetzt eine Preishistorie bis Januar 2011 in den Charts 1H, 2H, 3H, 4H, täglich, wöchentlich und monatlich.
 - 👈 Schieb den Chart nach links: ältere Kerzen laden von selbst, ohne dass sich deine Ansicht verschiebt.
 - 🕔 Tageskerzen schließen auch in der Vergangenheit um 17 Uhr New Yorker Zeit.
 - 🙏 Ein Teil der Preishistorie stammt von Dukascopy Bank SA (Profil › Rechtliches › Danksagungen).
+
+</details>
 
 <details>
 <summary>Vorher in 1.9.0 — Zeiteinheiten ab 1 Minute</summary>
@@ -97,13 +105,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - 🛠️ Wenn in der App etwas kaputtgeht, vom Willkommensbildschirm bis zum Chart, sendet dein Gerät uns von selbst einen kurzen technischen Bericht, damit wir es beheben können, auch wenn uns niemand Bescheid sagt.
 - 🔒 Nur technische Daten (Fehlermeldung, Bildschirm, App-Version, Gerätetyp und Browser): kein Name, kein Konto, keine IP-Adresse. Die Berichte werden nach 30 Tagen gelöscht. Die Datenschutzerklärung erklärt es.
-
-</details>
-
-<details>
-<summary>Vorher in 1.7.0 — Stabilere Verbindung</summary>
-
-- ⚡ Die Verbindung der App mit dem Server ist schneller und zuverlässiger, auch wenn du sie auf dem iPhone schließt.
 
 </details>
 

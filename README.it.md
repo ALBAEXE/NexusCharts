@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.12.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.12.1-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.12.0 — Candele da 4 ore sulla giornata di New York
+### 🆕 Novità della 1.12.1 — Volume a tick
+
+- 📊 Le candele ora hanno il volume a tick (quante volte il prezzo è cambiato), lo stesso tipo di volume che TradingView usa per oro e Forex. Gli indicatori che leggono il volume ora lavorano con valori reali.
+- 🎨 Tema chiaro: il testo degli indicatori scritto con il colore del testo del grafico si vede di nuovo.
+
+### In precedenza, nella 1.12.0 — Candele da 4 ore sulla giornata di New York
 
 - 🕔 Per oro, metalli, energia, Forex e indici le candele da 4 ore partono alle 17, 21, 1, 5, 9 e 13 di New York: ogni giornata finisce alle 17 insieme alla candela giornaliera, come sui broker.
 - 📈 Anche la candela in diretta si apre agli stessi orari. Cripto e azioni restano come prima.
@@ -77,12 +82,15 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - ⏱️ L'oro ora ha lo storico fino a gennaio 2011 anche sui grafici in minuti: 1m, 3m, 5m, 15m, 30m e 45m.
 - 👈 Come negli altri timeframe, scorri il grafico verso sinistra e le candele più vecchie si caricano da sole.
 
-### In precedenza, nella 1.10.0 — Storico dell'oro dal 2011
+<details>
+<summary>In precedenza, nella 1.10.0 — Storico dell'oro dal 2011</summary>
 
 - 📜 L'oro ora ha lo storico dei prezzi fino a gennaio 2011 sui grafici a 1H, 2H, 3H, 4H, giornaliero, settimanale e mensile.
 - 👈 Scorri il grafico verso sinistra: le candele più vecchie si caricano da sole, senza spostarti la vista.
 - 🕔 Le candele giornaliere chiudono alle 17:00 di New York anche nel passato.
 - 🙏 Parte dello storico dei prezzi viene da Dukascopy Bank SA (Profilo › Note legali › Crediti).
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.9.0 — Timeframe da 1 minuto</summary>
@@ -97,13 +105,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 - 🛠️ Se qualcosa si rompe nell'app, dalla schermata di benvenuto al grafico, il dispositivo ci manda da solo un breve rapporto tecnico, così possiamo correggerlo anche se nessuno ce lo dice.
 - 🔒 Solo dati tecnici (messaggio d'errore, schermata, versione dell'app, tipo di dispositivo e browser): niente nome, account o indirizzo IP. I rapporti si cancellano dopo 30 giorni. La privacy policy lo spiega.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.7.0 — Collegamento più stabile</summary>
-
-- ⚡ Il collegamento dell'app con il server è più rapido e affidabile, anche quando la chiudi su iPhone.
 
 </details>
 
