@@ -1,11 +1,7 @@
-# v1.10.0 — Gold history since 2011
+# v1.11.0 — Gold minutes since 2011
 ### Added
-- Gold price history back to January 2011 on 1H, 2H, 3H, 4H, daily, weekly and monthly charts.
-- Scrolling the chart to the left loads older candles automatically, without moving the view.
-
-### Changed
-- Daily candles close at 5 pm New York time in the past too.
-- Profile › Legal › Credits: part of the price history comes from Dukascopy Bank SA.
+- Gold price history back to January 2011 on the minute charts: 1m, 3m, 5m, 15m, 30m and 45m.
+- As with the other timeframes, scrolling the chart to the left loads older candles automatically.
 
 ### Documentation
-- README updated in 5 languages: new in 1.10.0.
+- README updated in 5 languages: new in 1.11.0.

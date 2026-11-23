@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.10.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.11.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.10.0 — Gold-Historie seit 2011
+### 🆕 Neu in 1.11.0 — Gold-Minuten seit 2011
+
+- ⏱️ Gold hat jetzt auch in den Minuten-Charts eine Historie bis Januar 2011: 1m, 3m, 5m, 15m, 30m und 45m.
+- 👈 Wie bei den anderen Zeiteinheiten: Schieb den Chart nach links, und ältere Kerzen laden von selbst.
+
+### Vorher in 1.10.0 — Gold-Historie seit 2011
 
 - 📜 Gold hat jetzt eine Preishistorie bis Januar 2011 in den Charts 1H, 2H, 3H, 4H, täglich, wöchentlich und monatlich.
 - 👈 Schieb den Chart nach links: ältere Kerzen laden von selbst, ohne dass sich deine Ansicht verschiebt.
@@ -79,10 +84,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - ⏱️ Zeiteinheiten beginnen jetzt bei 1 Minute. Die Sekunden-Zeiteinheiten wurden entfernt: Sie hatten keinen Verlauf und zeigten nur, was bei geöffneter App ankam.
 - 🔁 Ein Chart oder Layout, das auf Sekunden gespeichert war, öffnet sich mit 1 Minute.
 
-### Vorher in 1.8.0 — Automatische Fehlerberichte
+<details>
+<summary>Vorher in 1.8.0 — Automatische Fehlerberichte</summary>
 
 - 🛠️ Wenn in der App etwas kaputtgeht, vom Willkommensbildschirm bis zum Chart, sendet dein Gerät uns von selbst einen kurzen technischen Bericht, damit wir es beheben können, auch wenn uns niemand Bescheid sagt.
 - 🔒 Nur technische Daten (Fehlermeldung, Bildschirm, App-Version, Gerätetyp und Browser): kein Name, kein Konto, keine IP-Adresse. Die Berichte werden nach 30 Tagen gelöscht. Die Datenschutzerklärung erklärt es.
+
+</details>
 
 <details>
 <summary>Vorher in 1.7.0 — Stabilere Verbindung</summary>
@@ -96,13 +104,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - ⚖️ **Profil › Rechtliches** sieht jetzt aus wie der Rest der App: ein Menü mit Abschnitten (Risikohinweis, Bedingungen, Datenschutz, Beiträge, Danksagungen, Kontakt), jeder mit eigener Seite.
 - 💬 **Kontakt**: Schreib uns auf Telegram oder an support@nexuscharts.app. Das sind die einzigen offiziellen Kanäle.
-
-</details>
-
-<details>
-<summary>Vorher in 1.5.0 — Unsere Social-Media-Profile</summary>
-
-- 📣 **Profil › Soziale Netzwerke**: offizieller Telegram-Kanal, Instagram, TikTok, YouTube und X, jeweils mit eigenem Icon. Ein Tipp öffnet die App direkt auf unserer Seite (oder die Website, wenn die App nicht installiert ist).
 
 </details>
 

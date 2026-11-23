@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.10.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.11.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.10.0 — Historial del oro desde 2011
+### 🆕 Novedades de la 1.11.0 — Minutos del oro desde 2011
+
+- ⏱️ El oro ahora tiene historial hasta enero de 2011 también en los gráficos de minutos: 1m, 3m, 5m, 15m, 30m y 45m.
+- 👈 Como en las otras temporalidades, desliza el gráfico hacia la izquierda y las velas más antiguas se cargan solas.
+
+### Anteriormente, en la 1.10.0 — Historial del oro desde 2011
 
 - 📜 El oro ahora tiene historial de precios hasta enero de 2011 en los gráficos de 1H, 2H, 3H, 4H, diario, semanal y mensual.
 - 👈 Desliza el gráfico hacia la izquierda: las velas más antiguas se cargan solas, sin moverte la vista.
@@ -79,10 +84,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - ⏱️ Las temporalidades ahora empiezan en 1 minuto. Las de segundos se han quitado: no tenían historial y solo mostraban lo que llegaba con la app abierta.
 - 🔁 Un gráfico o diseño guardado en segundos se abre en 1 minuto.
 
-### Anteriormente, en la 1.8.0 — Informes automáticos de errores
+<details>
+<summary>Anteriormente, en la 1.8.0 — Informes automáticos de errores</summary>
 
 - 🛠️ Si algo falla en la app, desde la pantalla de bienvenida hasta el gráfico, tu dispositivo nos envía solo un breve informe técnico, para que podamos arreglarlo aunque nadie nos avise.
 - 🔒 Solo datos técnicos (mensaje de error, pantalla, versión de la app, tipo de dispositivo y navegador): sin nombre, cuenta ni dirección IP. Los informes se borran a los 30 días. La política de privacidad lo explica.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.7.0 — Conexión más estable</summary>
@@ -96,13 +104,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - ⚖️ **Perfil › Avisos legales** tiene el mismo estilo que el resto de la app: un menú de secciones (advertencia de riesgo, términos, privacidad, contribuciones, créditos, contacto) y cada una abre su propia página.
 - 💬 **Contacto**: escríbenos por Telegram o a support@nexuscharts.app. Son los únicos canales oficiales.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.5.0 — Nuestros perfiles sociales</summary>
-
-- 📣 **Perfil › Redes sociales**: canal oficial de Telegram, Instagram, TikTok, YouTube y X, cada uno con su icono. Con un toque se abre la app de la red social directamente en nuestra página (o la web, si la app no está instalada).
 
 </details>
 
