@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.24.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.25.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.24.0 — Remplissages en dégradé et scripts plus compatibles
+### 🆕 Nouveautés de la 1.25.0 — Fonctions Pine à plusieurs formes
+
+- 🧩 Chaque fonction Pine v6 ayant plusieurs formes a été vérifiée avec le manuel officiel, chaque forme contre l'autre.
+- 🎚️ input.int et input.float avec les options écrites à la suite affichent maintenant un menu déroulant ; input(close) affiche le menu Source.
+- 🕒 time et time_close acceptent bars_back et timeframe_bars_back dans les deux formes de la v6.
+
+### Auparavant, dans la 1.24.0 — Remplissages en dégradé et scripts plus compatibles
 
 - 🌈 Les remplissages en dégradé (valeur et couleur du haut et du bas) sont dessinés comme sur TradingView, avec les couleurs du haut et du bas dans Style ; le RSI les utilise pour le surachat et la survente.
 - 🧓 Anciens scripts Pine v3/v4 : la transparence transp, la transparence par défaut des arrière-plans et remplissages et la condition when des ordres de stratégie sont maintenant appliquées.
@@ -79,11 +85,14 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 📉 Les indicateurs dans les panneaux sous le graphique dessinent maintenant aussi signaux, remplissages, arrière-plans, rectangles, étiquettes et lignes (par exemple la bande du RSI entre 30 et 70).
 - 🔒 Les remplissages et arrière-plans marqués comme non modifiables dans le script restent masqués dans Style, comme sur TradingView.
 
-### Auparavant, dans la 1.22.0 — Onglet Style complet pour les signaux et les dessins
+<details>
+<summary>Auparavant, dans la 1.22.0 — Onglet Style complet pour les signaux et les dessins</summary>
 
 - 🎯 Style affiche désormais les signaux de chaque script (plotshape, plotchar, plotarrow) : afficher/masquer, couleur et opacité, forme, position, taille et couleur du texte.
 - 🧩 Nouvelle section Objets graphiques : rectangles, étiquettes, lignes, tableaux et polylignes à activer ou désactiver.
 - 🔒 Les tracés et signaux marqués comme non modifiables dans le script restent masqués dans Style, comme sur TradingView.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.21.0 — Volume et niveaux refaits</summary>
@@ -100,15 +109,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 📉 RSI, Stochastic RSI, Stochastique, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator et Aroon refaits avec les réglages et valeurs de départ de TradingView, plus niveaux modifiables, autre unité de temps et alertes.
 - 🔀 RSI : lissage avec Bandes de Bollinger, zones de surachat et de survente et divergences haussières et baissières.
 - 🎨 MACD avec les quatre couleurs de l'histogramme et le type de moyenne pour l'oscillateur et le signal.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.19.0 — Bandes et canaux refaits</summary>
-
-- 📊 Bandes de Bollinger, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP et Régression linéaire refaits avec les réglages et valeurs de départ de TradingView, plus type de moyenne, autre unité de temps, signaux et alertes là où c'est utile.
-- 📐 Nouveau : Linear Regression Channel avec écart haut/bas, lignes prolongeables et R de Pearson.
-- 🛠️ Réglages du graphique › Légende : les interrupteurs fonctionnent et la flèche du menu Titre est à sa place.
 
 </details>
 

@@ -1,4 +1,4 @@
-const VERSION='1.24.0';
+const VERSION='1.25.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -6186,11 +6186,14 @@ F('ta.percentrank',['source','length'],(E,a,s)=>{const w=last(buf(s,E,a[0]),Math
 F('ta.correlation',['source1','source2','length'],(E,a,s)=>{const X=last(buf(s,E,a[0],'x'),a[2]),Y=last(buf(s,E,a[1],'y'),a[2]);if(!X||!Y)return NaN;const n=X.length,mx=X.reduce((t,v)=>t+v,0)/n,my=Y.reduce((t,v)=>t+v,0)/n;let c=0,vx=0,vy=0;for(let i=0;i<n;i++){c+=(X[i]-mx)*(Y[i]-my);vx+=(X[i]-mx)**2;vy+=(Y[i]-my)**2}return c/Math.sqrt(vx*vy)},1);
 
 /* ---------- tempo ---------- */
-F('time',['timeframe','session','timezone'],(E,a)=>{
-  const t=E.D.t[E.bar],tf=tfNorm(a[0]||'');let r=t;
-  if(tf&&tf!==E.tf){const ms=tfMsOf(tf);r=Math.floor(t/ms)*ms}
-  if(a[1]!=null&&a[1]!==''&&!inSess(t,a[1],a[2]||'UTC'))return NaN;return r});
-F('time_close',['timeframe','session','timezone'],(E,a)=>{const t=E.D.t[E.bar];if(a[1]!=null&&a[1]!==''&&!inSess(t,a[1],a[2]||'UTC'))return NaN;const tf=tfNorm(a[0]||'');const ms=tf?tfMsOf(tf):E.tfMs;return Math.floor(t/ms)*ms+ms});
+/* 1.25.0: time e time_close con le due forme della v6: (timeframe, session, bars_back, timeframe_bars_back) e (timeframe, session, timezone, bars_back, timeframe_bars_back) */
+function timeArgs(a){let tz=a[2],bb=a[3],tb=a[4];if(typeof tz==='number'){tb=bb;bb=tz;tz=undefined}return{tz:typeof tz==='string'&&tz?tz:'UTC',bb:isNa(bb)?0:Math.trunc(bb),tb:isNa(tb)?0:Math.trunc(tb)}}
+function timeBack(E,bb){if(!bb)return E.D.t[E.bar];const i=E.bar-bb;if(i>=0&&i<E.n)return E.D.t[i];if(i<0)return E.D.t[0]+i*E.tfMs;return E.D.t[E.n-1]+(i-E.n+1)*E.tfMs}
+F('time',['timeframe','session','timezone','bars_back','timeframe_bars_back'],(E,a)=>{
+  const A=timeArgs(a),t=timeBack(E,A.bb),tf=tfNorm(a[0]||'');let r=t;
+  if(tf&&tf!==E.tf){const ms=tfMsOf(tf);r=Math.floor(t/ms)*ms-A.tb*ms}else if(A.tb)r=t-A.tb*E.tfMs;
+  if(a[1]!=null&&a[1]!==''&&!inSess(t,a[1],A.tz))return NaN;return r});
+F('time_close',['timeframe','session','timezone','bars_back','timeframe_bars_back'],(E,a)=>{const A=timeArgs(a),t=timeBack(E,A.bb);if(a[1]!=null&&a[1]!==''&&!inSess(t,a[1],A.tz))return NaN;const tf=tfNorm(a[0]||'');const ms=tf?tfMsOf(tf):E.tfMs;return Math.floor(t/ms)*ms+ms-A.tb*ms});
 F('timestamp',[],(E,a)=>{
   if(a.length===1&&typeof a[0]==='string'){const d=Date.parse(a[0]);return isNaN(d)?NaN:d}
   let tz='UTC',i=0;if(typeof a[0]==='string'){tz=a[0];i=1}
@@ -7048,6 +7051,8 @@ cp.input=function(e,sc,d){
   const get=k=>{const i=P.indexOf(k);if(e.kw[k])return e.kw[k];return i>=0?e.args[i]:undefined};
   const fs=this.args(e,sc,P);
   const dv=get('defval');
+  /* 1.25.0: input(close) = una sorgente, come in TradingView */
+  if(d==='input'&&dv&&dv.t==='name'&&SRC_NAMES.includes(dv.n))d='input.source';
   if(d==='input.source'){
     const def=dv&&dv.t==='name'&&SRC_NAMES.includes(dv.n)?dv.n:'close';
     return E=>{
@@ -7063,6 +7068,8 @@ cp.input=function(e,sc,d){
   };
 };
 cp.inMeta=function(E,d,a,P,srcDef){
+  /* 1.25.0: input.int / input.float hanno due forme: con minval, maxval, step oppure con options in terza posizione */
+  if((d==='input.int'||d==='input.float')&&Array.isArray(a[2])){const o=a.slice();o[10]=a[2];o[5]=a[3];o[6]=a[4];o[7]=a[5];o[8]=a[6];o[2]=o[3]=o[4]=undefined;a=o}
   const g=k=>a[P.indexOf(k)];
   let def=srcDef||g('defval'),type=d==='input'?(typeof def==='boolean'?'bool':typeof def==='string'?'string':def&&def.__c?'color':'float'):d.slice(6);
   if(d==='input'&&type==='float'&&Number.isInteger(def))type='int';

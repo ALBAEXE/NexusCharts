@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.24.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.25.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.24.0 — Riempimenti a sfumatura e script più compatibili
+### 🆕 Novità della 1.25.0 — Funzioni Pine con più forme
+
+- 🧩 Ogni funzione di Pine v6 con più di una forma è stata controllata sul manuale ufficiale, ogni forma contro l'altra.
+- 🎚️ input.int e input.float con le opzioni scritte in fila ora mostrano il menu a tendina; input(close) mostra il menu Sorgente.
+- 🕒 time e time_close accettano bars_back e timeframe_bars_back in entrambe le forme della v6.
+
+### In precedenza, nella 1.24.0 — Riempimenti a sfumatura e script più compatibili
 
 - 🌈 I riempimenti a sfumatura (valore e colore in alto e in basso) sono disegnati come su TradingView, con i colori in alto e in basso in Stile; l'RSI li usa per ipercomprato e ipervenduto.
 - 🧓 Script vecchi Pine v3/v4: ora valgono la trasparenza transp, la trasparenza di serie di sfondi e riempimenti e la condizione when degli ordini delle strategie.
@@ -79,11 +85,14 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 📉 Gli indicatori nei riquadri sotto il grafico ora disegnano anche segnali, riempimenti, sfondi, riquadri, etichette e linee (per esempio la fascia dell'RSI tra 30 e 70).
 - 🔒 Riempimenti e sfondi che lo script segna come non modificabili restano nascosti in Stile, come su TradingView.
 
-### In precedenza, nella 1.22.0 — Scheda Stile completa per segnali e disegni
+<details>
+<summary>In precedenza, nella 1.22.0 — Scheda Stile completa per segnali e disegni</summary>
 
 - 🎯 Stile ora elenca i segnali di ogni script (plotshape, plotchar, plotarrow): mostra/nascondi, colore e trasparenza, forma, posizione, dimensione e colore del testo.
 - 🧩 Nuova sezione Oggetti grafici: riquadri, etichette, linee, tabelle e polilinee da accendere o spegnere.
 - 🔒 Linee e segnali che lo script segna come non modificabili restano nascosti in Stile, come su TradingView.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.21.0 — Volume e livelli rifatti</summary>
@@ -100,15 +109,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 📉 RSI, Stochastic RSI, Stocastico, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator e Aroon rifatti con le impostazioni e i valori di partenza di TradingView, più livelli modificabili, altro timeframe e avvisi.
 - 🔀 RSI: livellamento con Bande di Bollinger, zone di ipercomprato e ipervenduto e divergenze rialziste e ribassiste.
 - 🎨 MACD con i quattro colori dell'istogramma e il tipo di media per oscillatore e segnale.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.19.0 — Bande e canali rifatti</summary>
-
-- 📊 Bande di Bollinger, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP e Regressione lineare rifatti con le impostazioni e i valori di partenza di TradingView, più tipo di media, altro timeframe, segnali e avvisi dove servono.
-- 📐 Nuovo: Linear Regression Channel con deviazione sopra/sotto, linee estendibili e R di Pearson.
-- 🛠️ Impostazioni grafico › Legenda: gli interruttori ora funzionano e la freccia del menu Titolo è al suo posto.
 
 </details>
 

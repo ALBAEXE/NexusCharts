@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.24.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.25.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.24.0 — Rellenos degradados y scripts más compatibles
+### 🆕 Novedades de la 1.25.0 — Funciones Pine con varias formas
+
+- 🧩 Cada función de Pine v6 con más de una forma se ha comprobado con el manual oficial, cada forma contra la otra.
+- 🎚️ input.int e input.float con las opciones escritas en orden ahora muestran el menú desplegable; input(close) muestra el menú Fuente.
+- 🕒 time y time_close aceptan bars_back y timeframe_bars_back en las dos formas de la v6.
+
+### Anteriormente, en la 1.24.0 — Rellenos degradados y scripts más compatibles
 
 - 🌈 Los rellenos degradados (valor y color superior e inferior) se dibujan como en TradingView, con los colores superior e inferior en Estilo; el RSI los usa para sobrecompra y sobreventa.
 - 🧓 Scripts antiguos Pine v3/v4: ahora se aplican la transparencia transp, la transparencia por defecto de fondos y rellenos y la condición when de las órdenes de estrategia.
@@ -79,11 +85,14 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 📉 Los indicadores en los paneles bajo el gráfico ahora también dibujan señales, rellenos, fondos, recuadros, etiquetas y líneas (por ejemplo la banda del RSI entre 30 y 70).
 - 🔒 Los rellenos y fondos marcados como no editables en el script quedan ocultos en Estilo, como en TradingView.
 
-### Anteriormente, en la 1.22.0 — Pestaña Estilo completa para señales y dibujos
+<details>
+<summary>Anteriormente, en la 1.22.0 — Pestaña Estilo completa para señales y dibujos</summary>
 
 - 🎯 Estilo muestra ahora las señales de cada script (plotshape, plotchar, plotarrow): mostrar/ocultar, color y opacidad, forma, posición, tamaño y color del texto.
 - 🧩 Nueva sección Objetos gráficos: recuadros, etiquetas, líneas, tablas y polilíneas que se pueden activar o desactivar.
 - 🔒 Las líneas y señales marcadas como no editables en el script quedan ocultas en Estilo, como en TradingView.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.21.0 — Volumen y niveles rehechos</summary>
@@ -100,15 +109,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 📉 RSI, Stochastic RSI, Estocástico, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator y Aroon rehechos con los ajustes y valores iniciales de TradingView, más niveles editables, otra temporalidad y alertas.
 - 🔀 RSI: suavizado con Bandas de Bollinger, zonas de sobrecompra y sobreventa y divergencias alcistas y bajistas.
 - 🎨 MACD con los cuatro colores del histograma y el tipo de media para oscilador y señal.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.19.0 — Bandas y canales rehechos</summary>
-
-- 📊 Bandas de Bollinger, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP y Regresión lineal rehechos con los ajustes y valores iniciales de TradingView, más tipo de media, otra temporalidad, señales y alertas donde sirven.
-- 📐 Nuevo: Linear Regression Channel con desviación superior/inferior, líneas extensibles y R de Pearson.
-- 🛠️ Ajustes del gráfico › Leyenda: los interruptores ya funcionan y la flecha del menú Título está en su sitio.
 
 </details>
 
