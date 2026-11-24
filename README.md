@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.16.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.17.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.16.0 — Indicator names in their pane, chart follows the theme
+### 🆕 New in 1.17.0 — Customize every indicator
+
+- 🎨 Style, for every indicator and every script: plot type (line, step line, histogram, cross, area, columns, circles), solid/dashed/dotted line, width, colour, price line, labels on the price scale, precision, values and inputs in the legend.
+- 👁️ Visibility with ranges, for example Minutes from 1 to 15.
+- 🔗 Source in your language, and the result of another indicator on the chart as source (for example a moving average of RSI).
+
+### Previously in 1.16.0 — Indicator names in their pane, chart follows the theme
 
 - 🏷️ Indicators with their own pane below the chart (RSI, MACD…) show their name at the top left of that pane; tap it for show/hide, settings and remove. Closing the legend tab hides these names too.
 - 🌗 Switching to the light theme makes the chart white, and back to dark makes it black. A custom background chosen by hand is kept.
@@ -77,9 +83,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🔢 Indicators in a pane below the chart, such as RSI, show 2 decimals instead of the price's decimals; very small values (such as MACD on EURUSD) keep the decimals they need.
 - 🌍 With Bar Replay open, Cancel and Start here now change language right away, and the button names read by VoiceOver and TalkBack are in the chosen language.
 
-### Previously in 1.15.0 — Back to the latest candle
+<details>
+<summary>Previously in 1.15.0 — Back to the latest candle</summary>
 
 - ⏩ When you scroll the chart back in time, a small button appears at the bottom right: tap it to jump back to the latest candle.
+
+</details>
 
 <details>
 <summary>Previously in 1.14.1 — More compact Script editor</summary>
@@ -94,15 +103,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 - 📊 Strategy results in a full-screen Strategy Tester: overview with the equity curve, performance split into All, Long and Short, and the list of trades.
 - 🏷️ Next to a strategy's name on the chart, a small tag shows its net profit: tap it to open the Strategy Tester. Indicators that are not strategies are unchanged.
-
-</details>
-
-<details>
-<summary>Previously in 1.13.0 — Pine Script engine: full coverage and strategies</summary>
-
-- 🧩 The Pine Script engine now covers every function, variable and constant in the official Pine v6 reference, including matrices, enums, polylines and chart points.
-- 📈 Strategies are now simulated like a strategy tester: market, limit and stop orders, take profit, stop loss and trailing stop, pyramiding, commissions and trade statistics (net profit, equity, drawdown, closed and open trades). Simulation only: no real orders.
-- 🕰️ Older scripts work too: Pine v1, v2 and v3, scripts without //@version, offset(), and text that continues on the next line.
 
 </details>
 

@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.16.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.17.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.16.0 — Nomi degli indicatori nel loro riquadro, grafico che segue il tema
+### 🆕 Novità della 1.17.0 — Personalizza ogni indicatore
+
+- 🎨 Stile, per ogni indicatore e ogni script: tipo di disegno (linea, linea a step, istogramma, croci, area, colonne, cerchi), linea continua/tratteggiata/puntinata, spessore, colore, linea del prezzo, etichette sull'asse, decimali, valori e input in legenda.
+- 👁️ Visibilità con gli intervalli, per esempio Minuti da 1 a 15.
+- 🔗 Sorgente nella tua lingua, e il risultato di un altro indicatore sul grafico come sorgente (per esempio una media dell'RSI).
+
+### In precedenza, nella 1.16.0 — Nomi degli indicatori nel loro riquadro, grafico che segue il tema
 
 - 🏷️ Gli indicatori con un riquadro loro sotto il grafico (RSI, MACD…) mostrano il nome in alto a sinistra del riquadro; toccalo per mostra/nascondi, impostazioni ed elimina. Chiudendo la linguetta della legenda spariscono anche questi nomi.
 - 🌗 Passando al tema chiaro il grafico diventa bianco, tornando allo scuro diventa nero. Uno sfondo personalizzato scelto a mano resta com'è.
@@ -77,9 +83,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🔢 Gli indicatori nel riquadro sotto il grafico, come l'RSI, hanno 2 decimali invece di quelli del prezzo; i valori piccolissimi (come il MACD su EURUSD) tengono i decimali che servono.
 - 🌍 Con il Bar Replay aperto, Annulla e Avvia da qui cambiano lingua subito, e i nomi dei pulsanti letti da VoiceOver e TalkBack sono nella lingua scelta.
 
-### In precedenza, nella 1.15.0 — Torna all'ultima candela
+<details>
+<summary>In precedenza, nella 1.15.0 — Torna all'ultima candela</summary>
 
 - ⏩ Quando scorri il grafico indietro nel tempo, in basso a destra compare un piccolo tasto: toccalo per tornare subito all'ultima candela.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.14.1 — Editor degli script più compatto</summary>
@@ -94,15 +103,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 - 📊 I risultati delle strategie in uno Strategy Tester a tutto schermo: panoramica con la curva del capitale, rendimento diviso in Tutte, Long e Short, ed elenco delle operazioni.
 - 🏷️ Accanto al nome di una strategia sul grafico, una piccola etichetta mostra il profitto netto: toccala per aprire lo Strategy Tester. Gli indicatori che non sono strategie restano come prima.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.13.0 — Motore Pine Script completo e strategie</summary>
-
-- 🧩 Il motore Pine Script ora copre tutte le funzioni, le variabili e le costanti del manuale ufficiale di Pine v6, comprese matrici, enum, polyline e chart point.
-- 📈 Le strategie ora vengono simulate come in uno strategy tester: ordini a mercato, limit e stop, take profit, stop loss e trailing stop, pyramiding, commissioni e statistiche (profitto netto, capitale, drawdown, operazioni chiuse e aperte). Solo simulazione: nessun ordine vero.
-- 🕰️ Funzionano anche gli script più vecchi: Pine v1, v2 e v3, script senza //@version, offset() e testi che continuano sulla riga dopo.
 
 </details>
 

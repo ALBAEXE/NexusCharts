@@ -1,4 +1,4 @@
-const VERSION='1.16.0';
+const VERSION='1.17.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -825,7 +825,10 @@ async function barsFor(it,reso,from,to){
 }
 const toChart=b=>({time:Math.floor(b.t/1000)-new Date().getTimezoneOffset()*60,open:b.o,high:b.h,low:b.l,close:b.c});
 function decOf(vals){
-  for(let d=0;d<=5;d++){const k=Math.pow(10,d);if(vals.every(v=>Math.abs(v*k-Math.round(v*k))<1e-4))return d}
+  for(let d=0;d<=5;d++){const k=Math.pow(10,d);if(vals.every(v=>Math.abs(v*k-Math.round(v*k))<1e-4)){
+    /* 1.17.0: prezzo medio tra denaro e lettera = mezzo tick (ultima cifra sempre 0 o 5): si mostra un decimale in meno, come TradingView */
+    if(d>=3&&vals.length>20&&vals.every(v=>{const x=Math.round(Math.abs(v)*k)%10;return x===0||x===5})&&vals.some(v=>Math.round(Math.abs(v)*k)%10===5))return d-1;
+    return d}}
   return 5;
 }
 const LOC={it:'it-IT',es:'es-ES',en:'en-US',fr:'fr-FR',de:"de-DE"};
@@ -5881,7 +5884,9 @@ function smaA(a,len){const w=last(a,len);if(!w)return NaN;let t=0;for(const x of
 function stdevA(a,len,biased){const w=last(a,len);if(!w)return NaN;let m=0;for(const x of w){if(x!==x)return NaN;m+=x}m/=w.length;let v=0;for(const x of w)v+=(x-m)*(x-m);return Math.sqrt(v/(biased===false?w.length-1:w.length))}
 function wmaA(a,len){const w=last(a,len);if(!w)return NaN;let t=0,d=0;for(let i=0;i<w.length;i++){if(w[i]!==w[i])return NaN;t+=w[i]*(i+1);d+=i+1}return t/d}
 function trNow(E,handle){const b=E.bar,D=E.D;if(b===0)return handle===false?NaN:D.h[b]-D.l[b];const pc=D.c[b-1];return Math.max(D.h[b]-D.l[b],Math.abs(D.h[b]-pc),Math.abs(D.l[b]-pc))}
-function srcAt(E,k){const D=E.D,b=E.bar;switch(k){case 'open':return D.o[b];case 'high':return D.h[b];case 'low':return D.l[b];case 'close':return D.c[b];case 'volume':return D.v?D.v[b]:NaN;case 'hl2':return(D.h[b]+D.l[b])/2;case 'hlc3':return(D.h[b]+D.l[b]+D.c[b])/3;case 'ohlc4':return(D.o[b]+D.h[b]+D.l[b]+D.c[b])/4;case 'hlcc4':return(D.h[b]+D.l[b]+2*D.c[b])/4}return NaN}
+function srcAt(E,k){const D=E.D,b=E.bar;switch(k){case 'open':return D.o[b];case 'high':return D.h[b];case 'low':return D.l[b];case 'close':return D.c[b];case 'volume':return D.v?D.v[b]:NaN;case 'hl2':return(D.h[b]+D.l[b])/2;case 'hlc3':return(D.h[b]+D.l[b]+D.c[b])/3;case 'ohlc4':return(D.o[b]+D.h[b]+D.l[b]+D.c[b])/4;case 'hlcc4':return(D.h[b]+D.l[b]+2*D.c[b])/4}
+  /* 1.17.0: sorgente = risultato di un altro indicatore sul grafico */
+  const X=E.opts&&E.opts.ext&&E.opts.ext[k];if(X){const v=X[b];return v==null?NaN:v}return NaN}
 const SERIES=new Set(['open','high','low','close','volume','hl2','hlc3','ohlc4','hlcc4','time','time_close','bar_index']);
 function seriesAt(E,k,i){const D=E.D;if(i<0||i>=E.n)return NaN;switch(k){case 'open':return D.o[i];case 'high':return D.h[i];case 'low':return D.l[i];case 'close':return D.c[i];case 'volume':return D.v?D.v[i]:NaN;case 'hl2':return(D.h[i]+D.l[i])/2;case 'hlc3':return(D.h[i]+D.l[i]+D.c[i])/3;case 'ohlc4':return(D.o[i]+D.h[i]+D.l[i]+D.c[i])/4;case 'hlcc4':return(D.h[i]+D.l[i]+2*D.c[i])/4;case 'time':return D.t[i];case 'time_close':return D.t[i]+E.tfMs;case 'bar_index':return i}return NaN}
 
@@ -6992,7 +6997,7 @@ cp.input=function(e,sc,d){
     const def=dv&&dv.t==='name'&&SRC_NAMES.includes(dv.n)?dv.n:'close';
     return E=>{
       let m=E.inp.get(id);
-      if(!m){const a=fs.map(f=>f?f(E):undefined);m=this.inMeta(E,d,a,P,def);m.src=SRC_NAMES.includes(m.val)?m.val:def;E.inp.set(id,m)}
+      if(!m){const a=fs.map(f=>f?f(E):undefined);m=this.inMeta(E,d,a,P,def);m.src=SRC_NAMES.includes(m.val)||(E.opts&&E.opts.ext&&E.opts.ext[m.val])?m.val:def;E.inp.set(id,m)}
       return srcAt(E,m.src);
     };
   }
@@ -7252,6 +7257,17 @@ function indSchedule(force){
   const gap=Math.max(2500,(INDS.cost||0)*4);
   INDS.pend=true;INDS.tm=setTimeout(indRunAll,Math.max(0,gap-(Date.now()-INDS.last)));
 }
+/* 1.17.0: un indicatore può usare come sorgente il risultato di un altro («ext:<uid>:<plot>») */
+function indExt(ind,D){
+  const out={};let miss=false;
+  Object.values(ind.inputs||{}).forEach(v=>{if(typeof v!=='string'||v.indexOf('ext:')!==0||out[v])return;
+    const p=v.split(':'),r=IR.get(p[1]);if(!r||r.error||r.sym!==cur||r.res!==res||!r.plots){miss=true;return}
+    const pl=r.plots.find(x=>String(x.id)===p[2]);if(!pl){miss=true;return}
+    const m=new Map();r.times.forEach((t,i)=>{const j=i-(pl.off||0);if(j>=0&&j<pl.vals.length)m.set(t,pl.vals[j])});
+    out[v]=D.t.map(t=>{const x=m.get(t);return x==null||!isFinite(x)?null:x})});
+  if(miss&&!INDS.extTry){INDS.extTry=true;INDS.again=true}
+  return out;
+}
 async function indRunAll(){
   INDS.pend=false;if(INDS.busy)return;
   if(!lastBars.length||!series)return;
@@ -7263,13 +7279,14 @@ async function indRunAll(){
     const D=indData(),fg=themeVar('--fg')||'#d1d4dc',bg=(cvRes&&cvRes().c1)||'#000000';
     for(const ind of IND.slice()){
       if(indOff(ind)){IR.delete(ind.uid);continue}
-      let r=await pineRun(ind.code,D,{inputs:ind.inputs||{},sec:secFor(),fg,bg});
+      const ext=indExt(ind,D);
+      let r=await pineRun(ind.code,D,{inputs:ind.inputs||{},sec:secFor(),fg,bg,ext});
       if(!r)r=EMPTY_RES('motore non disponibile');
       /* 1.13.0: se il motore non conosce una funzione Pine, lo segnaliamo in automatico: SOLO il nome della funzione, mai lo script */
       try{if(r.error&&/sconosciut|non (ancora )?(è )?support/.test(r.error.msg||'')){const m=/«([^»]{1,60})»/.exec(r.error.msg);const k='Pine: '+(m?m[1]:'?');window.__nxPineMiss=window.__nxPineMiss||{};if(m&&!window.__nxPineMiss[k]&&window.NXErr){window.__nxPineMiss[k]=1;NXErr(k+' (non supportata)','pine','')}}}catch(e){}
       if(r.need&&r.need.length){
         let got=false;for(const tf of r.need){try{if(await secFetch(tf))got=true}catch(e){}}
-        if(got&&cur+'|'+res===want)r=await pineRun(ind.code,D,{inputs:ind.inputs||{},sec:secFor(),fg,bg})||r;
+        if(got&&cur+'|'+res===want)r=await pineRun(ind.code,D,{inputs:ind.inputs||{},sec:secFor(),fg,bg,ext})||r;
       }
       if(cur+'|'+res!==want)break;
       r.times=D.t;r.sym=cur;r.res=res;
@@ -7299,7 +7316,10 @@ function indAlerts(ind,r,D){
 
 /* ---------- serie dei plot ---------- */
 const chartT=ms=>Math.floor(ms/1000)-new Date(ms).getTimezoneOffset()*60;
-function paneOf(ind,r){if(!r.meta||r.meta.overlay)return 0;let k=1;for(const x of IND){if(x===ind)break;const rr=IR.get(x.uid);if(!indOff(x)&&rr&&rr.meta&&!rr.meta.overlay&&!rr.error)k++}return k}
+function paneOf(ind,r,dd){
+  /* 1.17.0: un indicatore calcolato su un altro va nel riquadro di quello (come TradingView) */
+  if((dd||0)<4){const e=Object.values(ind.inputs||{}).find(v=>typeof v==='string'&&v.indexOf('ext:')===0);if(e){const u=e.split(':')[1],x=IND.find(q=>q.uid===u),rr=x&&IR.get(u);if(x&&rr&&!rr.error)return paneOf(x,rr,(dd||0)+1)}}
+  if(!r.meta||r.meta.overlay)return 0;let k=1;for(const x of IND){if(x===ind)break;const rr=IR.get(x.uid);if(!indOff(x)&&rr&&rr.meta&&!rr.meta.overlay&&!rr.error)k++}return k}
 function indClearSeries(uid){const s=IS.get(uid);if(!s)return;s.list.forEach(x=>{try{chart.removeSeries(x)}catch(e){}});IS.delete(uid)}
 function cleanPanes(){try{const ps=chart.panes();for(let i=ps.length-1;i>0;i--){if(!ps[i].getSeries().length)chart.removePane(i)}}catch(e){}}
 function indRender(){
@@ -7313,24 +7333,26 @@ function indRender(){
     const pane=paneOf(ind,r),times=r.times.map(chartT);
     const SO=ind.style||{},so=k=>SO[k]||{};
     const plots=r.plots.filter(p=>p.disp!==0&&(p.disp&1)&&so('p'+p.id).v!==false),hl=r.hlines.filter(h=>h.disp!==0&&isFinite(h.p)&&so('h'+h.id).v!==false);
-    const key=pane+'|'+plots.map(p=>p.style+p.id+'w'+(so('p'+p.id).w||'')).join(',')+'|'+hl.map(h=>h.id+'w'+(so('h'+h.id).w||'')+(so('h'+h.id).c||'')+(so('h'+h.id).o||'')).join(',');
+    /* 1.17.0: stile scelto dall'utente: tipo di disegno, linea, decimali, etichette sull'asse */
+    const stOf=p=>so('p'+p.id).t||p.style,lsOf=p=>so('p'+p.id).ls||0,uPrec=SO.__prec!=null&&SO.__prec!==''?+SO.__prec:null,axOf=p=>so('p'+p.id).ax!=null?so('p'+p.id).ax:(SO.__ax!=null?SO.__ax:pane>0);
+    const key=pane+'|'+uPrec+'|'+plots.map(p=>stOf(p)+p.id+'w'+(so('p'+p.id).w||'')+'l'+lsOf(p)+'a'+axOf(p)+'q'+!!so('p'+p.id).pl).join(',')+'|'+hl.map(h=>h.id+'w'+(so('h'+h.id).w||'')+(so('h'+h.id).c||'')+(so('h'+h.id).o||'')+'l'+(so('h'+h.id).ls)).join(',');
     let S=IS.get(ind.uid);
     if(!S||S.key!==key){
       indClearSeries(ind.uid);S={key,list:[],map:{}};
       /* 1.15.1: nel pannello sotto il grafico i decimali sono quelli dello script (precision=) oppure 2 per valori come RSI,
          e quelli del prezzo solo per valori piccoli (es. MACD su EURUSD), come TradingView; prima valevano sempre quelli del prezzo */
-      const pPrec=(()=>{if(pane===0)return dec;const mp=r.meta&&r.meta.precision;if(mp!=null&&isFinite(mp))return Math.max(0,Math.min(10,Math.round(mp)));
+      const pPrec=(()=>{if(uPrec!=null)return uPrec;if(pane===0)return dec;const mp=r.meta&&r.meta.precision;if(mp!=null&&isFinite(mp))return Math.max(0,Math.min(10,Math.round(mp)));
         const v=[];plots.forEach(p=>{for(let i=p.vals.length-1;i>=0&&v.length<400;i--){const x=p.vals[i];if(x!=null&&isFinite(x)&&x!==0)v.push(Math.abs(x))}});
         if(!v.length)return 2;v.sort((a,b)=>a-b);return v[v.length>>1]>=1?2:Math.max(2,dec)})();
       plots.forEach(p=>{
-        const base={lastValueVisible:pane>0,priceLineVisible:false,title:'',priceFormat:pane>0?{type:'custom',minMove:Math.pow(10,-pPrec),formatter:x=>fmt(x,pPrec)}:pfDec()};
-        let s,kind;
-        if(p.style==='histogram'||p.style==='columns'){kind='Histogram';s=chart.addSeries(L.HistogramSeries,Object.assign(base,{base:p.hb||0}),pane)}
-        else if(p.style==='area'){kind='Area';s=chart.addSeries(L.AreaSeries,Object.assign(base,{lineWidth:so('p'+p.id).w||p.lw||1}),pane)}
-        else{kind='Line';const pts=p.style==='circles'||p.style==='cross';s=chart.addSeries(L.LineSeries,Object.assign(base,{lineWidth:so('p'+p.id).w||p.lw||1,lineType:p.style==='stepline'?1:0,lineVisible:!pts,pointMarkersVisible:pts,pointMarkersRadius:pts?2:undefined,crosshairMarkerVisible:!pts}),pane)}
+        const base={lastValueVisible:axOf(p),priceLineVisible:!!so('p'+p.id).pl,priceLineStyle:2,priceLineWidth:1,title:'',lineStyle:lsOf(p),priceFormat:pane>0||uPrec!=null?{type:'custom',minMove:Math.pow(10,-pPrec),formatter:x=>fmt(x,pPrec)}:pfDec()};
+        let s,kind;const st=stOf(p);
+        if(st==='histogram'||st==='columns'){kind='Histogram';s=chart.addSeries(L.HistogramSeries,Object.assign(base,{base:p.hb||0}),pane)}
+        else if(st==='area'){kind='Area';s=chart.addSeries(L.AreaSeries,Object.assign(base,{lineWidth:so('p'+p.id).w||p.lw||1}),pane)}
+        else{kind='Line';const pts=st==='circles'||st==='cross';s=chart.addSeries(L.LineSeries,Object.assign(base,{lineWidth:so('p'+p.id).w||p.lw||1,lineType:st==='stepline'?1:0,lineVisible:!pts,pointMarkersVisible:pts,pointMarkersRadius:pts?2:undefined,crosshairMarkerVisible:!pts}),pane)}
         S.list.push(s);S.map['p'+p.id]={s,kind};
       });
-      hl.forEach(h=>{const q=so('h'+h.id);const s=chart.addSeries(L.LineSeries,{color:q.c?rgbaOf(q.c,q.o!=null?q.o:100):(h.c||'#787B86'),lineWidth:q.w||h.w||1,lineStyle:h.st==='solid'?0:h.st==='dotted'?1:2,lastValueVisible:false,priceLineVisible:false,crosshairMarkerVisible:false,priceFormat:pane>0?pfOf(pPrec):pfDec()},pane);S.list.push(s);S.map['h'+h.id]={s,kind:'H'}});
+      hl.forEach(h=>{const q=so('h'+h.id);const s=chart.addSeries(L.LineSeries,{color:q.c?rgbaOf(q.c,q.o!=null?q.o:100):(h.c||'#787B86'),lineWidth:q.w||h.w||1,lineStyle:q.ls!=null?q.ls:(h.st==='solid'?0:h.st==='dotted'?1:2),lastValueVisible:false,priceLineVisible:false,crosshairMarkerVisible:false,priceFormat:pane>0?pfOf(pPrec):pfDec()},pane);S.list.push(s);S.map['h'+h.id]={s,kind:'H'}});
       IS.set(ind.uid,S);
     }
     plots.forEach(p=>{
@@ -8357,7 +8379,9 @@ function isdt(k){const L=ISDT[lang]||ISDT.it;return L[k]!=null?L[k]:ISDT.it[k]}
 var IDEF=lsGet('tc_inddef',{});
 function indKey(ind){return ind.sid||('n:'+(ind.name||''))}
 function tfCat(r){r=r||res;return /m$/.test(r)?'m':/H$/.test(r)?'h':'d'}
-function indOff(ind){return ind.vis===false||!!(ind.tfv&&ind.tfv[tfCat()]===false)}
+function indOff(ind){if(ind.vis===false)return true;const v=ind.tfv;if(!v)return false;const c=tfCat();if(v[c]===false)return true;
+  /* 1.17.0: intervalli come TradingView (es. Minuti da 1 a 15) */
+  const rg=v[c+'r'];if(rg&&rg.length===2){const n=parseInt(res,10)||1;if(n<rg[0]||n>rg[1])return true}return false}
 indSave=function(){lsSet('tc_ind',IND.map(x=>({uid:x.uid,name:x.name,sid:x.sid||null,code:x.code,inputs:x.inputs||{},vis:x.vis!==false,style:x.style||{},tfv:x.tfv||{}})))};
 /* un indicatore nuovo prende le impostazioni salvate come predefinite */
 (function(){const o=indAdd;indAdd=function(code,name,sid){const n0=IND.length,r=o.apply(this,arguments);
@@ -14001,6 +14025,7 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   const o=indLegend;indLegend=function(){o.apply(this,arguments);
     boxes.forEach(b=>{b.innerHTML=''});
     const d=$('lgind');if(!d)return;const rows=[...d.querySelectorAll('.lgr')];if(rows.length!==IND.length)return;
+    rows.forEach((x,i)=>{x.dataset.uid=IND[i].uid});
     IND.forEach((ind,i)=>{const r=IR.get(ind.uid);if(!r||r.error||!r.meta||r.meta.overlay||indOff(ind))return;
       const k=paneOf(ind,r);if(k>0)box(k).appendChild(rows[i])});
     /* senza indicatori sul grafico principale la legenda in alto resta vuota, come TradingView */
@@ -14022,4 +14047,127 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   const o=setTheme;setTheme=function(th){sync(th);const r=o.apply(this,arguments);try{applyCanvas()}catch(e){}try{indLegend()}catch(e){}return r};
   /* una volta sola: chi ha già il tema chiaro con il grafico nero lo trova allineato */
   try{if(!localStorage.getItem('tc_cvsync1')){localStorage.setItem('tc_cvsync1','1');const th=document.documentElement.dataset.theme||'dark';if(sync(th)){try{applyCanvas()}catch(e){}}}}catch(e){}
+})();
+/* =====================================================================
+   1.17.0: personalizzazione di ogni indicatore (anche gli script dell'utente), come TradingView e oltre
+   Stile: tipo di disegno, linea continua/tratteggiata/puntinata, spessore, colore; decimali, etichette sull'asse,
+   valori e input in legenda. Visibilità: intervalli per Minuti/Ore/Giorni/Settimane/Mesi.
+   Sorgente: nomi tradotti e risultati degli altri indicatori sul grafico.
+   ===================================================================== */
+var CUS_T={
+ it:{pl:'Linea del prezzo',outv:'Valori di output',prec:'Decimali',pdef:'Predefiniti',ax:"Etichette sull'asse dei prezzi",lgv:'Valori in legenda',inv:'Valori di input',lgi:'Input in legenda',type:'Tipo',line:'Linea',
+  t_line:'Linea',t_stepline:'Linea a step',t_histogram:'Istogramma',t_cross:'Croci',t_area:'Area',t_columns:'Colonne',t_circles:'Cerchi',ls0:'Continua',ls2:'Tratteggiata',ls1:'Puntinata',
+  open:'Apertura',high:'Massimo',low:'Minimo',close:'Chiusura',volume:'Volume',hl2:'(H + L)/2',hlc3:'(H + L + C)/3',ohlc4:'(O + H + L + C)/4',hlcc4:'(H + L + C + C)/4',prices:'Prezzo',others:'Altri indicatori',
+  from:'da',to:'a',vistip:"Togli la spunta per non vedere l'indicatore su quel gruppo di timeframe, oppure scegli da quale a quale valore si vede (per esempio Minuti da 1 a 15)."},
+ en:{pl:'Price line',outv:'Output values',prec:'Precision',pdef:'Default',ax:'Labels on price scale',lgv:'Values in legend',inv:'Input values',lgi:'Inputs in legend',type:'Type',line:'Line',
+  t_line:'Line',t_stepline:'Step line',t_histogram:'Histogram',t_cross:'Cross',t_area:'Area',t_columns:'Columns',t_circles:'Circles',ls0:'Solid',ls2:'Dashed',ls1:'Dotted',
+  open:'Open',high:'High',low:'Low',close:'Close',volume:'Volume',hl2:'(H + L)/2',hlc3:'(H + L + C)/3',ohlc4:'(O + H + L + C)/4',hlcc4:'(H + L + C + C)/4',prices:'Price',others:'Other indicators',
+  from:'from',to:'to',vistip:'Untick to hide the indicator on that group of timeframes, or choose from which to which value it shows (for example Minutes from 1 to 15).'},
+ es:{pl:'Línea de precio',outv:'Valores de salida',prec:'Decimales',pdef:'Predeterminados',ax:'Etiquetas en la escala de precios',lgv:'Valores en la leyenda',inv:'Valores de entrada',lgi:'Entradas en la leyenda',type:'Tipo',line:'Línea',
+  t_line:'Línea',t_stepline:'Línea escalonada',t_histogram:'Histograma',t_cross:'Cruces',t_area:'Área',t_columns:'Columnas',t_circles:'Círculos',ls0:'Continua',ls2:'Discontinua',ls1:'Punteada',
+  open:'Apertura',high:'Máximo',low:'Mínimo',close:'Cierre',volume:'Volumen',hl2:'(H + L)/2',hlc3:'(H + L + C)/3',ohlc4:'(O + H + L + C)/4',hlcc4:'(H + L + C + C)/4',prices:'Precio',others:'Otros indicadores',
+  from:'de',to:'a',vistip:'Desmarca para no ver el indicador en ese grupo de temporalidades, o elige de qué valor a qué valor se ve (por ejemplo Minutos de 1 a 15).'},
+ fr:{pl:'Ligne de prix',outv:'Valeurs de sortie',prec:'Décimales',pdef:'Par défaut',ax:"Étiquettes sur l'échelle de prix",lgv:'Valeurs dans la légende',inv:"Valeurs d'entrée",lgi:'Paramètres dans la légende',type:'Type',line:'Ligne',
+  t_line:'Ligne',t_stepline:'Ligne en escalier',t_histogram:'Histogramme',t_cross:'Croix',t_area:'Zone',t_columns:'Colonnes',t_circles:'Cercles',ls0:'Continue',ls2:'Tirets',ls1:'Pointillés',
+  open:'Ouverture',high:'Plus haut',low:'Plus bas',close:'Clôture',volume:'Volume',hl2:'(H + L)/2',hlc3:'(H + L + C)/3',ohlc4:'(O + H + L + C)/4',hlcc4:'(H + L + C + C)/4',prices:'Prix',others:'Autres indicateurs',
+  from:'de',to:'à',vistip:"Décoche pour ne pas voir l'indicateur sur ce groupe d'unités de temps, ou choisis de quelle à quelle valeur il s'affiche (par exemple Minutes de 1 à 15)."},
+ de:{pl:'Preislinie',outv:'Ausgabewerte',prec:'Nachkommastellen',pdef:'Standard',ax:'Beschriftung auf der Preisachse',lgv:'Werte in der Legende',inv:'Eingabewerte',lgi:'Eingaben in der Legende',type:'Typ',line:'Linie',
+  t_line:'Linie',t_stepline:'Stufenlinie',t_histogram:'Histogramm',t_cross:'Kreuze',t_area:'Fläche',t_columns:'Säulen',t_circles:'Kreise',ls0:'Durchgehend',ls2:'Gestrichelt',ls1:'Gepunktet',
+  open:'Eröffnung',high:'Hoch',low:'Tief',close:'Schluss',volume:'Volumen',hl2:'(H + L)/2',hlc3:'(H + L + C)/3',ohlc4:'(O + H + L + C)/4',hlcc4:'(H + L + C + C)/4',prices:'Preis',others:'Andere Indikatoren',
+  from:'von',to:'bis',vistip:'Abwählen, um den Indikator in dieser Zeiteinheitengruppe auszublenden, oder wählen, von welchem bis zu welchem Wert er sichtbar ist (zum Beispiel Minuten von 1 bis 15).'}
+};
+function cust(k){const L=CUS_T[lang]||CUS_T.it;return L[k]!=null?L[k]:CUS_T.it[k]}
+const CUS_SRC=['open','high','low','close','hl2','hlc3','ohlc4','hlcc4','volume'];
+/* sorgenti: prezzi tradotti + i valori degli altri indicatori sul grafico */
+function cusSrcOpts(self){
+  const o=CUS_SRC.map(v=>[v,cust(v)]);
+  IND.forEach(x=>{if(x===self)return;const r=IR.get(x.uid);if(!r||r.error||!r.plots)return;
+    r.plots.forEach((p,i)=>{if(!p.vals||!p.vals.length)return;o.push(['ext:'+x.uid+':'+p.id,(x.name||'Script')+': '+(p.title||('Plot '+(i+1)))])})});
+  return o;
+}
+(function(){
+  /* Input: la sorgente usa la lista nuova */
+  const oI=isdInputs;isdInputs=function(body,ind){oI(body,ind);
+    const r=IR.get(ind.uid);if(!r)return;const srcs=(r.inputs||[]).filter(x=>x.type==='source');if(!srcs.length)return;
+    const rows=[...body.querySelectorAll('.isr')];
+    srcs.forEach(inp=>{const row=rows.find(x=>{const l=x.querySelector('.lab');return l&&l.textContent===inp.title});if(!row)return;
+      const has=ind.inputs&&Object.prototype.hasOwnProperty.call(ind.inputs,inp.key);let cur0=has?ind.inputs[inp.key]:(inp.def||'close');
+      const opts=cusSrcOpts(ind);if(!opts.some(o=>o[0]===cur0))cur0=inp.def||'close';
+      const sel=isdSel([],cur0,v=>{ind.inputs=ind.inputs||{};ind.inputs[inp.key]=v;INDS.extTry=false;isdLive(true)});
+      const g1=document.createElement('optgroup');g1.label=cust('prices');const g2=document.createElement('optgroup');g2.label=cust('others');
+      opts.forEach(([k,t])=>{const op=document.createElement('option');op.value=k;op.textContent=t;if(k===cur0)op.selected=true;(k.indexOf('ext:')===0?g2:g1).appendChild(op)});
+      sel.appendChild(g1);if(g2.children.length)sel.appendChild(g2);
+      const c=row.querySelector('.ctl');if(c){const old=c.querySelector('select');if(old)old.replaceWith(sel);else c.prepend(sel)}});
+  };
+  /* Stile */
+  isdStyle=function(body,ind){
+    const r=IR.get(ind.uid);
+    if(!r){shEl(body,'isnote',isdt('wait'));return}
+    ind.style=ind.style||{};const SO=ind.style;
+    const plots=(r.plots||[]).filter(p=>p.disp!==0&&(p.disp&1)),hl=(r.hlines||[]).filter(h=>h.disp!==0);
+    const live=re=>{indSave();if(re){IS.forEach((S,u)=>{if(u===ind.uid)S.key=''})}isdLive(false);try{indLegend()}catch(e){}};
+    const one=(k,title,col,w,isPlot,p)=>{
+      const s=SO[k]||{};const q=()=>(SO[k]=SO[k]||{});
+      shEl(body,'isg',title);
+      isdRow(body,isdt('vischart'),isdCheck(s.v!==false,v=>{q().v=v;live(true)}),'',true);
+      const c=cssToRGBA(s.c||col)||{r:33,g:150,b:243,a:1};const op=s.o!=null?s.o:Math.round((c.a==null?1:c.a)*100);
+      const ctl=isdColor(s.c||hex6(c),op,(hx,o)=>{const z=q();z.c=hx;z.o=o;live(false)});
+      const row=isdRow(body,isdt('color'),document.createElement('span'),'',false);row.querySelector('.ctl').replaceWith(ctl);
+      if(isPlot){
+        const ty=['line','stepline','histogram','cross','area','columns','circles'];const cur0=s.t||(ty.includes(p.style)?p.style:'line');
+        isdRow(body,cust('type'),isdSel(ty.map(t=>[t,cust('t_'+t)]),cur0,v=>{q().t=v===p.style?undefined:v;live(true)}),'',false);
+      }
+      isdRow(body,cust('line'),isdSel([[0,cust('ls0')],[2,cust('ls2')],[1,cust('ls1')]],s.ls!=null?s.ls:(isPlot?0:(p&&p.st==='solid'?0:p&&p.st==='dotted'?1:2)),v=>{q().ls=+v;live(true)}),'',false);
+      isdRow(body,isdt('width'),isdSel([1,2,3,4].map(n=>[n,n+' px']),s.w||w||1,v=>{q().w=+v;live(true)}),'',false);
+      if(isPlot)isdRow(body,cust('pl'),isdCheck(!!s.pl,v=>{q().pl=v;live(true)}),'',true);
+      if(isPlot)isdRow(body,cust('ax'),isdCheck(s.ax!=null?s.ax:(SO.__ax!=null?SO.__ax:paneOf(ind,r)>0),v=>{q().ax=v;live(true)}),'',true);
+    };
+    /* generali, come TradingView: valori di output e di input */
+    shEl(body,'isg',cust('outv'));
+    isdRow(body,cust('prec'),isdSel([['',cust('pdef')]].concat([0,1,2,3,4,5,6,7,8].map(n=>[n,String(n)])),SO.__prec==null?'':SO.__prec,v=>{SO.__prec=v===''?null:+v;live(true)}),'',false);
+    isdRow(body,cust('lgv'),isdCheck(SO.__lv!==false,v=>{SO.__lv=v;live(false)}),'',true);
+    shEl(body,'isg',cust('inv'));
+    isdRow(body,cust('lgi'),isdCheck(SO.__li!==false,v=>{SO.__li=v;live(false)}),'',true);
+    if(!plots.length&&!hl.length){shEl(body,'isnote',isdt('nosty'));return}
+    plots.forEach((p,i)=>one('p'+p.id,p.title||(isdt('plot')+' '+(i+1)),p.cols.find(x=>x)||'#2196f3',p.lw,true,p));
+    hl.forEach((h,i)=>one('h'+h.id,h.title||(isdt('level')+' '+(i+1)),h.c||'#787b86',h.w,false,h));
+  };
+  /* Visibilità: spunta + intervallo da/a */
+  const RG={m:[1,59],h:[1,24],d:[1,366],w:[1,52],mo:[1,12]};
+  isdVis=function(body,ind){
+    shEl(body,'isg',isdt('showon'));
+    const n=shEl(body,'isnote',cust('vistip'));n.style.margin='4px 0 10px';n.style.fontSize='13px';
+    ind.tfv=ind.tfv||{};const V=ind.tfv;
+    const apply=()=>{indSave();indSchedule(true);indRender()};
+    ['m','h','d','w','mo'].forEach(k=>{
+      const r=document.createElement('div');r.className='isr';r.style.flexWrap='nowrap';
+      const ck=isdCheck(V[k]!==false,v=>{V[k]=v;a.disabled=b.disabled=!v;apply()});
+      const l=document.createElement('span');l.className='lab';l.style.flex='1 1 auto';l.textContent=isdt(k);
+      const mk=(val,i)=>{const x=document.createElement('input');x.type='text';x.inputMode='numeric';x.className='isin';x.style.width='58px';x.style.textAlign='center';x.value=val;
+        x.onchange=()=>{let v=parseInt(x.value,10);const lim=RG[k];if(!isFinite(v))v=(V[k+'r']||lim)[i];v=Math.max(lim[0],Math.min(lim[1],v));x.value=v;const cur=(V[k+'r']||lim).slice();cur[i]=v;if(cur[0]>cur[1]){if(i===0)cur[1]=v;else cur[0]=v}a.value=cur[0];b.value=cur[1];V[k+'r']=cur[0]===lim[0]&&cur[1]===lim[1]?undefined:cur;apply()};return x};
+      const rg=V[k+'r']||RG[k],a=mk(rg[0],0),b=mk(rg[1],1);a.disabled=b.disabled=V[k]===false;
+      const dash=document.createElement('span');dash.textContent='–';dash.style.color='var(--muted)';
+      r.appendChild(ck);r.appendChild(l);r.appendChild(a);r.appendChild(dash);r.appendChild(b);
+      l.onclick=()=>{ck.checked=!ck.checked;ck.onchange()};body.appendChild(r);
+    });
+  };
+  /* legenda: valori dei plot (all'ultima candela o sotto il dito) e input, ognuno si può spegnere */
+  const st=document.createElement('style');st.textContent='.lgr .lgv{margin-left:6px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lgr .lgv i{font-style:normal;margin-right:5px}';document.head.appendChild(st);
+  let hov=null;
+  const valAt=(r,p,idx)=>{const j=idx-(p.off||0);const v=j>=0&&j<p.vals.length?p.vals[j]:NaN;return v};
+  const fill=()=>{document.querySelectorAll('.lgr[data-uid]').forEach(row=>{const ind=IND.find(x=>x.uid===row.dataset.uid);if(!ind)return;const SO=ind.style||{};
+    const r=IR.get(ind.uid);let sp=row.querySelector('.lgv');
+    const p0=row.querySelector('.lgp');if(p0)p0.style.display=SO.__li===false?'none':'';
+    if(SO.__lv===false||!r||r.error||!r.plots||indOff(ind)){if(sp)sp.remove();return}
+    if(!sp){sp=document.createElement('span');sp.className='lgv';const ref=row.querySelector('.lgs')||row.querySelector('.lgb');row.insertBefore(sp,ref)}
+    const n=r.times.length;let idx=n-1;if(hov!=null){const t=hov;let lo=0,hi=n-1;while(lo<hi){const m=(lo+hi+1)>>1;if(chartT(r.times[m])<=t)lo=m;else hi=m-1}idx=lo}
+    const pane=paneOf(ind,r),uP=SO.__prec!=null?SO.__prec:null;
+    const pl=r.plots.filter(p=>p.disp!==0&&(p.disp&1)&&((SO['p'+p.id]||{}).v!==false)).slice(0,8);
+    sp.innerHTML='';pl.forEach(p=>{const v=valAt(r,p,idx);if(!isFinite(v))return;const q=SO['p'+p.id]||{};const i=document.createElement('i');
+      i.style.color=q.c?rgbaOf(q.c,100):((p.cols&&(p.cols[Math.min(idx,p.cols.length-1)]||p.cols.find(x=>x)))||'');
+      const d=uP!=null?uP:(pane>0?(Math.abs(v)>=1?2:Math.max(2,dec)):dec);i.textContent=fmt(v,d);sp.appendChild(i)})})};
+  const o=indLegend;indLegend=function(){o.apply(this,arguments);try{fill()}catch(e){}};
+  const hook=()=>{if(typeof chart==='undefined'||!chart){setTimeout(hook,600);return}
+    try{chart.subscribeCrosshairMove(pr=>{const t=pr&&pr.time!=null?pr.time:null;if(t===hov)return;hov=t;try{fill()}catch(e){}})}catch(e){}};hook();
+  try{indLegend()}catch(e){}
 })();

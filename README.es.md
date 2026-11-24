@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.16.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.17.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.16.0 — Nombres de los indicadores en su panel, el gráfico sigue el tema
+### 🆕 Novedades de la 1.17.0 — Personaliza cada indicador
+
+- 🎨 Estilo, para cada indicador y cada script: tipo de dibujo (línea, línea escalonada, histograma, cruces, área, columnas, círculos), línea continua/discontinua/punteada, grosor, color, línea de precio, etiquetas en la escala, decimales, valores y entradas en la leyenda.
+- 👁️ Visibilidad con intervalos, por ejemplo Minutos de 1 a 15.
+- 🔗 Fuente en tu idioma, y el resultado de otro indicador del gráfico como fuente (por ejemplo una media del RSI).
+
+### Anteriormente, en la 1.16.0 — Nombres de los indicadores en su panel, el gráfico sigue el tema
 
 - 🏷️ Los indicadores con su propio panel bajo el gráfico (RSI, MACD…) muestran su nombre arriba a la izquierda de ese panel; tócalo para mostrar/ocultar, ajustes y eliminar. Al cerrar la pestaña de la leyenda también desaparecen estos nombres.
 - 🌗 Al pasar al tema claro el gráfico se vuelve blanco, y al volver al oscuro, negro. Un fondo personalizado elegido a mano se mantiene.
@@ -77,9 +83,12 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🔢 Los indicadores en el panel bajo el gráfico, como el RSI, muestran 2 decimales en lugar de los del precio; los valores muy pequeños (como el MACD en EURUSD) mantienen los decimales necesarios.
 - 🌍 Con el Bar Replay abierto, Cancelar y Empezar aquí cambian de idioma al momento, y los nombres de los botones que leen VoiceOver y TalkBack están en el idioma elegido.
 
-### Anteriormente, en la 1.15.0 — Volver a la última vela
+<details>
+<summary>Anteriormente, en la 1.15.0 — Volver a la última vela</summary>
 
 - ⏩ Cuando desplazas el gráfico hacia atrás en el tiempo, abajo a la derecha aparece un pequeño botón: tócalo para volver enseguida a la última vela.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.14.1 — Editor de scripts más compacto</summary>
@@ -94,15 +103,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - 📊 Los resultados de las estrategias en un Strategy Tester a pantalla completa: resumen con la curva de capital, rendimiento dividido en Todas, Long y Short, y la lista de operaciones.
 - 🏷️ Junto al nombre de una estrategia en el gráfico, una pequeña etiqueta muestra el beneficio neto: tócala para abrir el Strategy Tester. Los indicadores que no son estrategias no cambian.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.13.0 — Motor Pine Script completo y estrategias</summary>
-
-- 🧩 El motor Pine Script ahora cubre todas las funciones, variables y constantes de la referencia oficial de Pine v6, incluidas matrices, enums, polilíneas y chart points.
-- 📈 Las estrategias ahora se simulan como en un probador de estrategias: órdenes a mercado, limit y stop, take profit, stop loss y trailing stop, pyramiding, comisiones y estadísticas (beneficio neto, capital, drawdown, operaciones cerradas y abiertas). Solo simulación: ninguna orden real.
-- 🕰️ También funcionan los scripts más antiguos: Pine v1, v2 y v3, scripts sin //@version, offset() y textos que continúan en la línea siguiente.
 
 </details>
 

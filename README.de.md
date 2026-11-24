@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.16.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.17.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.16.0 — Indikatornamen im eigenen Bereich, Chart folgt dem Design
+### 🆕 Neu in 1.17.0 — Jeden Indikator anpassen
+
+- 🎨 Stil, für jeden Indikator und jedes Skript: Darstellung (Linie, Stufenlinie, Histogramm, Kreuze, Fläche, Säulen, Kreise), durchgehend/gestrichelt/gepunktet, Stärke, Farbe, Preislinie, Beschriftung auf der Preisachse, Nachkommastellen, Werte und Eingaben in der Legende.
+- 👁️ Sichtbarkeit mit Bereichen, zum Beispiel Minuten von 1 bis 15.
+- 🔗 Quelle in deiner Sprache und das Ergebnis eines anderen Indikators im Chart als Quelle (zum Beispiel ein gleitender Durchschnitt des RSI).
+
+### Vorher in 1.16.0 — Indikatornamen im eigenen Bereich, Chart folgt dem Design
 
 - 🏷️ Indikatoren mit eigenem Bereich unter dem Chart (RSI, MACD…) zeigen ihren Namen oben links in diesem Bereich; antippen für Ein-/Ausblenden, Einstellungen und Entfernen. Wird die Legende eingeklappt, verschwinden auch diese Namen.
 - 🌗 Beim hellen Design wird der Chart weiß, beim dunklen wieder schwarz. Ein von Hand gewählter Hintergrund bleibt erhalten.
@@ -77,9 +83,12 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🔢 Indikatoren im Bereich unter dem Chart, wie der RSI, zeigen 2 Nachkommastellen statt der des Preises; sehr kleine Werte (wie der MACD auf EURUSD) behalten die nötigen Stellen.
 - 🌍 Bei geöffnetem Bar Replay wechseln Abbrechen und Hier starten sofort die Sprache, und die von VoiceOver und TalkBack vorgelesenen Tastennamen sind in der gewählten Sprache.
 
-### Vorher in 1.15.0 — Zurück zur letzten Kerze
+<details>
+<summary>Vorher in 1.15.0 — Zurück zur letzten Kerze</summary>
 
 - ⏩ Wenn du den Chart in der Zeit zurückscrollst, erscheint unten rechts eine kleine Taste: antippen, um sofort zur letzten Kerze zurückzukehren.
+
+</details>
 
 <details>
 <summary>Vorher in 1.14.1 — Kompakterer Skript-Editor</summary>
@@ -94,15 +103,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - 📊 Strategieergebnisse in einem Strategy Tester im Vollbild: Übersicht mit Kapitalkurve, Performance nach Alle, Long und Short, und die Liste der Trades.
 - 🏷️ Neben dem Namen einer Strategie im Chart zeigt ein kleines Etikett den Nettogewinn: antippen, um den Strategy Tester zu öffnen. Indikatoren, die keine Strategien sind, bleiben unverändert.
-
-</details>
-
-<details>
-<summary>Vorher in 1.13.0 — Vollständige Pine-Script-Engine und Strategien</summary>
-
-- 🧩 Die Pine-Script-Engine deckt jetzt alle Funktionen, Variablen und Konstanten der offiziellen Pine-v6-Referenz ab, einschließlich Matrizen, Enums, Polylinien und Chart-Punkten.
-- 📈 Strategien werden jetzt wie in einem Strategietester simuliert: Markt-, Limit- und Stop-Orders, Take Profit, Stop Loss und Trailing Stop, Pyramiding, Kommissionen und Statistiken (Nettogewinn, Kapital, Drawdown, geschlossene und offene Trades). Nur Simulation: keine echten Orders.
-- 🕰️ Auch ältere Skripte funktionieren: Pine v1, v2 und v3, Skripte ohne //@version, offset() und Text, der in der nächsten Zeile weitergeht.
 
 </details>
 
