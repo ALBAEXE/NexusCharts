@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.27.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.28.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.27.0 — Nouveaux indicateurs de tendance
+### 🆕 Nouveautés de la 1.28.0 — Supprimer des scripts depuis Mes scripts
+
+- 🗑️ Appuie longuement sur un script dans Mes scripts (aussi dans les Favoris et la recherche) pour le supprimer, avec une confirmation avant.
+- 🛡️ Deux étapes volontaires : rien n'est supprimé par un toucher accidentel ; un script déjà sur le graphique y reste jusqu'à ce que tu le retires.
+- 🎨 Même menu et même confirmation que la watchlist, en thème clair et sombre.
+
+### Auparavant, dans la 1.27.0 — Nouveaux indicateurs de tendance
 
 - 📈 Nouveaux : Parabolic SAR, Williams Alligator, Williams Fractals, Guppy Multiple Moving Average (GMMA) et Vortex Indicator, avec les réglages de TradingView plus couleurs, autre unité de temps, signaux et alertes.
 - ⏩ Les lignes décalées vers l'avant (offset) continuent maintenant après la dernière bougie, comme sur TradingView : par exemple le nuage Ichimoku 26 bougies en avant.
@@ -79,11 +85,14 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🧮 Plus d'erreurs dues à la façon dont l'ordinateur stocke les décimales (3971,16499…).
 - ✅ Mêmes résultats qu'avant sur tous les scripts de test et sur le contrôle indépendant des calculs.
 
-### Auparavant, dans la 1.25.0 — Fonctions Pine à plusieurs formes
+<details>
+<summary>Auparavant, dans la 1.25.0 — Fonctions Pine à plusieurs formes</summary>
 
 - 🧩 Chaque fonction Pine v6 ayant plusieurs formes a été vérifiée avec le manuel officiel, chaque forme contre l'autre.
 - 🎚️ input.int et input.float avec les options écrites à la suite affichent maintenant un menu déroulant ; input(close) affiche le menu Source.
 - 🕒 time et time_close acceptent bars_back et timeframe_bars_back dans les deux formes de la v6.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.24.0 — Remplissages en dégradé et scripts plus compatibles</summary>
@@ -100,15 +109,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🎨 Style affiche désormais chaque remplissage et couleur d'arrière-plan du script : afficher/masquer et, si le script utilise plusieurs couleurs, chacune se modifie avec sa propre opacité.
 - 📉 Les indicateurs dans les panneaux sous le graphique dessinent maintenant aussi signaux, remplissages, arrière-plans, rectangles, étiquettes et lignes (par exemple la bande du RSI entre 30 et 70).
 - 🔒 Les remplissages et arrière-plans marqués comme non modifiables dans le script restent masqués dans Style, comme sur TradingView.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.22.0 — Onglet Style complet pour les signaux et les dessins</summary>
-
-- 🎯 Style affiche désormais les signaux de chaque script (plotshape, plotchar, plotarrow) : afficher/masquer, couleur et opacité, forme, position, taille et couleur du texte.
-- 🧩 Nouvelle section Objets graphiques : rectangles, étiquettes, lignes, tableaux et polylignes à activer ou désactiver.
-- 🔒 Les tracés et signaux marqués comme non modifiables dans le script restent masqués dans Style, comme sur TradingView.
 
 </details>
 

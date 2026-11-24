@@ -1,15 +1,10 @@
-# v1.27.0 — New trend indicators
+# v1.28.0 — Delete scripts from My scripts
 ### Added
-- Parabolic SAR (Start, Increment, Max Value) with optional trend colours, reversal signals and alerts.
-- Williams Alligator (jaw, teeth, lips with lengths and offsets) with source and moving-average type, optional mouth fill and alerts.
-- Williams Fractals (periods) with colours, optional lines from the fractals until broken, and alerts for new and broken fractals.
-- Guppy Multiple Moving Average with 12 editable lengths, 8 moving-average types, trend colours, group fills and alerts.
-- Vortex Indicator (VI+ and VI-) with crossover signals and alerts.
-- All five can be calculated on another timeframe.
+- Indicators › My scripts: press and hold a script to open a menu with Delete, followed by a confirmation. Also available in Favorites and in search results.
+- A short hint under the list explains how to delete a script.
 
 ### Changed
-- Plots with a positive offset continue past the last candle (for example the Ichimoku cloud), while the view stays on the latest real candle.
-- Fills between offset plots are drawn where the plots are displayed.
+- A deleted script is also removed from Favorites; if it is open in the Script editor, the editor switches to the next script. A copy already on the chart stays until it is removed.
 
 ### Documentation
-- README updated in 5 languages: new in 1.27.0.
+- README updated in 5 languages: new in 1.28.0.

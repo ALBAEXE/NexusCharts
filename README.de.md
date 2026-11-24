@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.27.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.28.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.27.0 — Neue Trendindikatoren
+### 🆕 Neu in 1.28.0 — Skripte aus Meine Skripte löschen
+
+- 🗑️ Halte ein Skript in Meine Skripte (auch in Favoriten und in der Suche) gedrückt, um es zu löschen, mit Bestätigung vorher.
+- 🛡️ Zwei bewusste Schritte: Nichts wird durch versehentliches Tippen gelöscht; ein Skript im Chart bleibt dort, bis du es entfernst.
+- 🎨 Gleiches Menü und gleiche Bestätigung wie in der Watchlist, im hellen und dunklen Design.
+
+### Vorher in 1.27.0 — Neue Trendindikatoren
 
 - 📈 Neu: Parabolic SAR, Williams Alligator, Williams Fractals, Guppy Multiple Moving Average (GMMA) und Vortex Indicator, mit den Einstellungen von TradingView plus Farben, anderer Zeiteinheit, Signalen und Alarmen.
 - ⏩ Nach vorne verschobene Linien (Offset) gehen jetzt über die letzte Kerze hinaus, wie bei TradingView: zum Beispiel die Ichimoku-Wolke 26 Kerzen voraus.
@@ -79,11 +85,14 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🧮 Keine Fehler mehr durch die Art, wie Computer Dezimalzahlen speichern (3971,16499…).
 - ✅ Gleiche Ergebnisse wie zuvor bei allen Testskripten und bei der unabhängigen Rechenprüfung.
 
-### Vorher in 1.25.0 — Pine-Funktionen mit mehreren Formen
+<details>
+<summary>Vorher in 1.25.0 — Pine-Funktionen mit mehreren Formen</summary>
 
 - 🧩 Jede Pine-v6-Funktion mit mehr als einer Form wurde mit der offiziellen Referenz geprüft, jede Form gegen die andere.
 - 🎚️ input.int und input.float mit positional geschriebenen Optionen zeigen jetzt ein Auswahlmenü; input(close) zeigt das Quelle-Menü.
 - 🕒 time und time_close akzeptieren bars_back und timeframe_bars_back in beiden v6-Formen.
+
+</details>
 
 <details>
 <summary>Vorher in 1.24.0 — Verlaufsfüllungen und bessere Skript-Kompatibilität</summary>
@@ -100,15 +109,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🎨 Stil zeigt jetzt jede Füllung und Hintergrundfarbe des Skripts: ein-/ausblenden und, wenn das Skript mehrere Farben nutzt, jede einzeln mit eigener Deckkraft ändern.
 - 📉 Indikatoren in den Bereichen unter dem Chart zeichnen jetzt auch Signale, Füllungen, Hintergründe, Rechtecke, Beschriftungen und Linien (zum Beispiel das RSI-Band zwischen 30 und 70).
 - 🔒 Füllungen und Hintergründe, die im Skript als nicht bearbeitbar markiert sind, bleiben im Stil-Tab verborgen, wie bei TradingView.
-
-</details>
-
-<details>
-<summary>Vorher in 1.22.0 — Vollständiger Stil-Tab für Signale und Zeichnungen</summary>
-
-- 🎯 Stil zeigt jetzt die Signale jedes Skripts (plotshape, plotchar, plotarrow): ein-/ausblenden, Farbe und Deckkraft, Form, Position, Größe und Textfarbe.
-- 🧩 Neuer Bereich Zeichenobjekte: Rechtecke, Beschriftungen, Linien, Tabellen und Polylinien ein- oder ausschalten.
-- 🔒 Plots und Signale, die im Skript als nicht bearbeitbar markiert sind, bleiben im Stil-Tab verborgen, wie bei TradingView.
 
 </details>
 

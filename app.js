@@ -1,4 +1,4 @@
-const VERSION='1.27.0';
+const VERSION='1.28.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -14559,4 +14559,80 @@ function fbgt(k){const L=FBG_T[lang]||FBG_T.it;return L[k]!=null?L[k]:FBG_T.it[k
   ED_BUILTIN.length=0;IND_LIB.forEach(x=>ED_BUILTIN.push([x[1],x[3]]));
   try{let ch=false;IND.forEach(x=>{const m=/^b:(.+)$/.exec(x.sid||'');if(!m||!NEW[m[1]])return;if(x.code!==NEW[m[1]][1]){x.code=NEW[m[1]][1];ch=true}});if(ch){indSave();indSchedule(true)}}catch(e){}
   Object.assign(INTR,{"Jaw Length": ["Periodo della mascella", "Periodo de la mandíbula", "Période de la mâchoire", "Kiefer-Länge"], "Teeth Length": ["Periodo dei denti", "Periodo de los dientes", "Période des dents", "Zähne-Länge"], "Lips Length": ["Periodo delle labbra", "Periodo de los labios", "Période des lèvres", "Lippen-Länge"], "Jaw Offset": ["Spostamento della mascella", "Desplazamiento de la mandíbula", "Décalage de la mâchoire", "Kiefer-Versatz"], "Teeth Offset": ["Spostamento dei denti", "Desplazamiento de los dientes", "Décalage des dents", "Zähne-Versatz"], "Lips Offset": ["Spostamento delle labbra", "Desplazamiento de los labios", "Décalage des lèvres", "Lippen-Versatz"], "Fill the mouth": ["Colora la bocca", "Colorear la boca", "Colorer la bouche", "Maul einfärben"], "Moving average": ["Media mobile", "Media móvil", "Moyenne mobile", "Gleitender Durchschnitt"], "Periods": ["Candele", "Velas", "Bougies", "Kerzen"], "Up fractal color": ["Colore frattale in alto", "Color fractal superior", "Couleur fractale haute", "Farbe oberes Fraktal"], "Down fractal color": ["Colore frattale in basso", "Color fractal inferior", "Couleur fractale basse", "Farbe unteres Fraktal"], "Lines from the fractals until broken": ["Linee dai frattali finché non vengono rotti", "Líneas desde los fractales hasta que se rompen", "Lignes depuis les fractales jusqu'à la cassure", "Linien ab den Fraktalen bis zum Bruch"], "Lines to keep for each side": ["Linee da tenere per lato", "Líneas a mantener por lado", "Lignes à garder par côté", "Linien je Seite behalten"], "Traders color": ["Colore trader", "Color traders", "Couleur traders", "Farbe Trader"], "Investors color": ["Colore investitori", "Color inversores", "Couleur investisseurs", "Farbe Investoren"], "Color by trend": ["Colore secondo il trend", "Color según la tendencia", "Couleur selon la tendance", "Farbe nach Trend"], "Fill the two groups": ["Colora i due gruppi", "Colorear los dos grupos", "Colorer les deux groupes", "Beide Gruppen füllen"], "Traders (short)": ["Trader (brevi)", "Traders (cortas)", "Traders (courtes)", "Trader (kurz)"], "Investors (long)": ["Investitori (lunghe)", "Inversores (largas)", "Investisseurs (longues)", "Investoren (lang)"], "Start": ["Inizio", "Inicio", "Départ", "Start"], "Increment": ["Incremento", "Incremento", "Incrément", "Schrittweite"], "Max Value": ["Valore massimo", "Valor máximo", "Valeur maximale", "Höchstwert"], "Uptrend color": ["Colore trend rialzista", "Color tendencia alcista", "Couleur tendance haussière", "Farbe Aufwärtstrend"], "Downtrend color": ["Colore trend ribassista", "Color tendencia bajista", "Couleur tendance baissière", "Farbe Abwärtstrend"], "Show reversal signals": ["Mostra i segnali di inversione", "Mostrar señales de giro", "Afficher les signaux de retournement", "Umkehrsignale anzeigen"], "Show crossover signals": ["Mostra i segnali di incrocio", "Mostrar señales de cruce", "Afficher les signaux de croisement", "Kreuzungssignale anzeigen"], "MA 1": ["Media 1", "Media 1", "Moyenne 1", "MA 1"], "MA 2": ["Media 2", "Media 2", "Moyenne 2", "MA 2"], "MA 3": ["Media 3", "Media 3", "Moyenne 3", "MA 3"], "MA 4": ["Media 4", "Media 4", "Moyenne 4", "MA 4"], "MA 5": ["Media 5", "Media 5", "Moyenne 5", "MA 5"], "MA 6": ["Media 6", "Media 6", "Moyenne 6", "MA 6"], "MA 7": ["Media 7", "Media 7", "Moyenne 7", "MA 7"], "MA 8": ["Media 8", "Media 8", "Moyenne 8", "MA 8"], "MA 9": ["Media 9", "Media 9", "Moyenne 9", "MA 9"], "MA 10": ["Media 10", "Media 10", "Moyenne 10", "MA 10"], "MA 11": ["Media 11", "Media 11", "Moyenne 11", "MA 11"], "MA 12": ["Media 12", "Media 12", "Moyenne 12", "MA 12"]});
+})();
+/* =====================================================================
+   1.28.0: «I miei script»: tenendo premuto uno script compare il menu (lo stesso della watchlist, Design 3.0)
+   con «Elimina»; prima di eliminare c'è la conferma. Vale anche nei Preferiti e nella ricerca.
+   ===================================================================== */
+var SCD_T={
+ it:{del:'Elimina',cancel:'Annulla',delT:'Eliminare lo script?',delD:'«{n}» verrà eliminato dai tuoi script e non si potrà recuperare. Se è sul grafico, resta lì finché non lo togli.',deleted:'Script «{n}» eliminato',hint:'Tieni premuto uno script per eliminarlo.'},
+ en:{del:'Delete',cancel:'Cancel',delT:'Delete the script?',delD:'«{n}» will be deleted from your scripts and cannot be recovered. If it is on the chart, it stays there until you remove it.',deleted:'Script «{n}» deleted',hint:'Press and hold a script to delete it.'},
+ es:{del:'Eliminar',cancel:'Cancelar',delT:'¿Eliminar el script?',delD:'«{n}» se eliminará de tus scripts y no se podrá recuperar. Si está en el gráfico, se queda ahí hasta que lo quites.',deleted:'Script «{n}» eliminado',hint:'Mantén pulsado un script para eliminarlo.'},
+ fr:{del:'Supprimer',cancel:'Annuler',delT:'Supprimer le script ?',delD:'«{n}» sera supprimé de tes scripts et ne pourra pas être récupéré. S’il est sur le graphique, il y reste jusqu’à ce que tu le retires.',deleted:'Script «{n}» supprimé',hint:'Appuie longuement sur un script pour le supprimer.'},
+ de:{del:'Löschen',cancel:'Abbrechen',delT:'Skript löschen?',delD:'«{n}» wird aus deinen Skripten gelöscht und kann nicht wiederhergestellt werden. Wenn es im Chart ist, bleibt es dort, bis du es entfernst.',deleted:'Skript «{n}» gelöscht',hint:'Halte ein Skript gedrückt, um es zu löschen.'}
+};
+function scdt(k,n){const L=SCD_T[lang]||SCD_T.it;const s=L[k]!=null?L[k]:SCD_T.it[k];return n==null?s:s.replace('{n}',n)}
+(function(){
+  const st=document.createElement('style');
+  st.textContent='.irow.scdm{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.irow.scdm.held{background:var(--glasssel)}';
+  document.head.appendChild(st);
+  const TRASH='<svg viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12"/></svg>';
+  const closeMenu=()=>{const a=document.getElementById('d3ctx'),b=document.getElementById('d3ctxbg');if(a)a.remove();if(b)b.remove()};
+  const popAt=(m,r)=>{document.body.appendChild(m);const mw=m.offsetWidth,mh=m.offsetHeight,vh=window.innerHeight,vw=window.innerWidth;
+    const left=Math.max(12,Math.min(vw-mw-12,r.left+56));let top=r.bottom+6,up=false;if(top+mh>vh-12){top=r.top-mh-6;up=true}top=Math.max(12,Math.min(vh-mh-12,top));
+    m.style.left=left+'px';m.style.top=top+'px';m.classList.toggle('up',up);m.style.setProperty('--cx',Math.max(16,Math.min(mw-16,(r.left+r.width/2)-left))+'px');m.style.setProperty('--cy',up?'100%':'0')};
+  const sheetClose=()=>{const s=document.getElementById('d3wls');if(!s)return;s.classList.remove('show');setTimeout(()=>s.remove(),220)};
+  const toast=t=>{try{if(window.NXLists&&NXLists._toast){NXLists._toast(t);return}}catch(e){}try{msg(t)}catch(e){}};
+  const doDelete=id=>{
+    const s=ED.list.find(x=>x.id===id);if(!s)return;const nm=s.name;
+    ED.list=ED.list.filter(x=>x.id!==id);edSaveList();
+    const k='s:'+id,i=IFAV.indexOf(k);if(i>=0){IFAV.splice(i,1);ifavSave()}
+    /* se lo script era aperto nell'editor, l'editor passa al prossimo (come «Elimina» nell'editor) */
+    try{if(ED.cur&&ED.cur.id===id){const n=ED.list[0];edLoad(n?{id:n.id,name:n.name,kind:n.kind,code:n.code,saved:n.code}:edNew('indicator'))}}catch(e){}
+    try{const d=lsGet('tc_sdraft',null);if(d&&d.id===id)lsSet('tc_sdraft',null)}catch(e){}
+    try{haptic()}catch(e){}
+    try{hubRender()}catch(e){}
+    toast(scdt('deleted',nm));
+  };
+  const askDel=id=>{
+    const sc=ED.list.find(x=>x.id===id);if(!sc)return;
+    let s=document.getElementById('d3wls');if(s)s.remove();
+    s=document.createElement('div');s.id='d3wls';s.setAttribute('role','dialog');s.setAttribute('aria-modal','true');s.setAttribute('aria-label',scdt('delT'));
+    s.innerHTML='<div class="d3w-c"><h3></h3><p></p><div class="d3w-bt"><button type="button" class="no"></button><button type="button" class="go red"></button></div></div>';
+    const c=s.firstChild;c.querySelector('h3').textContent=scdt('delT');c.querySelector('p').textContent=scdt('delD',sc.name);
+    c.querySelector('.no').textContent=scdt('cancel');c.querySelector('.go').textContent=scdt('del');
+    c.querySelector('.no').onclick=sheetClose;c.querySelector('.go').onclick=()=>{sheetClose();doDelete(id)};
+    s.addEventListener('pointerdown',ev=>{if(ev.target===s){ev.preventDefault();sheetClose()}});
+    document.body.appendChild(s);void s.offsetWidth;s.classList.add('show');
+    setTimeout(()=>{try{c.querySelector('.no').focus()}catch(z){}},60);
+  };
+  const menu=(r,it)=>{
+    closeMenu();try{haptic()}catch(e){}
+    const g=document.createElement('div');g.id='d3ctxbg';g.style.zIndex='84';
+    g.addEventListener('pointerdown',ev=>{ev.preventDefault();ev.stopPropagation();closeMenu()});g.addEventListener('contextmenu',ev=>ev.preventDefault());document.body.appendChild(g);
+    const m=document.createElement('div');m.id='d3ctx';m.setAttribute('role','menu');m.style.zIndex='85';
+    m.innerHTML='<div class="d3c-h"><i aria-hidden="true"></i><span></span></div>';m.querySelector('.d3c-h span').textContent=it.name;m.setAttribute('aria-label',it.name);
+    const del=document.createElement('button');del.type='button';del.setAttribute('role','menuitem');
+    del.innerHTML='<span aria-hidden="true">'+TRASH+'</span><em style="font-style:normal"></em>';del.querySelector('em').textContent=scdt('del');
+    del.onclick=()=>{closeMenu();askDel(it.sid)};m.appendChild(del);
+    m.addEventListener('contextmenu',ev=>ev.preventDefault());
+    popAt(m,r.getBoundingClientRect());
+    try{del.focus({preventScroll:true})}catch(x){}
+  };
+  const oRow=iRow;
+  iRow=function(b,it){
+    const r=oRow(b,it);if(it.cat!=='mine')return r;
+    r.classList.add('scdm');let t=0,fired=false,x0=0,y0=0;
+    const clr=()=>{clearTimeout(t);t=0;r.classList.remove('held')};
+    r.addEventListener('pointerdown',ev=>{if(ev.target.closest('.istar'))return;fired=false;x0=ev.clientX;y0=ev.clientY;clr();r.classList.add('held');
+      t=setTimeout(()=>{t=0;fired=true;r.classList.remove('held');menu(r,it)},480)});
+    r.addEventListener('pointermove',ev=>{if(t&&(Math.abs(ev.clientX-x0)>9||Math.abs(ev.clientY-y0)>9))clr()});
+    ['pointerup','pointercancel','pointerleave'].forEach(k=>r.addEventListener(k,()=>{if(t)clr()}));
+    r.addEventListener('contextmenu',ev=>{ev.preventDefault();if(!fired){fired=true;clr();menu(r,it)}});
+    const oc=r.onclick;r.onclick=ev=>{if(fired){fired=false;return}if(oc)oc.call(r,ev)};
+    return r;
+  };
+  /* sotto la lista «I miei script» un piccolo suggerimento su come eliminare */
+  const oList=iList;
+  iList=function(b,list,empty){oList(b,list,empty);if(list.length&&list.every(x=>x.cat==='mine')){const n=shEl(b,'inote',scdt('hint'));n.classList.add('scdhint')}};
 })();

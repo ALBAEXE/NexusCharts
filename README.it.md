@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.27.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.28.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.27.0 — Nuovi indicatori di trend
+### 🆕 Novità della 1.28.0 — Eliminare gli script da I miei script
+
+- 🗑️ Tieni premuto uno script in I miei script (anche nei Preferiti e nella ricerca) per eliminarlo, con la conferma prima.
+- 🛡️ Due passaggi voluti: niente si elimina con un tocco per sbaglio; uno script già sul grafico resta lì finché non lo togli.
+- 🎨 Stesso menu e stessa conferma della watchlist, in tema chiaro e scuro.
+
+### In precedenza, nella 1.27.0 — Nuovi indicatori di trend
 
 - 📈 Nuovi: Parabolic SAR, Williams Alligator, Williams Fractals, Guppy Multiple Moving Average (GMMA) e Vortex Indicator, con le impostazioni di TradingView più colori, altro timeframe, segnali e avvisi.
 - ⏩ Le linee spostate in avanti (offset) ora continuano oltre l'ultima candela, come su TradingView: per esempio la nuvola dell'Ichimoku 26 candele avanti.
@@ -79,11 +85,14 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🧮 Niente più errori dovuti a come il computer memorizza i decimali (3971,16499…).
 - ✅ Stessi risultati di prima su tutti gli script di prova e sul controllo indipendente dei calcoli.
 
-### In precedenza, nella 1.25.0 — Funzioni Pine con più forme
+<details>
+<summary>In precedenza, nella 1.25.0 — Funzioni Pine con più forme</summary>
 
 - 🧩 Ogni funzione di Pine v6 con più di una forma è stata controllata sul manuale ufficiale, ogni forma contro l'altra.
 - 🎚️ input.int e input.float con le opzioni scritte in fila ora mostrano il menu a tendina; input(close) mostra il menu Sorgente.
 - 🕒 time e time_close accettano bars_back e timeframe_bars_back in entrambe le forme della v6.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.24.0 — Riempimenti a sfumatura e script più compatibili</summary>
@@ -100,15 +109,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🎨 Stile ora elenca ogni riempimento e sfondo colorato dello script: mostra/nascondi e, se lo script usa più colori, ognuno si cambia con la sua trasparenza.
 - 📉 Gli indicatori nei riquadri sotto il grafico ora disegnano anche segnali, riempimenti, sfondi, riquadri, etichette e linee (per esempio la fascia dell'RSI tra 30 e 70).
 - 🔒 Riempimenti e sfondi che lo script segna come non modificabili restano nascosti in Stile, come su TradingView.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.22.0 — Scheda Stile completa per segnali e disegni</summary>
-
-- 🎯 Stile ora elenca i segnali di ogni script (plotshape, plotchar, plotarrow): mostra/nascondi, colore e trasparenza, forma, posizione, dimensione e colore del testo.
-- 🧩 Nuova sezione Oggetti grafici: riquadri, etichette, linee, tabelle e polilinee da accendere o spegnere.
-- 🔒 Linee e segnali che lo script segna come non modificabili restano nascosti in Stile, come su TradingView.
 
 </details>
 
