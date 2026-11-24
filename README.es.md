@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.13.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.14.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.13.0 — Motor Pine Script completo y estrategias
+### 🆕 Novedades de la 1.14.0 — Strategy Tester
+
+- 📊 Los resultados de las estrategias en un Strategy Tester a pantalla completa: resumen con la curva de capital, rendimiento dividido en Todas, Long y Short, y la lista de operaciones.
+- 🏷️ Junto al nombre de una estrategia en el gráfico, una pequeña etiqueta muestra el beneficio neto: tócala para abrir el Strategy Tester. Los indicadores que no son estrategias no cambian.
+
+### Anteriormente, en la 1.13.0 — Motor Pine Script completo y estrategias
 
 - 🧩 El motor Pine Script ahora cubre todas las funciones, variables y constantes de la referencia oficial de Pine v6, incluidas matrices, enums, polilíneas y chart points.
 - 📈 Las estrategias ahora se simulan como en un probador de estrategias: órdenes a mercado, limit y stop, take profit, stop loss y trailing stop, pyramiding, comisiones y estadísticas (beneficio neto, capital, drawdown, operaciones cerradas y abiertas). Solo simulación: ninguna orden real.
@@ -77,11 +82,14 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - 🏷️ Las etiquetas y dibujos de los indicadores situados en una hora entre dos velas (por ejemplo el nombre de una sesión en medio de su caja) ahora aparecen donde deben, y no en el borde izquierdo del gráfico.
 
-### Anteriormente, en la 1.12.2 — Compatibilidad con Pine v4
+<details>
+<summary>Anteriormente, en la 1.12.2 — Compatibilidad con Pine v4</summary>
 
 - 🧩 Ahora también funcionan los indicadores Pine Script v4: funciones sin ta./math./str., security(), iff(), tostring() e input(type=…).
 - ➗ Pine v5: dividir dos números enteros escritos en el código da un entero (5 / 2 = 2), como en TradingView. En v6 sigue siendo 2,5.
 - 📊 Oro: volumen de ticks en todo el historial desde 2011.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.12.1 — Volumen de ticks</summary>
@@ -96,14 +104,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - 🕔 Para oro, metales, energía, Forex e índices, las velas de 4 horas empiezan a las 17, 21, 1, 5, 9 y 13 de Nueva York: cada jornada termina a las 17 junto con la vela diaria, como en los brókers.
 - 📈 La vela en vivo también se abre a esas horas. Cripto y acciones siguen igual.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.11.0 — Minutos del oro desde 2011</summary>
-
-- ⏱️ El oro ahora tiene historial hasta enero de 2011 también en los gráficos de minutos: 1m, 3m, 5m, 15m, 30m y 45m.
-- 👈 Como en las otras temporalidades, desliza el gráfico hacia la izquierda y las velas más antiguas se cargan solas.
 
 </details>
 

@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.13.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.14.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.13.0 — Pine Script engine: full coverage and strategies
+### 🆕 New in 1.14.0 — Strategy Tester
+
+- 📊 Strategy results in a full-screen Strategy Tester: overview with the equity curve, performance split into All, Long and Short, and the list of trades.
+- 🏷️ Next to a strategy's name on the chart, a small tag shows its net profit: tap it to open the Strategy Tester. Indicators that are not strategies are unchanged.
+
+### Previously in 1.13.0 — Pine Script engine: full coverage and strategies
 
 - 🧩 The Pine Script engine now covers every function, variable and constant in the official Pine v6 reference, including matrices, enums, polylines and chart points.
 - 📈 Strategies are now simulated like a strategy tester: market, limit and stop orders, take profit, stop loss and trailing stop, pyramiding, commissions and trade statistics (net profit, equity, drawdown, closed and open trades). Simulation only: no real orders.
@@ -77,11 +82,14 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 - 🏷️ Indicator labels and drawings placed at a time between two candles (for example a session name in the middle of its box) now appear where they should, instead of at the left edge of the chart.
 
-### Previously in 1.12.2 — Pine v4 support
+<details>
+<summary>Previously in 1.12.2 — Pine v4 support</summary>
 
 - 🧩 Pine Script v4 indicators now run too: functions without the ta./math./str. prefix, security(), iff(), tostring() and input(type=…).
 - ➗ Pine v5: dividing two whole numbers written in the code gives a whole number (5 / 2 = 2), as on TradingView. In v6 it stays 2.5.
 - 📊 Gold: tick volume across the whole history since 2011.
+
+</details>
 
 <details>
 <summary>Previously in 1.12.1 — Tick volume</summary>
@@ -96,14 +104,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 - 🕔 For gold, metals, energy, Forex and indices, 4-hour candles start at 5 pm, 9 pm, 1 am, 5 am, 9 am and 1 pm New York time, so each day ends at 5 pm together with the daily candle, as with brokers.
 - 📈 The live candle opens at the same times. Crypto and stocks stay as before.
-
-</details>
-
-<details>
-<summary>Previously in 1.11.0 — Gold minutes since 2011</summary>
-
-- ⏱️ Gold now has history back to January 2011 on the minute charts too: 1m, 3m, 5m, 15m, 30m and 45m.
-- 👈 As with the other timeframes, scroll the chart to the left and older candles load on their own.
 
 </details>
 

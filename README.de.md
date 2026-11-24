@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.13.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.14.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.13.0 — Vollständige Pine-Script-Engine und Strategien
+### 🆕 Neu in 1.14.0 — Strategy Tester
+
+- 📊 Strategieergebnisse in einem Strategy Tester im Vollbild: Übersicht mit Kapitalkurve, Performance nach Alle, Long und Short, und die Liste der Trades.
+- 🏷️ Neben dem Namen einer Strategie im Chart zeigt ein kleines Etikett den Nettogewinn: antippen, um den Strategy Tester zu öffnen. Indikatoren, die keine Strategien sind, bleiben unverändert.
+
+### Vorher in 1.13.0 — Vollständige Pine-Script-Engine und Strategien
 
 - 🧩 Die Pine-Script-Engine deckt jetzt alle Funktionen, Variablen und Konstanten der offiziellen Pine-v6-Referenz ab, einschließlich Matrizen, Enums, Polylinien und Chart-Punkten.
 - 📈 Strategien werden jetzt wie in einem Strategietester simuliert: Markt-, Limit- und Stop-Orders, Take Profit, Stop Loss und Trailing Stop, Pyramiding, Kommissionen und Statistiken (Nettogewinn, Kapital, Drawdown, geschlossene und offene Trades). Nur Simulation: keine echten Orders.
@@ -77,11 +82,14 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - 🏷️ Beschriftungen und Zeichnungen von Indikatoren, die auf einer Zeit zwischen zwei Kerzen liegen (zum Beispiel der Name einer Sitzung in der Mitte ihrer Box), erscheinen jetzt an der richtigen Stelle statt am linken Rand des Charts.
 
-### Vorher in 1.12.2 — Unterstützung für Pine v4
+<details>
+<summary>Vorher in 1.12.2 — Unterstützung für Pine v4</summary>
 
 - 🧩 Jetzt laufen auch Pine-Script-v4-Indikatoren: Funktionen ohne ta./math./str., security(), iff(), tostring() und input(type=…).
 - ➗ Pine v5: Die Division zweier im Code geschriebener ganzer Zahlen ergibt eine ganze Zahl (5 / 2 = 2), wie bei TradingView. In v6 bleibt es 2,5.
 - 📊 Gold: Tick-Volumen über die gesamte Historie seit 2011.
+
+</details>
 
 <details>
 <summary>Vorher in 1.12.1 — Tick-Volumen</summary>
@@ -96,14 +104,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - 🕔 Für Gold, Metalle, Energie, Forex und Indizes beginnen 4-Stunden-Kerzen um 17, 21, 1, 5, 9 und 13 Uhr New Yorker Zeit: Jeder Tag endet um 17 Uhr zusammen mit der Tageskerze, wie bei Brokern.
 - 📈 Auch die Live-Kerze öffnet zu diesen Zeiten. Krypto und Aktien bleiben wie bisher.
-
-</details>
-
-<details>
-<summary>Vorher in 1.11.0 — Gold-Minuten seit 2011</summary>
-
-- ⏱️ Gold hat jetzt auch in den Minuten-Charts eine Historie bis Januar 2011: 1m, 3m, 5m, 15m, 30m und 45m.
-- 👈 Wie bei den anderen Zeiteinheiten: Schieb den Chart nach links, und ältere Kerzen laden von selbst.
 
 </details>
 

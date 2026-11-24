@@ -1,4 +1,4 @@
-const VERSION='1.13.0';
+const VERSION='1.14.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -6275,7 +6275,7 @@ const declF=kind=>(E,a)=>{if(E.bar===0&&!E.declared){E.declared=true;const k=i=>
 F('indicator',DECL_P,declF('indicator'));F('study',DECL_P,declF('indicator'));F('library',['title','overlay'],declF('library'));
 F('strategy',['title','shorttitle','overlay','format','precision','scale','pyramiding','calc_on_order_fills','calc_on_every_tick','max_bars_back','backtest_fill_limits_assumption','default_qty_type','default_qty_value','initial_capital','currency','slippage','commission_type','commission_value','process_orders_on_close','close_entries_rule','margin_long','margin_short','explicit_plot_zorder','max_lines_count','max_labels_count','max_boxes_count','max_polylines_count','dynamic_requests','behind_chart','risk_free_rate','use_bar_magnifier','fill_orders_on_standard_ohlc'],(E,a,s,n,P)=>{if(E.bar===0&&!E.declared){E.declared=true;E.out.meta={kind:'strategy',title:a[0]||'Strategy',short:a[1]||'',overlay:a[2]===true,precision:a[4]};
   const SP=['title','shorttitle','overlay','format','precision','scale','pyramiding','calc_on_order_fills','calc_on_every_tick','max_bars_back','backtest_fill_limits_assumption','default_qty_type','default_qty_value','initial_capital','currency','slippage','commission_type','commission_value','process_orders_on_close'];
-  E.SP={};SP.forEach((k,i)=>{if(a[i]!=null&&a[i]===a[i])E.SP[k]=a[i]});E.max.line=Math.min(500,a[23]||50);E.max.label=Math.min(500,a[24]||50);E.max.box=Math.min(500,a[25]||50)}return NaN});
+  E.SP={};SP.forEach((k,i)=>{if(a[i]!=null&&a[i]===a[i])E.SP[k]=a[i]});stS(E);E.max.line=Math.min(500,a[23]||50);E.max.label=Math.min(500,a[24]||50);E.max.box=Math.min(500,a[25]||50)}return NaN});
 /* =====================================================================
    1.13.0 — funzioni che mancavano rispetto al manuale ufficiale di Pine v6
    (formule come nel manuale TradingView; dove il manuale dà il codice Pine, è tradotto riga per riga)
@@ -6507,7 +6507,7 @@ function stS(E){
   const P=E.SP||{};
   return E.S={cap:P.initial_capital>0?P.initial_capital:1000000,qt:P.default_qty_type||'fixed',qv:P.default_qty_value>0?P.default_qty_value:1,pyr:P.pyramiding>0?P.pyramiding:1,
     ct:P.commission_type||'percent',cv:P.commission_value>0?P.commission_value:0,poc:P.process_orders_on_close===true,
-    open:[],closed:[],pend:[],exits:new Map(),net:0,gp:0,gl:0,win:0,loss:0,even:0,eqPeak:NaN,maxDD:0,maxDDp:0,eqLow:NaN,maxRU:0,maxRUp:0,
+    open:[],closed:[],pend:[],exits:new Map(),net:0,netc:0,eqs:[],b0:-1,gp:0,gl:0,win:0,loss:0,even:0,eqPeak:NaN,maxDD:0,maxDDp:0,eqLow:NaN,maxRU:0,maxRUp:0,
     held:{all:0,long:0,short:0},allow:'all',firstIdx:0};
 }
 const stMt=E=>Math.pow(10,-E.dec);
@@ -6528,7 +6528,7 @@ function stCloseEntry(E,S,o,qty,price,exitId,comment,quiet){
   S.net+=o.dir*qty*(price-o.price)-c;/* la commissione d'entrata era già tolta */
   const tr={id:o.id,dir:o.dir,qty,ep:o.price,eb:o.bar,et:o.time,ec:o.comment,xp:price,xb:E.bar,xt:E.D.t[E.bar],xid:exitId||'',xc:comment||'',pl,comm:c+ec,
     ru:o.dir>0?(o.hi-o.price)*qty:(o.price-o.lo)*qty,dd:o.dir>0?(o.lo-o.price)*qty:(o.price-o.hi)*qty};
-  S.closed.push(tr);if(pl>0){S.win++;S.gp+=pl}else if(pl<0){S.loss++;S.gl-=pl}else S.even++;
+  S.netc+=pl;S.closed.push(tr);if(pl>0){S.win++;S.gp+=pl}else if(pl<0){S.loss++;S.gl-=pl}else S.even++;
   o.qty-=qty;o.comm-=ec;if(o.qty<=1e-12)S.open.splice(S.open.indexOf(o),1);
   if(!quiet)stMark(E,S,0,comment||exitId||'Close',price,qty);
 }
@@ -6603,9 +6603,22 @@ function stPost(E){
   const S=E.S;if(!S)return;const D=E.D,b=E.bar;
   for(const od of S.pend.filter(x=>x.mkt&&x.bar===b&&(S.poc||x.now))){S.pend.splice(S.pend.indexOf(od),1);stRunMkt(E,S,od,D.c[b])}
   const eq=S.cap+S.net+stOpenPL(E,S,D.c[b]);
+  if(S.b0<0)S.b0=b;S.eqs[b]=eq;
   if(!(eq<=S.eqPeak))S.eqPeak=eq;const dd=S.eqPeak-eq;if(dd>S.maxDD){S.maxDD=dd;S.maxDDp=S.eqPeak?dd/S.eqPeak*100:0}
   if(!(eq>=S.eqLow))S.eqLow=eq;const ru=eq-S.eqLow;if(ru>S.maxRU){S.maxRU=ru;S.maxRUp=S.eqLow?ru/S.eqLow*100:0}
   S.eq=eq;
+}
+/* riepilogo per il pannello «Strategy tester» (come le sezioni Panoramica, Rendimento e Elenco operazioni di TradingView) */
+function stReport(E){
+  const S=E.S,D=E.D,cl=S.closed,L=E.n-1;
+  const side=f=>{const a=cl.filter(f),w=a.filter(t=>t.pl>0),l=a.filter(t=>t.pl<0),gp=w.reduce((x,t)=>x+t.pl,0),gl=-l.reduce((x,t)=>x+t.pl,0),av=q=>q.length?q.reduce((x,t)=>x+t,0)/q.length:null;
+    return{n:a.length,w:w.length,l:l.length,e:a.length-w.length-l.length,net:gp-gl,gp,gl,pf:gl?gp/gl:null,avg:av(a.map(t=>t.pl)),avgp:av(a.map(t=>t.pl/(t.ep*t.qty)*100)),aw:av(w.map(t=>t.pl)),al:av(l.map(t=>-t.pl)),
+      bw:w.length?Math.max(...w.map(t=>t.pl)):null,bl:l.length?Math.max(...l.map(t=>-t.pl)):null,comm:a.reduce((x,t)=>x+t.comm,0),bars:av(a.map(t=>t.xb-t.eb)),pct:a.length?w.length/a.length*100:null}};
+  const b0=S.b0<0?0:S.b0,eq=[];for(let i=b0;i<=L;i++)eq.push(S.eqs[i]!=null?S.eqs[i]:S.cap);
+  const c0=D.c[b0],bh=c0?S.cap*(D.c[L]/c0-1):0;let cum=0;
+  const tr=cl.map((t,i)=>{cum+=t.pl;return{i:i+1,d:t.dir,q:t.qty,id:t.id,xid:t.xid||t.xc,et:t.et,xt:t.xt,ep:t.ep,xp:t.xp,pl:t.pl,plp:t.pl/(t.ep*t.qty)*100,ru:t.ru,dd:t.dd,cum}});
+  const op=S.open.map((o,i)=>({i:cl.length+i+1,d:o.dir,q:o.qty,id:o.id,et:o.time,ep:o.price,xp:D.c[L],pl:o.dir*o.qty*(D.c[L]-o.price),plp:o.dir*(D.c[L]-o.price)/o.price*100,open:true}));
+  return{cap:S.cap,all:side(()=>true),long:side(t=>t.dir>0),short:side(t=>t.dir<0),open:stOpenPL(E,S,D.c[L]),maxDD:S.maxDD,maxDDp:S.maxDDp,maxRU:S.maxRU,maxRUp:S.maxRUp,bh,eq,t0:D.t[b0],t1:D.t[L],trades:tr,opens:op};
 }
 const stNum=(x,d)=>x==null||x!==x?d:x;
 function stOrder(E,kind,a){
@@ -6642,7 +6655,7 @@ Object.assign(BV,{
   'strategy.position_size':stv(S=>stPos(S)),'strategy.position_avg_price':stv(S=>{const q=S.open.reduce((t,o)=>t+o.qty,0);return q?S.open.reduce((t,o)=>t+o.qty*o.price,0)/q:NaN}),
   'strategy.position_entry_name':stv(S=>S.open.length?S.open[S.open.length-1].id:''),
   'strategy.equity':stv((S,E)=>S.cap+S.net+stOpenPL(E,S,E.D.c[E.bar])),'strategy.initial_capital':stv(S=>S.cap),'strategy.account_currency':()=>'USD',
-  'strategy.netprofit':stv(S=>S.net),'strategy.netprofit_percent':stv(S=>S.net/S.cap*100),
+  'strategy.netprofit':stv(S=>S.netc),'strategy.netprofit_percent':stv(S=>S.netc/S.cap*100),
   'strategy.openprofit':stv((S,E)=>stOpenPL(E,S,E.D.c[E.bar])),'strategy.openprofit_percent':stv((S,E)=>stOpenPL(E,S,E.D.c[E.bar])/S.cap*100),
   'strategy.grossprofit':stv(S=>S.gp),'strategy.grossloss':stv(S=>S.gl),'strategy.grossprofit_percent':stv(S=>S.gp/S.cap*100),'strategy.grossloss_percent':stv(S=>S.gl/S.cap*100),
   'strategy.closedtrades':stv(S=>S.closed.length),'strategy.opentrades':stv(S=>S.open.length),'strategy.wintrades':stv(S=>S.win),'strategy.losstrades':stv(S=>S.loss),'strategy.eventrades':stv(S=>S.even),
@@ -7118,6 +7131,7 @@ function run(prog,data,opts){
     linefills:O.linefill.filter(o=>!o.del&&o.l1&&o.l2&&!o.l1.del&&!o.l2.del).map(o=>({l1:o.l1,l2:o.l2,c:cv(o.c)})),
     polylines:O.polyline.filter(o=>!o.del).map(o=>({pts:o.pts,cu:o.cu,cl:o.cl,xl:o.xl,c:cv(o.c),fc:cv(o.fc),st:o.st,w:o.w})),
     orders:O.orders};
+  res.strat=E.S?stReport(E):null;
   const lmap=new Map();res.lines.forEach(L=>{lmap.set(L._o,L);delete L._o});
   res.linefills=res.linefills.map(f=>({a:lmap.get(f.l1),b:lmap.get(f.l2),c:f.c})).filter(f=>f.a&&f.b);
   return res;
@@ -8133,6 +8147,165 @@ pageInd=function(b){
   try{indLegend()}catch(e){}
 })();
 
+/* =====================================================================
+   1.14.0: Strategy tester — risultati delle strategie a tutto schermo
+   (Panoramica con curva del capitale, Rendimento Tutte/Long/Short, Elenco operazioni)
+   Si apre dal profitto accanto al nome della strategia nella legenda.
+   ===================================================================== */
+var STT_T={
+ it:{title:"Strategy Tester",ov:"Panoramica",perf:"Rendimento",list:"Operazioni",net:"Profitto netto",trades:"Operazioni chiuse",pct:"Vincenti",pf:"Fattore di profitto",dd:"Drawdown massimo",avg:"Media per operazione",bars:"Candele medie per operazione",
+  all:"Tutte",long:"Long",short:"Short",gp:"Profitto lordo",gl:"Perdita lorda",comm:"Commissioni pagate",bh:"Rendimento buy & hold",ru:"Run-up massimo",openpl:"Profitto aperto",win:"Operazioni vincenti",loss:"Operazioni perdenti",
+  aw:"Media vincenti",al:"Media perdenti",ratio:"Rapporto media vincenti / perdenti",bw:"Vincente più grande",bl:"Perdente più grande",cap:"Capitale iniziale",eq:"Capitale",entry:"Entrata",exit:"Uscita",open:"Aperta",
+  price:"Prezzo",qty:"Quantità",pl:"Profitto",cum:"Cumulato",none:"Nessuna operazione nello storico caricato.",note:"Simulazione sulle candele caricate, con le regole dello Strategy Tester di TradingView. Scorri il grafico a sinistra per caricare più storico. Nessun ordine vero.",more:"Mostra altre",close:"Chiudi",report:"Risultati"},
+ en:{title:"Strategy Tester",ov:"Overview",perf:"Performance",list:"Trades",net:"Net profit",trades:"Closed trades",pct:"Percent profitable",pf:"Profit factor",dd:"Max drawdown",avg:"Avg trade",bars:"Avg bars in trades",
+  all:"All",long:"Long",short:"Short",gp:"Gross profit",gl:"Gross loss",comm:"Commission paid",bh:"Buy & hold return",ru:"Max run-up",openpl:"Open P&L",win:"Winning trades",loss:"Losing trades",
+  aw:"Avg winning trade",al:"Avg losing trade",ratio:"Ratio avg win / avg loss",bw:"Largest winning trade",bl:"Largest losing trade",cap:"Initial capital",eq:"Equity",entry:"Entry",exit:"Exit",open:"Open",
+  price:"Price",qty:"Qty",pl:"Profit",cum:"Cumulative",none:"No trades in the loaded history.",note:"Simulation on the loaded candles, with the rules of TradingView's Strategy Tester. Scroll the chart left to load more history. No real orders.",more:"Show more",close:"Close",report:"Results"},
+ es:{title:"Strategy Tester",ov:"Resumen",perf:"Rendimiento",list:"Operaciones",net:"Beneficio neto",trades:"Operaciones cerradas",pct:"Rentables",pf:"Factor de beneficio",dd:"Drawdown máximo",avg:"Media por operación",bars:"Velas medias por operación",
+  all:"Todas",long:"Long",short:"Short",gp:"Beneficio bruto",gl:"Pérdida bruta",comm:"Comisiones pagadas",bh:"Rendimiento buy & hold",ru:"Run-up máximo",openpl:"Beneficio abierto",win:"Operaciones ganadoras",loss:"Operaciones perdedoras",
+  aw:"Media ganadoras",al:"Media perdedoras",ratio:"Relación media ganadoras / perdedoras",bw:"Mayor ganadora",bl:"Mayor perdedora",cap:"Capital inicial",eq:"Capital",entry:"Entrada",exit:"Salida",open:"Abierta",
+  price:"Precio",qty:"Cantidad",pl:"Beneficio",cum:"Acumulado",none:"No hay operaciones en el historial cargado.",note:"Simulación sobre las velas cargadas, con las reglas del Strategy Tester de TradingView. Desliza el gráfico a la izquierda para cargar más historial. Ninguna orden real.",more:"Mostrar más",close:"Cerrar",report:"Resultados"},
+ fr:{title:"Strategy Tester",ov:"Vue d'ensemble",perf:"Performance",list:"Transactions",net:"Profit net",trades:"Transactions clôturées",pct:"Gagnantes",pf:"Facteur de profit",dd:"Drawdown maximal",avg:"Moyenne par transaction",bars:"Bougies moyennes par transaction",
+  all:"Toutes",long:"Long",short:"Short",gp:"Profit brut",gl:"Perte brute",comm:"Commissions payées",bh:"Rendement buy & hold",ru:"Run-up maximal",openpl:"Profit ouvert",win:"Transactions gagnantes",loss:"Transactions perdantes",
+  aw:"Moyenne gagnantes",al:"Moyenne perdantes",ratio:"Rapport moyenne gagnantes / perdantes",bw:"Plus grande gagnante",bl:"Plus grande perdante",cap:"Capital initial",eq:"Capital",entry:"Entrée",exit:"Sortie",open:"Ouverte",
+  price:"Prix",qty:"Quantité",pl:"Profit",cum:"Cumulé",none:"Aucune transaction dans l'historique chargé.",note:"Simulation sur les bougies chargées, avec les règles du Strategy Tester de TradingView. Fais glisser le graphique vers la gauche pour charger plus d'historique. Aucun ordre réel.",more:"Afficher plus",close:"Fermer",report:"Résultats"},
+ de:{title:"Strategy Tester",ov:"Übersicht",perf:"Performance",list:"Trades",net:"Nettogewinn",trades:"Geschlossene Trades",pct:"Profitabel",pf:"Profitfaktor",dd:"Max. Drawdown",avg:"Ø pro Trade",bars:"Ø Kerzen pro Trade",
+  all:"Alle",long:"Long",short:"Short",gp:"Bruttogewinn",gl:"Bruttoverlust",comm:"Gezahlte Kommission",bh:"Buy-&-Hold-Rendite",ru:"Max. Run-up",openpl:"Offener Gewinn",win:"Gewinntrades",loss:"Verlusttrades",
+  aw:"Ø Gewinntrade",al:"Ø Verlusttrade",ratio:"Verhältnis Ø Gewinn / Ø Verlust",bw:"Größter Gewinntrade",bl:"Größter Verlusttrade",cap:"Startkapital",eq:"Kapital",entry:"Einstieg",exit:"Ausstieg",open:"Offen",
+  price:"Preis",qty:"Menge",pl:"Gewinn",cum:"Kumuliert",none:"Keine Trades in der geladenen Historie.",note:"Simulation auf den geladenen Kerzen, mit den Regeln des Strategy Testers von TradingView. Wische den Chart nach links, um mehr Historie zu laden. Keine echten Orders.",more:"Mehr anzeigen",close:"Schließen",report:"Ergebnisse"}
+};
+function sttx(k){const L=STT_T[lang]||STT_T.it;return L[k]!=null?L[k]:STT_T.it[k]}
+(function(){
+  const st=document.createElement('style');
+  st.textContent=`#stt{position:fixed;inset:0;z-index:80;background:var(--bg);color:var(--fg);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top)}
+#stt[hidden]{display:none}
+#stt .ish{display:flex;align-items:center;padding:16px 20px 2px}
+#stt .ish b{flex:1;min-width:0;font-size:22px;font-weight:700;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#stt .ish small{display:block;font-size:13px;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:2px;overflow:hidden;text-overflow:ellipsis}
+#stt .isx{width:40px;height:40px;margin:0 -8px 0 8px;padding:0;border:0;background:none;color:var(--fg);display:flex;align-items:center;justify-content:center;flex:0 0 40px}
+#stt .isx svg{width:22px;height:22px}
+#stt .ist{display:flex;gap:22px;padding:10px 20px 0;position:relative}
+#stt .ist button{margin:0;padding:6px 0 10px;border:0;background:none;color:var(--muted);font-size:16px;font-weight:600;width:auto;white-space:nowrap}
+#stt .ist button.on{color:var(--fg)}
+#stt .istl{position:absolute;left:20px;right:20px;bottom:0;height:3px;border-radius:2px;background:var(--line)}
+#stt .isti{position:absolute;bottom:0;height:3px;border-radius:2px;background:var(--fg);transition:left .25s,width .25s}
+#stt .isb{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 20px calc(24px + env(safe-area-inset-bottom))}
+#stt .kp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#stt .kp div{padding:12px 13px;border-radius:14px;background:var(--glasssel);min-width:0}
+#stt .kp span{display:block;font-size:12px;color:var(--muted);line-height:1.3}
+#stt .kp b{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:5px;margin-top:4px;font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+#stt .kp b small{font-size:12px;font-weight:600;color:var(--muted)}
+#stt .up{color:var(--up)}#stt .dn{color:var(--down)}
+#stt .eqc{margin:16px 0 4px;height:190px;border-radius:14px;background:var(--glasssel);position:relative;overflow:hidden}
+#stt .eqc canvas{position:absolute;inset:0;width:100%;height:100%}
+#stt .eqc i{position:absolute;left:12px;top:9px;font-style:normal;font-size:12px;color:var(--muted)}
+#stt .isg{margin:20px 0 6px;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+#stt .note{margin:18px 0 0;color:var(--muted);font-size:13px;line-height:1.45}
+#stt table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+#stt th{font-size:12px;font-weight:600;color:var(--muted);text-align:right;padding:8px 0 8px 8px;white-space:nowrap}
+#stt th:first-child,#stt td:first-child{text-align:left;padding-left:0}
+#stt td{text-align:right;padding:10px 0 10px 8px;border-top:1px solid var(--line);white-space:nowrap}
+#stt td:first-child{white-space:normal;color:var(--fg);line-height:1.3;font-size:13.5px;min-width:0}
+#stt .tr{padding:12px 0;border-top:1px solid var(--line)}
+#stt .tr:first-child{border-top:0}
+#stt .trh{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+#stt .trh .n{color:var(--muted);font-weight:500;min-width:28px}
+#stt .trh .sd{padding:2px 7px;border-radius:6px;font-size:12px;font-weight:700}
+#stt .trh .sd.l{background:color-mix(in srgb,var(--up) 18%,transparent);color:var(--up)}
+#stt .trh .sd.s{background:color-mix(in srgb,var(--down) 18%,transparent);color:var(--down)}
+#stt .trh .pl{margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap}
+#stt .trh .id{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:374px){#stt table{font-size:12.5px}#stt td:first-child{font-size:12.5px}#stt th,#stt td{padding-left:5px}#stt .isb{padding-left:16px;padding-right:16px}#stt .ist{gap:16px}#stt .ist button{font-size:15px}#stt .trh{font-size:13px}#stt .trr{font-size:12px}#stt .kp b{font-size:16px}}
+#stt .trr{display:flex;justify-content:space-between;gap:10px;margin-top:5px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+#stt .trr span:last-child{text-align:right}
+#stt .mb{display:block;width:100%;margin:14px 0 0;height:44px;border-radius:10px;border:1.5px solid var(--line);background:none;color:var(--fg);font-size:15px;font-weight:600}
+#lgind .lgr .lgs{margin-left:6px;padding:1px 6px;border-radius:5px;font-weight:600;font-variant-numeric:tabular-nums;background:var(--glasssel);pointer-events:auto}
+#lgind .lgr .lgs.up{color:var(--up)}#lgind .lgr .lgs.dn{color:var(--down)}`;
+  document.head.appendChild(st);
+  const d=document.createElement('div');d.id='stt';d.hidden=true;document.body.appendChild(d);
+})();
+var STT={ind:null,tab:'ov',lim:100};
+function sttNum(v,dp){if(v==null||!isFinite(v))return'—';const loc={it:'it-IT',en:'en-US',es:'es-ES',fr:'fr-FR',de:'de-DE'}[lang]||'it-IT';return v.toLocaleString(loc,{minimumFractionDigits:dp==null?2:dp,maximumFractionDigits:dp==null?2:dp})}
+function sttMoney(v,sign){if(v==null||!isFinite(v))return'—';return(sign&&v>0?'+':'')+sttNum(v)}
+function sttCls(v){return v>0?'up':v<0?'dn':''}
+function sttDate(t){if(t==null)return'—';try{const loc={it:'it-IT',en:'en-GB',es:'es-ES',fr:'fr-FR',de:'de-DE'}[lang]||'it-IT';return new Date(t).toLocaleString(loc,{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'})}catch(e){return''}}
+function openStt(ind){STT.ind=ind;STT.tab='ov';STT.lim=100;sttBuild();$('stt').hidden=false}
+function sttClose(){$('stt').hidden=true;STT.ind=null}
+/* se la strategia si ricalcola (candela nuova, storico caricato) il pannello aperto si aggiorna */
+function sttRefresh(){if(STT.ind&&!$('stt').hidden&&STT.body)STT.draw()}
+function sttBuild(){
+  const D=$('stt'),ind=STT.ind;D.innerHTML='';
+  const h=document.createElement('div');h.className='ish';const b=document.createElement('b');b.textContent=sttx('title');
+  const sm=document.createElement('small');sm.textContent=(ind.name||'Script')+' · '+cur+' · '+res;b.appendChild(sm);h.appendChild(b);
+  const x=document.createElement('button');x.className='isx';x.setAttribute('aria-label',sttx('close'));x.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>';x.onclick=sttClose;h.appendChild(x);D.appendChild(h);
+  const tb=document.createElement('div');tb.className='ist';const ln=document.createElement('i');ln.className='istl';tb.appendChild(ln);const ti=document.createElement('i');ti.className='isti';
+  const body=document.createElement('div');body.className='isb';STT.body=body;const tabs={};
+  [['ov',sttx('ov')],['perf',sttx('perf')],['list',sttx('list')]].forEach(([k,l])=>{const t=document.createElement('button');t.textContent=l;t.onclick=()=>{STT.tab=k;STT.lim=100;sel(true)};tb.appendChild(t);tabs[k]=t});
+  tb.appendChild(ti);D.appendChild(tb);D.appendChild(body);
+  const sel=top=>{Object.keys(tabs).forEach(k=>tabs[k].classList.toggle('on',k===STT.tab));const t=tabs[STT.tab];ti.style.left=t.offsetLeft+'px';ti.style.width=t.offsetWidth+'px';
+    const y=body.scrollTop;body.innerHTML='';const r=IR.get(ind.uid),R=r&&r.strat;
+    if(!R){const n=document.createElement('div');n.className='note';n.textContent=r&&r.error?r.error.msg:sttx('none');body.appendChild(n);return}
+    ({ov:sttOv,perf:sttPerf,list:sttList})[STT.tab](body,R);if(!top)body.scrollTop=y;else body.scrollTop=0};
+  STT.draw=()=>sel(false);
+  requestAnimationFrame(()=>sel(true));
+}
+function sttKp(box,items){const g=document.createElement('div');g.className='kp';items.forEach(([l,v,sub,cls])=>{const c=document.createElement('div');const s=document.createElement('span');s.textContent=l;const b=document.createElement('b');b.textContent=v;if(cls)b.className=cls;if(sub){const q=document.createElement('small');q.textContent=sub;b.appendChild(q)}c.appendChild(s);c.appendChild(b);g.appendChild(c)});box.appendChild(g)}
+function sttOv(b,R){
+  const A=R.all;
+  sttKp(b,[[sttx('net'),sttMoney(A.net,true),sttNum(A.net/R.cap*100)+'%',sttCls(A.net)],[sttx('trades'),sttNum(A.n,0)],
+    [sttx('pct'),A.pct==null?'—':sttNum(A.pct)+'%',A.n?sttNum(A.w,0)+'/'+sttNum(A.n,0):''],[sttx('pf'),A.pf==null?'—':sttNum(A.pf,3)],
+    [sttx('dd'),sttMoney(R.maxDD),sttNum(R.maxDDp)+'%',R.maxDD>0?'dn':''],[sttx('avg'),sttMoney(A.avg,true),A.avgp==null?'':sttNum(A.avgp)+'%',sttCls(A.avg)]]);
+  /* curva del capitale */
+  const w=document.createElement('div');w.className='eqc';const lab=document.createElement('i');lab.textContent=sttx('eq');const cv=document.createElement('canvas');w.appendChild(cv);w.appendChild(lab);b.appendChild(w);
+  requestAnimationFrame(()=>{const r=w.getBoundingClientRect(),dpr=window.devicePixelRatio||1;cv.width=Math.max(1,r.width*dpr);cv.height=Math.max(1,r.height*dpr);const c=cv.getContext('2d');c.scale(dpr,dpr);
+    const E=R.eq;if(!E.length)return;let lo=Math.min(R.cap,...E),hi=Math.max(R.cap,...E);if(hi===lo){hi+=1;lo-=1}const pt=30,pb=12,H=r.height-pt-pb,W=r.width-24;
+    const X=i=>12+(E.length<2?W/2:i/(E.length-1)*W),Y=v=>pt+(hi-v)/(hi-lo)*H,cs=getComputedStyle(document.documentElement);
+    const up=cs.getPropertyValue('--up').trim()||'#22ab94',dn=cs.getPropertyValue('--down').trim()||'#f23645',mu=cs.getPropertyValue('--muted').trim()||'#888';
+    c.strokeStyle=mu;c.globalAlpha=.5;c.setLineDash([3,4]);c.beginPath();c.moveTo(12,Y(R.cap));c.lineTo(12+W,Y(R.cap));c.stroke();c.setLineDash([]);c.globalAlpha=1;
+    const col=E[E.length-1]>=R.cap?up:dn;c.beginPath();E.forEach((v,i)=>i?c.lineTo(X(i),Y(v)):c.moveTo(X(i),Y(v)));c.strokeStyle=col;c.lineWidth=1.6;c.stroke();
+    c.lineTo(X(E.length-1),Y(lo));c.lineTo(X(0),Y(lo));c.closePath();c.globalAlpha=.12;c.fillStyle=col;c.fill();c.globalAlpha=1});
+  const g=document.createElement('div');g.className='isg';g.textContent=sttx('perf');b.appendChild(g);
+  sttKp(b,[[sttx('cap'),sttMoney(R.cap)],[sttx('openpl'),sttMoney(R.open,true),'',sttCls(R.open)],[sttx('bh'),sttMoney(R.bh,true),sttNum(R.bh/R.cap*100)+'%',sttCls(R.bh)],[sttx('comm'),sttMoney(A.comm)]]);
+  const n=document.createElement('div');n.className='note';n.textContent=sttx('note');b.appendChild(n);
+}
+function sttPerf(b,R){
+  const t=document.createElement('table'),hd=document.createElement('tr');['',sttx('all'),sttx('long'),sttx('short')].forEach(x=>{const th=document.createElement('th');th.textContent=x;hd.appendChild(th)});t.appendChild(hd);
+  const row=(l,f,cls)=>{const tr=document.createElement('tr');const a=document.createElement('td');a.textContent=l;tr.appendChild(a);[R.all,R.long,R.short].forEach(S=>{const td=document.createElement('td');const v=f(S);td.textContent=v[0];if(cls&&v[1]!=null)td.className=sttCls(v[1]);tr.appendChild(td)});t.appendChild(tr)};
+  row(sttx('net'),S=>[sttMoney(S.net,true),S.net],true);row(sttx('gp'),S=>[sttMoney(S.gp)]);row(sttx('gl'),S=>[sttMoney(S.gl)]);row(sttx('comm'),S=>[sttMoney(S.comm)]);
+  row(sttx('pf'),S=>[S.pf==null?'—':sttNum(S.pf,3)]);row(sttx('trades'),S=>[sttNum(S.n,0)]);row(sttx('win'),S=>[sttNum(S.w,0)]);row(sttx('loss'),S=>[sttNum(S.l,0)]);
+  row(sttx('pct'),S=>[S.pct==null?'—':sttNum(S.pct)+'%']);row(sttx('avg'),S=>[sttMoney(S.avg,true),S.avg],true);row(sttx('aw'),S=>[sttMoney(S.aw)]);row(sttx('al'),S=>[sttMoney(S.al)]);
+  row(sttx('ratio'),S=>[S.aw!=null&&S.al?sttNum(S.aw/S.al,3):'—']);row(sttx('bw'),S=>[sttMoney(S.bw)]);row(sttx('bl'),S=>[sttMoney(S.bl)]);row(sttx('bars'),S=>[S.bars==null?'—':sttNum(S.bars,0)]);
+  const w=document.createElement('div');w.style.cssText='overflow-x:auto';w.appendChild(t);b.appendChild(w);
+  const g=document.createElement('div');g.className='isg';g.textContent=sttx('dd');b.appendChild(g);
+  sttKp(b,[[sttx('dd'),sttMoney(R.maxDD),sttNum(R.maxDDp)+'%',R.maxDD>0?'dn':''],[sttx('ru'),sttMoney(R.maxRU),sttNum(R.maxRUp)+'%',R.maxRU>0?'up':'']]);
+}
+function sttList(b,R){
+  const all=R.opens.concat(R.trades.slice().reverse());/* le più recenti in alto, come TradingView */
+  if(!all.length){const n=document.createElement('div');n.className='note';n.textContent=sttx('none');b.appendChild(n);return}
+  const dp=typeof dec==='number'?dec:2;
+  all.slice(0,STT.lim).forEach(T=>{
+    const d=document.createElement('div');d.className='tr';
+    const h=document.createElement('div');h.className='trh';
+    const n=document.createElement('span');n.className='n';n.textContent='#'+T.i;h.appendChild(n);
+    const sd=document.createElement('span');sd.className='sd '+(T.d>0?'l':'s');sd.textContent=T.d>0?sttx('long'):sttx('short');h.appendChild(sd);
+    const id=document.createElement('span');id.className='id';id.textContent=T.open?T.id+' · '+sttx('open'):T.id;h.appendChild(id);
+    const pl=document.createElement('span');pl.className='pl '+sttCls(T.pl);pl.textContent=sttMoney(T.pl,true)+' ('+sttNum(T.plp)+'%)';h.appendChild(pl);d.appendChild(h);
+    const r1=document.createElement('div');r1.className='trr';r1.innerHTML='<span></span><span></span>';r1.children[0].textContent=sttx('entry')+' '+sttDate(T.et);r1.children[1].textContent=sttNum(T.ep,dp)+' · '+sttx('qty')+' '+sttNum(T.q,T.q%1?2:0);d.appendChild(r1);
+    const r2=document.createElement('div');r2.className='trr';r2.innerHTML='<span></span><span></span>';
+    if(T.open){r2.children[0].textContent=sttx('price');r2.children[1].textContent=sttNum(T.xp,dp)}
+    else{r2.children[0].textContent=sttx('exit')+' '+sttDate(T.xt)+(T.xid?' · '+T.xid:'');r2.children[1].textContent=sttNum(T.xp,dp)+' · '+sttx('cum')+' '+sttMoney(T.cum,true)}
+    d.appendChild(r2);b.appendChild(d);
+  });
+  if(all.length>STT.lim){const m=document.createElement('button');m.className='mb';m.textContent=sttx('more')+' ('+(all.length-STT.lim)+')';m.onclick=()=>{STT.lim+=200;STT.draw()};b.appendChild(m)}
+}
+/* legenda: accanto al nome della strategia il profitto netto; toccandolo si apre lo Strategy tester */
+(function(){const o=indLegend;indLegend=function(){o.apply(this,arguments);const d=$('lgind');if(!d)return;
+  const rows=d.querySelectorAll('.lgr');IND.forEach((ind,i)=>{const r=IR.get(ind.uid),row=rows[i];if(!row||!r||!r.strat||r.error)return;
+    const A=r.strat.all,s=document.createElement('span');s.className='lgs '+sttCls(A.net);s.textContent=sttMoney(A.net,true);s.setAttribute('role','button');s.setAttribute('aria-label',sttx('title'));
+    s.onclick=e=>{e.stopPropagation();haptic&&haptic();openStt(ind)};const p=row.querySelector('.lgb');row.insertBefore(s,p);
+    const bar=row.querySelector('.lgb');if(bar){const q=document.createElement('button');q.setAttribute('aria-label',sttx('title'));q.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5h16M6.5 16l4-5 3 3 4.5-6.5"/></svg>';
+      q.onclick=e=>{e.stopPropagation();haptic&&haptic();LGSEL=null;indLegend();openStt(ind)};bar.insertBefore(q,bar.firstChild)}});
+  sttRefresh()}})();
 /* =====================================================================
    0.39.3: finestra impostazioni indicatore (Input, Stile, Visibilità)
    ===================================================================== */

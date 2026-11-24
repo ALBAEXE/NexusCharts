@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.13.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.14.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.13.0 — Moteur Pine Script complet et stratégies
+### 🆕 Nouveautés de la 1.14.0 — Strategy Tester
+
+- 📊 Les résultats des stratégies dans un Strategy Tester plein écran : vue d'ensemble avec la courbe du capital, performance répartie en Toutes, Long et Short, et la liste des transactions.
+- 🏷️ À côté du nom d'une stratégie sur le graphique, une petite étiquette affiche le profit net : touche-la pour ouvrir le Strategy Tester. Les indicateurs qui ne sont pas des stratégies ne changent pas.
+
+### Auparavant, dans la 1.13.0 — Moteur Pine Script complet et stratégies
 
 - 🧩 Le moteur Pine Script couvre désormais toutes les fonctions, variables et constantes de la référence officielle de Pine v6, y compris matrices, enums, polylignes et chart points.
 - 📈 Les stratégies sont désormais simulées comme dans un testeur de stratégies : ordres au marché, limit et stop, take profit, stop loss et trailing stop, pyramiding, commissions et statistiques (profit net, capital, drawdown, trades clôturés et ouverts). Simulation uniquement : aucun ordre réel.
@@ -77,11 +82,14 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 - 🏷️ Les étiquettes et dessins des indicateurs placés à une heure entre deux bougies (par exemple le nom d'une session au milieu de sa boîte) apparaissent maintenant au bon endroit, et non plus au bord gauche du graphique.
 
-### Auparavant, dans la 1.12.2 — Prise en charge de Pine v4
+<details>
+<summary>Auparavant, dans la 1.12.2 — Prise en charge de Pine v4</summary>
 
 - 🧩 Les indicateurs Pine Script v4 fonctionnent aussi : fonctions sans ta./math./str., security(), iff(), tostring() et input(type=…).
 - ➗ Pine v5 : diviser deux nombres entiers écrits dans le code donne un entier (5 / 2 = 2), comme sur TradingView. En v6 cela reste 2,5.
 - 📊 Or : volume de ticks sur tout l'historique depuis 2011.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.12.1 — Volume de ticks</summary>
@@ -96,14 +104,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 - 🕔 Pour l'or, les métaux, l'énergie, le Forex et les indices, les bougies de 4 heures commencent à 17 h, 21 h, 1 h, 5 h, 9 h et 13 h, heure de New York : chaque journée se termine à 17 h avec la bougie journalière, comme chez les courtiers.
 - 📈 La bougie en direct s'ouvre aux mêmes heures. Cryptos et actions restent comme avant.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.11.0 — Minutes de l'or depuis 2011</summary>
-
-- ⏱️ L'or a désormais un historique jusqu'à janvier 2011 aussi sur les graphiques en minutes : 1m, 3m, 5m, 15m, 30m et 45m.
-- 👈 Comme pour les autres unités de temps, fais glisser le graphique vers la gauche et les bougies plus anciennes se chargent toutes seules.
 
 </details>
 
