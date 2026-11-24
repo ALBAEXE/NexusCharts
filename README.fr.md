@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.22.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.23.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.22.0 — Onglet Style complet pour les signaux et les dessins
+### 🆕 Nouveautés de la 1.23.0 — Remplissages, arrière-plans et panneaux inférieurs
+
+- 🎨 Style affiche désormais chaque remplissage et couleur d'arrière-plan du script : afficher/masquer et, si le script utilise plusieurs couleurs, chacune se modifie avec sa propre opacité.
+- 📉 Les indicateurs dans les panneaux sous le graphique dessinent maintenant aussi signaux, remplissages, arrière-plans, rectangles, étiquettes et lignes (par exemple la bande du RSI entre 30 et 70).
+- 🔒 Les remplissages et arrière-plans marqués comme non modifiables dans le script restent masqués dans Style, comme sur TradingView.
+
+### Auparavant, dans la 1.22.0 — Onglet Style complet pour les signaux et les dessins
 
 - 🎯 Style affiche désormais les signaux de chaque script (plotshape, plotchar, plotarrow) : afficher/masquer, couleur et opacité, forme, position, taille et couleur du texte.
 - 🧩 Nouvelle section Objets graphiques : rectangles, étiquettes, lignes, tableaux et polylignes à activer ou désactiver.
@@ -79,11 +85,14 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🎯 Nouveau : Pivot Points Standard (Traditionnel, Fibonacci, Woodie, Classique, DM, Camarilla) journaliers, hebdomadaires, mensuels, trimestriels ou annuels.
 - ✅ Toute la bibliothèque d'indicateurs est maintenant refaite.
 
-### Auparavant, dans la 1.20.0 — Oscillateurs refaits
+<details>
+<summary>Auparavant, dans la 1.20.0 — Oscillateurs refaits</summary>
 
 - 📉 RSI, Stochastic RSI, Stochastique, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator et Aroon refaits avec les réglages et valeurs de départ de TradingView, plus niveaux modifiables, autre unité de temps et alertes.
 - 🔀 RSI : lissage avec Bandes de Bollinger, zones de surachat et de survente et divergences haussières et baissières.
 - 🎨 MACD avec les quatre couleurs de l'histogramme et le type de moyenne pour l'oscillateur et le signal.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.19.0 — Bandes et canaux refaits</summary>
@@ -100,15 +109,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 📈 Moyennes mobiles refaites avec les réglages et valeurs de départ de TradingView (lissage avec Bandes de Bollinger, autre unité de temps, attente de la clôture) plus des alertes de croisement du prix. Nouvelles : SMMA, DEMA, TEMA, LSMA, McGinley Dynamic et MA Cross ; MA Ribbon avec 4 moyennes réglables.
 - 🏷️ Réglages du graphique › Légende : logo, titre (symbole, nom ou les deux), marché ouvert, valeurs du graphique, variation de la barre, volume, variation sur la veille ; pour les indicateurs titres, paramètres, valeurs et fond.
 - 🔤 Les réglages des indicateurs s'affichent dans ta langue.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.17.0 — Personnalise chaque indicateur</summary>
-
-- 🎨 Style, pour chaque indicateur et chaque script : type de tracé (ligne, ligne en escalier, histogramme, croix, zone, colonnes, cercles), ligne continue/tirets/pointillés, épaisseur, couleur, ligne de prix, étiquettes sur l'échelle, décimales, valeurs et paramètres dans la légende.
-- 👁️ Visibilité avec des intervalles, par exemple Minutes de 1 à 15.
-- 🔗 Source dans ta langue, et le résultat d'un autre indicateur du graphique comme source (par exemple une moyenne du RSI).
 
 </details>
 

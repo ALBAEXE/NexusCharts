@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.22.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.23.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.22.0 — Vollständiger Stil-Tab für Signale und Zeichnungen
+### 🆕 Neu in 1.23.0 — Füllungen, Hintergründe und untere Bereiche
+
+- 🎨 Stil zeigt jetzt jede Füllung und Hintergrundfarbe des Skripts: ein-/ausblenden und, wenn das Skript mehrere Farben nutzt, jede einzeln mit eigener Deckkraft ändern.
+- 📉 Indikatoren in den Bereichen unter dem Chart zeichnen jetzt auch Signale, Füllungen, Hintergründe, Rechtecke, Beschriftungen und Linien (zum Beispiel das RSI-Band zwischen 30 und 70).
+- 🔒 Füllungen und Hintergründe, die im Skript als nicht bearbeitbar markiert sind, bleiben im Stil-Tab verborgen, wie bei TradingView.
+
+### Vorher in 1.22.0 — Vollständiger Stil-Tab für Signale und Zeichnungen
 
 - 🎯 Stil zeigt jetzt die Signale jedes Skripts (plotshape, plotchar, plotarrow): ein-/ausblenden, Farbe und Deckkraft, Form, Position, Größe und Textfarbe.
 - 🧩 Neuer Bereich Zeichenobjekte: Rechtecke, Beschriftungen, Linien, Tabellen und Polylinien ein- oder ausschalten.
@@ -79,11 +85,14 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🎯 Neu: Pivot Points Standard (Traditionell, Fibonacci, Woodie, Klassisch, DM, Camarilla) täglich, wöchentlich, monatlich, quartalsweise oder jährlich.
 - ✅ Die gesamte Indikatorbibliothek ist jetzt neu gebaut.
 
-### Vorher in 1.20.0 — Oszillatoren neu
+<details>
+<summary>Vorher in 1.20.0 — Oszillatoren neu</summary>
 
 - 📉 RSI, Stochastic RSI, Stochastik, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator und Aroon neu gebaut mit den Einstellungen und Startwerten von TradingView, dazu einstellbare Niveaus, andere Zeiteinheit und Alarme.
 - 🔀 RSI: Glättung mit Bollinger-Bändern, überkaufte/überverkaufte Zonen und bullische/bärische Divergenzen.
 - 🎨 MACD mit den vier Histogrammfarben und MA-Typ für Oszillator und Signal.
+
+</details>
 
 <details>
 <summary>Vorher in 1.19.0 — Bänder und Kanäle neu</summary>
@@ -100,15 +109,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 📈 Gleitende Durchschnitte neu gebaut mit den Einstellungen und Startwerten von TradingView (Glättung mit Bollinger-Bändern, andere Zeiteinheit, Warten auf Schluss der Zeiteinheit) plus Alarme beim Kreuzen des Preises. Neu: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic und MA Cross; MA Ribbon mit 4 frei einstellbaren Durchschnitten.
 - 🏷️ Chart-Einstellungen › Legende: Logo, Titel (Symbol, Name oder beides), Marktstatus, Chartwerte, Balkenänderung, Volumen, Änderung zum Vortag; für Indikatoren Titel, Eingaben, Werte und Hintergrund.
 - 🔤 Die Indikator-Einstellungen erscheinen in deiner Sprache.
-
-</details>
-
-<details>
-<summary>Vorher in 1.17.0 — Jeden Indikator anpassen</summary>
-
-- 🎨 Stil, für jeden Indikator und jedes Skript: Darstellung (Linie, Stufenlinie, Histogramm, Kreuze, Fläche, Säulen, Kreise), durchgehend/gestrichelt/gepunktet, Stärke, Farbe, Preislinie, Beschriftung auf der Preisachse, Nachkommastellen, Werte und Eingaben in der Legende.
-- 👁️ Sichtbarkeit mit Bereichen, zum Beispiel Minuten von 1 bis 15.
-- 🔗 Quelle in deiner Sprache und das Ergebnis eines anderen Indikators im Chart als Quelle (zum Beispiel ein gleitender Durchschnitt des RSI).
 
 </details>
 

@@ -1,4 +1,4 @@
-const VERSION='1.22.0';
+const VERSION='1.23.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -6275,8 +6275,8 @@ F('plotarrow',['series','title','colorup','colordown','offset','minheight','maxh
 F('plotcandle',['open','high','low','close','title','color','wickcolor','editable','show_last','bordercolor','display'],()=>NaN);
 F('plotbar',['open','high','low','close','title','color','editable','show_last','display'],()=>NaN);
 F('hline',['price','title','color','linestyle','linewidth','editable','display'],(E,a,s,n)=>{if(!E.out.hline.has(n.id))E.out.hline.set(n.id,{id:n.id,p:a[0],title:a[1]||'',c:a[2]===undefined?CONST['color.gray']:a[2],st:a[3]||'dashed',w:a[4]||1,disp:a[6]==null?15:a[6]});return{__k:'hline',id:n.id}});
-F('fill',['plot1','plot2','color','title','editable','show_last','fillgaps','display'],(E,a,s,n)=>{let f=E.out.fill.get(n.id);if(!f){f={id:n.id,a:a[0]&&a[0].id,ak:a[0]&&a[0].__k,b:a[1]&&a[1].id,bk:a[1]&&a[1].__k,cols:new Array(E.n).fill(null)};E.out.fill.set(n.id,f)}f.cols[E.bar]=a[2]===undefined?mkc(33,150,243,80):a[2];return NaN});
-F('bgcolor',['color','offset','editable','show_last','title','display','force_overlay'],(E,a)=>{if(!isNa(a[0]))E.out.bg[E.bar+(a[1]||0)]=a[0];return NaN});
+F('fill',['plot1','plot2','color','title','editable','show_last','fillgaps','display'],(E,a,s,n)=>{let f=E.out.fill.get(n.id);if(!f){f={id:n.id,a:a[0]&&a[0].id,ak:a[0]&&a[0].__k,b:a[1]&&a[1].id,bk:a[1]&&a[1].__k,cols:new Array(E.n).fill(null),title:a[3]||null,ed:a[4]!==false,disp:a[7]==null?15:a[7]};E.out.fill.set(n.id,f)}f.cols[E.bar]=a[2]===undefined?mkc(33,150,243,80):a[2];return NaN});
+F('bgcolor',['color','offset','editable','show_last','title','display','force_overlay'],(E,a,s,n)=>{/* 1.23.0: ogni bgcolor ha il suo titolo e i suoi colori, per la scheda Stile */let m=E.out.bgm.get(n.id);if(!m){m={id:n.id,title:a[4]||null,ed:a[2]!==false,disp:a[5]==null?15:a[5],bars:{}};E.out.bgm.set(n.id,m)}if(a[5]===0)return NaN;if(!isNa(a[0]))m.bars[E.bar+(a[1]||0)]=a[0];return NaN});
 F('barcolor',['color','offset','editable','show_last','title','display'],(E,a)=>{if(!isNa(a[0]))E.out.barc[E.bar+(a[1]||0)]=a[0];return NaN});
 F('alert',['message','freq'],(E,a)=>{if(E.bar===E.n-1)E.out.alerts.push(String(a[0]));return NaN});
 F('alertcondition',['condition','title','message'],(E,a,s,n)=>{if(!E.out.condMeta.some(c=>c.id===n.id))E.out.condMeta.push({id:n.id,title:a[1]||'',msg:a[2]||''});if(E.bar===E.n-1&&tru(a[0]))E.out.conds.push({id:n.id,title:a[1]||'',msg:a[2]||''});return NaN});
@@ -7120,7 +7120,7 @@ function run(prog,data,opts){
     G:[],C:new Ctx(0),brk:false,cont:false,sec:false,depth:0,ln:0,pos:0,seq:0,declared:false,
     inp:new Map(),secR:new Map(),secData:opts.sec||{},need:new Set(),opts,
     max:{box:50,line:50,label:50,table:20,linefill:50,polyline:50},live2:null,old:{box:0,line:0,label:0,table:0,linefill:0,polyline:0},
-    out:{meta:{kind:prog.kind,title:'Script',short:'',overlay:false},inputs:[],plot:new Map(),hline:new Map(),fill:new Map(),shape:[],smeta:new Map(),bg:{},barc:{},
+    out:{meta:{kind:prog.kind,title:'Script',short:'',overlay:false},inputs:[],plot:new Map(),hline:new Map(),fill:new Map(),shape:[],smeta:new Map(),bgm:new Map(),bg:{},barc:{},
       box:[],line:[],label:[],table:[],linefill:[],polyline:[],alerts:[],conds:[],condMeta:[],logs:[],orders:[]}};
   E.lc={box:0,line:0,label:0,table:0,linefill:0,polyline:0};
   for(let i=0;i<prog.nG;i++)E.G.push(new V());
@@ -7138,10 +7138,11 @@ function run(prog,data,opts){
   const res={ms:Date.now()-t0,error,need:[...E.need],meta:O.meta,inputs:O.inputs,alerts:O.alerts,conds:O.conds,condMeta:O.condMeta,logs:O.logs,
     plots:[...O.plot.values()].map(p=>({id:p.id,title:p.title,lw:p.lw,style:p.style,off:p.off,disp:p.disp,ov:p.ov,ed:p.ed,vals:p.vals,cols:p.cols.map(cv)})),
     hlines:[...O.hline.values()].map(h=>({id:h.id,p:h.p,title:h.title,c:cv(h.c),st:h.st,w:h.w,disp:h.disp})),
-    fills:[...O.fill.values()].map(f=>({a:f.a,ak:f.ak,b:f.b,bk:f.bk,cols:f.cols.map(cv)})),
+    fills:[...O.fill.values()].filter(f=>f.disp!==0).map(f=>({id:f.id,title:f.title,ed:f.ed,disp:f.disp,a:f.a,ak:f.ak,b:f.b,bk:f.bk,cols:f.cols.map(cv)})),
     shapes:O.shape.map(s=>Object.assign({},s,{c:cv(s.c),tc:cv(s.tc)})),
     smeta:[...O.smeta.values()].map(m=>Object.assign({},m,{c:m.c==null?null:cv(m.c),tc:m.tc==null?null:cv(m.tc),cu:m.cu==null?null:cv(m.cu),cd:m.cd==null?null:cv(m.cd)})),
-    bg:Object.keys(O.bg).map(k=>({bar:+k,c:cv(O.bg[k])})).filter(x=>x.c),
+    bg:[].concat(...[...O.bgm.values()].map(m=>Object.keys(m.bars).map(k=>({bar:+k,c:cv(m.bars[k]),id:m.id})))).filter(x=>x.c).sort((x,y)=>x.bar-y.bar),
+    bgmeta:[...O.bgm.values()].map(m=>({id:m.id,title:m.title,ed:m.ed,disp:m.disp})),
     barc:Object.keys(O.barc).map(k=>({bar:+k,c:cv(O.barc[k])})).filter(x=>x.c),
     boxes:O.box.filter(o=>!o.del).map(o=>({l:o.l,t:o.t,r:o.r,b:o.b,bc:cv(o.bc),bw:o.bw,bs:o.bs,ext:o.ext,xl:o.xl,bg:cv(o.bg),tx:o.tx,ts:o.ts,tc:cv(o.tc),th:o.th,tv:o.tv})),
     lines:O.line.filter(o=>!o.del).map(o=>({x1:o.x1,y1:o.y1,x2:o.x2,y2:o.y2,xl:o.xl,ext:o.ext,c:cv(o.c),st:o.st,w:o.w,_o:o})),
@@ -7420,16 +7421,23 @@ function pcvDraw(){
     /* indice della prima candela del risultato nel grafico attuale */
     let off=0;if(r.times.length&&lastBars.length&&lastBars[0].t!==r.times[0]){const k=lastBars.findIndex(b=>b.t===r.times[0]);off=k>=0?k:0}
     const X=i=>lCoord(i+off),XT=ms=>{const l=tToL(chartT(ms));return l==null?null:lCoord(l)};
-    const xOf=(x,xl)=>xl==='bt'?XT(x):X(x),Y=p=>series.priceToCoordinate(p);
+    /* 1.23.0: anche gli script nel riquadro sotto hanno segnali, riempimenti, sfondi e disegni, nel loro riquadro */
+    const pIdx=ov?0:paneOf(ind,r);let PG=null;
+    if(pIdx>0){let s0=null;const own=IS.get(ind.uid);if(own&&own.list&&own.list.length)s0=own.list[0];
+      if(!s0)for(const x of IND){if(x===ind)continue;const rr=IR.get(x.uid),S2=IS.get(x.uid);if(rr&&!rr.error&&S2&&S2.list&&S2.list.length&&paneOf(x,rr)===pIdx){s0=S2.list[0];break}}
+      if(s0)try{const pe=s0.getPane().getHTMLElement(),rc=pe.getBoundingClientRect(),rc0=el.getBoundingClientRect();if(rc.height>4)PG={s:s0,top:rc.top-rc0.top,h:rc.height}}catch(e){}}
+    const PH=PG?PG.h:ph,cmap=(q,col)=>{if(!q||!q.m||!col)return col;const z=q.m[col];return z&&z.c?rgbaOf(z.c,z.o!=null?z.o:100):col};
+    const xOf=(x,xl)=>xl==='bt'?XT(x):X(x),Y=p=>(PG?PG.s:series).priceToCoordinate(p);
     const inView=(a,b)=>!(Math.max(a,b)<vr.from-off-2||Math.min(a,b)>vr.to-off+2);
     const i0=Math.max(0,Math.floor(vr.from-off)-1),i1=Math.min(r.times.length-1,Math.ceil(vr.to-off)+1);
-    if(ov){
+    if(pIdx===0||PG){
+      if(PG){c.restore();c.save();c.beginPath();c.rect(0,PG.top,pw,PG.h);c.clip();c.translate(0,PG.top)}
       /* sfondi */
-      for(const b of r.bg){if(b.bar<i0||b.bar>i1)continue;const x=X(b.bar);if(x==null)continue;c.fillStyle=b.c;c.fillRect(x-spacing/2,0,spacing,ph)}
+      for(const b of r.bg){if(b.bar<i0||b.bar>i1)continue;const qb=SOo['b'+b.id];if(qb&&qb.v===false)continue;const x=X(b.bar);if(x==null)continue;c.fillStyle=cmap(qb,b.c);c.fillRect(x-spacing/2,0,spacing,PH)}
       /* riempimenti tra plot o hline */
       const series2=(k,id)=>{if(k==='hline'){const h=r.hlines.find(x=>x.id===id);return h?(()=>h.p):null}const p=r.plots.find(x=>x.id===id);return p?(i=>p.vals[i]):null};
-      for(const f of r.fills){const A=series2(f.ak,f.a),B=series2(f.bk,f.b);if(!A||!B)continue;
-        for(let i=Math.max(i0,0);i<i1;i++){const col=f.cols[i];if(!col)continue;const a0=A(i),a1=A(i+1),b0=B(i),b1=B(i+1);if(![a0,a1,b0,b1].every(isFinite))continue;
+      for(const f of r.fills){const qf=SOo['f'+f.id];if(qf&&qf.v===false)continue;const A=series2(f.ak,f.a),B=series2(f.bk,f.b);if(!A||!B)continue;
+        for(let i=Math.max(i0,0);i<i1;i++){const col=cmap(qf,f.cols[i]);if(!col)continue;const a0=A(i),a1=A(i+1),b0=B(i),b1=B(i+1);if(![a0,a1,b0,b1].every(isFinite))continue;
           const x0=X(i),x1=X(i+1);if(x0==null||x1==null)continue;c.fillStyle=col;c.beginPath();c.moveTo(x0,Y(a0));c.lineTo(x1,Y(a1));c.lineTo(x1,Y(b1));c.lineTo(x0,Y(b0));c.closePath();c.fill()}}
       /* box */
       for(const b of (dOn('box')?r.boxes:[])){
@@ -7458,18 +7466,18 @@ function pcvDraw(){
         if(l.xl!=='bt'&&l.ext==='none'&&!inView(l.x1,l.x2))continue;
         let x1=xOf(l.x1,l.xl),x2=xOf(l.x2,l.xl),y1=Y(l.y1),y2=Y(l.y2);if(x1==null||x2==null||y1==null||y2==null)continue;
         const dx=x2-x1,dy=y2-y1;
-        if((l.ext==='right'||l.ext==='both')&&dx!==0){const k=(pw-x1)/dx;if(k>1){x2=x1+dx*k;y2=y1+dy*k}}else if((l.ext==='right'||l.ext==='both')&&dx===0)y2=dy>0?ph:0;
+        if((l.ext==='right'||l.ext==='both')&&dx!==0){const k=(pw-x1)/dx;if(k>1){x2=x1+dx*k;y2=y1+dy*k}}else if((l.ext==='right'||l.ext==='both')&&dx===0)y2=dy>0?PH:0;
         if((l.ext==='left'||l.ext==='both')&&dx!==0){const k=-x1/dx;if(k<0){x1=x1+dx*k;y1=y1+dy*k}}
         c.strokeStyle=l.c;c.lineWidth=l.w||1;dash(c,l.st);c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();c.setLineDash([]);
         const ah=(ax,ay,bx,by)=>{const a=Math.atan2(by-ay,bx-ax);c.fillStyle=l.c;c.beginPath();c.moveTo(bx,by);c.lineTo(bx-9*Math.cos(a-0.45),by-9*Math.sin(a-0.45));c.lineTo(bx-9*Math.cos(a+0.45),by-9*Math.sin(a+0.45));c.closePath();c.fill()};
         if(l.st==='arrow_right'||l.st==='arrow_both')ah(x1,y1,x2,y2);if(l.st==='arrow_left'||l.st==='arrow_both')ah(x2,y2,x1,y1);
       }
       /* forme di plotshape / plotchar */
-      for(const s0 of r.shapes){if(s0.bar<i0||s0.bar>i1)continue;const s=shpStyled(s0,SOo['s'+s0.id]);if(!s)continue;const x=X(s.bar);if(x==null)continue;pcvShape(c,s,x,r,ph,Y)}
+      for(const s0 of r.shapes){if(s0.bar<i0||s0.bar>i1)continue;let s=shpStyled(s0,SOo['s'+s0.id]);if(!s)continue;if(PG&&(s.loc==='abovebar'||s.loc==='belowbar'))s=Object.assign({},s,{loc:s.loc==='abovebar'?'top':'bottom'});const x=X(s.bar);if(x==null)continue;pcvShape(c,s,x,r,PH,Y)}
       /* segnali delle strategie */
       const ost=new Map();/* più segni sulla stessa candela: uno sopra l'altro, non sovrapposti */
-      for(const o of r.orders){if(o.bar<i0||o.bar>i1)continue;const x=X(o.bar),bb=lastBars[o.bar+off];if(x==null||!bb)continue;
-        const up=o.d>0,kk=o.bar+(up?'u':'d'),nn=ost.get(kk)||0;ost.set(kk,nn+1);const y=up?Y(bb.l)+16+nn*30:Y(bb.h)-16-nn*30;pcvShape(c,{st:o.d===0?'xcross':up?'arrowup':'arrowdown',c:o.d>0?'#22ab94':o.d<0?'#f23645':'#9598a1',tx:o.tx,tc:o.d>0?'#22ab94':o.d<0?'#f23645':'#9598a1',sz:'small',loc:'absolute',y:NaN},x,r,ph,Y,y)}
+      if(!PG)for(const o of r.orders){if(o.bar<i0||o.bar>i1)continue;const x=X(o.bar),bb=lastBars[o.bar+off];if(x==null||!bb)continue;
+        const up=o.d>0,kk=o.bar+(up?'u':'d'),nn=ost.get(kk)||0;ost.set(kk,nn+1);const y=up?Y(bb.l)+16+nn*30:Y(bb.h)-16-nn*30;pcvShape(c,{st:o.d===0?'xcross':up?'arrowup':'arrowdown',c:o.d>0?'#22ab94':o.d<0?'#f23645':'#9598a1',tx:o.tx,tc:o.d>0?'#22ab94':o.d<0?'#f23645':'#9598a1',sz:'small',loc:'absolute',y:NaN},x,r,PH,Y,y)}
       /* 1.13.0: polyline (spezzate o curve, chiuse o aperte, con riempimento) */
       for(const pl of (dOn('poly')?(r.polylines||[]):[])){
         const P=pl.pts.map(q=>[xOf(q[0],pl.xl),Y(q[1])]).filter(q=>q[0]!=null&&q[1]!=null&&isFinite(q[0])&&isFinite(q[1]));if(P.length<2)continue;
@@ -7485,9 +7493,10 @@ function pcvDraw(){
         if(!isFinite(lb.x))continue;
         if(lb.xl!=='bt'&&!inView(lb.x,lb.x))continue;
         const x=xOf(lb.x,lb.xl);if(x==null)continue;
-        let y;if(lb.yl==='abovebar'||lb.yl==='belowbar'){const bi=lb.xl==='bt'?null:Math.round(lb.x)+off,bb=bi!=null?lastBars[bi]:null;if(!bb)continue;y=lb.yl==='abovebar'?Y(bb.h)-6:Y(bb.l)+6}else{if(!isFinite(lb.y))continue;y=Y(lb.y)}
+        let y;if(PG&&(lb.yl==='abovebar'||lb.yl==='belowbar'))y=lb.yl==='abovebar'?14:PH-14;else if(lb.yl==='abovebar'||lb.yl==='belowbar'){const bi=lb.xl==='bt'?null:Math.round(lb.x)+off,bb=bi!=null?lastBars[bi]:null;if(!bb)continue;y=lb.yl==='abovebar'?Y(bb.h)-6:Y(bb.l)+6}else{if(!isFinite(lb.y))continue;y=Y(lb.y)}
         if(y==null)continue;pcvLabel(c,lb,x,y);
       }
+      if(PG){c.restore();c.save();c.beginPath();c.rect(0,0,pw,PH);c.clip()}
     }
     /* tabelle (anche per gli script nel riquadro sotto) */
     if(dOn('table'))for(const tb of r.tables)pcvTable(c,tb,pw,ph);
@@ -14408,5 +14417,51 @@ function shpt(k){const L=SHP_T[lang]||SHP_T.it;return L[k]!=null?L[k]:SHP_T.it[k
     });
     if(dob.length){shEl(body,'isg',shpt('dobj'));
       dob.forEach(([k])=>isdRow(body,shpt(k),isdCheck(SO['__d'+k]!==false,v=>{SO['__d'+k]=v?undefined:false;live(false)}),'',true))}
+  };
+})();
+/* =====================================================================
+   1.23.0: Stile › riempimenti (fill) e sfondi (bgcolor), come TradingView e oltre:
+   mostra/nascondi e, se lo script usa più colori (per esempio verde quando sale e rosso quando scende),
+   ogni colore si cambia per conto suo, con la sua trasparenza. Le voci editable=false restano nascoste.
+   ===================================================================== */
+var FBG_T={
+ it:{fill:'Riempimento',bg:'Sfondo',col:'Colore',grad:'Questo colore cambia a sfumatura: qui si può solo mostrare o nascondere.'},
+ en:{fill:'Fill',bg:'Background',col:'Color',grad:'This colour is a gradient: here it can only be shown or hidden.'},
+ es:{fill:'Relleno',bg:'Fondo',col:'Color',grad:'Este color es un degradado: aquí solo se puede mostrar u ocultar.'},
+ fr:{fill:'Remplissage',bg:'Arrière-plan',col:'Couleur',grad:"Cette couleur est un dégradé : ici on peut seulement l'afficher ou la masquer."},
+ de:{fill:'Füllung',bg:'Hintergrund',col:'Farbe',grad:'Diese Farbe ist ein Verlauf: hier kann sie nur ein- oder ausgeblendet werden.'}
+};
+function fbgt(k){const L=FBG_T[lang]||FBG_T.it;return L[k]!=null?L[k]:FBG_T.it[k]}
+(function(){
+  const MAXC=6;
+  const distinct=arr=>{const o=[];for(const c of arr){if(c&&!o.includes(c)){o.push(c);if(o.length>MAXC)break}}return o};
+  const oS=isdStyle;
+  isdStyle=function(body,ind){
+    oS(body,ind);
+    const r=IR.get(ind.uid);if(!r)return;
+    ind.style=ind.style||{};const SO=ind.style;
+    const fills=(r.fills||[]).filter(f=>f.ed!==false&&f.disp!==0&&f.id!=null);
+    const bgs=(r.bgmeta||[]).filter(b=>b.ed!==false&&b.disp!==0);
+    if(!fills.length&&!bgs.length)return;
+    const note=body.querySelector('.isnote');if(note&&note.textContent===isdt('nosty'))note.remove();
+    const live=()=>{indSave();isdLive(false);try{pcvDraw()}catch(e){}};
+    /* prima degli Oggetti grafici, come su TradingView */
+    const dg=[...body.querySelectorAll('.isg')].find(g=>g.textContent===shpt('dobj'));
+    const at=el=>{if(dg)body.insertBefore(el,dg);else body.appendChild(el)};
+    const tmp=document.createElement('div');
+    const flush=()=>{while(tmp.firstChild)at(tmp.firstChild)};
+    const one=(key,title,cols)=>{
+      const q=()=>(SO[key]=SO[key]||{}),s=SO[key]||{};
+      shEl(tmp,'isg',title);
+      isdRow(tmp,isdt('vischart'),isdCheck(s.v!==false,v=>{q().v=v?undefined:false;live()}),'',true);
+      if(cols.length>MAXC){shEl(tmp,'isnote',fbgt('grad'));return}
+      cols.forEach((c0,k)=>{const m=(s.m||{})[c0]||{};const c=cssToRGBA(m.c||c0)||{r:33,g:150,b:243,a:1};
+        const op=m.o!=null?m.o:Math.round((cssToRGBA(c0)||{a:1}).a*100);
+        const ctl=isdColor(m.c||hex6(c),op,(hx,o)=>{const z=q();z.m=z.m||{};z.m[c0]={c:hx,o};live()});
+        const row=isdRow(tmp,cols.length>1?fbgt('col')+' '+(k+1):fbgt('col'),document.createElement('span'),'',false);row.querySelector('.ctl').replaceWith(ctl)});
+    };
+    fills.forEach((f,i)=>one('f'+f.id,f.title||(fbgt('fill')+(fills.length>1?' '+(i+1):'')),distinct(f.cols)));
+    bgs.forEach((b,i)=>one('b'+b.id,b.title||(fbgt('bg')+(bgs.length>1?' '+(i+1):'')),distinct((r.bg||[]).filter(x=>x.id===b.id).map(x=>x.c))));
+    flush();
   };
 })();

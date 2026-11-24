@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.22.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.23.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.22.0 — Scheda Stile completa per segnali e disegni
+### 🆕 Novità della 1.23.0 — Riempimenti, sfondi e riquadri sotto il grafico
+
+- 🎨 Stile ora elenca ogni riempimento e sfondo colorato dello script: mostra/nascondi e, se lo script usa più colori, ognuno si cambia con la sua trasparenza.
+- 📉 Gli indicatori nei riquadri sotto il grafico ora disegnano anche segnali, riempimenti, sfondi, riquadri, etichette e linee (per esempio la fascia dell'RSI tra 30 e 70).
+- 🔒 Riempimenti e sfondi che lo script segna come non modificabili restano nascosti in Stile, come su TradingView.
+
+### In precedenza, nella 1.22.0 — Scheda Stile completa per segnali e disegni
 
 - 🎯 Stile ora elenca i segnali di ogni script (plotshape, plotchar, plotarrow): mostra/nascondi, colore e trasparenza, forma, posizione, dimensione e colore del testo.
 - 🧩 Nuova sezione Oggetti grafici: riquadri, etichette, linee, tabelle e polilinee da accendere o spegnere.
@@ -79,11 +85,14 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🎯 Nuovo: Pivot Points Standard (Tradizionale, Fibonacci, Woodie, Classico, DM, Camarilla) giornalieri, settimanali, mensili, trimestrali o annuali.
 - ✅ Tutta la libreria di indicatori è ora rifatta.
 
-### In precedenza, nella 1.20.0 — Oscillatori rifatti
+<details>
+<summary>In precedenza, nella 1.20.0 — Oscillatori rifatti</summary>
 
 - 📉 RSI, Stochastic RSI, Stocastico, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator e Aroon rifatti con le impostazioni e i valori di partenza di TradingView, più livelli modificabili, altro timeframe e avvisi.
 - 🔀 RSI: livellamento con Bande di Bollinger, zone di ipercomprato e ipervenduto e divergenze rialziste e ribassiste.
 - 🎨 MACD con i quattro colori dell'istogramma e il tipo di media per oscillatore e segnale.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.19.0 — Bande e canali rifatti</summary>
@@ -100,15 +109,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 📈 Medie mobili rifatte con le impostazioni e i valori di partenza di TradingView (livellamento con Bande di Bollinger, altro timeframe, attesa della chiusura del timeframe) più gli avvisi sull'incrocio del prezzo. Nuove: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic e MA Cross; MA Ribbon con 4 medie personalizzabili.
 - 🏷️ Impostazioni grafico › Legenda: logo, titolo (simbolo, nome o entrambi), mercato aperto, valori del grafico, variazione barre, volume, variazione sul giorno precedente; per gli indicatori titoli, input, valori e sfondo.
 - 🔤 Le impostazioni degli indicatori sono nella tua lingua.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.17.0 — Personalizza ogni indicatore</summary>
-
-- 🎨 Stile, per ogni indicatore e ogni script: tipo di disegno (linea, linea a step, istogramma, croci, area, colonne, cerchi), linea continua/tratteggiata/puntinata, spessore, colore, linea del prezzo, etichette sull'asse, decimali, valori e input in legenda.
-- 👁️ Visibilità con gli intervalli, per esempio Minuti da 1 a 15.
-- 🔗 Sorgente nella tua lingua, e il risultato di un altro indicatore sul grafico come sorgente (per esempio una media dell'RSI).
 
 </details>
 
