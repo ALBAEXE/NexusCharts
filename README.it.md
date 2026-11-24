@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.26.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.27.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.26.0 — Arrotondamento a metà in su
+### 🆕 Novità della 1.27.0 — Nuovi indicatori di trend
+
+- 📈 Nuovi: Parabolic SAR, Williams Alligator, Williams Fractals, Guppy Multiple Moving Average (GMMA) e Vortex Indicator, con le impostazioni di TradingView più colori, altro timeframe, segnali e avvisi.
+- ⏩ Le linee spostate in avanti (offset) ora continuano oltre l'ultima candela, come su TradingView: per esempio la nuvola dell'Ichimoku 26 candele avanti.
+- 🎨 I riempimenti tra linee spostate seguono le linee; la vista resta sull'ultima candela vera.
+
+### In precedenza, nella 1.26.0 — Arrotondamento a metà in su
 
 - 🔢 I numeri esattamente a metà si arrotondano in su (3971,165 → 3971,17) in math.round, str.tostring, math.round_to_mintick e nei prezzi mostrati sul grafico.
 - 🧮 Niente più errori dovuti a come il computer memorizza i decimali (3971,16499…).
@@ -79,11 +85,14 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🎚️ input.int e input.float con le opzioni scritte in fila ora mostrano il menu a tendina; input(close) mostra il menu Sorgente.
 - 🕒 time e time_close accettano bars_back e timeframe_bars_back in entrambe le forme della v6.
 
-### In precedenza, nella 1.24.0 — Riempimenti a sfumatura e script più compatibili
+<details>
+<summary>In precedenza, nella 1.24.0 — Riempimenti a sfumatura e script più compatibili</summary>
 
 - 🌈 I riempimenti a sfumatura (valore e colore in alto e in basso) sono disegnati come su TradingView, con i colori in alto e in basso in Stile; l'RSI li usa per ipercomprato e ipervenduto.
 - 🧓 Script vecchi Pine v3/v4: ora valgono la trasparenza transp, la trasparenza di serie di sfondi e riempimenti e la condizione when degli ordini delle strategie.
 - 🧩 line.new, box.new e label.new con chart.point, i nomi alternativi ufficiali dei parametri e l'avviso automatico dei parametri non supportati.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.23.0 — Riempimenti, sfondi e riquadri sotto il grafico</summary>
@@ -100,15 +109,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🎯 Stile ora elenca i segnali di ogni script (plotshape, plotchar, plotarrow): mostra/nascondi, colore e trasparenza, forma, posizione, dimensione e colore del testo.
 - 🧩 Nuova sezione Oggetti grafici: riquadri, etichette, linee, tabelle e polilinee da accendere o spegnere.
 - 🔒 Linee e segnali che lo script segna come non modificabili restano nascosti in Stile, come su TradingView.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.21.0 — Volume e livelli rifatti</summary>
-
-- 📊 OBV, Volume, Pivot Points High Low, ZigZag e gli indicatori di livelli (massimo e minimo del giorno e della settimana prima, aperture, ADR, variazione %, volatilità storica, massimo e minimo a 52 settimane, massimo e minimo della sessione) rifatti con le impostazioni di TradingView più etichette, opzioni in più e avvisi.
-- 🎯 Nuovo: Pivot Points Standard (Tradizionale, Fibonacci, Woodie, Classico, DM, Camarilla) giornalieri, settimanali, mensili, trimestrali o annuali.
-- ✅ Tutta la libreria di indicatori è ora rifatta.
 
 </details>
 

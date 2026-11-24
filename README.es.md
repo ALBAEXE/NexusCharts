@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.26.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.27.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.26.0 — Redondeo de la mitad hacia arriba
+### 🆕 Novedades de la 1.27.0 — Nuevos indicadores de tendencia
+
+- 📈 Nuevos: Parabolic SAR, Williams Alligator, Williams Fractals, Guppy Multiple Moving Average (GMMA) y Vortex Indicator, con los ajustes de TradingView más colores, otra temporalidad, señales y alertas.
+- ⏩ Las líneas desplazadas hacia delante (offset) ahora continúan después de la última vela, como en TradingView: por ejemplo la nube de Ichimoku 26 velas por delante.
+- 🎨 Los rellenos entre líneas desplazadas siguen las líneas; la vista se queda en la última vela real.
+
+### Anteriormente, en la 1.26.0 — Redondeo de la mitad hacia arriba
 
 - 🔢 Los números exactamente en la mitad se redondean hacia arriba (3971,165 → 3971,17) en math.round, str.tostring, math.round_to_mintick y en los precios mostrados en el gráfico.
 - 🧮 Se acabaron los errores causados por cómo el ordenador guarda los decimales (3971,16499…).
@@ -79,11 +85,14 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🎚️ input.int e input.float con las opciones escritas en orden ahora muestran el menú desplegable; input(close) muestra el menú Fuente.
 - 🕒 time y time_close aceptan bars_back y timeframe_bars_back en las dos formas de la v6.
 
-### Anteriormente, en la 1.24.0 — Rellenos degradados y scripts más compatibles
+<details>
+<summary>Anteriormente, en la 1.24.0 — Rellenos degradados y scripts más compatibles</summary>
 
 - 🌈 Los rellenos degradados (valor y color superior e inferior) se dibujan como en TradingView, con los colores superior e inferior en Estilo; el RSI los usa para sobrecompra y sobreventa.
 - 🧓 Scripts antiguos Pine v3/v4: ahora se aplican la transparencia transp, la transparencia por defecto de fondos y rellenos y la condición when de las órdenes de estrategia.
 - 🧩 line.new, box.new y label.new con chart.point, los nombres alternativos oficiales de los parámetros y el aviso automático de parámetros no soportados.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.23.0 — Rellenos, fondos y paneles inferiores</summary>
@@ -100,15 +109,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🎯 Estilo muestra ahora las señales de cada script (plotshape, plotchar, plotarrow): mostrar/ocultar, color y opacidad, forma, posición, tamaño y color del texto.
 - 🧩 Nueva sección Objetos gráficos: recuadros, etiquetas, líneas, tablas y polilíneas que se pueden activar o desactivar.
 - 🔒 Las líneas y señales marcadas como no editables en el script quedan ocultas en Estilo, como en TradingView.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.21.0 — Volumen y niveles rehechos</summary>
-
-- 📊 OBV, Volumen, Pivot Points High Low, ZigZag y los indicadores de niveles (máximo y mínimo del día y la semana anteriores, aperturas, ADR, variación %, volatilidad histórica, máximo y mínimo de 52 semanas, máximo y mínimo de la sesión) rehechos con los ajustes de TradingView más etiquetas, opciones extra y alertas.
-- 🎯 Nuevo: Pivot Points Standard (Tradicional, Fibonacci, Woodie, Clásico, DM, Camarilla) diarios, semanales, mensuales, trimestrales o anuales.
-- ✅ Toda la biblioteca de indicadores está rehecha.
 
 </details>
 
