@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.20.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.21.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.20.0 — Oscillators rebuilt
+### 🆕 New in 1.21.0 — Volume and levels rebuilt
+
+- 📊 OBV, Volume, Pivot Points High Low, ZigZag and the levels indicators (previous day/week high and low, opens, ADR, change %, historical volatility, 52-week high/low, session high/low) rebuilt with TradingView's settings plus labels, extra options and alerts.
+- 🎯 New: Pivot Points Standard (Traditional, Fibonacci, Woodie, Classic, DM, Camarilla) on daily, weekly, monthly, quarterly or yearly pivots.
+- ✅ The whole indicator library is now rebuilt.
+
+### Previously in 1.20.0 — Oscillators rebuilt
 
 - 📉 RSI, Stochastic RSI, Stochastic, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator and Aroon rebuilt with TradingView's settings and defaults, plus editable levels, another timeframe and alerts.
 - 🔀 RSI: smoothing with Bollinger Bands, overbought/oversold zones and bullish/bearish divergences.
@@ -79,11 +85,14 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 📐 New: Linear Regression Channel with upper/lower deviation, extendable lines and Pearson's R.
 - 🛠️ Chart settings › Legend: the switches now work, and the arrow of the Title menu is in the right place.
 
-### Previously in 1.18.0 — Moving averages rebuilt, legend settings
+<details>
+<summary>Previously in 1.18.0 — Moving averages rebuilt, legend settings</summary>
 
 - 📈 Moving averages rebuilt with TradingView's settings and defaults (smoothing with Bollinger Bands, another timeframe, wait for timeframe closes) plus price-cross alerts. New: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic and MA Cross; MA Ribbon with 4 fully configurable averages.
 - 🏷️ Chart settings › Legend: logo, title (symbol, name or both), market status, chart values, bar change, volume, change from the previous day; for indicators titles, inputs, values and background.
 - 🔤 Indicator settings are shown in your language.
+
+</details>
 
 <details>
 <summary>Previously in 1.17.0 — Customize every indicator</summary>
@@ -99,14 +108,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 - 🏷️ Indicators with their own pane below the chart (RSI, MACD…) show their name at the top left of that pane; tap it for show/hide, settings and remove. Closing the legend tab hides these names too.
 - 🌗 Switching to the light theme makes the chart white, and back to dark makes it black. A custom background chosen by hand is kept.
-
-</details>
-
-<details>
-<summary>Previously in 1.15.1 — Fixes</summary>
-
-- 🔢 Indicators in a pane below the chart, such as RSI, show 2 decimals instead of the price's decimals; very small values (such as MACD on EURUSD) keep the decimals they need.
-- 🌍 With Bar Replay open, Cancel and Start here now change language right away, and the button names read by VoiceOver and TalkBack are in the chosen language.
 
 </details>
 

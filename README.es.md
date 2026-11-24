@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.20.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.21.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.20.0 — Osciladores rehechos
+### 🆕 Novedades de la 1.21.0 — Volumen y niveles rehechos
+
+- 📊 OBV, Volumen, Pivot Points High Low, ZigZag y los indicadores de niveles (máximo y mínimo del día y la semana anteriores, aperturas, ADR, variación %, volatilidad histórica, máximo y mínimo de 52 semanas, máximo y mínimo de la sesión) rehechos con los ajustes de TradingView más etiquetas, opciones extra y alertas.
+- 🎯 Nuevo: Pivot Points Standard (Tradicional, Fibonacci, Woodie, Clásico, DM, Camarilla) diarios, semanales, mensuales, trimestrales o anuales.
+- ✅ Toda la biblioteca de indicadores está rehecha.
+
+### Anteriormente, en la 1.20.0 — Osciladores rehechos
 
 - 📉 RSI, Stochastic RSI, Estocástico, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator y Aroon rehechos con los ajustes y valores iniciales de TradingView, más niveles editables, otra temporalidad y alertas.
 - 🔀 RSI: suavizado con Bandas de Bollinger, zonas de sobrecompra y sobreventa y divergencias alcistas y bajistas.
@@ -79,11 +85,14 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 📐 Nuevo: Linear Regression Channel con desviación superior/inferior, líneas extensibles y R de Pearson.
 - 🛠️ Ajustes del gráfico › Leyenda: los interruptores ya funcionan y la flecha del menú Título está en su sitio.
 
-### Anteriormente, en la 1.18.0 — Medias móviles rehechas, ajustes de la leyenda
+<details>
+<summary>Anteriormente, en la 1.18.0 — Medias móviles rehechas, ajustes de la leyenda</summary>
 
 - 📈 Medias móviles rehechas con los ajustes y valores iniciales de TradingView (suavizado con Bandas de Bollinger, otra temporalidad, esperar al cierre de la temporalidad) más alertas de cruce del precio. Nuevas: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic y MA Cross; MA Ribbon con 4 medias configurables.
 - 🏷️ Ajustes del gráfico › Leyenda: logo, título (símbolo, nombre o ambos), mercado abierto, valores del gráfico, variación de la barra, volumen, variación sobre el día anterior; para los indicadores títulos, entradas, valores y fondo.
 - 🔤 Los ajustes de los indicadores se muestran en tu idioma.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.17.0 — Personaliza cada indicador</summary>
@@ -99,14 +108,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - 🏷️ Los indicadores con su propio panel bajo el gráfico (RSI, MACD…) muestran su nombre arriba a la izquierda de ese panel; tócalo para mostrar/ocultar, ajustes y eliminar. Al cerrar la pestaña de la leyenda también desaparecen estos nombres.
 - 🌗 Al pasar al tema claro el gráfico se vuelve blanco, y al volver al oscuro, negro. Un fondo personalizado elegido a mano se mantiene.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.15.1 — Correcciones</summary>
-
-- 🔢 Los indicadores en el panel bajo el gráfico, como el RSI, muestran 2 decimales en lugar de los del precio; los valores muy pequeños (como el MACD en EURUSD) mantienen los decimales necesarios.
-- 🌍 Con el Bar Replay abierto, Cancelar y Empezar aquí cambian de idioma al momento, y los nombres de los botones que leen VoiceOver y TalkBack están en el idioma elegido.
 
 </details>
 
