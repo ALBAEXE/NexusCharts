@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.15.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.16.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.15.1 — Corrections
+### 🆕 Nouveautés de la 1.16.0 — Noms des indicateurs dans leur panneau, le graphique suit le thème
+
+- 🏷️ Les indicateurs avec leur propre panneau sous le graphique (RSI, MACD…) affichent leur nom en haut à gauche de ce panneau ; touche-le pour afficher/masquer, réglages et supprimer. En fermant l'onglet de la légende, ces noms disparaissent aussi.
+- 🌗 En passant au thème clair le graphique devient blanc, et en revenant au sombre, noir. Un fond personnalisé choisi à la main est conservé.
+
+### Auparavant, dans la 1.15.1 — Corrections
 
 - 🔢 Les indicateurs dans le panneau sous le graphique, comme le RSI, affichent 2 décimales au lieu de celles du prix ; les valeurs très petites (comme le MACD sur EURUSD) gardent les décimales nécessaires.
 - 🌍 Avec le Bar Replay ouvert, Annuler et Démarrer ici changent de langue tout de suite, et les noms des boutons lus par VoiceOver et TalkBack sont dans la langue choisie.
@@ -76,10 +81,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 - ⏩ Quand tu fais défiler le graphique en arrière dans le temps, un petit bouton apparaît en bas à droite : touche-le pour revenir tout de suite à la dernière bougie.
 
-### Auparavant, dans la 1.14.1 — Éditeur de scripts plus compact
+<details>
+<summary>Auparavant, dans la 1.14.1 — Éditeur de scripts plus compact</summary>
 
 - 🔤 Le code dans l'éditeur de scripts est plus petit et plus compact : tu vois plus de lignes, et plus longues, à la fois. Le texte plus grand ou plus petit reste dans le menu.
 - 🔍 Dans le navigateur, toucher un champ de texte n'agrandit plus la page tout seul.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.14.0 — Strategy Tester</summary>
@@ -95,13 +103,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🧩 Le moteur Pine Script couvre désormais toutes les fonctions, variables et constantes de la référence officielle de Pine v6, y compris matrices, enums, polylignes et chart points.
 - 📈 Les stratégies sont désormais simulées comme dans un testeur de stratégies : ordres au marché, limit et stop, take profit, stop loss et trailing stop, pyramiding, commissions et statistiques (profit net, capital, drawdown, trades clôturés et ouverts). Simulation uniquement : aucun ordre réel.
 - 🕰️ Les scripts plus anciens fonctionnent aussi : Pine v1, v2 et v3, scripts sans //@version, offset() et textes qui continuent à la ligne suivante.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.12.3 — Étiquettes à la bonne place</summary>
-
-- 🏷️ Les étiquettes et dessins des indicateurs placés à une heure entre deux bougies (par exemple le nom d'une session au milieu de sa boîte) apparaissent maintenant au bon endroit, et non plus au bord gauche du graphique.
 
 </details>
 

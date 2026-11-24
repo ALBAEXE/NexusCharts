@@ -1,4 +1,4 @@
-const VERSION='1.15.1';
+const VERSION='1.16.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -8153,7 +8153,7 @@ pageInd=function(b){
     });
   };
   /* tocco fuori dalla legenda: deseleziona */
-  document.addEventListener('pointerdown',e=>{if(LGSEL&&!e.target.closest('#lgind')){LGSEL=null;indLegend()}},true);
+  document.addEventListener('pointerdown',e=>{if(LGSEL&&!e.target.closest('#lgind,.plg')){LGSEL=null;indLegend()}},true);
   try{indLegend()}catch(e){}
 })();
 
@@ -13980,4 +13980,46 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
     if(typeof hintFor==='function'&&dMode==='place'){}}catch(e){}};
   const o=applyLang;applyLang=function(){const r=o.apply(this,arguments);rp();all();return r};
   all();
+})();
+
+/* =====================================================================
+   1.16.0: come TradingView, il nome di un indicatore che ha un riquadro suo sotto il grafico
+   (RSI, MACD, …) si vede in alto a sinistra del suo riquadro, non più nella legenda in alto.
+   Toccandolo compare la stessa barra (occhio, impostazioni, elimina).
+   ===================================================================== */
+(function(){
+  /* stesso aspetto delle righe della legenda */
+  try{const add=[];document.querySelectorAll('style').forEach(s=>{const t=s.textContent||'';if(t.indexOf('#lgind ')>=0){const keep=t.split('}').filter(r=>r.indexOf('#lgind ')>=0).map(r=>r.split('#lgind ').join('.plg ').replace(/^[^{]*@media[^{]*\{/,'')).join('}');if(keep)add.push(keep+'}')}});
+    const st=document.createElement('style');st.textContent=add.join('\n')+`\n.plg{position:absolute;left:8px;z-index:5;display:flex;flex-direction:column;gap:1px;pointer-events:none;max-width:calc(100% - 90px)}\n.plg .lgr{margin-left:0}`;document.head.appendChild(st)}catch(e){}
+  const boxes=new Map();let hid=false;
+  const box=k=>{let b=boxes.get(k);if(!b||!b.isConnected){b=document.createElement('div');b.className='plg';const cb=$('chartbox');if(cb)cb.appendChild(b);boxes.set(k,b)}return b};
+  /* stessi colori della legenda in alto (il grafico ha i suoi colori, anche con il tema chiaro) */
+  const vars=b=>{try{const lg=$('lgind')||$('legend');if(!lg)return;const cs=getComputedStyle(lg);['--fg','--muted','--bg','--glasssel','--line'].forEach(v=>{const x=cs.getPropertyValue(v);if(x)b.style.setProperty(v,x.trim())});b.style.color=cs.color}catch(e){}};
+  const place=()=>{boxes.forEach(vars);try{const ps=chart.panes();let y=0;const hs=ps.map(p=>p.getHeight());
+    boxes.forEach((b,k)=>{if(hid||k>=ps.length||!b.children.length){b.style.display='none';return}let t=0;for(let j=0;j<k;j++)t+=hs[j]+1;b.style.display='';b.style.top=(t+6)+'px'})}catch(e){}};
+  window.plgPlace=place;
+  const o=indLegend;indLegend=function(){o.apply(this,arguments);
+    boxes.forEach(b=>{b.innerHTML=''});
+    const d=$('lgind');if(!d)return;const rows=[...d.querySelectorAll('.lgr')];if(rows.length!==IND.length)return;
+    IND.forEach((ind,i)=>{const r=IR.get(ind.uid);if(!r||r.error||!r.meta||r.meta.overlay||indOff(ind))return;
+      const k=paneOf(ind,r);if(k>0)box(k).appendChild(rows[i])});
+    /* senza indicatori sul grafico principale la legenda in alto resta vuota, come TradingView */
+    if(IND.length&&!d.querySelector('.lgr')){d.innerHTML=''}
+    /* linguetta chiusa: spariscono anche i nomi nei riquadri, come TradingView */
+    hid=!!d.hidden;place()};
+  /* i riquadri cambiano altezza (dito sul separatore, rotazione, tastiera) */
+  setInterval(()=>{if(boxes.size)place()},400);
+  try{indLegend()}catch(e){}
+})();
+
+/* =====================================================================
+   1.16.0: cambiando tema il grafico cambia con lui (chiaro = sfondo bianco, scuro = nero),
+   come il resto dell'app. Un colore personalizzato scelto a mano resta com'è.
+   ===================================================================== */
+(function(){
+  const sync=th=>{try{const v=cvCfg();if(v.p==='custom')return false;const want=th==='light'?'white':(v.p==='white'?'black':v.p);
+    if(v.p===want)return false;v.p=want;saveCS();return true}catch(e){return false}};
+  const o=setTheme;setTheme=function(th){sync(th);const r=o.apply(this,arguments);try{applyCanvas()}catch(e){}try{indLegend()}catch(e){}return r};
+  /* una volta sola: chi ha già il tema chiaro con il grafico nero lo trova allineato */
+  try{if(!localStorage.getItem('tc_cvsync1')){localStorage.setItem('tc_cvsync1','1');const th=document.documentElement.dataset.theme||'dark';if(sync(th)){try{applyCanvas()}catch(e){}}}}catch(e){}
 })();

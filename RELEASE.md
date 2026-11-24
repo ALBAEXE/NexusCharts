@@ -1,8 +1,10 @@
-# v1.15.1 — Fixes
+# v1.16.0 — Indicator names in their pane, chart follows the theme
+### Changed
+- Indicators drawn in their own pane below the chart (for example RSI or MACD) now show their name and settings at the top left of that pane, instead of in the legend at the top. Tapping the name shows the same bar as before (show/hide, settings, remove). Indicators drawn on the price chart stay in the top legend.
+- Closing the legend tab also hides the names shown in the panes.
+
 ### Fixed
-- Indicators drawn in a pane below the chart (for example RSI) used the decimals of the symbol's price, such as 5 on EURUSD. They now use the script's precision when it sets one, otherwise 2 decimals, or the price decimals for very small values (for example MACD on EURUSD).
-- Changing language while Bar Replay is waiting for a starting point now updates its Cancel and Start here buttons right away.
-- Button names read by screen readers (VoiceOver, TalkBack) were always in English; they now follow the chosen language.
+- Switching to the light theme left the chart black. The chart background now follows the theme (white in light, black in dark); a custom background chosen by hand is kept.
 
 ### Documentation
-- README updated in 5 languages: new in 1.15.1.
+- README updated in 5 languages: new in 1.16.0.
