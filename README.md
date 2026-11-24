@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.14.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.15.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.14.1 — More compact Script editor
+### 🆕 New in 1.15.0 — Back to the latest candle
+
+- ⏩ When you scroll the chart back in time, a small button appears at the bottom right: tap it to jump back to the latest candle.
+
+### Previously in 1.14.1 — More compact Script editor
 
 - 🔤 The code in the Script editor is smaller and more compact, so you see more lines and longer lines at once. Larger or smaller text is still available from the menu.
 - 🔍 In the browser, tapping a text field no longer zooms the page in.
@@ -77,11 +81,14 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 📊 Strategy results in a full-screen Strategy Tester: overview with the equity curve, performance split into All, Long and Short, and the list of trades.
 - 🏷️ Next to a strategy's name on the chart, a small tag shows its net profit: tap it to open the Strategy Tester. Indicators that are not strategies are unchanged.
 
-### Previously in 1.13.0 — Pine Script engine: full coverage and strategies
+<details>
+<summary>Previously in 1.13.0 — Pine Script engine: full coverage and strategies</summary>
 
 - 🧩 The Pine Script engine now covers every function, variable and constant in the official Pine v6 reference, including matrices, enums, polylines and chart points.
 - 📈 Strategies are now simulated like a strategy tester: market, limit and stop orders, take profit, stop loss and trailing stop, pyramiding, commissions and trade statistics (net profit, equity, drawdown, closed and open trades). Simulation only: no real orders.
 - 🕰️ Older scripts work too: Pine v1, v2 and v3, scripts without //@version, offset(), and text that continues on the next line.
+
+</details>
 
 <details>
 <summary>Previously in 1.12.3 — Labels in the right place</summary>
@@ -96,14 +103,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🧩 Pine Script v4 indicators now run too: functions without the ta./math./str. prefix, security(), iff(), tostring() and input(type=…).
 - ➗ Pine v5: dividing two whole numbers written in the code gives a whole number (5 / 2 = 2), as on TradingView. In v6 it stays 2.5.
 - 📊 Gold: tick volume across the whole history since 2011.
-
-</details>
-
-<details>
-<summary>Previously in 1.12.1 — Tick volume</summary>
-
-- 📊 Candles now carry tick volume (how many times the price changed), the same kind of volume TradingView uses for gold and Forex. Indicators that read volume now work with real values.
-- 🎨 Light theme: indicator text drawn with the chart's text color is visible again.
 
 </details>
 

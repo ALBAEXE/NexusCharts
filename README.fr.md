@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.14.1-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.15.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,11 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.14.1 — Éditeur de scripts plus compact
+### 🆕 Nouveautés de la 1.15.0 — Retour à la dernière bougie
+
+- ⏩ Quand tu fais défiler le graphique en arrière dans le temps, un petit bouton apparaît en bas à droite : touche-le pour revenir tout de suite à la dernière bougie.
+
+### Auparavant, dans la 1.14.1 — Éditeur de scripts plus compact
 
 - 🔤 Le code dans l'éditeur de scripts est plus petit et plus compact : tu vois plus de lignes, et plus longues, à la fois. Le texte plus grand ou plus petit reste dans le menu.
 - 🔍 Dans le navigateur, toucher un champ de texte n'agrandit plus la page tout seul.
@@ -77,11 +81,14 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 📊 Les résultats des stratégies dans un Strategy Tester plein écran : vue d'ensemble avec la courbe du capital, performance répartie en Toutes, Long et Short, et la liste des transactions.
 - 🏷️ À côté du nom d'une stratégie sur le graphique, une petite étiquette affiche le profit net : touche-la pour ouvrir le Strategy Tester. Les indicateurs qui ne sont pas des stratégies ne changent pas.
 
-### Auparavant, dans la 1.13.0 — Moteur Pine Script complet et stratégies
+<details>
+<summary>Auparavant, dans la 1.13.0 — Moteur Pine Script complet et stratégies</summary>
 
 - 🧩 Le moteur Pine Script couvre désormais toutes les fonctions, variables et constantes de la référence officielle de Pine v6, y compris matrices, enums, polylignes et chart points.
 - 📈 Les stratégies sont désormais simulées comme dans un testeur de stratégies : ordres au marché, limit et stop, take profit, stop loss et trailing stop, pyramiding, commissions et statistiques (profit net, capital, drawdown, trades clôturés et ouverts). Simulation uniquement : aucun ordre réel.
 - 🕰️ Les scripts plus anciens fonctionnent aussi : Pine v1, v2 et v3, scripts sans //@version, offset() et textes qui continuent à la ligne suivante.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.12.3 — Étiquettes à la bonne place</summary>
@@ -96,14 +103,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🧩 Les indicateurs Pine Script v4 fonctionnent aussi : fonctions sans ta./math./str., security(), iff(), tostring() et input(type=…).
 - ➗ Pine v5 : diviser deux nombres entiers écrits dans le code donne un entier (5 / 2 = 2), comme sur TradingView. En v6 cela reste 2,5.
 - 📊 Or : volume de ticks sur tout l'historique depuis 2011.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.12.1 — Volume de ticks</summary>
-
-- 📊 Les bougies ont maintenant un volume de ticks (combien de fois le prix a changé), le même type de volume que TradingView utilise pour l'or et le Forex. Les indicateurs qui lisent le volume travaillent désormais avec des valeurs réelles.
-- 🎨 Thème clair : le texte des indicateurs dessiné avec la couleur du texte du graphique est de nouveau visible.
 
 </details>
 

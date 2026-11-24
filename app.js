@@ -1,4 +1,4 @@
-const VERSION='1.14.1';
+const VERSION='1.15.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -8148,6 +8148,34 @@ pageInd=function(b){
   try{indLegend()}catch(e){}
 })();
 
+/* =====================================================================
+   1.15.0: tasto «torna all'ultima candela» (come TradingView): compare in basso a destra
+   solo quando hai scorso il grafico indietro e l'ultima candela non si vede più
+   ===================================================================== */
+(function(){
+  const L={it:"Torna all'ultima candela",en:"Back to the latest candle",es:"Volver a la última vela",fr:"Revenir à la dernière bougie",de:"Zur letzten Kerze"};
+  const st=document.createElement('style');
+  st.textContent=`#rtbtn{position:absolute;z-index:6;width:34px;height:34px;margin:0;padding:0;border-radius:50%;border:1px solid var(--glassline);background:var(--glass2);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--fg);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.25);opacity:0;transform:scale(.8);pointer-events:none;transition:opacity .2s,transform .2s;-webkit-tap-highlight-color:transparent}
+#rtbtn.on{opacity:1;transform:none;pointer-events:auto}
+#rtbtn:active{transform:scale(.9)}
+#rtbtn svg{width:18px;height:18px}`;
+  document.head.appendChild(st);
+  const b=document.createElement('button');b.id='rtbtn';b.type='button';
+  b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7l5 5-5 5M13 7l5 5-5 5"/></svg>';
+  let on=false;
+  const place=()=>{try{const ts=chart.timeScale();b.style.right=(chart.priceScale('right').width()+8)+'px';b.style.bottom=(ts.height()+8)+'px'}catch(e){}};
+  const check=()=>{if(typeof chart==='undefined'||!chart)return;let show=false;
+    try{const r=chart.timeScale().getVisibleLogicalRange(),last=(lastBars&&lastBars.length?lastBars.length:0)-1;show=!!r&&last>0&&r.to<last-1}catch(e){}
+    if(show!==on){on=show;b.classList.toggle('on',on);if(on)place()}};
+  b.onclick=e=>{e.stopPropagation();try{haptic&&haptic()}catch(x){}try{chart.timeScale().scrollToRealTime()}catch(x){}};
+  const boot=()=>{const box=$('chartbox');if(!box||typeof chart==='undefined'||!chart){setTimeout(boot,500);return}
+    b.setAttribute('aria-label',L[lang]||L.it);box.appendChild(b);place();
+    try{chart.timeScale().subscribeVisibleLogicalRangeChange(check)}catch(e){}
+    window.addEventListener('resize',()=>{if(on)place()});
+    /* nuove candele, cambio simbolo o timeframe, lingua */
+    setInterval(()=>{b.setAttribute('aria-label',L[lang]||L.it);check();if(on)place()},1000)};
+  boot();
+})();
 /* =====================================================================
    1.14.0: Strategy tester — risultati delle strategie a tutto schermo
    (Panoramica con curva del capitale, Rendimento Tutte/Long/Short, Elenco operazioni)
