@@ -1,4 +1,4 @@
-const VERSION='1.14.0';
+const VERSION='1.14.1';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -5064,7 +5064,8 @@ var ED_BUILTIN=[
 ];
 
 /* ---------- archivio ---------- */
-var ED={list:lsGet('tc_scripts',[]),cur:null,fs:lsGet('tc_edfs',15),open:false,built:false,msgs:[]};
+/* 1.14.1: testo del codice più compatto (11 px, prima 15); la grandezza salvata prima non si usa più */
+var ED={list:lsGet('tc_scripts',[]),cur:null,fs:lsGet('tc_edfs2',11),open:false,built:false,msgs:[]};
 function edSaveList(){lsSet('tc_scripts',ED.list)}
 function edNew(kind,code,name){const c=code!=null?code:edTpl(kind);return{id:null,name:name||edt('untitled'),kind:kind||'indicator',code:c,saved:c,vers:[]}}
 function edDirty(){return!!ED.cur&&ED.ta&&ED.ta.value!==ED.cur.saved}
@@ -5527,8 +5528,8 @@ function edMoreMenu(){
     smItem(m,edt('check'),{ic:'check',on:()=>edRunCheck(true)});
     smItem(m,edt('find'),{ic:'search',on:()=>{ED.find.hidden=false;const f=ED.find.querySelector('.ff');const sel=ED.ta.value.slice(ED.ta.selectionStart,ED.ta.selectionEnd);if(sel&&!sel.includes('\n'))f.value=sel;edFindCount();setTimeout(()=>f.focus(),50)}});
     smSep(m);
-    smItem(m,edt('bigger'),{ic:'aa',keep:true,on:()=>{ED.fs=Math.min(22,ED.fs+1);lsSet('tc_edfs',ED.fs);edApplyFs()}});
-    smItem(m,edt('smaller'),{ic:'aa',keep:true,on:()=>{ED.fs=Math.max(11,ED.fs-1);lsSet('tc_edfs',ED.fs);edApplyFs()}});
+    smItem(m,edt('bigger'),{ic:'aa',keep:true,on:()=>{ED.fs=Math.min(22,ED.fs+1);lsSet('tc_edfs2',ED.fs);edApplyFs()}});
+    smItem(m,edt('smaller'),{ic:'aa',keep:true,on:()=>{ED.fs=Math.max(10,ED.fs-1);lsSet('tc_edfs2',ED.fs);edApplyFs()}});
     if(ED.cur&&ED.cur.id){
       smSep(m);
       smItem(m,edt('del'),{ic:'trash',danger:true,on:()=>{
@@ -7656,8 +7657,8 @@ edMoreMenu=function(){
     smItem(m,edt('check'),{ic:'check',on:()=>{edRunCheck(true);try{PINE.compile(ED.ta.value)}catch(e){const con=ED.con,x=document.createElement('button');x.className='cm e';x.innerHTML='<i></i><em></em><span></span>';x.children[0].textContent=edt('err');x.children[1].textContent=edt('in_line')+' '+(e.ln||1);x.children[2].textContent=e.message;x.onclick=()=>edSelectLine(e.ln||1);con.appendChild(x)}}});
     smItem(m,edt('find'),{ic:'search',on:()=>{ED.find.hidden=false;const f=ED.find.querySelector('.ff');const sel=ED.ta.value.slice(ED.ta.selectionStart,ED.ta.selectionEnd);if(sel&&!sel.includes('\n'))f.value=sel;edFindCount();setTimeout(()=>f.focus(),50)}});
     smSep(m);
-    smItem(m,edt('bigger'),{ic:'aa',keep:true,on:()=>{ED.fs=Math.min(22,ED.fs+1);lsSet('tc_edfs',ED.fs);edApplyFs()}});
-    smItem(m,edt('smaller'),{ic:'aa',keep:true,on:()=>{ED.fs=Math.max(11,ED.fs-1);lsSet('tc_edfs',ED.fs);edApplyFs()}});
+    smItem(m,edt('bigger'),{ic:'aa',keep:true,on:()=>{ED.fs=Math.min(22,ED.fs+1);lsSet('tc_edfs2',ED.fs);edApplyFs()}});
+    smItem(m,edt('smaller'),{ic:'aa',keep:true,on:()=>{ED.fs=Math.max(10,ED.fs-1);lsSet('tc_edfs2',ED.fs);edApplyFs()}});
     if(ED.cur&&ED.cur.id){
       smSep(m);
       smItem(m,edt('del'),{ic:'trash',danger:true,on:()=>{

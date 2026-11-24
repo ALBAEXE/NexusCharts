@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.14.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.14.1-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.14.0 — Strategy Tester
+### 🆕 Novità della 1.14.1 — Editor degli script più compatto
+
+- 🔤 Il codice nell'editor degli script è più piccolo e compatto: vedi più righe, e più lunghe, tutte insieme. Il testo più grande o più piccolo resta nel menu.
+- 🔍 Nel browser, toccando un campo di testo la pagina non si ingrandisce più da sola.
+
+### In precedenza, nella 1.14.0 — Strategy Tester
 
 - 📊 I risultati delle strategie in uno Strategy Tester a tutto schermo: panoramica con la curva del capitale, rendimento diviso in Tutte, Long e Short, ed elenco delle operazioni.
 - 🏷️ Accanto al nome di una strategia sul grafico, una piccola etichetta mostra il profitto netto: toccala per aprire lo Strategy Tester. Gli indicatori che non sono strategie restano come prima.
@@ -78,9 +83,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 📈 Le strategie ora vengono simulate come in uno strategy tester: ordini a mercato, limit e stop, take profit, stop loss e trailing stop, pyramiding, commissioni e statistiche (profitto netto, capitale, drawdown, operazioni chiuse e aperte). Solo simulazione: nessun ordine vero.
 - 🕰️ Funzionano anche gli script più vecchi: Pine v1, v2 e v3, script senza //@version, offset() e testi che continuano sulla riga dopo.
 
-### In precedenza, nella 1.12.3 — Etichette al posto giusto
+<details>
+<summary>In precedenza, nella 1.12.3 — Etichette al posto giusto</summary>
 
 - 🏷️ Le etichette e i disegni degli indicatori messi a un orario tra due candele (per esempio il nome di una sessione a metà del suo box) ora compaiono dove devono, invece che sul bordo sinistro del grafico.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.12.2 — Supporto a Pine v4</summary>
@@ -96,14 +104,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 - 📊 Le candele ora hanno il volume a tick (quante volte il prezzo è cambiato), lo stesso tipo di volume che TradingView usa per oro e Forex. Gli indicatori che leggono il volume ora lavorano con valori reali.
 - 🎨 Tema chiaro: il testo degli indicatori scritto con il colore del testo del grafico si vede di nuovo.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.12.0 — Candele da 4 ore sulla giornata di New York</summary>
-
-- 🕔 Per oro, metalli, energia, Forex e indici le candele da 4 ore partono alle 17, 21, 1, 5, 9 e 13 di New York: ogni giornata finisce alle 17 insieme alla candela giornaliera, come sui broker.
-- 📈 Anche la candela in diretta si apre agli stessi orari. Cripto e azioni restano come prima.
 
 </details>
 

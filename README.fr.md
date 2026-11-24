@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.14.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.14.1-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.14.0 — Strategy Tester
+### 🆕 Nouveautés de la 1.14.1 — Éditeur de scripts plus compact
+
+- 🔤 Le code dans l'éditeur de scripts est plus petit et plus compact : tu vois plus de lignes, et plus longues, à la fois. Le texte plus grand ou plus petit reste dans le menu.
+- 🔍 Dans le navigateur, toucher un champ de texte n'agrandit plus la page tout seul.
+
+### Auparavant, dans la 1.14.0 — Strategy Tester
 
 - 📊 Les résultats des stratégies dans un Strategy Tester plein écran : vue d'ensemble avec la courbe du capital, performance répartie en Toutes, Long et Short, et la liste des transactions.
 - 🏷️ À côté du nom d'une stratégie sur le graphique, une petite étiquette affiche le profit net : touche-la pour ouvrir le Strategy Tester. Les indicateurs qui ne sont pas des stratégies ne changent pas.
@@ -78,9 +83,12 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 📈 Les stratégies sont désormais simulées comme dans un testeur de stratégies : ordres au marché, limit et stop, take profit, stop loss et trailing stop, pyramiding, commissions et statistiques (profit net, capital, drawdown, trades clôturés et ouverts). Simulation uniquement : aucun ordre réel.
 - 🕰️ Les scripts plus anciens fonctionnent aussi : Pine v1, v2 et v3, scripts sans //@version, offset() et textes qui continuent à la ligne suivante.
 
-### Auparavant, dans la 1.12.3 — Étiquettes à la bonne place
+<details>
+<summary>Auparavant, dans la 1.12.3 — Étiquettes à la bonne place</summary>
 
 - 🏷️ Les étiquettes et dessins des indicateurs placés à une heure entre deux bougies (par exemple le nom d'une session au milieu de sa boîte) apparaissent maintenant au bon endroit, et non plus au bord gauche du graphique.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.12.2 — Prise en charge de Pine v4</summary>
@@ -96,14 +104,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 - 📊 Les bougies ont maintenant un volume de ticks (combien de fois le prix a changé), le même type de volume que TradingView utilise pour l'or et le Forex. Les indicateurs qui lisent le volume travaillent désormais avec des valeurs réelles.
 - 🎨 Thème clair : le texte des indicateurs dessiné avec la couleur du texte du graphique est de nouveau visible.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.12.0 — Bougies de 4 heures sur la journée de New York</summary>
-
-- 🕔 Pour l'or, les métaux, l'énergie, le Forex et les indices, les bougies de 4 heures commencent à 17 h, 21 h, 1 h, 5 h, 9 h et 13 h, heure de New York : chaque journée se termine à 17 h avec la bougie journalière, comme chez les courtiers.
-- 📈 La bougie en direct s'ouvre aux mêmes heures. Cryptos et actions restent comme avant.
 
 </details>
 

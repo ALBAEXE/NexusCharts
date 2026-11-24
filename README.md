@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.14.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.14.1-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.14.0 — Strategy Tester
+### 🆕 New in 1.14.1 — More compact Script editor
+
+- 🔤 The code in the Script editor is smaller and more compact, so you see more lines and longer lines at once. Larger or smaller text is still available from the menu.
+- 🔍 In the browser, tapping a text field no longer zooms the page in.
+
+### Previously in 1.14.0 — Strategy Tester
 
 - 📊 Strategy results in a full-screen Strategy Tester: overview with the equity curve, performance split into All, Long and Short, and the list of trades.
 - 🏷️ Next to a strategy's name on the chart, a small tag shows its net profit: tap it to open the Strategy Tester. Indicators that are not strategies are unchanged.
@@ -78,9 +83,12 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 📈 Strategies are now simulated like a strategy tester: market, limit and stop orders, take profit, stop loss and trailing stop, pyramiding, commissions and trade statistics (net profit, equity, drawdown, closed and open trades). Simulation only: no real orders.
 - 🕰️ Older scripts work too: Pine v1, v2 and v3, scripts without //@version, offset(), and text that continues on the next line.
 
-### Previously in 1.12.3 — Labels in the right place
+<details>
+<summary>Previously in 1.12.3 — Labels in the right place</summary>
 
 - 🏷️ Indicator labels and drawings placed at a time between two candles (for example a session name in the middle of its box) now appear where they should, instead of at the left edge of the chart.
+
+</details>
 
 <details>
 <summary>Previously in 1.12.2 — Pine v4 support</summary>
@@ -96,14 +104,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 - 📊 Candles now carry tick volume (how many times the price changed), the same kind of volume TradingView uses for gold and Forex. Indicators that read volume now work with real values.
 - 🎨 Light theme: indicator text drawn with the chart's text color is visible again.
-
-</details>
-
-<details>
-<summary>Previously in 1.12.0 — 4-hour candles on the New York day</summary>
-
-- 🕔 For gold, metals, energy, Forex and indices, 4-hour candles start at 5 pm, 9 pm, 1 am, 5 am, 9 am and 1 pm New York time, so each day ends at 5 pm together with the daily candle, as with brokers.
-- 📈 The live candle opens at the same times. Crypto and stocks stay as before.
 
 </details>
 

@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.14.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.14.1-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.14.0 — Strategy Tester
+### 🆕 Neu in 1.14.1 — Kompakterer Skript-Editor
+
+- 🔤 Der Code im Skript-Editor ist kleiner und kompakter: Du siehst mehr und längere Zeilen auf einmal. Größerer oder kleinerer Text bleibt im Menü verfügbar.
+- 🔍 Im Browser vergrößert sich die Seite beim Antippen eines Textfelds nicht mehr von selbst.
+
+### Vorher in 1.14.0 — Strategy Tester
 
 - 📊 Strategieergebnisse in einem Strategy Tester im Vollbild: Übersicht mit Kapitalkurve, Performance nach Alle, Long und Short, und die Liste der Trades.
 - 🏷️ Neben dem Namen einer Strategie im Chart zeigt ein kleines Etikett den Nettogewinn: antippen, um den Strategy Tester zu öffnen. Indikatoren, die keine Strategien sind, bleiben unverändert.
@@ -78,9 +83,12 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 📈 Strategien werden jetzt wie in einem Strategietester simuliert: Markt-, Limit- und Stop-Orders, Take Profit, Stop Loss und Trailing Stop, Pyramiding, Kommissionen und Statistiken (Nettogewinn, Kapital, Drawdown, geschlossene und offene Trades). Nur Simulation: keine echten Orders.
 - 🕰️ Auch ältere Skripte funktionieren: Pine v1, v2 und v3, Skripte ohne //@version, offset() und Text, der in der nächsten Zeile weitergeht.
 
-### Vorher in 1.12.3 — Beschriftungen an der richtigen Stelle
+<details>
+<summary>Vorher in 1.12.3 — Beschriftungen an der richtigen Stelle</summary>
 
 - 🏷️ Beschriftungen und Zeichnungen von Indikatoren, die auf einer Zeit zwischen zwei Kerzen liegen (zum Beispiel der Name einer Sitzung in der Mitte ihrer Box), erscheinen jetzt an der richtigen Stelle statt am linken Rand des Charts.
+
+</details>
 
 <details>
 <summary>Vorher in 1.12.2 — Unterstützung für Pine v4</summary>
@@ -96,14 +104,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - 📊 Kerzen haben jetzt Tick-Volumen (wie oft sich der Preis geändert hat), dieselbe Art Volumen, die TradingView für Gold und Forex nutzt. Indikatoren, die das Volumen lesen, arbeiten jetzt mit echten Werten.
 - 🎨 Helles Design: Indikator-Text in der Textfarbe des Charts ist wieder sichtbar.
-
-</details>
-
-<details>
-<summary>Vorher in 1.12.0 — 4-Stunden-Kerzen nach dem New Yorker Handelstag</summary>
-
-- 🕔 Für Gold, Metalle, Energie, Forex und Indizes beginnen 4-Stunden-Kerzen um 17, 21, 1, 5, 9 und 13 Uhr New Yorker Zeit: Jeder Tag endet um 17 Uhr zusammen mit der Tageskerze, wie bei Brokern.
-- 📈 Auch die Live-Kerze öffnet zu diesen Zeiten. Krypto und Aktien bleiben wie bisher.
 
 </details>
 
