@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.18.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.19.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.18.0 — Gleitende Durchschnitte neu, Legenden-Einstellungen
+### 🆕 Neu in 1.19.0 — Bänder und Kanäle neu
+
+- 📊 Bollinger-Bänder, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP und lineare Regression neu gebaut mit den Einstellungen und Startwerten von TradingView, dazu MA-Typ, andere Zeiteinheit, Signale und Alarme, wo sinnvoll.
+- 📐 Neu: Linear Regression Channel mit oberer/unterer Abweichung, verlängerbaren Linien und Pearson-R.
+- 🛠️ Chart-Einstellungen › Legende: die Schalter funktionieren jetzt, und der Pfeil des Titel-Menüs sitzt richtig.
+
+### Vorher in 1.18.0 — Gleitende Durchschnitte neu, Legenden-Einstellungen
 
 - 📈 Gleitende Durchschnitte neu gebaut mit den Einstellungen und Startwerten von TradingView (Glättung mit Bollinger-Bändern, andere Zeiteinheit, Warten auf Schluss der Zeiteinheit) plus Alarme beim Kreuzen des Preises. Neu: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic und MA Cross; MA Ribbon mit 4 frei einstellbaren Durchschnitten.
 - 🏷️ Chart-Einstellungen › Legende: Logo, Titel (Symbol, Name oder beides), Marktstatus, Chartwerte, Balkenänderung, Volumen, Änderung zum Vortag; für Indikatoren Titel, Eingaben, Werte und Hintergrund.
@@ -79,10 +85,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 👁️ Sichtbarkeit mit Bereichen, zum Beispiel Minuten von 1 bis 15.
 - 🔗 Quelle in deiner Sprache und das Ergebnis eines anderen Indikators im Chart als Quelle (zum Beispiel ein gleitender Durchschnitt des RSI).
 
-### Vorher in 1.16.0 — Indikatornamen im eigenen Bereich, Chart folgt dem Design
+<details>
+<summary>Vorher in 1.16.0 — Indikatornamen im eigenen Bereich, Chart folgt dem Design</summary>
 
 - 🏷️ Indikatoren mit eigenem Bereich unter dem Chart (RSI, MACD…) zeigen ihren Namen oben links in diesem Bereich; antippen für Ein-/Ausblenden, Einstellungen und Entfernen. Wird die Legende eingeklappt, verschwinden auch diese Namen.
 - 🌗 Beim hellen Design wird der Chart weiß, beim dunklen wieder schwarz. Ein von Hand gewählter Hintergrund bleibt erhalten.
+
+</details>
 
 <details>
 <summary>Vorher in 1.15.1 — Korrekturen</summary>
@@ -96,14 +105,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 <summary>Vorher in 1.15.0 — Zurück zur letzten Kerze</summary>
 
 - ⏩ Wenn du den Chart in der Zeit zurückscrollst, erscheint unten rechts eine kleine Taste: antippen, um sofort zur letzten Kerze zurückzukehren.
-
-</details>
-
-<details>
-<summary>Vorher in 1.14.1 — Kompakterer Skript-Editor</summary>
-
-- 🔤 Der Code im Skript-Editor ist kleiner und kompakter: Du siehst mehr und längere Zeilen auf einmal. Größerer oder kleinerer Text bleibt im Menü verfügbar.
-- 🔍 Im Browser vergrößert sich die Seite beim Antippen eines Textfelds nicht mehr von selbst.
 
 </details>
 

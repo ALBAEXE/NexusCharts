@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.18.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.19.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.18.0 — Moyennes mobiles refaites, réglages de la légende
+### 🆕 Nouveautés de la 1.19.0 — Bandes et canaux refaits
+
+- 📊 Bandes de Bollinger, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP et Régression linéaire refaits avec les réglages et valeurs de départ de TradingView, plus type de moyenne, autre unité de temps, signaux et alertes là où c'est utile.
+- 📐 Nouveau : Linear Regression Channel avec écart haut/bas, lignes prolongeables et R de Pearson.
+- 🛠️ Réglages du graphique › Légende : les interrupteurs fonctionnent et la flèche du menu Titre est à sa place.
+
+### Auparavant, dans la 1.18.0 — Moyennes mobiles refaites, réglages de la légende
 
 - 📈 Moyennes mobiles refaites avec les réglages et valeurs de départ de TradingView (lissage avec Bandes de Bollinger, autre unité de temps, attente de la clôture) plus des alertes de croisement du prix. Nouvelles : SMMA, DEMA, TEMA, LSMA, McGinley Dynamic et MA Cross ; MA Ribbon avec 4 moyennes réglables.
 - 🏷️ Réglages du graphique › Légende : logo, titre (symbole, nom ou les deux), marché ouvert, valeurs du graphique, variation de la barre, volume, variation sur la veille ; pour les indicateurs titres, paramètres, valeurs et fond.
@@ -79,10 +85,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 👁️ Visibilité avec des intervalles, par exemple Minutes de 1 à 15.
 - 🔗 Source dans ta langue, et le résultat d'un autre indicateur du graphique comme source (par exemple une moyenne du RSI).
 
-### Auparavant, dans la 1.16.0 — Noms des indicateurs dans leur panneau, le graphique suit le thème
+<details>
+<summary>Auparavant, dans la 1.16.0 — Noms des indicateurs dans leur panneau, le graphique suit le thème</summary>
 
 - 🏷️ Les indicateurs avec leur propre panneau sous le graphique (RSI, MACD…) affichent leur nom en haut à gauche de ce panneau ; touche-le pour afficher/masquer, réglages et supprimer. En fermant l'onglet de la légende, ces noms disparaissent aussi.
 - 🌗 En passant au thème clair le graphique devient blanc, et en revenant au sombre, noir. Un fond personnalisé choisi à la main est conservé.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.15.1 — Corrections</summary>
@@ -96,14 +105,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 <summary>Auparavant, dans la 1.15.0 — Retour à la dernière bougie</summary>
 
 - ⏩ Quand tu fais défiler le graphique en arrière dans le temps, un petit bouton apparaît en bas à droite : touche-le pour revenir tout de suite à la dernière bougie.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.14.1 — Éditeur de scripts plus compact</summary>
-
-- 🔤 Le code dans l'éditeur de scripts est plus petit et plus compact : tu vois plus de lignes, et plus longues, à la fois. Le texte plus grand ou plus petit reste dans le menu.
-- 🔍 Dans le navigateur, toucher un champ de texte n'agrandit plus la page tout seul.
 
 </details>
 
