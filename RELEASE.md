@@ -1,10 +1,14 @@
-# v1.23.0 — Fills, backgrounds and lower panes
+# v1.24.0 — Gradient fills and better script compatibility
 ### Added
-- Style tab: every fill() and bgcolor() of a script is listed with show/hide; when it uses several colours, each colour can be changed separately with its own opacity (gradients can be shown or hidden).
-- Indicators in the panes below the chart now draw plotshape/plotchar/plotarrow signals, fills, backgrounds, boxes, labels, lines and polylines in their own pane.
+- Pine engine: gradient fill() (top_value, bottom_value, top_color, bottom_color), written with names or positionally; Style shows top and bottom colours with opacity.
+- Pine engine: line.new, box.new and label.new with chart.point arguments.
+- Pine engine: unsupported named parameters are reported automatically (function and parameter name only).
 
 ### Changed
-- Fills and backgrounds declared with editable=false are not listed in the Style tab; fills with display.none are not drawn.
+- RSI: overbought and oversold zones use gradient fills.
+- Pine v3/v4 scripts: transp is applied to plot, plotshape, plotchar, plotarrow, fill and bgcolor, with the default transparency of bgcolor and fill; positional parameter order of these versions is respected.
+- Strategies: the when argument of strategy.entry, order, close, close_all, exit and cancel is applied; long=true/false is accepted as direction.
+- Official alternative parameter names are accepted (hline1/hline2 in fill, named arguments of set functions).
 
 ### Documentation
-- README updated in 5 languages: new in 1.23.0.
+- README updated in 5 languages: new in 1.24.0.

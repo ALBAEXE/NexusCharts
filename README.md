@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.23.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.24.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.23.0 — Fills, backgrounds and lower panes
+### 🆕 New in 1.24.0 — Gradient fills and better script compatibility
+
+- 🌈 Gradient fills (top and bottom value and colour) are drawn like on TradingView, with top and bottom colours in Style; the RSI uses them for overbought and oversold.
+- 🧓 Older Pine v3/v4 scripts: transp transparency, default background and fill transparency, and the when condition of strategy orders are now applied.
+- 🧩 line.new, box.new and label.new with chart.point, alternative official parameter names, and automatic notice of unsupported parameters.
+
+### Previously in 1.23.0 — Fills, backgrounds and lower panes
 
 - 🎨 Style now lists every fill and background colour of a script: show/hide and, when the script uses several colours, each one can be changed with its own opacity.
 - 📉 Indicators in the panes below the chart now draw signals, fills, backgrounds, boxes, labels and lines too (for example the RSI band between 30 and 70).
@@ -79,11 +85,14 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🧩 New Drawing objects section: turn boxes, labels, lines, tables and polylines on or off.
 - 🔒 Plots and signals marked as not editable in the script stay hidden from Style, as on TradingView.
 
-### Previously in 1.21.0 — Volume and levels rebuilt
+<details>
+<summary>Previously in 1.21.0 — Volume and levels rebuilt</summary>
 
 - 📊 OBV, Volume, Pivot Points High Low, ZigZag and the levels indicators (previous day/week high and low, opens, ADR, change %, historical volatility, 52-week high/low, session high/low) rebuilt with TradingView's settings plus labels, extra options and alerts.
 - 🎯 New: Pivot Points Standard (Traditional, Fibonacci, Woodie, Classic, DM, Camarilla) on daily, weekly, monthly, quarterly or yearly pivots.
 - ✅ The whole indicator library is now rebuilt.
+
+</details>
 
 <details>
 <summary>Previously in 1.20.0 — Oscillators rebuilt</summary>
@@ -100,15 +109,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 📊 Bollinger Bands, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP and Linear Regression rebuilt with TradingView's settings and defaults, plus MA type choice, another timeframe, signals and alerts where useful.
 - 📐 New: Linear Regression Channel with upper/lower deviation, extendable lines and Pearson's R.
 - 🛠️ Chart settings › Legend: the switches now work, and the arrow of the Title menu is in the right place.
-
-</details>
-
-<details>
-<summary>Previously in 1.18.0 — Moving averages rebuilt, legend settings</summary>
-
-- 📈 Moving averages rebuilt with TradingView's settings and defaults (smoothing with Bollinger Bands, another timeframe, wait for timeframe closes) plus price-cross alerts. New: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic and MA Cross; MA Ribbon with 4 fully configurable averages.
-- 🏷️ Chart settings › Legend: logo, title (symbol, name or both), market status, chart values, bar change, volume, change from the previous day; for indicators titles, inputs, values and background.
-- 🔤 Indicator settings are shown in your language.
 
 </details>
 

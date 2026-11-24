@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.23.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.24.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.23.0 — Rellenos, fondos y paneles inferiores
+### 🆕 Novedades de la 1.24.0 — Rellenos degradados y scripts más compatibles
+
+- 🌈 Los rellenos degradados (valor y color superior e inferior) se dibujan como en TradingView, con los colores superior e inferior en Estilo; el RSI los usa para sobrecompra y sobreventa.
+- 🧓 Scripts antiguos Pine v3/v4: ahora se aplican la transparencia transp, la transparencia por defecto de fondos y rellenos y la condición when de las órdenes de estrategia.
+- 🧩 line.new, box.new y label.new con chart.point, los nombres alternativos oficiales de los parámetros y el aviso automático de parámetros no soportados.
+
+### Anteriormente, en la 1.23.0 — Rellenos, fondos y paneles inferiores
 
 - 🎨 Estilo muestra ahora cada relleno y color de fondo del script: mostrar/ocultar y, si el script usa varios colores, cada uno se cambia con su propia opacidad.
 - 📉 Los indicadores en los paneles bajo el gráfico ahora también dibujan señales, rellenos, fondos, recuadros, etiquetas y líneas (por ejemplo la banda del RSI entre 30 y 70).
@@ -79,11 +85,14 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🧩 Nueva sección Objetos gráficos: recuadros, etiquetas, líneas, tablas y polilíneas que se pueden activar o desactivar.
 - 🔒 Las líneas y señales marcadas como no editables en el script quedan ocultas en Estilo, como en TradingView.
 
-### Anteriormente, en la 1.21.0 — Volumen y niveles rehechos
+<details>
+<summary>Anteriormente, en la 1.21.0 — Volumen y niveles rehechos</summary>
 
 - 📊 OBV, Volumen, Pivot Points High Low, ZigZag y los indicadores de niveles (máximo y mínimo del día y la semana anteriores, aperturas, ADR, variación %, volatilidad histórica, máximo y mínimo de 52 semanas, máximo y mínimo de la sesión) rehechos con los ajustes de TradingView más etiquetas, opciones extra y alertas.
 - 🎯 Nuevo: Pivot Points Standard (Tradicional, Fibonacci, Woodie, Clásico, DM, Camarilla) diarios, semanales, mensuales, trimestrales o anuales.
 - ✅ Toda la biblioteca de indicadores está rehecha.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.20.0 — Osciladores rehechos</summary>
@@ -100,15 +109,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 📊 Bandas de Bollinger, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP y Regresión lineal rehechos con los ajustes y valores iniciales de TradingView, más tipo de media, otra temporalidad, señales y alertas donde sirven.
 - 📐 Nuevo: Linear Regression Channel con desviación superior/inferior, líneas extensibles y R de Pearson.
 - 🛠️ Ajustes del gráfico › Leyenda: los interruptores ya funcionan y la flecha del menú Título está en su sitio.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.18.0 — Medias móviles rehechas, ajustes de la leyenda</summary>
-
-- 📈 Medias móviles rehechas con los ajustes y valores iniciales de TradingView (suavizado con Bandas de Bollinger, otra temporalidad, esperar al cierre de la temporalidad) más alertas de cruce del precio. Nuevas: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic y MA Cross; MA Ribbon con 4 medias configurables.
-- 🏷️ Ajustes del gráfico › Leyenda: logo, título (símbolo, nombre o ambos), mercado abierto, valores del gráfico, variación de la barra, volumen, variación sobre el día anterior; para los indicadores títulos, entradas, valores y fondo.
-- 🔤 Los ajustes de los indicadores se muestran en tu idioma.
 
 </details>
 

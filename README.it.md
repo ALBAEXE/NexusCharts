@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.23.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.24.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.23.0 — Riempimenti, sfondi e riquadri sotto il grafico
+### 🆕 Novità della 1.24.0 — Riempimenti a sfumatura e script più compatibili
+
+- 🌈 I riempimenti a sfumatura (valore e colore in alto e in basso) sono disegnati come su TradingView, con i colori in alto e in basso in Stile; l'RSI li usa per ipercomprato e ipervenduto.
+- 🧓 Script vecchi Pine v3/v4: ora valgono la trasparenza transp, la trasparenza di serie di sfondi e riempimenti e la condizione when degli ordini delle strategie.
+- 🧩 line.new, box.new e label.new con chart.point, i nomi alternativi ufficiali dei parametri e l'avviso automatico dei parametri non supportati.
+
+### In precedenza, nella 1.23.0 — Riempimenti, sfondi e riquadri sotto il grafico
 
 - 🎨 Stile ora elenca ogni riempimento e sfondo colorato dello script: mostra/nascondi e, se lo script usa più colori, ognuno si cambia con la sua trasparenza.
 - 📉 Gli indicatori nei riquadri sotto il grafico ora disegnano anche segnali, riempimenti, sfondi, riquadri, etichette e linee (per esempio la fascia dell'RSI tra 30 e 70).
@@ -79,11 +85,14 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🧩 Nuova sezione Oggetti grafici: riquadri, etichette, linee, tabelle e polilinee da accendere o spegnere.
 - 🔒 Linee e segnali che lo script segna come non modificabili restano nascosti in Stile, come su TradingView.
 
-### In precedenza, nella 1.21.0 — Volume e livelli rifatti
+<details>
+<summary>In precedenza, nella 1.21.0 — Volume e livelli rifatti</summary>
 
 - 📊 OBV, Volume, Pivot Points High Low, ZigZag e gli indicatori di livelli (massimo e minimo del giorno e della settimana prima, aperture, ADR, variazione %, volatilità storica, massimo e minimo a 52 settimane, massimo e minimo della sessione) rifatti con le impostazioni di TradingView più etichette, opzioni in più e avvisi.
 - 🎯 Nuovo: Pivot Points Standard (Tradizionale, Fibonacci, Woodie, Classico, DM, Camarilla) giornalieri, settimanali, mensili, trimestrali o annuali.
 - ✅ Tutta la libreria di indicatori è ora rifatta.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.20.0 — Oscillatori rifatti</summary>
@@ -100,15 +109,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 📊 Bande di Bollinger, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP e Regressione lineare rifatti con le impostazioni e i valori di partenza di TradingView, più tipo di media, altro timeframe, segnali e avvisi dove servono.
 - 📐 Nuovo: Linear Regression Channel con deviazione sopra/sotto, linee estendibili e R di Pearson.
 - 🛠️ Impostazioni grafico › Legenda: gli interruttori ora funzionano e la freccia del menu Titolo è al suo posto.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.18.0 — Medie mobili rifatte, impostazioni della legenda</summary>
-
-- 📈 Medie mobili rifatte con le impostazioni e i valori di partenza di TradingView (livellamento con Bande di Bollinger, altro timeframe, attesa della chiusura del timeframe) più gli avvisi sull'incrocio del prezzo. Nuove: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic e MA Cross; MA Ribbon con 4 medie personalizzabili.
-- 🏷️ Impostazioni grafico › Legenda: logo, titolo (simbolo, nome o entrambi), mercato aperto, valori del grafico, variazione barre, volume, variazione sul giorno precedente; per gli indicatori titoli, input, valori e sfondo.
-- 🔤 Le impostazioni degli indicatori sono nella tua lingua.
 
 </details>
 

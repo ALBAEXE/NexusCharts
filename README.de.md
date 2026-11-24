@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.23.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.24.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.23.0 — Füllungen, Hintergründe und untere Bereiche
+### 🆕 Neu in 1.24.0 — Verlaufsfüllungen und bessere Skript-Kompatibilität
+
+- 🌈 Verlaufsfüllungen (Wert und Farbe oben und unten) werden wie bei TradingView gezeichnet, mit Farbe oben und unten im Stil-Tab; der RSI nutzt sie für überkauft und überverkauft.
+- 🧓 Ältere Pine-v3/v4-Skripte: Transparenz transp, Standardtransparenz von Hintergründen und Füllungen und die when-Bedingung von Strategie-Orders werden jetzt angewendet.
+- 🧩 line.new, box.new und label.new mit chart.point, offizielle alternative Parameternamen und automatischer Hinweis auf nicht unterstützte Parameter.
+
+### Vorher in 1.23.0 — Füllungen, Hintergründe und untere Bereiche
 
 - 🎨 Stil zeigt jetzt jede Füllung und Hintergrundfarbe des Skripts: ein-/ausblenden und, wenn das Skript mehrere Farben nutzt, jede einzeln mit eigener Deckkraft ändern.
 - 📉 Indikatoren in den Bereichen unter dem Chart zeichnen jetzt auch Signale, Füllungen, Hintergründe, Rechtecke, Beschriftungen und Linien (zum Beispiel das RSI-Band zwischen 30 und 70).
@@ -79,11 +85,14 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🧩 Neuer Bereich Zeichenobjekte: Rechtecke, Beschriftungen, Linien, Tabellen und Polylinien ein- oder ausschalten.
 - 🔒 Plots und Signale, die im Skript als nicht bearbeitbar markiert sind, bleiben im Stil-Tab verborgen, wie bei TradingView.
 
-### Vorher in 1.21.0 — Volumen und Niveaus neu
+<details>
+<summary>Vorher in 1.21.0 — Volumen und Niveaus neu</summary>
 
 - 📊 OBV, Volumen, Pivot Points High Low, ZigZag und die Niveau-Indikatoren (Hoch und Tief von Vortag/Vorwoche, Eröffnungen, ADR, Änderung %, historische Volatilität, 52-Wochen-Hoch/-Tief, Sitzungshoch/-tief) neu gebaut mit den Einstellungen von TradingView plus Beschriftungen, weiteren Optionen und Alarmen.
 - 🎯 Neu: Pivot Points Standard (Traditionell, Fibonacci, Woodie, Klassisch, DM, Camarilla) täglich, wöchentlich, monatlich, quartalsweise oder jährlich.
 - ✅ Die gesamte Indikatorbibliothek ist jetzt neu gebaut.
+
+</details>
 
 <details>
 <summary>Vorher in 1.20.0 — Oszillatoren neu</summary>
@@ -100,15 +109,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 📊 Bollinger-Bänder, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP und lineare Regression neu gebaut mit den Einstellungen und Startwerten von TradingView, dazu MA-Typ, andere Zeiteinheit, Signale und Alarme, wo sinnvoll.
 - 📐 Neu: Linear Regression Channel mit oberer/unterer Abweichung, verlängerbaren Linien und Pearson-R.
 - 🛠️ Chart-Einstellungen › Legende: die Schalter funktionieren jetzt, und der Pfeil des Titel-Menüs sitzt richtig.
-
-</details>
-
-<details>
-<summary>Vorher in 1.18.0 — Gleitende Durchschnitte neu, Legenden-Einstellungen</summary>
-
-- 📈 Gleitende Durchschnitte neu gebaut mit den Einstellungen und Startwerten von TradingView (Glättung mit Bollinger-Bändern, andere Zeiteinheit, Warten auf Schluss der Zeiteinheit) plus Alarme beim Kreuzen des Preises. Neu: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic und MA Cross; MA Ribbon mit 4 frei einstellbaren Durchschnitten.
-- 🏷️ Chart-Einstellungen › Legende: Logo, Titel (Symbol, Name oder beides), Marktstatus, Chartwerte, Balkenänderung, Volumen, Änderung zum Vortag; für Indikatoren Titel, Eingaben, Werte und Hintergrund.
-- 🔤 Die Indikator-Einstellungen erscheinen in deiner Sprache.
 
 </details>
 
