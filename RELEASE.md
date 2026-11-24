@@ -1,13 +1,10 @@
-# v1.19.0 — Bands and channels rebuilt
+# v1.20.0 — Oscillators rebuilt
 ### Added
-- Bollinger Bands, Bollinger Bands %B, Bollinger BandWidth, Keltner Channels, Donchian Channels, Envelope, Supertrend, Ichimoku Cloud, VWAP and Linear Regression Curve rebuilt with TradingView's inputs and default values.
-- Extra settings where useful: basis MA type, offset, another timeframe with wait for timeframe closes, custom levels, Supertrend buy/sell signals and trend highlight, VWAP anchor period (session, week, month, quarter, year) with three standard-deviation or percentage bands, and alerts on band crosses and trend changes.
-- New indicator: Linear Regression Channel, with upper and lower deviation, extendable lines and Pearson's R.
-
-### Fixed
-- Chart settings › Legend: the switches now change the legend (they were writing to a copy of the settings).
-- The arrow of the Title menu no longer appears on top of its switch.
-- ta.vwap with a band multiplier now returns the VWAP and its bands.
+- RSI, Stochastic RSI, Stochastic, MACD, CCI, Directional Movement Index (DMI/ADX), ATR, Money Flow Index, Williams %R, Momentum, Rate of Change, Awesome Oscillator and Aroon rebuilt with TradingView's inputs and default values.
+- Editable upper, middle and lower levels where the indicator has them, calculation on another timeframe with wait for timeframe closes, and alerts on the main signals.
+- RSI: smoothing (SMA, SMA + Bollinger Bands, EMA, SMMA, WMA, VWMA), overbought and oversold zone fills, and regular bullish and bearish divergences with configurable pivot lookback.
+- MACD: oscillator and signal MA type, four histogram colours, alerts on signal and zero-line crosses.
+- CCI smoothing like RSI; DMI with a key level; ATR smoothing type; Awesome Oscillator lengths, source and colours.
 
 ### Documentation
-- README updated in 5 languages: new in 1.19.0.
+- README updated in 5 languages: new in 1.20.0.
