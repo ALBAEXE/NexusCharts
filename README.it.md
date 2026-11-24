@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.21.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.22.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.21.0 — Volume e livelli rifatti
+### 🆕 Novità della 1.22.0 — Scheda Stile completa per segnali e disegni
+
+- 🎯 Stile ora elenca i segnali di ogni script (plotshape, plotchar, plotarrow): mostra/nascondi, colore e trasparenza, forma, posizione, dimensione e colore del testo.
+- 🧩 Nuova sezione Oggetti grafici: riquadri, etichette, linee, tabelle e polilinee da accendere o spegnere.
+- 🔒 Linee e segnali che lo script segna come non modificabili restano nascosti in Stile, come su TradingView.
+
+### In precedenza, nella 1.21.0 — Volume e livelli rifatti
 
 - 📊 OBV, Volume, Pivot Points High Low, ZigZag e gli indicatori di livelli (massimo e minimo del giorno e della settimana prima, aperture, ADR, variazione %, volatilità storica, massimo e minimo a 52 settimane, massimo e minimo della sessione) rifatti con le impostazioni di TradingView più etichette, opzioni in più e avvisi.
 - 🎯 Nuovo: Pivot Points Standard (Tradizionale, Fibonacci, Woodie, Classico, DM, Camarilla) giornalieri, settimanali, mensili, trimestrali o annuali.
@@ -79,11 +85,14 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🔀 RSI: livellamento con Bande di Bollinger, zone di ipercomprato e ipervenduto e divergenze rialziste e ribassiste.
 - 🎨 MACD con i quattro colori dell'istogramma e il tipo di media per oscillatore e segnale.
 
-### In precedenza, nella 1.19.0 — Bande e canali rifatti
+<details>
+<summary>In precedenza, nella 1.19.0 — Bande e canali rifatti</summary>
 
 - 📊 Bande di Bollinger, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP e Regressione lineare rifatti con le impostazioni e i valori di partenza di TradingView, più tipo di media, altro timeframe, segnali e avvisi dove servono.
 - 📐 Nuovo: Linear Regression Channel con deviazione sopra/sotto, linee estendibili e R di Pearson.
 - 🛠️ Impostazioni grafico › Legenda: gli interruttori ora funzionano e la freccia del menu Titolo è al suo posto.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.18.0 — Medie mobili rifatte, impostazioni della legenda</summary>
@@ -100,14 +109,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🎨 Stile, per ogni indicatore e ogni script: tipo di disegno (linea, linea a step, istogramma, croci, area, colonne, cerchi), linea continua/tratteggiata/puntinata, spessore, colore, linea del prezzo, etichette sull'asse, decimali, valori e input in legenda.
 - 👁️ Visibilità con gli intervalli, per esempio Minuti da 1 a 15.
 - 🔗 Sorgente nella tua lingua, e il risultato di un altro indicatore sul grafico come sorgente (per esempio una media dell'RSI).
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.16.0 — Nomi degli indicatori nel loro riquadro, grafico che segue il tema</summary>
-
-- 🏷️ Gli indicatori con un riquadro loro sotto il grafico (RSI, MACD…) mostrano il nome in alto a sinistra del riquadro; toccalo per mostra/nascondi, impostazioni ed elimina. Chiudendo la linguetta della legenda spariscono anche questi nomi.
-- 🌗 Passando al tema chiaro il grafico diventa bianco, tornando allo scuro diventa nero. Uno sfondo personalizzato scelto a mano resta com'è.
 
 </details>
 

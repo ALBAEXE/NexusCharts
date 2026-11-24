@@ -1,4 +1,4 @@
-const VERSION='1.21.0';
+const VERSION='1.22.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -6256,19 +6256,22 @@ F('table.delete',['table_id'],(E,a)=>{const o=a[0];if(o&&o.__k==='table'&&!o.del
 ['box','line','label','table','linefill'].forEach(k=>BV[k+'.all']=E=>E.out[k].filter(o=>!o.del));
 
 /* ---------- uscite: plot, forme, sfondi, alert ---------- */
+/* 1.22.0: ogni plotshape/plotchar/plotarrow si registra una volta (titolo, forma, posizione, colore, modificabile), anche se non scatta mai: serve alla scheda Stile */
+function smeta(E,n,title,k,st,loc,c,tc,ed,disp,sz,tx){let m=E.out.smeta.get(n.id);if(!m){m={id:n.id,title:title||null,k,st,loc,c:null,tc:null,ed:ed!==false,disp:disp==null?15:disp,sz:sz||'auto',tx:!!tx};E.out.smeta.set(n.id,m)}
+  if(m.c==null&&c!=null&&!isNa(c))m.c=c;if(m.tc==null&&tc!=null&&!isNa(tc))m.tc=tc;if(tx)m.tx=true;return m}
 function plotRec(E,node){let p=E.out.plot.get(node.id);if(!p){p={id:node.id,ln:node.ln,vals:new Array(E.n).fill(NaN),cols:new Array(E.n).fill(null)};E.out.plot.set(node.id,p)}return p}
 F('plot',['series','title','color','linewidth','style','trackprice','histbase','offset','join','editable','show_last','display','format','precision','force_overlay','linestyle'],(E,a,s,n)=>{
-  const p=plotRec(E,n);if(p.title===undefined){p.title=a[1]||('Plot '+(E.out.plot.size));p.lw=a[3]||1;p.style=a[4]||'line';p.off=a[7]||0;p.disp=a[11]==null?15:a[11];p.ov=a[14]===true;p.hb=a[6]||0}
+  const p=plotRec(E,n);if(p.title===undefined){p.title=a[1]||('Plot '+(E.out.plot.size));p.lw=a[3]||1;p.style=a[4]||'line';p.off=a[7]||0;p.disp=a[11]==null?15:a[11];p.ov=a[14]===true;p.hb=a[6]||0;p.ed=a[9]!==false}
   const v=a[0];p.vals[E.bar]=typeof v==='boolean'?+v:v;p.cols[E.bar]=a[2]===undefined?CONST['color.blue']:a[2];return{__k:'plot',id:n.id}});
 F('plotshape',['series','title','style','location','color','offset','text','textcolor','editable','size','show_last','display','format','precision','force_overlay'],(E,a,s,n)=>{
-  const v=a[0],loc=a[3]||'abovebar';if(a[11]===0)return NaN;
+  const v=a[0],loc=a[3]||'abovebar';smeta(E,n,a[1],'shape',a[2]||'xcross',loc,a[4],a[7],a[8],a[11],a[9],a[6]);if(a[11]===0)return NaN;
   if(loc==='absolute'?isNa(v):!tru(v))return NaN;
   E.out.shape.push({bar:E.bar+(a[5]||0),y:loc==='absolute'?v:NaN,st:a[2]||'xcross',loc,c:a[4]===undefined?CONST['color.blue']:a[4],tx:a[6]||'',tc:a[7]===undefined?CONST['color.blue']:a[7],sz:a[9]||'auto',k:'shape',id:n.id});return NaN});
 F('plotchar',['series','title','char','location','color','offset','text','textcolor','editable','size','show_last','display','format','precision','force_overlay'],(E,a,s,n)=>{
-  const v=a[0],loc=a[3]||'abovebar';if(a[11]===0)return NaN;
+  const v=a[0],loc=a[3]||'abovebar';smeta(E,n,a[1],'char',a[2]||'★',loc,a[4],a[7],a[8],a[11],a[9],a[6]);if(a[11]===0)return NaN;
   if(loc==='absolute'?isNa(v):!tru(v))return NaN;
   E.out.shape.push({bar:E.bar+(a[5]||0),y:loc==='absolute'?v:NaN,st:'char',ch:a[2]||'★',loc,c:a[4]===undefined?CONST['color.blue']:a[4],tx:a[6]||'',tc:a[7]===undefined?CONST['color.blue']:a[7],sz:a[9]||'auto',k:'char',id:n.id});return NaN});
-F('plotarrow',['series','title','colorup','colordown','offset','minheight','maxheight','editable','show_last','display'],(E,a,s,n)=>{const v=a[0];if(isNa(v)||v===0)return NaN;E.out.shape.push({bar:E.bar,y:NaN,st:v>0?'arrowup':'arrowdown',loc:v>0?'belowbar':'abovebar',c:v>0?(a[2]||CONST['color.green']):(a[3]||CONST['color.red']),tx:'',sz:'small',k:'shape',id:n.id});return NaN});
+F('plotarrow',['series','title','colorup','colordown','offset','minheight','maxheight','editable','show_last','display'],(E,a,s,n)=>{const v=a[0];{const m=smeta(E,n,a[1],'arrow','arrow','',a[2],null,a[7],a[9],'',''),cu=a[2]||CONST['color.green'],cd=a[3]||CONST['color.red'];if(m.cu==null&&a[2]!=null)m.cu=a[2];if(m.cd==null&&a[3]!=null)m.cd=a[3];if(m.cu==null&&v>0)m.cu=cu;if(m.cd==null&&v<0)m.cd=cd}if(a[9]===0)return NaN;if(isNa(v)||v===0)return NaN;E.out.shape.push({bar:E.bar,y:NaN,st:v>0?'arrowup':'arrowdown',loc:v>0?'belowbar':'abovebar',c:v>0?(a[2]||CONST['color.green']):(a[3]||CONST['color.red']),tx:'',sz:'small',k:'arrow',id:n.id});return NaN});
 F('plotcandle',['open','high','low','close','title','color','wickcolor','editable','show_last','bordercolor','display'],()=>NaN);
 F('plotbar',['open','high','low','close','title','color','editable','show_last','display'],()=>NaN);
 F('hline',['price','title','color','linestyle','linewidth','editable','display'],(E,a,s,n)=>{if(!E.out.hline.has(n.id))E.out.hline.set(n.id,{id:n.id,p:a[0],title:a[1]||'',c:a[2]===undefined?CONST['color.gray']:a[2],st:a[3]||'dashed',w:a[4]||1,disp:a[6]==null?15:a[6]});return{__k:'hline',id:n.id}});
@@ -7117,7 +7120,7 @@ function run(prog,data,opts){
     G:[],C:new Ctx(0),brk:false,cont:false,sec:false,depth:0,ln:0,pos:0,seq:0,declared:false,
     inp:new Map(),secR:new Map(),secData:opts.sec||{},need:new Set(),opts,
     max:{box:50,line:50,label:50,table:20,linefill:50,polyline:50},live2:null,old:{box:0,line:0,label:0,table:0,linefill:0,polyline:0},
-    out:{meta:{kind:prog.kind,title:'Script',short:'',overlay:false},inputs:[],plot:new Map(),hline:new Map(),fill:new Map(),shape:[],bg:{},barc:{},
+    out:{meta:{kind:prog.kind,title:'Script',short:'',overlay:false},inputs:[],plot:new Map(),hline:new Map(),fill:new Map(),shape:[],smeta:new Map(),bg:{},barc:{},
       box:[],line:[],label:[],table:[],linefill:[],polyline:[],alerts:[],conds:[],condMeta:[],logs:[],orders:[]}};
   E.lc={box:0,line:0,label:0,table:0,linefill:0,polyline:0};
   for(let i=0;i<prog.nG;i++)E.G.push(new V());
@@ -7133,10 +7136,11 @@ function run(prog,data,opts){
   }catch(x){error={msg:x&&x.pine?x.message:('errore interno: '+(x&&x.message||x)),ln:(x&&x.ln)||E.ln||0}}
   const O=E.out,cv=c=>css(c);
   const res={ms:Date.now()-t0,error,need:[...E.need],meta:O.meta,inputs:O.inputs,alerts:O.alerts,conds:O.conds,condMeta:O.condMeta,logs:O.logs,
-    plots:[...O.plot.values()].map(p=>({id:p.id,title:p.title,lw:p.lw,style:p.style,off:p.off,disp:p.disp,ov:p.ov,vals:p.vals,cols:p.cols.map(cv)})),
+    plots:[...O.plot.values()].map(p=>({id:p.id,title:p.title,lw:p.lw,style:p.style,off:p.off,disp:p.disp,ov:p.ov,ed:p.ed,vals:p.vals,cols:p.cols.map(cv)})),
     hlines:[...O.hline.values()].map(h=>({id:h.id,p:h.p,title:h.title,c:cv(h.c),st:h.st,w:h.w,disp:h.disp})),
     fills:[...O.fill.values()].map(f=>({a:f.a,ak:f.ak,b:f.b,bk:f.bk,cols:f.cols.map(cv)})),
     shapes:O.shape.map(s=>Object.assign({},s,{c:cv(s.c),tc:cv(s.tc)})),
+    smeta:[...O.smeta.values()].map(m=>Object.assign({},m,{c:m.c==null?null:cv(m.c),tc:m.tc==null?null:cv(m.tc),cu:m.cu==null?null:cv(m.cu),cd:m.cd==null?null:cv(m.cd)})),
     bg:Object.keys(O.bg).map(k=>({bar:+k,c:cv(O.bg[k])})).filter(x=>x.c),
     barc:Object.keys(O.barc).map(k=>({bar:+k,c:cv(O.barc[k])})).filter(x=>x.c),
     boxes:O.box.filter(o=>!o.del).map(o=>({l:o.l,t:o.t,r:o.r,b:o.b,bc:cv(o.bc),bw:o.bw,bs:o.bs,ext:o.ext,xl:o.xl,bg:cv(o.bg),tx:o.tx,ts:o.ts,tc:cv(o.tc),th:o.th,tv:o.tv})),
@@ -7411,6 +7415,8 @@ function pcvDraw(){
   for(const ind of IND){
     const r=IR.get(ind.uid);if(indOff(ind)||!r||r.error||r.sym!==cur||r.res!==res)continue;
     const ov=!r.meta||r.meta.overlay;
+    /* 1.22.0: Stile › Oggetti grafici (riquadri, etichette, linee, tabelle) e stile dei segnali */
+    const SOo=ind.style||{},dOn=k=>SOo['__d'+k]!==false;
     /* indice della prima candela del risultato nel grafico attuale */
     let off=0;if(r.times.length&&lastBars.length&&lastBars[0].t!==r.times[0]){const k=lastBars.findIndex(b=>b.t===r.times[0]);off=k>=0?k:0}
     const X=i=>lCoord(i+off),XT=ms=>{const l=tToL(chartT(ms));return l==null?null:lCoord(l)};
@@ -7426,7 +7432,7 @@ function pcvDraw(){
         for(let i=Math.max(i0,0);i<i1;i++){const col=f.cols[i];if(!col)continue;const a0=A(i),a1=A(i+1),b0=B(i),b1=B(i+1);if(![a0,a1,b0,b1].every(isFinite))continue;
           const x0=X(i),x1=X(i+1);if(x0==null||x1==null)continue;c.fillStyle=col;c.beginPath();c.moveTo(x0,Y(a0));c.lineTo(x1,Y(a1));c.lineTo(x1,Y(b1));c.lineTo(x0,Y(b0));c.closePath();c.fill()}}
       /* box */
-      for(const b of r.boxes){
+      for(const b of (dOn('box')?r.boxes:[])){
         if(![b.l,b.r,b.t,b.b].every(isFinite))continue;
         if(b.xl!=='bt'&&b.ext==='none'&&!inView(b.l,b.r))continue;
         let x1=xOf(b.l,b.xl),x2=xOf(b.r,b.xl);const y1=Y(b.t),y2=Y(b.b);if(x1==null||x2==null||y1==null||y2==null)continue;
@@ -7445,9 +7451,9 @@ function pcvDraw(){
         }
       }
       /* riempimenti tra linee */
-      for(const f of r.linefills){if(!f.c)continue;const a=f.a,b=f.b;const p=[[xOf(a.x1,a.xl),Y(a.y1)],[xOf(a.x2,a.xl),Y(a.y2)],[xOf(b.x2,b.xl),Y(b.y2)],[xOf(b.x1,b.xl),Y(b.y1)]];if(p.some(q=>q[0]==null||q[1]==null))continue;c.fillStyle=f.c;c.beginPath();p.forEach((q,i)=>i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]));c.closePath();c.fill()}
+      for(const f of (dOn('line')?r.linefills:[])){if(!f.c)continue;const a=f.a,b=f.b;const p=[[xOf(a.x1,a.xl),Y(a.y1)],[xOf(a.x2,a.xl),Y(a.y2)],[xOf(b.x2,b.xl),Y(b.y2)],[xOf(b.x1,b.xl),Y(b.y1)]];if(p.some(q=>q[0]==null||q[1]==null))continue;c.fillStyle=f.c;c.beginPath();p.forEach((q,i)=>i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]));c.closePath();c.fill()}
       /* linee */
-      for(const l of r.lines){
+      for(const l of (dOn('line')?r.lines:[])){
         if(![l.x1,l.y1,l.x2,l.y2].every(isFinite)||!l.c)continue;
         if(l.xl!=='bt'&&l.ext==='none'&&!inView(l.x1,l.x2))continue;
         let x1=xOf(l.x1,l.xl),x2=xOf(l.x2,l.xl),y1=Y(l.y1),y2=Y(l.y2);if(x1==null||x2==null||y1==null||y2==null)continue;
@@ -7459,13 +7465,13 @@ function pcvDraw(){
         if(l.st==='arrow_right'||l.st==='arrow_both')ah(x1,y1,x2,y2);if(l.st==='arrow_left'||l.st==='arrow_both')ah(x2,y2,x1,y1);
       }
       /* forme di plotshape / plotchar */
-      for(const s of r.shapes){if(s.bar<i0||s.bar>i1)continue;const x=X(s.bar);if(x==null)continue;pcvShape(c,s,x,r,ph,Y)}
+      for(const s0 of r.shapes){if(s0.bar<i0||s0.bar>i1)continue;const s=shpStyled(s0,SOo['s'+s0.id]);if(!s)continue;const x=X(s.bar);if(x==null)continue;pcvShape(c,s,x,r,ph,Y)}
       /* segnali delle strategie */
       const ost=new Map();/* più segni sulla stessa candela: uno sopra l'altro, non sovrapposti */
       for(const o of r.orders){if(o.bar<i0||o.bar>i1)continue;const x=X(o.bar),bb=lastBars[o.bar+off];if(x==null||!bb)continue;
         const up=o.d>0,kk=o.bar+(up?'u':'d'),nn=ost.get(kk)||0;ost.set(kk,nn+1);const y=up?Y(bb.l)+16+nn*30:Y(bb.h)-16-nn*30;pcvShape(c,{st:o.d===0?'xcross':up?'arrowup':'arrowdown',c:o.d>0?'#22ab94':o.d<0?'#f23645':'#9598a1',tx:o.tx,tc:o.d>0?'#22ab94':o.d<0?'#f23645':'#9598a1',sz:'small',loc:'absolute',y:NaN},x,r,ph,Y,y)}
       /* 1.13.0: polyline (spezzate o curve, chiuse o aperte, con riempimento) */
-      for(const pl of (r.polylines||[])){
+      for(const pl of (dOn('poly')?(r.polylines||[]):[])){
         const P=pl.pts.map(q=>[xOf(q[0],pl.xl),Y(q[1])]).filter(q=>q[0]!=null&&q[1]!=null&&isFinite(q[0])&&isFinite(q[1]));if(P.length<2)continue;
         c.beginPath();c.moveTo(P[0][0],P[0][1]);
         if(pl.cu&&P.length>2){for(let i=1;i<P.length-1;i++){const mx=(P[i][0]+P[i+1][0])/2,my=(P[i][1]+P[i+1][1])/2;c.quadraticCurveTo(P[i][0],P[i][1],mx,my)}c.lineTo(P[P.length-1][0],P[P.length-1][1])}
@@ -7475,7 +7481,7 @@ function pcvDraw(){
         if(pl.c){c.strokeStyle=pl.c;c.lineWidth=pl.w||1;dash(c,pl.st==='dashed'||pl.st==='style_dashed'?'dashed':pl.st==='dotted'||pl.st==='style_dotted'?'dotted':'solid');c.stroke();c.setLineDash([])}
       }
       /* etichette */
-      for(const lb of r.labels){
+      for(const lb of (dOn('label')?r.labels:[])){
         if(!isFinite(lb.x))continue;
         if(lb.xl!=='bt'&&!inView(lb.x,lb.x))continue;
         const x=xOf(lb.x,lb.xl);if(x==null)continue;
@@ -7484,11 +7490,16 @@ function pcvDraw(){
       }
     }
     /* tabelle (anche per gli script nel riquadro sotto) */
-    for(const tb of r.tables)pcvTable(c,tb,pw,ph);
+    if(dOn('table'))for(const tb of r.tables)pcvTable(c,tb,pw,ph);
   }
   c.restore();
   alBadges(c,pw,ph);
 }
+/* 1.22.0: segnale con lo stile scelto dall'utente (nascosto, colore e trasparenza, forma, posizione, dimensione, testo) */
+function shpStyled(s,q){if(!q)return s;if(q.v===false)return null;const o=Object.assign({},s);
+  if(s.k==='arrow'){const up=s.st==='arrowup';const cc=up?q.cu:q.cd,oo=up?q.ou:q.od;if(cc)o.c=rgbaOf(cc,oo!=null?oo:100)}
+  else{if(q.c)o.c=rgbaOf(q.c,q.o!=null?q.o:100);if(q.st&&s.k==='shape')o.st=q.st;if(q.ch&&s.k==='char')o.ch=q.ch;if(q.tc)o.tc=rgbaOf(q.tc,q.to!=null?q.to:100)}
+  if(q.loc&&s.loc!=='absolute'&&q.loc!=='absolute')o.loc=q.loc;if(q.sz)o.sz=q.sz;if(q.tx===false)o.tx='';return o}
 function pcvShape(c,s,x,r,ph,Y,yForce){
   const sz={tiny:6,small:9,normal:12,large:17,huge:24,auto:9}[s.sz]||9;
   let y,below;
@@ -14112,7 +14123,7 @@ function cusSrcOpts(self){
     const r=IR.get(ind.uid);
     if(!r){shEl(body,'isnote',isdt('wait'));return}
     ind.style=ind.style||{};const SO=ind.style;
-    const plots=(r.plots||[]).filter(p=>p.disp!==0&&(p.disp&1)),hl=(r.hlines||[]).filter(h=>h.disp!==0);
+    const plots=(r.plots||[]).filter(p=>p.disp!==0&&(p.disp&1)&&p.ed!==false),hl=(r.hlines||[]).filter(h=>h.disp!==0);
     const live=re=>{indSave();if(re){IS.forEach((S,u)=>{if(u===ind.uid)S.key=''})}isdLive(false);try{indLegend()}catch(e){}};
     const one=(k,title,col,w,isPlot,p)=>{
       const s=SO[k]||{};const q=()=>(SO[k]=SO[k]||{});
@@ -14136,7 +14147,7 @@ function cusSrcOpts(self){
     isdRow(body,cust('lgv'),isdCheck(SO.__lv!==false,v=>{SO.__lv=v;live(false)}),'',true);
     shEl(body,'isg',cust('inv'));
     isdRow(body,cust('lgi'),isdCheck(SO.__li!==false,v=>{SO.__li=v;live(false)}),'',true);
-    if(!plots.length&&!hl.length){shEl(body,'isnote',isdt('nosty'));return}
+    if(!plots.length&&!hl.length){if(!(r.smeta||[]).some(m=>m.ed!==false)&&!/\b(box|label|line|table|polyline)\.new\s*\(/.test(ind.code||''))shEl(body,'isnote',isdt('nosty'));return}
     plots.forEach((p,i)=>one('p'+p.id,p.title||(isdt('plot')+' '+(i+1)),p.cols.find(x=>x)||'#2196f3',p.lw,true,p));
     hl.forEach((h,i)=>one('h'+h.id,h.title||(isdt('level')+' '+(i+1)),h.c||'#787b86',h.w,false,h));
   };
@@ -14319,4 +14330,83 @@ html[data-theme="light"] body.lgs-bg #lgind .lgr,html[data-theme="light"] body.l
   ED_BUILTIN.length=0;IND_LIB.forEach(x=>ED_BUILTIN.push([x[1],x[3]]));
   try{let ch=false;IND.forEach(x=>{const m=/^b:(.+)$/.exec(x.sid||'');if(!m||!NEW[m[1]])return;if(x.code!==NEW[m[1]][1]){x.code=NEW[m[1]][1];ch=true}});if(ch){indSave();indSchedule(true)}}catch(e){}
   Object.assign(INTR,{"Color based on previous close": ["Colore in base alla chiusura precedente", "Color según el cierre anterior", "Couleur selon la clôture précédente", "Farbe nach vorherigem Schluss"], "Volume MA": ["Media del volume", "Media del volumen", "Moyenne du volume", "Volumen-MA"], "Show volume MA": ["Mostra la media del volume", "Mostrar la media del volumen", "Afficher la moyenne du volume", "Volumen-MA anzeigen"], "MA Length": ["Periodo della media", "Periodo de la media", "Période de la moyenne", "MA-Länge"], "Volume spike: times the average": ["Picco di volume: volte la media", "Pico de volumen: veces la media", "Pic de volume : fois la moyenne", "Volumenspitze: x-fach Durchschnitt"], "Pivot High": ["Pivot massimo", "Pivote máximo", "Pivot haut", "Pivot-Hoch"], "Pivot Low": ["Pivot minimo", "Pivote mínimo", "Pivot bas", "Pivot-Tief"], "Left": ["Candele a sinistra", "Velas a la izquierda", "Bougies à gauche", "Kerzen links"], "Right": ["Candele a destra", "Velas a la derecha", "Bougies à droite", "Kerzen rechts"], "Display": ["Visualizzazione", "Visualización", "Affichage", "Anzeige"], "Show prices": ["Mostra i prezzi", "Mostrar precios", "Afficher les prix", "Preise anzeigen"], "Lines from the pivots to the right": ["Linee dai pivot verso destra", "Líneas desde los pivotes a la derecha", "Lignes des pivots vers la droite", "Linien von den Pivots nach rechts"], "Pivots Timeframe": ["Timeframe dei pivot", "Temporalidad de los pivotes", "Unité de temps des pivots", "Pivot-Zeiteinheit"], "Auto": ["Automatico", "Automático", "Auto", "Automatisch"], "Daily": ["Giornaliero", "Diario", "Journalier", "Täglich"], "Weekly": ["Settimanale", "Semanal", "Hebdomadaire", "Wöchentlich"], "Monthly": ["Mensile", "Mensual", "Mensuel", "Monatlich"], "Quarterly": ["Trimestrale", "Trimestral", "Trimestriel", "Quartalsweise"], "Yearly": ["Annuale", "Anual", "Annuel", "Jährlich"], "Show labels": ["Mostra le etichette", "Mostrar etiquetas", "Afficher les étiquettes", "Beschriftungen anzeigen"], "Labels on the left": ["Etichette a sinistra", "Etiquetas a la izquierda", "Étiquettes à gauche", "Beschriftungen links"], "Traditional": ["Tradizionale", "Tradicional", "Traditionnel", "Traditionell"], "Classic": ["Classico", "Clásico", "Classique", "Klassisch"], "Price deviation for reversals (%)": ["Deviazione di prezzo per le inversioni (%)", "Desviación del precio para los giros (%)", "Écart de prix pour les retournements (%)", "Preisabweichung für Umkehrungen (%)"], "Pivot legs": ["Profondità (candele)", "Profundidad (velas)", "Profondeur (bougies)", "Tiefe (Kerzen)"], "Line color": ["Colore della linea", "Color de la línea", "Couleur de la ligne", "Linienfarbe"], "Line width": ["Spessore della linea", "Grosor de la línea", "Épaisseur de la ligne", "Linienstärke"], "Extend to last bar": ["Prolunga fino all'ultima candela", "Extender hasta la última vela", "Prolonger jusqu'à la dernière bougie", "Bis zur letzten Kerze verlängern"], "Labels": ["Etichette", "Etiquetas", "Étiquettes", "Beschriftungen"], "Display reversal price": ["Mostra il prezzo dell'inversione", "Mostrar el precio del giro", "Afficher le prix du retournement", "Umkehrpreis anzeigen"], "Display reversal price change": ["Mostra la variazione dell'inversione", "Mostrar la variación del giro", "Afficher la variation du retournement", "Umkehränderung anzeigen"], "Price change": ["Variazione", "Variación", "Variation", "Preisänderung"], "Absolute": ["Assoluta", "Absoluta", "Absolue", "Absolut"], "Percent": ["Percentuale", "Porcentaje", "Pourcentage", "Prozent"], "Display cumulative volume": ["Mostra il volume cumulato", "Mostrar el volumen acumulado", "Afficher le volume cumulé", "Kumuliertes Volumen anzeigen"], "Previous high": ["Massimo precedente", "Máximo anterior", "Plus haut précédent", "Vorheriges Hoch"], "Previous low": ["Minimo precedente", "Mínimo anterior", "Plus bas précédent", "Vorheriges Tief"], "Previous close": ["Chiusura precedente", "Cierre anterior", "Clôture précédente", "Vorheriger Schluss"], "Previous midpoint": ["Metà precedente", "Punto medio anterior", "Milieu précédent", "Vorherige Mitte"], "Labels with price": ["Etichette con il prezzo", "Etiquetas con el precio", "Étiquettes avec le prix", "Beschriftungen mit Preis"], "Daily open": ["Apertura del giorno", "Apertura diaria", "Ouverture du jour", "Tageseröffnung"], "Weekly open": ["Apertura della settimana", "Apertura semanal", "Ouverture de la semaine", "Wocheneröffnung"], "Monthly open": ["Apertura del mese", "Apertura mensual", "Ouverture du mois", "Monatseröffnung"], "Days": ["Giorni", "Días", "Jours", "Tage"], "Show as": ["Mostra come", "Mostrar como", "Afficher comme", "Anzeigen als"], "Price": ["Prezzo", "Precio", "Prix", "Preis"], "Show today's range": ["Mostra l'escursione di oggi", "Mostrar el rango de hoy", "Afficher l'amplitude du jour", "Heutige Spanne anzeigen"], "Compared with": ["Rispetto a", "Comparado con", "Comparé à", "Verglichen mit"], "Day": ["Giorno", "Día", "Jour", "Tag"], "Up": ["Su", "Arriba", "Hausse", "Hoch"], "Down": ["Giù", "Abajo", "Baisse", "Runter"], "Days per year": ["Giorni per anno", "Días por año", "Jours par an", "Tage pro Jahr"], "365 for markets open every day (crypto), 252 for markets closed at weekends": ["365 per i mercati aperti tutti i giorni (cripto), 252 per quelli chiusi nel fine settimana", "365 para mercados abiertos todos los días (cripto), 252 para los cerrados el fin de semana", "365 pour les marchés ouverts tous les jours (crypto), 252 pour ceux fermés le week-end", "365 für täglich geöffnete Märkte (Krypto), 252 für am Wochenende geschlossene"], "Weeks": ["Settimane", "Semanas", "Semaines", "Wochen"], "Use closes instead of highs and lows": ["Usa le chiusure invece di massimi e minimi", "Usar cierres en lugar de máximos y mínimos", "Utiliser les clôtures au lieu des plus hauts et bas", "Schlusskurse statt Hochs und Tiefs"], "Custom": ["Personalizzata", "Personalizada", "Personnalisée", "Benutzerdefiniert"], "Custom session": ["Sessione personalizzata", "Sesión personalizada", "Session personnalisée", "Eigene Sitzung"], "Time zone": ["Fuso orario", "Zona horaria", "Fuseau horaire", "Zeitzone"], "Show midpoint": ["Mostra la metà", "Mostrar el punto medio", "Afficher le milieu", "Mitte anzeigen"]});
+})();
+/* =====================================================================
+   1.22.0: scheda Stile completa come TradingView: i segnali (plotshape, plotchar, plotarrow) con colore, forma,
+   posizione e dimensione, e gli Oggetti grafici (riquadri, etichette, linee, tabelle) da accendere e spegnere.
+   Le voci che lo script segna come non modificabili (editable=false) restano nascoste, come su TradingView.
+   ===================================================================== */
+var SHP_T={
+ it:{shape:'Forma',chr:'Carattere',loc:'Posizione',size:'Dimensione',tcol:'Colore del testo',txt:'Mostra il testo',cu:'Colore rialzo',cd:'Colore ribasso',dobj:'Oggetti grafici',
+  box:'Riquadri',label:'Etichette',line:'Linee',table:'Tabelle',poly:'Polilinee',ax:"Etichette sull'asse dei prezzi",
+  s_xcross:'Croce a X',s_cross:'Croce',s_circle:'Cerchio',s_square:'Quadrato',s_diamond:'Rombo',s_triangleup:'Triangolo su',s_triangledown:'Triangolo giù',s_arrowup:'Freccia su',s_arrowdown:'Freccia giù',s_flag:'Bandiera',s_labelup:'Etichetta su',s_labeldown:'Etichetta giù',
+  l_abovebar:'Sopra la barra',l_belowbar:'Sotto la barra',l_top:'In alto',l_bottom:'In basso',l_absolute:'Assoluto',
+  z_auto:'Automatica',z_tiny:'Minuscola',z_small:'Piccola',z_normal:'Normale',z_large:'Grande',z_huge:'Enorme'},
+ en:{shape:'Shape',chr:'Character',loc:'Location',size:'Size',tcol:'Text color',txt:'Show text',cu:'Up color',cd:'Down color',dobj:'Drawing objects',
+  box:'Boxes',label:'Labels',line:'Lines',table:'Tables',poly:'Polylines',ax:'Labels on price scale',
+  s_xcross:'X cross',s_cross:'Cross',s_circle:'Circle',s_square:'Square',s_diamond:'Diamond',s_triangleup:'Triangle up',s_triangledown:'Triangle down',s_arrowup:'Arrow up',s_arrowdown:'Arrow down',s_flag:'Flag',s_labelup:'Label up',s_labeldown:'Label down',
+  l_abovebar:'Above bar',l_belowbar:'Below bar',l_top:'Top',l_bottom:'Bottom',l_absolute:'Absolute',
+  z_auto:'Auto',z_tiny:'Tiny',z_small:'Small',z_normal:'Normal',z_large:'Large',z_huge:'Huge'},
+ es:{shape:'Forma',chr:'Carácter',loc:'Posición',size:'Tamaño',tcol:'Color del texto',txt:'Mostrar el texto',cu:'Color alcista',cd:'Color bajista',dobj:'Objetos gráficos',
+  box:'Recuadros',label:'Etiquetas',line:'Líneas',table:'Tablas',poly:'Polilíneas',ax:'Etiquetas en la escala de precios',
+  s_xcross:'Cruz en X',s_cross:'Cruz',s_circle:'Círculo',s_square:'Cuadrado',s_diamond:'Rombo',s_triangleup:'Triángulo arriba',s_triangledown:'Triángulo abajo',s_arrowup:'Flecha arriba',s_arrowdown:'Flecha abajo',s_flag:'Bandera',s_labelup:'Etiqueta arriba',s_labeldown:'Etiqueta abajo',
+  l_abovebar:'Encima de la barra',l_belowbar:'Debajo de la barra',l_top:'Arriba',l_bottom:'Abajo',l_absolute:'Absoluta',
+  z_auto:'Automático',z_tiny:'Diminuto',z_small:'Pequeño',z_normal:'Normal',z_large:'Grande',z_huge:'Enorme'},
+ fr:{shape:'Forme',chr:'Caractère',loc:'Position',size:'Taille',tcol:'Couleur du texte',txt:'Afficher le texte',cu:'Couleur hausse',cd:'Couleur baisse',dobj:'Objets graphiques',
+  box:'Rectangles',label:'Étiquettes',line:'Lignes',table:'Tableaux',poly:'Polylignes',ax:"Étiquettes sur l'échelle de prix",
+  s_xcross:'Croix en X',s_cross:'Croix',s_circle:'Cercle',s_square:'Carré',s_diamond:'Losange',s_triangleup:'Triangle haut',s_triangledown:'Triangle bas',s_arrowup:'Flèche haut',s_arrowdown:'Flèche bas',s_flag:'Drapeau',s_labelup:'Étiquette haut',s_labeldown:'Étiquette bas',
+  l_abovebar:'Au-dessus de la barre',l_belowbar:'Sous la barre',l_top:'En haut',l_bottom:'En bas',l_absolute:'Absolue',
+  z_auto:'Automatique',z_tiny:'Minuscule',z_small:'Petite',z_normal:'Normale',z_large:'Grande',z_huge:'Énorme'},
+ de:{shape:'Form',chr:'Zeichen',loc:'Position',size:'Größe',tcol:'Textfarbe',txt:'Text anzeigen',cu:'Farbe steigend',cd:'Farbe fallend',dobj:'Zeichenobjekte',
+  box:'Rechtecke',label:'Beschriftungen',line:'Linien',table:'Tabellen',poly:'Polylinien',ax:'Beschriftung auf der Preisachse',
+  s_xcross:'X-Kreuz',s_cross:'Kreuz',s_circle:'Kreis',s_square:'Quadrat',s_diamond:'Raute',s_triangleup:'Dreieck oben',s_triangledown:'Dreieck unten',s_arrowup:'Pfeil oben',s_arrowdown:'Pfeil unten',s_flag:'Fahne',s_labelup:'Etikett oben',s_labeldown:'Etikett unten',
+  l_abovebar:'Über dem Balken',l_belowbar:'Unter dem Balken',l_top:'Oben',l_bottom:'Unten',l_absolute:'Absolut',
+  z_auto:'Automatisch',z_tiny:'Winzig',z_small:'Klein',z_normal:'Normal',z_large:'Groß',z_huge:'Riesig'}
+};
+function shpt(k){const L=SHP_T[lang]||SHP_T.it;return L[k]!=null?L[k]:SHP_T.it[k]}
+(function(){
+  const SHAPES=['xcross','cross','circle','square','diamond','triangleup','triangledown','arrowup','arrowdown','flag','labelup','labeldown'];
+  const LOCS=['abovebar','belowbar','top','bottom'],SIZES=['auto','tiny','small','normal','large','huge'];
+  /* quali oggetti grafici crea lo script: quelli che ha disegnato ora oppure che il codice sa creare */
+  const DOBJ=[['box','boxes',/\bbox\.new\s*\(/],['label','labels',/\blabel\.new\s*\(/],['line','lines',/\bline\.new\s*\(/],['table','tables',/\btable\.new\s*\(/],['poly','polylines',/\bpolyline\.new\s*\(/]];
+  const dobjOf=(ind,r)=>DOBJ.filter(([k,rk,re])=>(r[rk]&&r[rk].length)||re.test(ind.code||''));
+  const oS=isdStyle;
+  isdStyle=function(body,ind){
+    oS(body,ind);
+    const r=IR.get(ind.uid);if(!r)return;
+    ind.style=ind.style||{};const SO=ind.style;
+    const sm=(r.smeta||[]).filter(m=>m.ed!==false&&m.disp!==0&&(m.disp&1)),dob=dobjOf(ind,r);
+    const plots=(r.plots||[]).filter(p=>p.disp!==0&&(p.disp&1)&&p.ed!==false);
+    if(!sm.length&&!dob.length)return;
+    const live=re=>{indSave();if(re){IS.forEach((S,u)=>{if(u===ind.uid)S.key=''})}isdLive(false);try{indLegend()}catch(e){}};
+    /* etichette sull'asse per tutte le linee insieme, come la voce generale di TradingView */
+    if(plots.length){const g=[...body.querySelectorAll('.isg')].find(x=>x.textContent===cust('outv'));const lg=g&&[...body.querySelectorAll('.isr')].find(x=>{const l=x.querySelector('.lab');return l&&l.textContent===cust('lgv')});
+      if(lg){const pane=paneOf(ind,r);const tmp=document.createElement('div');
+        isdRow(tmp,shpt('ax'),isdCheck(SO.__ax!=null?SO.__ax:pane>0,v=>{SO.__ax=v;plots.forEach(p=>{const z=SO['p'+p.id];if(z)delete z.ax});live(true);
+          body.querySelectorAll('.isr').forEach(x=>{const l=x.querySelector('.lab');if(l&&l.textContent===cust('ax')){const c=x.querySelector('input[type=checkbox]');if(c)c.checked=v}})}),'',true);
+        lg.parentNode.insertBefore(tmp.firstChild,lg)}}
+    const colRow=(label,hx0,op0,fn)=>{const c=cssToRGBA(hx0)||{r:33,g:150,b:243,a:1};const ctl=isdColor(/^#/.test(hx0||'')&&hx0.length===7?hx0:hex6(c),op0!=null?op0:Math.round((c.a==null?1:c.a)*100),fn);
+      const row=isdRow(body,label,document.createElement('span'),'',false);row.querySelector('.ctl').replaceWith(ctl)};
+    sm.forEach((m,i)=>{
+      const k='s'+m.id,s=SO[k]||{},q=()=>(SO[k]=SO[k]||{});
+      shEl(body,'isg',m.title||(m.k==='char'?shpt('chr'):shpt('shape'))+' '+(i+1));
+      isdRow(body,isdt('vischart'),isdCheck(s.v!==false,v=>{q().v=v;live(false)}),'',true);
+      if(m.k==='arrow'){
+        colRow(shpt('cu'),s.cu||m.cu||'#089981',s.ou,(hx,o)=>{const z=q();z.cu=hx;z.ou=o;live(false)});
+        colRow(shpt('cd'),s.cd||m.cd||'#f23645',s.od,(hx,o)=>{const z=q();z.cd=hx;z.od=o;live(false)});
+      }else{
+        colRow(isdt('color'),s.c||m.c||'#2196f3',s.o,(hx,o)=>{const z=q();z.c=hx;z.o=o;live(false)});
+        if(m.k==='shape'){const cur=s.st||m.st;isdRow(body,shpt('shape'),isdSel(SHAPES.map(x=>[x,shpt('s_'+x)]),SHAPES.includes(cur)?cur:'xcross',v=>{q().st=v===m.st?undefined:v;live(false)}),'',false)}
+        else{const inp=document.createElement('input');inp.type='text';inp.className='isin';inp.maxLength=2;inp.style.width='58px';inp.style.textAlign='center';inp.value=s.ch||m.st||'★';
+          inp.onchange=()=>{const v=[...inp.value.trim()].slice(0,1).join('');q().ch=v&&v!==m.st?v:undefined;if(!v)inp.value=m.st;live(false)};isdRow(body,shpt('chr'),inp,'',false)}
+        if(m.loc==='absolute')isdRow(body,shpt('loc'),isdSel([['absolute',shpt('l_absolute')]],'absolute',()=>{}),'',false);
+        else{const cur=s.loc||m.loc;isdRow(body,shpt('loc'),isdSel(LOCS.map(x=>[x,shpt('l_'+x)]),LOCS.includes(cur)?cur:'abovebar',v=>{q().loc=v===m.loc?undefined:v;live(false)}),'',false)}
+        isdRow(body,shpt('size'),isdSel(SIZES.map(x=>[x,shpt('z_'+x)]),s.sz||m.sz||'auto',v=>{q().sz=v===m.sz?undefined:v;live(false)}),'',false);
+        if(m.tx){colRow(shpt('tcol'),s.tc||m.tc||'#ffffff',s.to,(hx,o)=>{const z=q();z.tc=hx;z.to=o;live(false)});
+          isdRow(body,shpt('txt'),isdCheck(s.tx!==false,v=>{q().tx=v?undefined:false;live(false)}),'',true)}
+      }
+    });
+    if(dob.length){shEl(body,'isg',shpt('dobj'));
+      dob.forEach(([k])=>isdRow(body,shpt(k),isdCheck(SO['__d'+k]!==false,v=>{SO['__d'+k]=v?undefined:false;live(false)}),'',true))}
+  };
 })();

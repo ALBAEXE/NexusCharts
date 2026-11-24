@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.21.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.22.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.21.0 — Volume et niveaux refaits
+### 🆕 Nouveautés de la 1.22.0 — Onglet Style complet pour les signaux et les dessins
+
+- 🎯 Style affiche désormais les signaux de chaque script (plotshape, plotchar, plotarrow) : afficher/masquer, couleur et opacité, forme, position, taille et couleur du texte.
+- 🧩 Nouvelle section Objets graphiques : rectangles, étiquettes, lignes, tableaux et polylignes à activer ou désactiver.
+- 🔒 Les tracés et signaux marqués comme non modifiables dans le script restent masqués dans Style, comme sur TradingView.
+
+### Auparavant, dans la 1.21.0 — Volume et niveaux refaits
 
 - 📊 OBV, Volume, Pivot Points High Low, ZigZag et les indicateurs de niveaux (plus haut et plus bas de la veille et de la semaine précédente, ouvertures, ADR, variation %, volatilité historique, plus haut/bas sur 52 semaines, plus haut/bas de la session) refaits avec les réglages de TradingView plus étiquettes, options en plus et alertes.
 - 🎯 Nouveau : Pivot Points Standard (Traditionnel, Fibonacci, Woodie, Classique, DM, Camarilla) journaliers, hebdomadaires, mensuels, trimestriels ou annuels.
@@ -79,11 +85,14 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🔀 RSI : lissage avec Bandes de Bollinger, zones de surachat et de survente et divergences haussières et baissières.
 - 🎨 MACD avec les quatre couleurs de l'histogramme et le type de moyenne pour l'oscillateur et le signal.
 
-### Auparavant, dans la 1.19.0 — Bandes et canaux refaits
+<details>
+<summary>Auparavant, dans la 1.19.0 — Bandes et canaux refaits</summary>
 
 - 📊 Bandes de Bollinger, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP et Régression linéaire refaits avec les réglages et valeurs de départ de TradingView, plus type de moyenne, autre unité de temps, signaux et alertes là où c'est utile.
 - 📐 Nouveau : Linear Regression Channel avec écart haut/bas, lignes prolongeables et R de Pearson.
 - 🛠️ Réglages du graphique › Légende : les interrupteurs fonctionnent et la flèche du menu Titre est à sa place.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.18.0 — Moyennes mobiles refaites, réglages de la légende</summary>
@@ -100,14 +109,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🎨 Style, pour chaque indicateur et chaque script : type de tracé (ligne, ligne en escalier, histogramme, croix, zone, colonnes, cercles), ligne continue/tirets/pointillés, épaisseur, couleur, ligne de prix, étiquettes sur l'échelle, décimales, valeurs et paramètres dans la légende.
 - 👁️ Visibilité avec des intervalles, par exemple Minutes de 1 à 15.
 - 🔗 Source dans ta langue, et le résultat d'un autre indicateur du graphique comme source (par exemple une moyenne du RSI).
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.16.0 — Noms des indicateurs dans leur panneau, le graphique suit le thème</summary>
-
-- 🏷️ Les indicateurs avec leur propre panneau sous le graphique (RSI, MACD…) affichent leur nom en haut à gauche de ce panneau ; touche-le pour afficher/masquer, réglages et supprimer. En fermant l'onglet de la légende, ces noms disparaissent aussi.
-- 🌗 En passant au thème clair le graphique devient blanc, et en revenant au sombre, noir. Un fond personnalisé choisi à la main est conservé.
 
 </details>
 

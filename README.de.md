@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.21.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.22.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.21.0 — Volumen und Niveaus neu
+### 🆕 Neu in 1.22.0 — Vollständiger Stil-Tab für Signale und Zeichnungen
+
+- 🎯 Stil zeigt jetzt die Signale jedes Skripts (plotshape, plotchar, plotarrow): ein-/ausblenden, Farbe und Deckkraft, Form, Position, Größe und Textfarbe.
+- 🧩 Neuer Bereich Zeichenobjekte: Rechtecke, Beschriftungen, Linien, Tabellen und Polylinien ein- oder ausschalten.
+- 🔒 Plots und Signale, die im Skript als nicht bearbeitbar markiert sind, bleiben im Stil-Tab verborgen, wie bei TradingView.
+
+### Vorher in 1.21.0 — Volumen und Niveaus neu
 
 - 📊 OBV, Volumen, Pivot Points High Low, ZigZag und die Niveau-Indikatoren (Hoch und Tief von Vortag/Vorwoche, Eröffnungen, ADR, Änderung %, historische Volatilität, 52-Wochen-Hoch/-Tief, Sitzungshoch/-tief) neu gebaut mit den Einstellungen von TradingView plus Beschriftungen, weiteren Optionen und Alarmen.
 - 🎯 Neu: Pivot Points Standard (Traditionell, Fibonacci, Woodie, Klassisch, DM, Camarilla) täglich, wöchentlich, monatlich, quartalsweise oder jährlich.
@@ -79,11 +85,14 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🔀 RSI: Glättung mit Bollinger-Bändern, überkaufte/überverkaufte Zonen und bullische/bärische Divergenzen.
 - 🎨 MACD mit den vier Histogrammfarben und MA-Typ für Oszillator und Signal.
 
-### Vorher in 1.19.0 — Bänder und Kanäle neu
+<details>
+<summary>Vorher in 1.19.0 — Bänder und Kanäle neu</summary>
 
 - 📊 Bollinger-Bänder, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP und lineare Regression neu gebaut mit den Einstellungen und Startwerten von TradingView, dazu MA-Typ, andere Zeiteinheit, Signale und Alarme, wo sinnvoll.
 - 📐 Neu: Linear Regression Channel mit oberer/unterer Abweichung, verlängerbaren Linien und Pearson-R.
 - 🛠️ Chart-Einstellungen › Legende: die Schalter funktionieren jetzt, und der Pfeil des Titel-Menüs sitzt richtig.
+
+</details>
 
 <details>
 <summary>Vorher in 1.18.0 — Gleitende Durchschnitte neu, Legenden-Einstellungen</summary>
@@ -100,14 +109,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🎨 Stil, für jeden Indikator und jedes Skript: Darstellung (Linie, Stufenlinie, Histogramm, Kreuze, Fläche, Säulen, Kreise), durchgehend/gestrichelt/gepunktet, Stärke, Farbe, Preislinie, Beschriftung auf der Preisachse, Nachkommastellen, Werte und Eingaben in der Legende.
 - 👁️ Sichtbarkeit mit Bereichen, zum Beispiel Minuten von 1 bis 15.
 - 🔗 Quelle in deiner Sprache und das Ergebnis eines anderen Indikators im Chart als Quelle (zum Beispiel ein gleitender Durchschnitt des RSI).
-
-</details>
-
-<details>
-<summary>Vorher in 1.16.0 — Indikatornamen im eigenen Bereich, Chart folgt dem Design</summary>
-
-- 🏷️ Indikatoren mit eigenem Bereich unter dem Chart (RSI, MACD…) zeigen ihren Namen oben links in diesem Bereich; antippen für Ein-/Ausblenden, Einstellungen und Entfernen. Wird die Legende eingeklappt, verschwinden auch diese Namen.
-- 🌗 Beim hellen Design wird der Chart weiß, beim dunklen wieder schwarz. Ein von Hand gewählter Hintergrund bleibt erhalten.
 
 </details>
 

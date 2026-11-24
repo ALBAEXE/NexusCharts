@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.21.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.22.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.21.0 — Volumen y niveles rehechos
+### 🆕 Novedades de la 1.22.0 — Pestaña Estilo completa para señales y dibujos
+
+- 🎯 Estilo muestra ahora las señales de cada script (plotshape, plotchar, plotarrow): mostrar/ocultar, color y opacidad, forma, posición, tamaño y color del texto.
+- 🧩 Nueva sección Objetos gráficos: recuadros, etiquetas, líneas, tablas y polilíneas que se pueden activar o desactivar.
+- 🔒 Las líneas y señales marcadas como no editables en el script quedan ocultas en Estilo, como en TradingView.
+
+### Anteriormente, en la 1.21.0 — Volumen y niveles rehechos
 
 - 📊 OBV, Volumen, Pivot Points High Low, ZigZag y los indicadores de niveles (máximo y mínimo del día y la semana anteriores, aperturas, ADR, variación %, volatilidad histórica, máximo y mínimo de 52 semanas, máximo y mínimo de la sesión) rehechos con los ajustes de TradingView más etiquetas, opciones extra y alertas.
 - 🎯 Nuevo: Pivot Points Standard (Tradicional, Fibonacci, Woodie, Clásico, DM, Camarilla) diarios, semanales, mensuales, trimestrales o anuales.
@@ -79,11 +85,14 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🔀 RSI: suavizado con Bandas de Bollinger, zonas de sobrecompra y sobreventa y divergencias alcistas y bajistas.
 - 🎨 MACD con los cuatro colores del histograma y el tipo de media para oscilador y señal.
 
-### Anteriormente, en la 1.19.0 — Bandas y canales rehechos
+<details>
+<summary>Anteriormente, en la 1.19.0 — Bandas y canales rehechos</summary>
 
 - 📊 Bandas de Bollinger, %B, BandWidth, Keltner, Donchian, Envelope, Supertrend, Ichimoku, VWAP y Regresión lineal rehechos con los ajustes y valores iniciales de TradingView, más tipo de media, otra temporalidad, señales y alertas donde sirven.
 - 📐 Nuevo: Linear Regression Channel con desviación superior/inferior, líneas extensibles y R de Pearson.
 - 🛠️ Ajustes del gráfico › Leyenda: los interruptores ya funcionan y la flecha del menú Título está en su sitio.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.18.0 — Medias móviles rehechas, ajustes de la leyenda</summary>
@@ -100,14 +109,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🎨 Estilo, para cada indicador y cada script: tipo de dibujo (línea, línea escalonada, histograma, cruces, área, columnas, círculos), línea continua/discontinua/punteada, grosor, color, línea de precio, etiquetas en la escala, decimales, valores y entradas en la leyenda.
 - 👁️ Visibilidad con intervalos, por ejemplo Minutos de 1 a 15.
 - 🔗 Fuente en tu idioma, y el resultado de otro indicador del gráfico como fuente (por ejemplo una media del RSI).
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.16.0 — Nombres de los indicadores en su panel, el gráfico sigue el tema</summary>
-
-- 🏷️ Los indicadores con su propio panel bajo el gráfico (RSI, MACD…) muestran su nombre arriba a la izquierda de ese panel; tócalo para mostrar/ocultar, ajustes y eliminar. Al cerrar la pestaña de la leyenda también desaparecen estos nombres.
-- 🌗 Al pasar al tema claro el gráfico se vuelve blanco, y al volver al oscuro, negro. Un fondo personalizado elegido a mano se mantiene.
 
 </details>
 
