@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.17.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.18.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.17.0 — Jeden Indikator anpassen
+### 🆕 Neu in 1.18.0 — Gleitende Durchschnitte neu, Legenden-Einstellungen
+
+- 📈 Gleitende Durchschnitte neu gebaut mit den Einstellungen und Startwerten von TradingView (Glättung mit Bollinger-Bändern, andere Zeiteinheit, Warten auf Schluss der Zeiteinheit) plus Alarme beim Kreuzen des Preises. Neu: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic und MA Cross; MA Ribbon mit 4 frei einstellbaren Durchschnitten.
+- 🏷️ Chart-Einstellungen › Legende: Logo, Titel (Symbol, Name oder beides), Marktstatus, Chartwerte, Balkenänderung, Volumen, Änderung zum Vortag; für Indikatoren Titel, Eingaben, Werte und Hintergrund.
+- 🔤 Die Indikator-Einstellungen erscheinen in deiner Sprache.
+
+### Vorher in 1.17.0 — Jeden Indikator anpassen
 
 - 🎨 Stil, für jeden Indikator und jedes Skript: Darstellung (Linie, Stufenlinie, Histogramm, Kreuze, Fläche, Säulen, Kreise), durchgehend/gestrichelt/gepunktet, Stärke, Farbe, Preislinie, Beschriftung auf der Preisachse, Nachkommastellen, Werte und Eingaben in der Legende.
 - 👁️ Sichtbarkeit mit Bereichen, zum Beispiel Minuten von 1 bis 15.
@@ -78,10 +84,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🏷️ Indikatoren mit eigenem Bereich unter dem Chart (RSI, MACD…) zeigen ihren Namen oben links in diesem Bereich; antippen für Ein-/Ausblenden, Einstellungen und Entfernen. Wird die Legende eingeklappt, verschwinden auch diese Namen.
 - 🌗 Beim hellen Design wird der Chart weiß, beim dunklen wieder schwarz. Ein von Hand gewählter Hintergrund bleibt erhalten.
 
-### Vorher in 1.15.1 — Korrekturen
+<details>
+<summary>Vorher in 1.15.1 — Korrekturen</summary>
 
 - 🔢 Indikatoren im Bereich unter dem Chart, wie der RSI, zeigen 2 Nachkommastellen statt der des Preises; sehr kleine Werte (wie der MACD auf EURUSD) behalten die nötigen Stellen.
 - 🌍 Bei geöffnetem Bar Replay wechseln Abbrechen und Hier starten sofort die Sprache, und die von VoiceOver und TalkBack vorgelesenen Tastennamen sind in der gewählten Sprache.
+
+</details>
 
 <details>
 <summary>Vorher in 1.15.0 — Zurück zur letzten Kerze</summary>
@@ -95,14 +104,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - 🔤 Der Code im Skript-Editor ist kleiner und kompakter: Du siehst mehr und längere Zeilen auf einmal. Größerer oder kleinerer Text bleibt im Menü verfügbar.
 - 🔍 Im Browser vergrößert sich die Seite beim Antippen eines Textfelds nicht mehr von selbst.
-
-</details>
-
-<details>
-<summary>Vorher in 1.14.0 — Strategy Tester</summary>
-
-- 📊 Strategieergebnisse in einem Strategy Tester im Vollbild: Übersicht mit Kapitalkurve, Performance nach Alle, Long und Short, und die Liste der Trades.
-- 🏷️ Neben dem Namen einer Strategie im Chart zeigt ein kleines Etikett den Nettogewinn: antippen, um den Strategy Tester zu öffnen. Indikatoren, die keine Strategien sind, bleiben unverändert.
 
 </details>
 

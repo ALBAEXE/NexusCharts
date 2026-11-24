@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.17.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.18.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.17.0 — Personaliza cada indicador
+### 🆕 Novedades de la 1.18.0 — Medias móviles rehechas, ajustes de la leyenda
+
+- 📈 Medias móviles rehechas con los ajustes y valores iniciales de TradingView (suavizado con Bandas de Bollinger, otra temporalidad, esperar al cierre de la temporalidad) más alertas de cruce del precio. Nuevas: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic y MA Cross; MA Ribbon con 4 medias configurables.
+- 🏷️ Ajustes del gráfico › Leyenda: logo, título (símbolo, nombre o ambos), mercado abierto, valores del gráfico, variación de la barra, volumen, variación sobre el día anterior; para los indicadores títulos, entradas, valores y fondo.
+- 🔤 Los ajustes de los indicadores se muestran en tu idioma.
+
+### Anteriormente, en la 1.17.0 — Personaliza cada indicador
 
 - 🎨 Estilo, para cada indicador y cada script: tipo de dibujo (línea, línea escalonada, histograma, cruces, área, columnas, círculos), línea continua/discontinua/punteada, grosor, color, línea de precio, etiquetas en la escala, decimales, valores y entradas en la leyenda.
 - 👁️ Visibilidad con intervalos, por ejemplo Minutos de 1 a 15.
@@ -78,10 +84,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🏷️ Los indicadores con su propio panel bajo el gráfico (RSI, MACD…) muestran su nombre arriba a la izquierda de ese panel; tócalo para mostrar/ocultar, ajustes y eliminar. Al cerrar la pestaña de la leyenda también desaparecen estos nombres.
 - 🌗 Al pasar al tema claro el gráfico se vuelve blanco, y al volver al oscuro, negro. Un fondo personalizado elegido a mano se mantiene.
 
-### Anteriormente, en la 1.15.1 — Correcciones
+<details>
+<summary>Anteriormente, en la 1.15.1 — Correcciones</summary>
 
 - 🔢 Los indicadores en el panel bajo el gráfico, como el RSI, muestran 2 decimales en lugar de los del precio; los valores muy pequeños (como el MACD en EURUSD) mantienen los decimales necesarios.
 - 🌍 Con el Bar Replay abierto, Cancelar y Empezar aquí cambian de idioma al momento, y los nombres de los botones que leen VoiceOver y TalkBack están en el idioma elegido.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.15.0 — Volver a la última vela</summary>
@@ -95,14 +104,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - 🔤 El código en el editor de scripts es más pequeño y compacto: ves más líneas, y más largas, a la vez. El texto más grande o más pequeño sigue en el menú.
 - 🔍 En el navegador, al tocar un campo de texto la página ya no se amplía sola.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.14.0 — Strategy Tester</summary>
-
-- 📊 Los resultados de las estrategias en un Strategy Tester a pantalla completa: resumen con la curva de capital, rendimiento dividido en Todas, Long y Short, y la lista de operaciones.
-- 🏷️ Junto al nombre de una estrategia en el gráfico, una pequeña etiqueta muestra el beneficio neto: tócala para abrir el Strategy Tester. Los indicadores que no son estrategias no cambian.
 
 </details>
 

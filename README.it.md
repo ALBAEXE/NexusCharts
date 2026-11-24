@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.17.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.18.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.17.0 — Personalizza ogni indicatore
+### 🆕 Novità della 1.18.0 — Medie mobili rifatte, impostazioni della legenda
+
+- 📈 Medie mobili rifatte con le impostazioni e i valori di partenza di TradingView (livellamento con Bande di Bollinger, altro timeframe, attesa della chiusura del timeframe) più gli avvisi sull'incrocio del prezzo. Nuove: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic e MA Cross; MA Ribbon con 4 medie personalizzabili.
+- 🏷️ Impostazioni grafico › Legenda: logo, titolo (simbolo, nome o entrambi), mercato aperto, valori del grafico, variazione barre, volume, variazione sul giorno precedente; per gli indicatori titoli, input, valori e sfondo.
+- 🔤 Le impostazioni degli indicatori sono nella tua lingua.
+
+### In precedenza, nella 1.17.0 — Personalizza ogni indicatore
 
 - 🎨 Stile, per ogni indicatore e ogni script: tipo di disegno (linea, linea a step, istogramma, croci, area, colonne, cerchi), linea continua/tratteggiata/puntinata, spessore, colore, linea del prezzo, etichette sull'asse, decimali, valori e input in legenda.
 - 👁️ Visibilità con gli intervalli, per esempio Minuti da 1 a 15.
@@ -78,10 +84,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🏷️ Gli indicatori con un riquadro loro sotto il grafico (RSI, MACD…) mostrano il nome in alto a sinistra del riquadro; toccalo per mostra/nascondi, impostazioni ed elimina. Chiudendo la linguetta della legenda spariscono anche questi nomi.
 - 🌗 Passando al tema chiaro il grafico diventa bianco, tornando allo scuro diventa nero. Uno sfondo personalizzato scelto a mano resta com'è.
 
-### In precedenza, nella 1.15.1 — Correzioni
+<details>
+<summary>In precedenza, nella 1.15.1 — Correzioni</summary>
 
 - 🔢 Gli indicatori nel riquadro sotto il grafico, come l'RSI, hanno 2 decimali invece di quelli del prezzo; i valori piccolissimi (come il MACD su EURUSD) tengono i decimali che servono.
 - 🌍 Con il Bar Replay aperto, Annulla e Avvia da qui cambiano lingua subito, e i nomi dei pulsanti letti da VoiceOver e TalkBack sono nella lingua scelta.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.15.0 — Torna all'ultima candela</summary>
@@ -95,14 +104,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 - 🔤 Il codice nell'editor degli script è più piccolo e compatto: vedi più righe, e più lunghe, tutte insieme. Il testo più grande o più piccolo resta nel menu.
 - 🔍 Nel browser, toccando un campo di testo la pagina non si ingrandisce più da sola.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.14.0 — Strategy Tester</summary>
-
-- 📊 I risultati delle strategie in uno Strategy Tester a tutto schermo: panoramica con la curva del capitale, rendimento diviso in Tutte, Long e Short, ed elenco delle operazioni.
-- 🏷️ Accanto al nome di una strategia sul grafico, una piccola etichetta mostra il profitto netto: toccala per aprire lo Strategy Tester. Gli indicatori che non sono strategie restano come prima.
 
 </details>
 

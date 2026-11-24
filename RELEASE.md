@@ -1,12 +1,16 @@
-# v1.17.0 — Customize every indicator
+# v1.18.0 — Moving averages rebuilt, legend settings
 ### Added
-- Style settings for every indicator, including your own scripts: plot type (line, step line, histogram, cross, area, columns, circles), solid, dashed or dotted line, width, colour, price line and label on the price scale for each plot; precision, values in the legend and inputs in the legend for the whole indicator.
-- Values in the legend show the latest value, or the value under your finger while you move across the chart.
-- Visibility ranges for each group of timeframes, for example Minutes from 1 to 15.
-- Source inputs show their names in your language and can use the result of another indicator on the chart. An indicator calculated on another one is drawn in the same pane.
+- Moving averages rebuilt with TradingView's inputs and default values: SMA, EMA, WMA, HMA, VWMA and ALMA now have Length, Source, Offset, Smoothing (None, SMA, SMA + Bollinger Bands, EMA, SMMA (RMA), WMA, VWMA) with its length and BB StdDev, Timeframe and Wait for timeframe closes, plus alerts when the price crosses the average.
+- New moving averages: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic and MA Cross (two averages with type, length and colour, cross markers, fill and alerts).
+- Moving Average Ribbon with four averages, each with show/hide, type, source, length and colour.
+- Chart settings › Legend: logo, title (symbol, name or both), market status, chart values, bar change, volume and change from the previous day; for indicators: titles, inputs, values and background with opacity.
+- Indicator input names are shown in the chosen language (also for scripts that use the same English names).
+- Plot types "Line with breaks", "Step line with breaks" and "Area with breaks".
 
 ### Fixed
-- When the price feed sends mid prices ending in a half tick (for example 3651.2185), prices are shown with one decimal less, as on TradingView.
+- A source input used inside request.security now reads the other timeframe's candles, as in Pine Script.
+- Line, step line and area plots now connect across missing values, as in Pine Script; only the "with breaks" styles leave gaps.
+- Moving averages already on the chart from the library are updated to the new version and keep their changed inputs.
 
 ### Documentation
-- README updated in 5 languages: new in 1.17.0.
+- README updated in 5 languages: new in 1.18.0.

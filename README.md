@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.17.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.18.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.17.0 — Customize every indicator
+### 🆕 New in 1.18.0 — Moving averages rebuilt, legend settings
+
+- 📈 Moving averages rebuilt with TradingView's settings and defaults (smoothing with Bollinger Bands, another timeframe, wait for timeframe closes) plus price-cross alerts. New: SMMA, DEMA, TEMA, LSMA, McGinley Dynamic and MA Cross; MA Ribbon with 4 fully configurable averages.
+- 🏷️ Chart settings › Legend: logo, title (symbol, name or both), market status, chart values, bar change, volume, change from the previous day; for indicators titles, inputs, values and background.
+- 🔤 Indicator settings are shown in your language.
+
+### Previously in 1.17.0 — Customize every indicator
 
 - 🎨 Style, for every indicator and every script: plot type (line, step line, histogram, cross, area, columns, circles), solid/dashed/dotted line, width, colour, price line, labels on the price scale, precision, values and inputs in the legend.
 - 👁️ Visibility with ranges, for example Minutes from 1 to 15.
@@ -78,10 +84,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🏷️ Indicators with their own pane below the chart (RSI, MACD…) show their name at the top left of that pane; tap it for show/hide, settings and remove. Closing the legend tab hides these names too.
 - 🌗 Switching to the light theme makes the chart white, and back to dark makes it black. A custom background chosen by hand is kept.
 
-### Previously in 1.15.1 — Fixes
+<details>
+<summary>Previously in 1.15.1 — Fixes</summary>
 
 - 🔢 Indicators in a pane below the chart, such as RSI, show 2 decimals instead of the price's decimals; very small values (such as MACD on EURUSD) keep the decimals they need.
 - 🌍 With Bar Replay open, Cancel and Start here now change language right away, and the button names read by VoiceOver and TalkBack are in the chosen language.
+
+</details>
 
 <details>
 <summary>Previously in 1.15.0 — Back to the latest candle</summary>
@@ -95,14 +104,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 - 🔤 The code in the Script editor is smaller and more compact, so you see more lines and longer lines at once. Larger or smaller text is still available from the menu.
 - 🔍 In the browser, tapping a text field no longer zooms the page in.
-
-</details>
-
-<details>
-<summary>Previously in 1.14.0 — Strategy Tester</summary>
-
-- 📊 Strategy results in a full-screen Strategy Tester: overview with the equity curve, performance split into All, Long and Short, and the list of trades.
-- 🏷️ Next to a strategy's name on the chart, a small tag shows its net profit: tap it to open the Strategy Tester. Indicators that are not strategies are unchanged.
 
 </details>
 
