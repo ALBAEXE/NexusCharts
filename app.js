@@ -1,4 +1,4 @@
-const VERSION='1.15.0';
+const VERSION='1.15.1';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -1052,14 +1052,17 @@ function chartOpts(){
     rightPriceScale:v.rightPriceScale,
     timeScale:{...v.timeScale,timeVisible:true,secondsVisible:false},
     crosshair:{mode:0,vertLine:{...v.crosshair.vertLine,labelBackgroundColor:'#3a3a3e'},horzLine:{...v.crosshair.horzLine,labelBackgroundColor:'#3a3a3e'}},
-    localization:{priceFormatter:p=>fmt(p,dec)}
   };
 }
+/* 1.15.1: i decimali si scelgono serie per serie (prima una regola unica per tutto il grafico dava i 5 decimali del prezzo anche all'RSI) */
+function pfDec(){return{type:'custom',minMove:Math.pow(10,-dec),formatter:p=>fmt(p,dec)}}
+function pfOf(d){return{type:'custom',minMove:Math.pow(10,-d),formatter:p=>fmt(p,d)}}
 function setDec(d){
   if(d===dec)return;
   dec=d;
-  if(series)series.applyOptions({priceFormat:{type:'price',precision:d,minMove:Math.pow(10,-d)}});
-  if(chart)chart.applyOptions({localization:{priceFormatter:p=>fmt(p,dec)}});
+  if(series)series.applyOptions({priceFormat:pfDec()});
+  try{if(typeof CMP!=='undefined'&&CMP.series)CMP.series.applyOptions({priceFormat:pfDec()})}catch(e){}
+  try{if(typeof indRender==='function'&&typeof IS!=='undefined'){IS.forEach(S=>{S.key=''});indRender()}}catch(e){}
 }
 function tint(){
   const r=cvRes();
@@ -1313,7 +1316,8 @@ function renderAll(){
   if(tab==='pf')renderProfile();
   if(!BYN[cur])return;
   renderWL();renderLegend();renderSymPill();renderMini();tagText();
-  if(chart)chart.applyOptions({localization:{priceFormatter:p=>fmt(p,dec)}});
+  /* lingua nuova: separatori dei numeri nuovi */
+  try{if(series)series.applyOptions({priceFormat:pfDec()});if(typeof CMP!=='undefined'&&CMP.series)CMP.series.applyOptions({priceFormat:pfDec()});if(typeof IS!=='undefined'){IS.forEach(S=>{S.key=''});indRender()}}catch(e){}
 }
 
 /* ---------- accesso: collegamento, rinnovo automatico, Face ID ---------- */
@@ -2220,7 +2224,7 @@ function upDn(){
 }
 function makeSeries(){
   const[U,D]=upDn(),blue=themeVar('--blue')||'#2962ff';
-  const base={lastValueVisible:false,priceLineVisible:CS.pline,priceLineStyle:1,priceLineWidth:1,priceLineColor:blue,priceFormat:{type:'price',precision:dec,minMove:Math.pow(10,-dec)}};
+  const base={lastValueVisible:false,priceLineVisible:CS.pline,priceLineStyle:1,priceLineWidth:1,priceLineColor:blue,priceFormat:pfDec()};
   if(CS.type==='bars')return addS('Bar',Object.assign(base,{upColor:U,downColor:D,thinBars:false}));
   if(CS.type==='line')return addS('Line',Object.assign(base,{color:blue,lineWidth:2}));
   if(CS.type==='area')return addS('Area',Object.assign(base,{lineColor:blue,topColor:'rgba(41, 98, 255, 0.35)',bottomColor:'rgba(41, 98, 255, 0.02)',lineWidth:2}));
@@ -2309,7 +2313,7 @@ function cmpSet(sym){
   $('lgcmp').hidden=!CMP.sym;
   if(CMP.sym){
     $('lgcmp').textContent='＋ '+CMP.sym;
-    CMP.series=addS('Line',{color:'#ff9800',lineWidth:2,priceLineVisible:false,lastValueVisible:true});
+    CMP.series=addS('Line',{color:'#ff9800',lineWidth:2,priceLineVisible:false,lastValueVisible:true,priceFormat:pfDec()});
     cmpLoad().catch(()=>{});
   }
 }
@@ -4259,7 +4263,7 @@ function ccOpts(){
 }
 makeSeries=function(){
   const blue=themeVar('--blue')||'#2962ff';
-  const base={lastValueVisible:false,priceLineVisible:CS.pline,priceLineStyle:1,priceLineWidth:1,priceLineColor:blue,priceFormat:{type:'price',precision:dec,minMove:Math.pow(10,-dec)}};
+  const base={lastValueVisible:false,priceLineVisible:CS.pline,priceLineStyle:1,priceLineWidth:1,priceLineColor:blue,priceFormat:pfDec()};
   if(CS.type==='bars'){const c=ccRes();return addS('Bar',Object.assign(base,{upColor:hexA(c.body.u,c.body.o),downColor:hexA(c.body.d,c.body.o),thinBars:false}))}
   if(CS.type==='line')return addS('Line',Object.assign(base,{color:blue,lineWidth:2}));
   if(CS.type==='area')return addS('Area',Object.assign(base,{lineColor:blue,topColor:'rgba(41, 98, 255, 0.35)',bottomColor:'rgba(41, 98, 255, 0.02)',lineWidth:2}));
@@ -7313,15 +7317,20 @@ function indRender(){
     let S=IS.get(ind.uid);
     if(!S||S.key!==key){
       indClearSeries(ind.uid);S={key,list:[],map:{}};
+      /* 1.15.1: nel pannello sotto il grafico i decimali sono quelli dello script (precision=) oppure 2 per valori come RSI,
+         e quelli del prezzo solo per valori piccoli (es. MACD su EURUSD), come TradingView; prima valevano sempre quelli del prezzo */
+      const pPrec=(()=>{if(pane===0)return dec;const mp=r.meta&&r.meta.precision;if(mp!=null&&isFinite(mp))return Math.max(0,Math.min(10,Math.round(mp)));
+        const v=[];plots.forEach(p=>{for(let i=p.vals.length-1;i>=0&&v.length<400;i--){const x=p.vals[i];if(x!=null&&isFinite(x)&&x!==0)v.push(Math.abs(x))}});
+        if(!v.length)return 2;v.sort((a,b)=>a-b);return v[v.length>>1]>=1?2:Math.max(2,dec)})();
       plots.forEach(p=>{
-        const base={lastValueVisible:pane>0,priceLineVisible:false,title:'',priceFormat:{type:'price',precision:pane>0?2:dec,minMove:pane>0?0.01:Math.pow(10,-dec)}};
+        const base={lastValueVisible:pane>0,priceLineVisible:false,title:'',priceFormat:pane>0?{type:'custom',minMove:Math.pow(10,-pPrec),formatter:x=>fmt(x,pPrec)}:pfDec()};
         let s,kind;
         if(p.style==='histogram'||p.style==='columns'){kind='Histogram';s=chart.addSeries(L.HistogramSeries,Object.assign(base,{base:p.hb||0}),pane)}
         else if(p.style==='area'){kind='Area';s=chart.addSeries(L.AreaSeries,Object.assign(base,{lineWidth:so('p'+p.id).w||p.lw||1}),pane)}
         else{kind='Line';const pts=p.style==='circles'||p.style==='cross';s=chart.addSeries(L.LineSeries,Object.assign(base,{lineWidth:so('p'+p.id).w||p.lw||1,lineType:p.style==='stepline'?1:0,lineVisible:!pts,pointMarkersVisible:pts,pointMarkersRadius:pts?2:undefined,crosshairMarkerVisible:!pts}),pane)}
         S.list.push(s);S.map['p'+p.id]={s,kind};
       });
-      hl.forEach(h=>{const q=so('h'+h.id);const s=chart.addSeries(L.LineSeries,{color:q.c?rgbaOf(q.c,q.o!=null?q.o:100):(h.c||'#787B86'),lineWidth:q.w||h.w||1,lineStyle:h.st==='solid'?0:h.st==='dotted'?1:2,lastValueVisible:false,priceLineVisible:false,crosshairMarkerVisible:false},pane);S.list.push(s);S.map['h'+h.id]={s,kind:'H'}});
+      hl.forEach(h=>{const q=so('h'+h.id);const s=chart.addSeries(L.LineSeries,{color:q.c?rgbaOf(q.c,q.o!=null?q.o:100):(h.c||'#787B86'),lineWidth:q.w||h.w||1,lineStyle:h.st==='solid'?0:h.st==='dotted'?1:2,lastValueVisible:false,priceLineVisible:false,crosshairMarkerVisible:false,priceFormat:pane>0?pfOf(pPrec):pfDec()},pane);S.list.push(s);S.map['h'+h.id]={s,kind:'H'}});
       IS.set(ind.uid,S);
     }
     plots.forEach(p=>{
@@ -13938,4 +13947,37 @@ ${B}#d3cpop button.on::after{content:"";position:absolute;inset:-4px;border-radi
   function isStk(n){try{return !!(BYN[n]&&info(BYN[n]).cat==='stk')}catch(e){return false}}
   try{var oSD=setDec;setDec=function(d){return oSD.call(this,isStk(cur)?2:d)}}catch(e){}
   try{var oQF=quoteFor;quoteFor=function(n){return Promise.resolve(oQF.apply(this,arguments)).then(function(r){try{if(isStk(n)&&QUOTE[n])QUOTE[n].dec=2}catch(e){}return r})}}catch(e){}
+})();
+/* =====================================================================
+   1.15.1: nomi dei pulsanti per VoiceOver/TalkBack nella lingua scelta (prima sempre in inglese)
+   e pulsanti del Bar Replay che cambiano lingua anche se il replay è già aperto
+   ===================================================================== */
+(function(){
+  const A={
+    Details:{it:'Dettagli',es:'Detalles',fr:'Détails',de:'Details'},Drawing:{it:'Disegno',es:'Dibujo',fr:'Dessin',de:'Zeichnen'},
+    'Bar Replay':{it:'Bar Replay',es:'Bar Replay',fr:'Bar Replay',de:'Bar Replay'},Indicators:{it:'Indicatori',es:'Indicadores',fr:'Indicateurs',de:'Indikatoren'},
+    More:{it:'Altro',es:'Más',fr:'Plus',de:'Mehr'},Symbol:{it:'Simbolo',es:'Símbolo',fr:'Symbole',de:'Symbol'},Timeframe:{it:'Timeframe',es:'Temporalidad',fr:'Unité de temps',de:'Zeiteinheit'},
+    Exit:{it:'Esci',es:'Salir',fr:'Quitter',de:'Beenden'},Pick:{it:'Scegli il punto',es:'Elegir el punto',fr:'Choisir le point',de:'Punkt wählen'},
+    Play:{it:'Avvia',es:'Reproducir',fr:'Lecture',de:'Abspielen'},Step:{it:'Avanti di una candela',es:'Avanzar una vela',fr:'Avancer d\'une bougie',de:'Eine Kerze weiter'},
+    Close:{it:'Chiudi',es:'Cerrar',fr:'Fermer',de:'Schließen'},close:{it:'Chiudi',es:'Cerrar',fr:'Fermer',de:'Schließen'},
+    save:{it:'Salva',es:'Guardar',fr:'Enregistrer',de:'Speichern'},more:{it:'Altro',es:'Más',fr:'Plus',de:'Mehr'},
+    edit:{it:'Modifica',es:'Editar',fr:'Modifier',de:'Bearbeiten'},keyboard:{it:'Tastiera',es:'Teclado',fr:'Clavier',de:'Tastatur'},
+    console:{it:'Console',es:'Consola',fr:'Console',de:'Konsole'},del:{it:'Elimina',es:'Eliminar',fr:'Supprimer',de:'Löschen'},
+    Undo:{it:'Annulla',es:'Deshacer',fr:'Annuler',de:'Rückgängig'},Menu:{it:'Menu',es:'Menú',fr:'Menu',de:'Menü'},Info:{it:'Informazioni',es:'Información',fr:'Informations',de:'Info'},
+    Code:{it:'Codice',es:'Código',fr:'Code',de:'Code'},refresh:{it:'Aggiorna',es:'Actualizar',fr:'Actualiser',de:'Aktualisieren'},Refresh:{it:'Aggiorna',es:'Actualizar',fr:'Actualiser',de:'Aktualisieren'},
+    Language:{it:'Lingua',es:'Idioma',fr:'Langue',de:'Sprache'}
+  };
+  const EN={close:'Close',save:'Save',more:'More',edit:'Edit',keyboard:'Keyboard',console:'Console',del:'Delete',refresh:'Refresh'};
+  const one=el=>{let k=el.getAttribute('data-al');const cur=el.getAttribute('aria-label');
+    if(!k||(cur&&cur!==el.getAttribute('data-alv'))){if(!cur||!A[cur])return;k=cur;el.setAttribute('data-al',k)}
+    const v=lang==='en'?(EN[k]||k):((A[k]&&A[k][lang])||k);if(cur!==v){el.setAttribute('aria-label',v)}el.setAttribute('data-alv',v)};
+  const all=()=>{try{document.querySelectorAll('[aria-label]').forEach(one)}catch(e){}};
+  let tm=0;const later=()=>{if(!tm)tm=setTimeout(()=>{tm=0;all()},120)};
+  try{new MutationObserver(later).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['aria-label']})}catch(e){}
+  /* Bar Replay aperto mentre cambi lingua: «Annulla» e «Avvia da qui» si aggiornano subito */
+  const rp=()=>{try{const b=$('dban');if(!b||b.hidden)return;$('dbcancel').textContent=t('cancel');
+    if(typeof RP!=='undefined'&&RP.on&&typeof dMode!=='undefined'&&dMode==='pick'){$('dbantxt').textContent=t('rp_pick');$('dbdone').textContent=t('rp_go')}else $('dbdone').textContent=t('done');
+    if(typeof hintFor==='function'&&dMode==='place'){}}catch(e){}};
+  const o=applyLang;applyLang=function(){const r=o.apply(this,arguments);rp();all();return r};
+  all();
 })();

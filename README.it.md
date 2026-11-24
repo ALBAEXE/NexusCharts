@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.15.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.15.1-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.15.0 — Torna all'ultima candela
+### 🆕 Novità della 1.15.1 — Correzioni
+
+- 🔢 Gli indicatori nel riquadro sotto il grafico, come l'RSI, hanno 2 decimali invece di quelli del prezzo; i valori piccolissimi (come il MACD su EURUSD) tengono i decimali che servono.
+- 🌍 Con il Bar Replay aperto, Annulla e Avvia da qui cambiano lingua subito, e i nomi dei pulsanti letti da VoiceOver e TalkBack sono nella lingua scelta.
+
+### In precedenza, nella 1.15.0 — Torna all'ultima candela
 
 - ⏩ Quando scorri il grafico indietro nel tempo, in basso a destra compare un piccolo tasto: toccalo per tornare subito all'ultima candela.
 
@@ -76,10 +81,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🔤 Il codice nell'editor degli script è più piccolo e compatto: vedi più righe, e più lunghe, tutte insieme. Il testo più grande o più piccolo resta nel menu.
 - 🔍 Nel browser, toccando un campo di testo la pagina non si ingrandisce più da sola.
 
-### In precedenza, nella 1.14.0 — Strategy Tester
+<details>
+<summary>In precedenza, nella 1.14.0 — Strategy Tester</summary>
 
 - 📊 I risultati delle strategie in uno Strategy Tester a tutto schermo: panoramica con la curva del capitale, rendimento diviso in Tutte, Long e Short, ed elenco delle operazioni.
 - 🏷️ Accanto al nome di una strategia sul grafico, una piccola etichetta mostra il profitto netto: toccala per aprire lo Strategy Tester. Gli indicatori che non sono strategie restano come prima.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.13.0 — Motore Pine Script completo e strategie</summary>
@@ -94,15 +102,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 <summary>In precedenza, nella 1.12.3 — Etichette al posto giusto</summary>
 
 - 🏷️ Le etichette e i disegni degli indicatori messi a un orario tra due candele (per esempio il nome di una sessione a metà del suo box) ora compaiono dove devono, invece che sul bordo sinistro del grafico.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.12.2 — Supporto a Pine v4</summary>
-
-- 🧩 Ora funzionano anche gli indicatori Pine Script v4: funzioni senza ta./math./str., security(), iff(), tostring() e input(type=…).
-- ➗ Pine v5: la divisione tra due numeri interi scritti nel codice dà un intero (5 / 2 = 2), come su TradingView. In v6 resta 2,5.
-- 📊 Oro: volume a tick su tutto lo storico dal 2011.
 
 </details>
 

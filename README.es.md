@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.15.0-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.15.1-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,12 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.15.0 — Volver a la última vela
+### 🆕 Novedades de la 1.15.1 — Correcciones
+
+- 🔢 Los indicadores en el panel bajo el gráfico, como el RSI, muestran 2 decimales en lugar de los del precio; los valores muy pequeños (como el MACD en EURUSD) mantienen los decimales necesarios.
+- 🌍 Con el Bar Replay abierto, Cancelar y Empezar aquí cambian de idioma al momento, y los nombres de los botones que leen VoiceOver y TalkBack están en el idioma elegido.
+
+### Anteriormente, en la 1.15.0 — Volver a la última vela
 
 - ⏩ Cuando desplazas el gráfico hacia atrás en el tiempo, abajo a la derecha aparece un pequeño botón: tócalo para volver enseguida a la última vela.
 
@@ -76,10 +81,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - 🔤 El código en el editor de scripts es más pequeño y compacto: ves más líneas, y más largas, a la vez. El texto más grande o más pequeño sigue en el menú.
 - 🔍 En el navegador, al tocar un campo de texto la página ya no se amplía sola.
 
-### Anteriormente, en la 1.14.0 — Strategy Tester
+<details>
+<summary>Anteriormente, en la 1.14.0 — Strategy Tester</summary>
 
 - 📊 Los resultados de las estrategias en un Strategy Tester a pantalla completa: resumen con la curva de capital, rendimiento dividido en Todas, Long y Short, y la lista de operaciones.
 - 🏷️ Junto al nombre de una estrategia en el gráfico, una pequeña etiqueta muestra el beneficio neto: tócala para abrir el Strategy Tester. Los indicadores que no son estrategias no cambian.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.13.0 — Motor Pine Script completo y estrategias</summary>
@@ -94,15 +102,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 <summary>Anteriormente, en la 1.12.3 — Etiquetas en su sitio</summary>
 
 - 🏷️ Las etiquetas y dibujos de los indicadores situados en una hora entre dos velas (por ejemplo el nombre de una sesión en medio de su caja) ahora aparecen donde deben, y no en el borde izquierdo del gráfico.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.12.2 — Compatibilidad con Pine v4</summary>
-
-- 🧩 Ahora también funcionan los indicadores Pine Script v4: funciones sin ta./math./str., security(), iff(), tostring() e input(type=…).
-- ➗ Pine v5: dividir dos números enteros escritos en el código da un entero (5 / 2 = 2), como en TradingView. En v6 sigue siendo 2,5.
-- 📊 Oro: volumen de ticks en todo el historial desde 2011.
 
 </details>
 
