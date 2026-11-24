@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.25.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.26.0-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.25.0 — Fonctions Pine à plusieurs formes
+### 🆕 Nouveautés de la 1.26.0 — Arrondi de la moitié vers le haut
+
+- 🔢 Les nombres exactement à mi-chemin sont arrondis vers le haut (3971,165 → 3971,17) dans math.round, str.tostring, math.round_to_mintick et dans les prix affichés sur le graphique.
+- 🧮 Plus d'erreurs dues à la façon dont l'ordinateur stocke les décimales (3971,16499…).
+- ✅ Mêmes résultats qu'avant sur tous les scripts de test et sur le contrôle indépendant des calculs.
+
+### Auparavant, dans la 1.25.0 — Fonctions Pine à plusieurs formes
 
 - 🧩 Chaque fonction Pine v6 ayant plusieurs formes a été vérifiée avec le manuel officiel, chaque forme contre l'autre.
 - 🎚️ input.int et input.float avec les options écrites à la suite affichent maintenant un menu déroulant ; input(close) affiche le menu Source.
@@ -79,11 +85,14 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🧓 Anciens scripts Pine v3/v4 : la transparence transp, la transparence par défaut des arrière-plans et remplissages et la condition when des ordres de stratégie sont maintenant appliquées.
 - 🧩 line.new, box.new et label.new avec chart.point, les noms alternatifs officiels des paramètres et l'avis automatique des paramètres non pris en charge.
 
-### Auparavant, dans la 1.23.0 — Remplissages, arrière-plans et panneaux inférieurs
+<details>
+<summary>Auparavant, dans la 1.23.0 — Remplissages, arrière-plans et panneaux inférieurs</summary>
 
 - 🎨 Style affiche désormais chaque remplissage et couleur d'arrière-plan du script : afficher/masquer et, si le script utilise plusieurs couleurs, chacune se modifie avec sa propre opacité.
 - 📉 Les indicateurs dans les panneaux sous le graphique dessinent maintenant aussi signaux, remplissages, arrière-plans, rectangles, étiquettes et lignes (par exemple la bande du RSI entre 30 et 70).
 - 🔒 Les remplissages et arrière-plans marqués comme non modifiables dans le script restent masqués dans Style, comme sur TradingView.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.22.0 — Onglet Style complet pour les signaux et les dessins</summary>
@@ -100,15 +109,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 📊 OBV, Volume, Pivot Points High Low, ZigZag et les indicateurs de niveaux (plus haut et plus bas de la veille et de la semaine précédente, ouvertures, ADR, variation %, volatilité historique, plus haut/bas sur 52 semaines, plus haut/bas de la session) refaits avec les réglages de TradingView plus étiquettes, options en plus et alertes.
 - 🎯 Nouveau : Pivot Points Standard (Traditionnel, Fibonacci, Woodie, Classique, DM, Camarilla) journaliers, hebdomadaires, mensuels, trimestriels ou annuels.
 - ✅ Toute la bibliothèque d'indicateurs est maintenant refaite.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.20.0 — Oscillateurs refaits</summary>
-
-- 📉 RSI, Stochastic RSI, Stochastique, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator et Aroon refaits avec les réglages et valeurs de départ de TradingView, plus niveaux modifiables, autre unité de temps et alertes.
-- 🔀 RSI : lissage avec Bandes de Bollinger, zones de surachat et de survente et divergences haussières et baissières.
-- 🎨 MACD avec les quatre couleurs de l'histogramme et le type de moyenne pour l'oscillateur et le signal.
 
 </details>
 

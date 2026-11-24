@@ -1,4 +1,4 @@
-const VERSION='1.25.0';
+const VERSION='1.26.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -836,7 +836,8 @@ const LOC={it:'it-IT',es:'es-ES',en:'en-US',fr:'fr-FR',de:"de-DE"};
 const SEPS={it:['.',','],es:['.',','],en:[',','.'],fr:['\u202f',','],de:[".",","]};
 function fmt(v,d){
   const sp=SEPS[lang]||SEPS.it,n=Number(v);
-  const s=Math.abs(n).toFixed(d).split('.');
+  /* 1.26.0: a metà si arrotonda in su (…,1645 → …,165), senza l'errore dei numeri del computer */
+  const an=Math.abs(n),s=(isFinite(an)&&an<1e15?(Math.round(Number(Number(an.toPrecision(15))+'e'+d))/Math.pow(10,d)):an).toFixed(d).split('.');
   return (n<0?'-':'')+s[0].replace(/\B(?=(\d{3})+(?!\d))/g,sp[0])+(s[1]?sp[1]+s[1]:'');
 }
 function fmtSigned(v,d){return (v>0?'+':v<0?'−':'')+fmt(Math.abs(v),d)}
@@ -5932,6 +5933,9 @@ function inSess(ms,sess,tz){
 function tparts(ms,tz){const d=new Date(ms+tzOff(tz||'UTC',ms)*60000);return{y:d.getUTCFullYear(),mo:d.getUTCMonth()+1,d:d.getUTCDate(),dw:d.getUTCDay()+1,h:d.getUTCHours(),mi:d.getUTCMinutes(),s:d.getUTCSeconds()}}
 
 /* ---------- testo e numeri ---------- */
+/* 1.26.0: arrotondamento decimale «a metà in su» (3971,165 → 3971,17), senza l'errore dei numeri del computer (3971,16499…) */
+function rndH(x,d){if(x!==x||!isFinite(x))return x;const sg=x<0?-1:1,y=Number(Math.abs(x).toPrecision(15));return sg*Number(Math.round(Number(y+'e'+d))+'e-'+d)}
+function fixH(x,d){return rndH(x,d).toFixed(d)}
 function fmtNum(v,fmt,E){
   if(v===true)return'true';if(v===false)return'false';
   if(v&&typeof v==='object'&&v.__k==='enum')return v.t;
@@ -5940,14 +5944,14 @@ function fmtNum(v,fmt,E){
   if(v==null||(typeof v==='number'&&v!==v))return'NaN';
   if(typeof v!=='number')return String(v);
   if(fmt==null||fmt===''){if(Number.isInteger(v))return String(v);return String(+v.toFixed(8))}
-  if(fmt==='__volume'){const a=Math.abs(v);return a>=1e9?+(v/1e9).toFixed(3)+'B':a>=1e6?+(v/1e6).toFixed(3)+'M':a>=1e3?+(v/1e3).toFixed(3)+'K':String(+v.toFixed(2))}
-  if(fmt==='__percent')return v.toFixed(2)+'%';
-  if(fmt==='__mintick'||fmt==='__price'||fmt==='__inherit')return v.toFixed(E?E.dec:2);
+  if(fmt==='__volume'){const a=Math.abs(v);return a>=1e9?+fixH(v/1e9,3)+'B':a>=1e6?+fixH(v/1e6,3)+'M':a>=1e3?+fixH(v/1e3,3)+'K':String(+fixH(v,2))}
+  if(fmt==='__percent')return fixH(v,2)+'%';
+  if(fmt==='__mintick'||fmt==='__price'||fmt==='__inherit')return fixH(v,E?E.dec:2);
   const m=/^([#0,]*)(?:\.([#0]*))?(%?)$/.exec(fmt);
   if(!m)return String(v);
   const decs=m[2]||'',min=(decs.match(/0/g)||[]).length,max=decs.length;
   let x=m[3]?v*100:v;
-  let s=x.toFixed(max);
+  let s=fixH(x,max);
   if(max>min){s=s.replace(/0+$/,'');const need=min-(s.split('.')[1]||'').length;if(need>0)s+='0'.repeat(need);s=s.replace(/\.$/,'')}
   if(m[1].includes(',')){const p=s.split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');s=p.join('.')}
   return s+(m[3]?'%':'');
@@ -6015,8 +6019,8 @@ const err=(node,m)=>{const e=new Error(m);e.pine=true;e.ln=node&&node.ln;return 
 F('math.abs',['number'],(E,a)=>Math.abs(a[0]));
 F('math.ceil',['number'],(E,a)=>Math.ceil(a[0]));
 F('math.floor',['number'],(E,a)=>Math.floor(a[0]));
-F('math.round',['number','precision'],(E,a)=>{const x=a[0];if(x!==x)return NaN;if(a[1]==null||a[1]!==a[1])return Math.sign(x)*Math.round(Math.abs(x));const p=Math.pow(10,a[1]);return Math.round(x*p)/p});
-F('math.round_to_mintick',['number'],(E,a)=>{const m=Math.pow(10,-E.dec);return Math.round(a[0]/m)*m});
+F('math.round',['number','precision'],(E,a)=>{const x=a[0];if(x!==x)return NaN;if(a[1]==null||a[1]!==a[1])return Math.sign(x)*Math.round(Math.abs(x));return rndH(x,a[1])});
+F('math.round_to_mintick',['number'],(E,a)=>rndH(a[0],E.dec));
 F('math.sqrt',['number'],(E,a)=>Math.sqrt(a[0]));
 F('math.pow',['base','exponent'],(E,a)=>Math.pow(a[0],a[1]));
 F('math.exp',['number'],(E,a)=>Math.exp(a[0]));

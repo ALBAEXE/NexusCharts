@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.25.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.26.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.25.0 — Pine-Funktionen mit mehreren Formen
+### 🆕 Neu in 1.26.0 — Kaufmännisches Runden
+
+- 🔢 Zahlen genau in der Mitte werden aufgerundet (3971,165 → 3971,17) in math.round, str.tostring, math.round_to_mintick und bei den Preisen im Chart.
+- 🧮 Keine Fehler mehr durch die Art, wie Computer Dezimalzahlen speichern (3971,16499…).
+- ✅ Gleiche Ergebnisse wie zuvor bei allen Testskripten und bei der unabhängigen Rechenprüfung.
+
+### Vorher in 1.25.0 — Pine-Funktionen mit mehreren Formen
 
 - 🧩 Jede Pine-v6-Funktion mit mehr als einer Form wurde mit der offiziellen Referenz geprüft, jede Form gegen die andere.
 - 🎚️ input.int und input.float mit positional geschriebenen Optionen zeigen jetzt ein Auswahlmenü; input(close) zeigt das Quelle-Menü.
@@ -79,11 +85,14 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 🧓 Ältere Pine-v3/v4-Skripte: Transparenz transp, Standardtransparenz von Hintergründen und Füllungen und die when-Bedingung von Strategie-Orders werden jetzt angewendet.
 - 🧩 line.new, box.new und label.new mit chart.point, offizielle alternative Parameternamen und automatischer Hinweis auf nicht unterstützte Parameter.
 
-### Vorher in 1.23.0 — Füllungen, Hintergründe und untere Bereiche
+<details>
+<summary>Vorher in 1.23.0 — Füllungen, Hintergründe und untere Bereiche</summary>
 
 - 🎨 Stil zeigt jetzt jede Füllung und Hintergrundfarbe des Skripts: ein-/ausblenden und, wenn das Skript mehrere Farben nutzt, jede einzeln mit eigener Deckkraft ändern.
 - 📉 Indikatoren in den Bereichen unter dem Chart zeichnen jetzt auch Signale, Füllungen, Hintergründe, Rechtecke, Beschriftungen und Linien (zum Beispiel das RSI-Band zwischen 30 und 70).
 - 🔒 Füllungen und Hintergründe, die im Skript als nicht bearbeitbar markiert sind, bleiben im Stil-Tab verborgen, wie bei TradingView.
+
+</details>
 
 <details>
 <summary>Vorher in 1.22.0 — Vollständiger Stil-Tab für Signale und Zeichnungen</summary>
@@ -100,15 +109,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - 📊 OBV, Volumen, Pivot Points High Low, ZigZag und die Niveau-Indikatoren (Hoch und Tief von Vortag/Vorwoche, Eröffnungen, ADR, Änderung %, historische Volatilität, 52-Wochen-Hoch/-Tief, Sitzungshoch/-tief) neu gebaut mit den Einstellungen von TradingView plus Beschriftungen, weiteren Optionen und Alarmen.
 - 🎯 Neu: Pivot Points Standard (Traditionell, Fibonacci, Woodie, Klassisch, DM, Camarilla) täglich, wöchentlich, monatlich, quartalsweise oder jährlich.
 - ✅ Die gesamte Indikatorbibliothek ist jetzt neu gebaut.
-
-</details>
-
-<details>
-<summary>Vorher in 1.20.0 — Oszillatoren neu</summary>
-
-- 📉 RSI, Stochastic RSI, Stochastik, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator und Aroon neu gebaut mit den Einstellungen und Startwerten von TradingView, dazu einstellbare Niveaus, andere Zeiteinheit und Alarme.
-- 🔀 RSI: Glättung mit Bollinger-Bändern, überkaufte/überverkaufte Zonen und bullische/bärische Divergenzen.
-- 🎨 MACD mit den vier Histogrammfarben und MA-Typ für Oszillator und Signal.
 
 </details>
 

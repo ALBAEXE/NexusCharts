@@ -1,9 +1,8 @@
-# v1.25.0 — Pine functions with several forms
+# v1.26.0 — Rounding half up
 ### Changed
-- Pine engine: every Pine v6 function with more than one form was checked against the official reference by comparing each form with the equivalent one.
-- input.int and input.float accept options as the third positional argument (dropdown instead of a minimum value).
-- input() with a price source as default value (for example close) creates a Source input.
-- time and time_close support bars_back and timeframe_bars_back in both v6 forms; a number in third position is no longer read as a time zone.
+- Values exactly halfway are rounded up (3971.165 → 3971.17) in math.round with precision, str.tostring with a format, format.mintick, format.percent, format.volume and math.round_to_mintick.
+- Prices and values shown on the chart, price scale and legend use the same rounding.
+- Rounding no longer depends on binary floating-point representation (for example 3971.16499…).
 
 ### Documentation
-- README updated in 5 languages: new in 1.25.0.
+- README updated in 5 languages: new in 1.26.0.

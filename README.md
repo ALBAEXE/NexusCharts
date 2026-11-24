@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.25.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.26.0-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.25.0 — Pine functions with several forms
+### 🆕 New in 1.26.0 — Rounding half up
+
+- 🔢 Numbers exactly halfway are rounded up (3971.165 → 3971.17) in math.round, str.tostring, math.round_to_mintick and in the prices shown on the chart.
+- 🧮 No more errors caused by how computers store decimals (3971.16499…).
+- ✅ Same results as before on all test scripts and on the independent calculation check.
+
+### Previously in 1.25.0 — Pine functions with several forms
 
 - 🧩 Every Pine v6 function with more than one form was checked against the official reference, each form against the other.
 - 🎚️ input.int and input.float with options written positionally now show a dropdown; input(close) shows the Source menu.
@@ -79,11 +85,14 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🧓 Older Pine v3/v4 scripts: transp transparency, default background and fill transparency, and the when condition of strategy orders are now applied.
 - 🧩 line.new, box.new and label.new with chart.point, alternative official parameter names, and automatic notice of unsupported parameters.
 
-### Previously in 1.23.0 — Fills, backgrounds and lower panes
+<details>
+<summary>Previously in 1.23.0 — Fills, backgrounds and lower panes</summary>
 
 - 🎨 Style now lists every fill and background colour of a script: show/hide and, when the script uses several colours, each one can be changed with its own opacity.
 - 📉 Indicators in the panes below the chart now draw signals, fills, backgrounds, boxes, labels and lines too (for example the RSI band between 30 and 70).
 - 🔒 Fills and backgrounds marked as not editable in the script stay hidden from Style, as on TradingView.
+
+</details>
 
 <details>
 <summary>Previously in 1.22.0 — Full Style tab for signals and drawings</summary>
@@ -100,15 +109,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 📊 OBV, Volume, Pivot Points High Low, ZigZag and the levels indicators (previous day/week high and low, opens, ADR, change %, historical volatility, 52-week high/low, session high/low) rebuilt with TradingView's settings plus labels, extra options and alerts.
 - 🎯 New: Pivot Points Standard (Traditional, Fibonacci, Woodie, Classic, DM, Camarilla) on daily, weekly, monthly, quarterly or yearly pivots.
 - ✅ The whole indicator library is now rebuilt.
-
-</details>
-
-<details>
-<summary>Previously in 1.20.0 — Oscillators rebuilt</summary>
-
-- 📉 RSI, Stochastic RSI, Stochastic, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator and Aroon rebuilt with TradingView's settings and defaults, plus editable levels, another timeframe and alerts.
-- 🔀 RSI: smoothing with Bollinger Bands, overbought/oversold zones and bullish/bearish divergences.
-- 🎨 MACD with the four histogram colours and moving-average type for oscillator and signal.
 
 </details>
 

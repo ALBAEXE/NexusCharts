@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.25.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.26.0-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.25.0 — Funzioni Pine con più forme
+### 🆕 Novità della 1.26.0 — Arrotondamento a metà in su
+
+- 🔢 I numeri esattamente a metà si arrotondano in su (3971,165 → 3971,17) in math.round, str.tostring, math.round_to_mintick e nei prezzi mostrati sul grafico.
+- 🧮 Niente più errori dovuti a come il computer memorizza i decimali (3971,16499…).
+- ✅ Stessi risultati di prima su tutti gli script di prova e sul controllo indipendente dei calcoli.
+
+### In precedenza, nella 1.25.0 — Funzioni Pine con più forme
 
 - 🧩 Ogni funzione di Pine v6 con più di una forma è stata controllata sul manuale ufficiale, ogni forma contro l'altra.
 - 🎚️ input.int e input.float con le opzioni scritte in fila ora mostrano il menu a tendina; input(close) mostra il menu Sorgente.
@@ -79,11 +85,14 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🧓 Script vecchi Pine v3/v4: ora valgono la trasparenza transp, la trasparenza di serie di sfondi e riempimenti e la condizione when degli ordini delle strategie.
 - 🧩 line.new, box.new e label.new con chart.point, i nomi alternativi ufficiali dei parametri e l'avviso automatico dei parametri non supportati.
 
-### In precedenza, nella 1.23.0 — Riempimenti, sfondi e riquadri sotto il grafico
+<details>
+<summary>In precedenza, nella 1.23.0 — Riempimenti, sfondi e riquadri sotto il grafico</summary>
 
 - 🎨 Stile ora elenca ogni riempimento e sfondo colorato dello script: mostra/nascondi e, se lo script usa più colori, ognuno si cambia con la sua trasparenza.
 - 📉 Gli indicatori nei riquadri sotto il grafico ora disegnano anche segnali, riempimenti, sfondi, riquadri, etichette e linee (per esempio la fascia dell'RSI tra 30 e 70).
 - 🔒 Riempimenti e sfondi che lo script segna come non modificabili restano nascosti in Stile, come su TradingView.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.22.0 — Scheda Stile completa per segnali e disegni</summary>
@@ -100,15 +109,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 📊 OBV, Volume, Pivot Points High Low, ZigZag e gli indicatori di livelli (massimo e minimo del giorno e della settimana prima, aperture, ADR, variazione %, volatilità storica, massimo e minimo a 52 settimane, massimo e minimo della sessione) rifatti con le impostazioni di TradingView più etichette, opzioni in più e avvisi.
 - 🎯 Nuovo: Pivot Points Standard (Tradizionale, Fibonacci, Woodie, Classico, DM, Camarilla) giornalieri, settimanali, mensili, trimestrali o annuali.
 - ✅ Tutta la libreria di indicatori è ora rifatta.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.20.0 — Oscillatori rifatti</summary>
-
-- 📉 RSI, Stochastic RSI, Stocastico, MACD, CCI, DMI/ADX, ATR, MFI, Williams %R, Momentum, ROC, Awesome Oscillator e Aroon rifatti con le impostazioni e i valori di partenza di TradingView, più livelli modificabili, altro timeframe e avvisi.
-- 🔀 RSI: livellamento con Bande di Bollinger, zone di ipercomprato e ipervenduto e divergenze rialziste e ribassiste.
-- 🎨 MACD con i quattro colori dell'istogramma e il tipo di media per oscillatore e segnale.
 
 </details>
 
