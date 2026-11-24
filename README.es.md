@@ -9,7 +9,7 @@ Una app de gráficos rápida y bonita para iPhone, Android y ordenador, con un d
 
 [English](README.md) · [Italiano](README.it.md) · **Español** · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.12.3-d9a441?style=for-the-badge)](../../releases)
+[![Versión](https://img.shields.io/badge/versi%C3%B3n-v1.13.0-d9a441?style=for-the-badge)](../../releases)
 ![Plataforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordenador-web%20app-2962ff?style=for-the-badge)
 ![Idiomas](https://img.shields.io/badge/idiomas-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Precio](https://img.shields.io/badge/instalaci%C3%B3n-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 > 📝 Las novedades de cada versión están en la página [Releases](../../releases).
 
-### 🆕 Novedades de la 1.12.3 — Etiquetas en su sitio
+### 🆕 Novedades de la 1.13.0 — Motor Pine Script completo y estrategias
+
+- 🧩 El motor Pine Script ahora cubre todas las funciones, variables y constantes de la referencia oficial de Pine v6, incluidas matrices, enums, polilíneas y chart points.
+- 📈 Las estrategias ahora se simulan como en un probador de estrategias: órdenes a mercado, limit y stop, take profit, stop loss y trailing stop, pyramiding, comisiones y estadísticas (beneficio neto, capital, drawdown, operaciones cerradas y abiertas). Solo simulación: ninguna orden real.
+- 🕰️ También funcionan los scripts más antiguos: Pine v1, v2 y v3, scripts sin //@version, offset() y textos que continúan en la línea siguiente.
+
+### Anteriormente, en la 1.12.3 — Etiquetas en su sitio
 
 - 🏷️ Las etiquetas y dibujos de los indicadores situados en una hora entre dos velas (por ejemplo el nombre de una sesión en medio de su caja) ahora aparecen donde deben, y no en el borde izquierdo del gráfico.
 
@@ -77,10 +83,13 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 - ➗ Pine v5: dividir dos números enteros escritos en el código da un entero (5 / 2 = 2), como en TradingView. En v6 sigue siendo 2,5.
 - 📊 Oro: volumen de ticks en todo el historial desde 2011.
 
-### Anteriormente, en la 1.12.1 — Volumen de ticks
+<details>
+<summary>Anteriormente, en la 1.12.1 — Volumen de ticks</summary>
 
 - 📊 Las velas ahora tienen volumen de ticks (cuántas veces cambió el precio), el mismo tipo de volumen que TradingView usa para oro y Forex. Los indicadores que leen el volumen ya trabajan con valores reales.
 - 🎨 Tema claro: el texto de los indicadores con el color del texto del gráfico vuelve a verse.
+
+</details>
 
 <details>
 <summary>Anteriormente, en la 1.12.0 — Velas de 4 horas con la jornada de Nueva York</summary>
@@ -95,16 +104,6 @@ Está pensada para traders que quieren **gráficos limpios, precios en tiempo re
 
 - ⏱️ El oro ahora tiene historial hasta enero de 2011 también en los gráficos de minutos: 1m, 3m, 5m, 15m, 30m y 45m.
 - 👈 Como en las otras temporalidades, desliza el gráfico hacia la izquierda y las velas más antiguas se cargan solas.
-
-</details>
-
-<details>
-<summary>Anteriormente, en la 1.10.0 — Historial del oro desde 2011</summary>
-
-- 📜 El oro ahora tiene historial de precios hasta enero de 2011 en los gráficos de 1H, 2H, 3H, 4H, diario, semanal y mensual.
-- 👈 Desliza el gráfico hacia la izquierda: las velas más antiguas se cargan solas, sin moverte la vista.
-- 🕔 Las velas diarias cierran a las 17:00 de Nueva York también en el pasado.
-- 🙏 Parte del historial de precios procede de Dukascopy Bank SA (Perfil › Avisos legales › Créditos).
 
 </details>
 

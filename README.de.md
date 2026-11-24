@@ -9,7 +9,7 @@ Eine schnelle, elegante Chart-App für iPhone, Android und Computer, mit tiefsch
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · **Deutsch**
 
-[![Version](https://img.shields.io/badge/version-v1.12.3-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.13.0-d9a441?style=for-the-badge)](../../releases)
 ![Plattform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Sprachen](https://img.shields.io/badge/sprachen-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Preis](https://img.shields.io/badge/installation-kostenlos-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 > 📝 Was in jeder Version neu ist: siehe die Seite [Releases](../../releases).
 
-### 🆕 Neu in 1.12.3 — Beschriftungen an der richtigen Stelle
+### 🆕 Neu in 1.13.0 — Vollständige Pine-Script-Engine und Strategien
+
+- 🧩 Die Pine-Script-Engine deckt jetzt alle Funktionen, Variablen und Konstanten der offiziellen Pine-v6-Referenz ab, einschließlich Matrizen, Enums, Polylinien und Chart-Punkten.
+- 📈 Strategien werden jetzt wie in einem Strategietester simuliert: Markt-, Limit- und Stop-Orders, Take Profit, Stop Loss und Trailing Stop, Pyramiding, Kommissionen und Statistiken (Nettogewinn, Kapital, Drawdown, geschlossene und offene Trades). Nur Simulation: keine echten Orders.
+- 🕰️ Auch ältere Skripte funktionieren: Pine v1, v2 und v3, Skripte ohne //@version, offset() und Text, der in der nächsten Zeile weitergeht.
+
+### Vorher in 1.12.3 — Beschriftungen an der richtigen Stelle
 
 - 🏷️ Beschriftungen und Zeichnungen von Indikatoren, die auf einer Zeit zwischen zwei Kerzen liegen (zum Beispiel der Name einer Sitzung in der Mitte ihrer Box), erscheinen jetzt an der richtigen Stelle statt am linken Rand des Charts.
 
@@ -77,10 +83,13 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 - ➗ Pine v5: Die Division zweier im Code geschriebener ganzer Zahlen ergibt eine ganze Zahl (5 / 2 = 2), wie bei TradingView. In v6 bleibt es 2,5.
 - 📊 Gold: Tick-Volumen über die gesamte Historie seit 2011.
 
-### Vorher in 1.12.1 — Tick-Volumen
+<details>
+<summary>Vorher in 1.12.1 — Tick-Volumen</summary>
 
 - 📊 Kerzen haben jetzt Tick-Volumen (wie oft sich der Preis geändert hat), dieselbe Art Volumen, die TradingView für Gold und Forex nutzt. Indikatoren, die das Volumen lesen, arbeiten jetzt mit echten Werten.
 - 🎨 Helles Design: Indikator-Text in der Textfarbe des Charts ist wieder sichtbar.
+
+</details>
 
 <details>
 <summary>Vorher in 1.12.0 — 4-Stunden-Kerzen nach dem New Yorker Handelstag</summary>
@@ -95,16 +104,6 @@ Sie ist für Trader gemacht, die **saubere Charts, Live-Preise, Indikatoren und 
 
 - ⏱️ Gold hat jetzt auch in den Minuten-Charts eine Historie bis Januar 2011: 1m, 3m, 5m, 15m, 30m und 45m.
 - 👈 Wie bei den anderen Zeiteinheiten: Schieb den Chart nach links, und ältere Kerzen laden von selbst.
-
-</details>
-
-<details>
-<summary>Vorher in 1.10.0 — Gold-Historie seit 2011</summary>
-
-- 📜 Gold hat jetzt eine Preishistorie bis Januar 2011 in den Charts 1H, 2H, 3H, 4H, täglich, wöchentlich und monatlich.
-- 👈 Schieb den Chart nach links: ältere Kerzen laden von selbst, ohne dass sich deine Ansicht verschiebt.
-- 🕔 Tageskerzen schließen auch in der Vergangenheit um 17 Uhr New Yorker Zeit.
-- 🙏 Ein Teil der Preishistorie stammt von Dukascopy Bank SA (Profil › Rechtliches › Danksagungen).
 
 </details>
 

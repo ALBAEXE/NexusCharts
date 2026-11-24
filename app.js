@@ -1,4 +1,4 @@
-const VERSION='1.12.3';
+const VERSION='1.13.0';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -5565,13 +5565,19 @@ function edEditMenu(anchor){
    ===================================================================== */
 function PINE_SRC(){
 'use strict';
+const NSB=new Set(['ta','math','str','array','matrix','map','line','label','box','table','color','request','ticker','chart','strategy','polyline','linefill','input','timeframe','syminfo','runtime','log','alert']);
 function PErr(msg,ln){const e=new Error(msg);e.pine=true;e.ln=ln||0;return e}
 
 /* ---------------- lexer ---------------- */
 const OPS2=[':=','+=','-=','*=','/=','%=','==','!=','<=','>=','=>'];
 const CONT_END=new Set([',','+','-','*','/','%','?',':','==','!=','<','>','<=','>=','and','or','not','=',':=','+=','-=','*=','/=','%=']);
+function joinStr(lines){/* 1.13.0: testo tra virgolette che continua sulla riga dopo (come accetta TradingView) */
+  for(let i=0;i<lines.length-1;i++){
+    for(let guard=0,k=i+1;guard<500&&k<lines.length;guard++,k++){const s=lines[i];let q=null;for(let j=0;j<s.length;j++){const c=s[j];if(q){if(c==='\\'){j++;continue}if(c===q)q=null}else{if(c==='/'&&s[j+1]==='/')break;if(c==='"'||c==="'")q=c}}
+      if(!q)break;lines[i]=s+lines[k].replace(/^\s+/,'');lines[k]='';}
+  }return lines}
 function lex(src){
-  const T=[],lines=String(src).replace(/\r\n?/g,'\n').split('\n'),stack=[0];
+  const T=[],lines=joinStr(String(src).replace(/\r\n?/g,'\n').split('\n')),stack=[0];
   let depth=0,started=false,prevLast=null;
   for(let li=0;li<lines.length;li++){
     const s=lines[li],n=s.length,ln=li+1;let i=0,ind=0;
@@ -5633,12 +5639,12 @@ pp.expId=function(v){const t=this.nx();if(!t||t.k!=='id'||(v&&t.v!==v))throw thi
 pp.N=function(o,t){o.id=NID++;o.ln=(t||this.T[Math.max(0,this.p-1)]||{}).ln||0;return o};
 pp.skipNl=function(){while(this.pk().k==='nl')this.nx()};
 pp.endStmt=function(){const t=this.pk(),pv=this.T[this.p-1];if(pv&&pv.k==='ded')return;if(t.k==='nl'||t.k==='ded'||t.k==='eof')return;throw this.err('fine riga attesa, trovato «'+(t.v!=null?t.v:t.k)+'»')};
-pp.program=function(){const body=[];for(;;){this.skipNl();if(this.pk().k==='eof')break;if(this.pk().k==='ind')throw this.err('rientro inatteso');body.push(this.stmt());this.endStmt()}return body};
+pp.program=function(){const body=[];for(;;){this.skipNl();if(this.pk().k==='eof')break;if(this.pk().k==='ind')throw this.err('rientro inatteso');body.push(this.stmt());while(this.isOp(',')){this.nx();const q=this.pk().k;if(q==='nl'||q==='eof'||q==='ded')break;body.push(this.stmt())}this.endStmt()}return body};
 pp.block=function(){
   const t=this.pk();if(t.k!=='nl')throw this.err('a capo atteso');this.nx();
   if(this.pk().k!=='ind')throw this.err('blocco rientrato atteso');this.nx();
   const out=[];
-  for(;;){this.skipNl();const k=this.pk().k;if(k==='ded'){this.nx();break}if(k==='eof')break;out.push(this.stmt());this.endStmt()}
+  for(;;){this.skipNl();const k=this.pk().k;if(k==='ded'){this.nx();break}if(k==='eof')break;out.push(this.stmt());while(this.isOp(',')){this.nx();const q=this.pk().k;if(q==='nl'||q==='eof'||q==='ded')break;out.push(this.stmt())}this.endStmt()}
   return out;
 };
 const QUAL=new Set(['series','simple','const','input']);
@@ -5646,7 +5652,7 @@ pp.genericAt=function(o){
   if(!this.isOp('<',o))return 0;let j=o+1;
   for(;;){if(!this.isId(null,j))return 0;j++;if(this.isOp('<',j)){const g=this.genericAt(j);if(!g)return 0;j+=g}if(this.isOp(',',j)){j++;continue}if(this.isOp('>',j))return j+1-o;return 0}
 };
-pp.typeLen=function(o){let j=o;while(this.isId(null,j)&&QUAL.has(this.pk(j).v)&&this.isId(null,j+1))j++;if(!this.isId(null,j))return 0;j++;const g=this.genericAt(j);if(g)j+=g;return j-o};
+pp.typeLen=function(o){let j=o;while(this.isId(null,j)&&QUAL.has(this.pk(j).v)&&this.isId(null,j+1))j++;if(!this.isId(null,j))return 0;j++;const g=this.genericAt(j);if(g)j+=g;if(this.isOp('[',j)&&this.isOp(']',j+1))j+=2;return j-o};
 pp.isTypedDecl=function(){const L=this.typeLen(0);return L>0&&this.isId(null,L)&&this.isOp('=',L+1)};
 pp.matchClose=function(o){const open=this.pk(o).v,close=open==='('?')':']';let d=0,j=o;for(;;){const t=this.pk(j);if(!t||t.k==='eof')return -1;if(t.k==='op'){if(t.v==='('||t.v==='[')d++;else if(t.v===')'||t.v===']'){d--;if(d===0)return t.v===close?j:-1}}j++}};
 pp.stmt=function(){
@@ -5656,6 +5662,7 @@ pp.stmt=function(){
     if(v==='if'||v==='for'||v==='while'||v==='switch')return this.N({t:'expr',e:this.expr()},t);
     if(v==='break'||v==='continue'){this.nx();return this.N({t:v},t)}
     if(v==='type'&&this.isId(null,1)&&this.pk(2).k==='nl')return this.typeDef();
+    if(v==='enum'&&this.isId(null,1)&&this.pk(2).k==='nl')return this.enumDef();
     if(v==='export'){this.nx();return this.stmt()}
     if(v==='method'&&this.isId(null,1)){this.nx();return this.fnDef(true)}
     if(v==='import')throw this.err('«import» di librerie esterne non è supportato');
@@ -5687,7 +5694,7 @@ pp.params=function(){
   if(this.isOp(')')){this.nx();return ps}
   for(;;){
     const ids=[];
-    while(this.isId()){ids.push(this.nx().v);const g=this.genericAt(0);if(g)this.p+=g}
+    while(this.isId()){ids.push(this.nx().v);const g=this.genericAt(0);if(g)this.p+=g;if(this.isOp('[')&&this.isOp(']',1))this.p+=2}
     if(!ids.length)throw this.err('parametro atteso');
     let def=null;if(this.isOp('=')){this.nx();def=this.expr()}
     ps.push({name:ids[ids.length-1],typ:ids.length>1?ids[ids.length-2]:null,def});
@@ -5701,12 +5708,24 @@ pp.fnDef=function(isMethod){
   let body;if(this.pk().k==='nl')body=this.block();else body=[this.stmt()];
   return this.N({t:'fn',name,params,body,isMethod},t);
 };
+/* 1.13.0: enum (Pine v6): campi «nome» o «nome = "Titolo"» */
+pp.enumDef=function(){
+  const t=this.nx(),name=this.expId(),fields=[];
+  this.expect=null;if(this.pk().k!=='nl')throw this.err('a capo atteso');this.nx();if(this.pk().k!=='ind')throw this.err('campi dell\u2019enum attesi');this.nx();
+  for(;;){
+    this.skipNl();const k=this.pk().k;if(k==='ded'){this.nx();break}if(k==='eof')break;
+    if(!this.isId())throw this.err('campo non valido');const fn=this.nx().v;let title=fn;
+    if(this.isOp('=')){this.nx();const tk=this.nx();if(tk.k!=='str')throw this.err('il titolo di un campo enum deve essere un testo');title=tk.v}
+    fields.push({name:fn,title});
+  }
+  return this.N({t:'enum',name,fields},t);
+};
 pp.typeDef=function(){
   const t=this.nx(),name=this.expId(),fields=[];
   this.expect=null;if(this.pk().k!=='nl')throw this.err('a capo atteso');this.nx();if(this.pk().k!=='ind')throw this.err('campi del tipo attesi');this.nx();
   for(;;){
     this.skipNl();const k=this.pk().k;if(k==='ded'){this.nx();break}if(k==='eof')break;
-    const ids=[];while(this.isId()){ids.push(this.nx().v);const g=this.genericAt(0);if(g)this.p+=g}
+    const ids=[];while(this.isId()){ids.push(this.nx().v);const g=this.genericAt(0);if(g)this.p+=g;if(this.isOp('[')&&this.isOp(']',1))this.p+=2}
     if(ids.length<1)throw this.err('campo non valido');
     let def=null;if(this.isOp('=')){this.nx();def=this.expr()}
     fields.push({name:ids[ids.length-1],typ:ids[ids.length-2]||null,def});
@@ -5796,7 +5815,8 @@ function parse(src){
   const T=lex(src),p=new P(T);
   const body=p.program();
   const vm=/\/\/\s*@version\s*=\s*(\d+)/.exec(src);
-  return{body,version:vm?+vm[1]:5};
+  /* senza //@version: TradingView lo tratta come Pine v1 (script vecchi con study()); per gli altri si resta sulla v5 */
+  return{body,version:vm?+vm[1]:(/(^|\n)\s*study\s*\(/.test(src)?1:5)};
 }
 
 /* =====================================================================
@@ -5904,6 +5924,7 @@ function tparts(ms,tz){const d=new Date(ms+tzOff(tz||'UTC',ms)*60000);return{y:d
 /* ---------- testo e numeri ---------- */
 function fmtNum(v,fmt,E){
   if(v===true)return'true';if(v===false)return'false';
+  if(v&&typeof v==='object'&&v.__k==='enum')return v.t;
   if(typeof v==='string')return v;
   if(v&&v.__c)return'#'+[v.r,v.g,v.b].map(x=>Math.round(x).toString(16).padStart(2,'0')).join('').toUpperCase();
   if(v==null||(typeof v==='number'&&v!==v))return'NaN';
@@ -5971,7 +5992,6 @@ const BV={
   'syminfo.type':()=>'cfd','syminfo.session':()=>'regular','syminfo.volumetype':()=>'tick',
   'chart.fg_color':E=>E.fg,'chart.bg_color':E=>E.bg,'chart.is_standard':()=>true,'chart.is_heikinashi':()=>false,
   'ta.tr':E=>trNow(E,false),
-  'strategy.position_size':E=>E.pos,'strategy.equity':()=>NaN,'strategy.netprofit':()=>NaN,'strategy.opentrades':E=>E.pos?1:0,'strategy.closedtrades':()=>0
 };
 /* variabili che in realta' sono calcoli con memoria */
 const BV_CALL={'ta.vwap':['ta.vwap',['hlc3']],'ta.obv':['ta.__obv',[]]};
@@ -6251,16 +6271,392 @@ F('max_bars_back',['var','num'],()=>NaN);
 /* dichiarazione */
 const DECL_P=['title','shorttitle','overlay','format','precision','scale','max_bars_back','timeframe','timeframe_gaps','explicit_plot_zorder','max_lines_count','max_labels_count','max_boxes_count','calc_bars_count','max_polylines_count','dynamic_requests','behind_chart'];
 const declF=kind=>(E,a)=>{if(E.bar===0&&!E.declared){E.declared=true;const k=i=>a[DECL_P.indexOf(i)];E.out.meta={kind,title:k('title')||'Script',short:k('shorttitle')||'',overlay:k('overlay')===true,precision:k('precision')};
-  E.max.line=Math.min(500,k('max_lines_count')||50);E.max.label=Math.min(500,k('max_labels_count')||50);E.max.box=Math.min(500,k('max_boxes_count')||50);}return NaN};
+  E.max.line=Math.min(500,k('max_lines_count')||50);E.max.label=Math.min(500,k('max_labels_count')||50);E.max.box=Math.min(500,k('max_boxes_count')||50);E.max.polyline=Math.min(100,k('max_polylines_count')||50);}return NaN};
 F('indicator',DECL_P,declF('indicator'));F('study',DECL_P,declF('indicator'));F('library',['title','overlay'],declF('library'));
-F('strategy',['title','shorttitle','overlay','format','precision','scale','pyramiding','calc_on_order_fills','calc_on_every_tick','max_bars_back','backtest_fill_limits_assumption','default_qty_type','default_qty_value','initial_capital','currency','slippage','commission_type','commission_value','process_orders_on_close','close_entries_rule','margin_long','margin_short','explicit_plot_zorder','max_lines_count','max_labels_count','max_boxes_count'],(E,a)=>{if(E.bar===0&&!E.declared){E.declared=true;E.out.meta={kind:'strategy',title:a[0]||'Strategy',short:a[1]||'',overlay:a[2]===true}}return NaN});
-/* strategie: solo i segnali sul grafico */
-F('strategy.entry',['id','direction','qty','limit','stop','oca_name','oca_type','comment','alert_message','disable_alert'],(E,a)=>{const d=a[1]==='short'?-1:1;if(E.pos!==d){E.pos=d;E.out.orders.push({bar:E.bar,d,tx:a[7]||a[0]})}return NaN});
-F('strategy.order',['id','direction','qty','limit','stop','oca_name','oca_type','comment'],(E,a)=>{const d=a[1]==='short'?-1:1;E.out.orders.push({bar:E.bar,d,tx:a[7]||a[0]});E.pos=d;return NaN});
-F('strategy.close',['id','comment','qty','qty_percent','alert_message','immediately','disable_alert'],(E,a)=>{if(E.pos){E.out.orders.push({bar:E.bar,d:0,tx:a[1]||'Close'});E.pos=0}return NaN});
-F('strategy.close_all',['comment'],(E,a)=>{if(E.pos){E.out.orders.push({bar:E.bar,d:0,tx:a[0]||'Close'});E.pos=0}return NaN});
-F('strategy.exit',['id','from_entry','qty','qty_percent','profit','limit','loss','stop','trail_price','trail_points','trail_offset','oca_name','comment'],()=>NaN);
-F('strategy.cancel',['id'],()=>NaN);F('strategy.cancel_all',[],()=>NaN);
+F('strategy',['title','shorttitle','overlay','format','precision','scale','pyramiding','calc_on_order_fills','calc_on_every_tick','max_bars_back','backtest_fill_limits_assumption','default_qty_type','default_qty_value','initial_capital','currency','slippage','commission_type','commission_value','process_orders_on_close','close_entries_rule','margin_long','margin_short','explicit_plot_zorder','max_lines_count','max_labels_count','max_boxes_count','max_polylines_count','dynamic_requests','behind_chart','risk_free_rate','use_bar_magnifier','fill_orders_on_standard_ohlc'],(E,a,s,n,P)=>{if(E.bar===0&&!E.declared){E.declared=true;E.out.meta={kind:'strategy',title:a[0]||'Strategy',short:a[1]||'',overlay:a[2]===true,precision:a[4]};
+  const SP=['title','shorttitle','overlay','format','precision','scale','pyramiding','calc_on_order_fills','calc_on_every_tick','max_bars_back','backtest_fill_limits_assumption','default_qty_type','default_qty_value','initial_capital','currency','slippage','commission_type','commission_value','process_orders_on_close'];
+  E.SP={};SP.forEach((k,i)=>{if(a[i]!=null&&a[i]===a[i])E.SP[k]=a[i]});E.max.line=Math.min(500,a[23]||50);E.max.label=Math.min(500,a[24]||50);E.max.box=Math.min(500,a[25]||50)}return NaN});
+/* =====================================================================
+   1.13.0 — funzioni che mancavano rispetto al manuale ufficiale di Pine v6
+   (formule come nel manuale TradingView; dove il manuale dà il codice Pine, è tradotto riga per riga)
+   ===================================================================== */
+/* ---- ta: nuove funzioni ---- */
+F('ta.max',['source'],(E,a,s)=>{if(s.b!==E.bar){s.b=E.bar;s.P=s.M}const x=a[0],p=s.P;s.M=x!==x?p:(p===undefined||p!==p?x:Math.max(p,x));return s.M===undefined?NaN:s.M},1);
+F('ta.min',['source'],(E,a,s)=>{if(s.b!==E.bar){s.b=E.bar;s.P=s.M}const x=a[0],p=s.P;s.M=x!==x?p:(p===undefined||p!==p?x:Math.min(p,x));return s.M===undefined?NaN:s.M},1);
+F('ta.range',['source','length'],(E,a,s)=>{const w=last(buf(s,E,a[0]),a[1]);if(!w)return NaN;let hi=-Infinity,lo=Infinity;for(const x of w){if(x!==x)return NaN;if(x>hi)hi=x;if(x<lo)lo=x}return hi-lo},1);
+F('ta.cmo',['series','length'],(E,a,s)=>{const A=buf(s,E,a[0]);const L=Math.round(a[1]);if(A.length<L+1)return NaN;let u=0,d=0;for(let i=A.length-L;i<A.length;i++){const m=A[i]-A[i-1];if(m!==m)return NaN;if(m>=0)u+=m;else d-=m}return u+d===0?0:100*(u-d)/(u+d)},1);
+F('ta.cog',['source','length'],(E,a,s)=>{const w=last(buf(s,E,a[0]),a[1]);if(!w)return NaN;let sum=0,num=0;for(let i=0;i<w.length;i++){const x=w[w.length-1-i];if(x!==x)return NaN;sum+=x;num+=x*(i+1)}return sum===0?NaN:-num/sum},1);
+F('ta.kcw',['series','length','mult','useTrueRange'],(E,a,s)=>{const b=ema(sub(s,'e'),E,a[0],a[1]);const r=ema(sub(s,'r'),E,a[3]===false?E.D.h[E.bar]-E.D.l[E.bar]:trNow(E,true),a[1]);return b?(2*a[2]*r)/b:NaN},1);
+F('ta.mode',['source','length'],(E,a,s)=>{const w=last(buf(s,E,a[0]),a[1]);if(!w)return NaN;const c=new Map();let best=NaN,bn=0;for(const x of w){if(x!==x)continue;const k=(c.get(x)||0)+1;c.set(x,k);if(k>bn||(k===bn&&x<best)){bn=k;best=x}}return best},1);
+function pctNR(w,p){const A=w.filter(x=>x===x).sort((x,y)=>x-y);if(!A.length)return NaN;let i=Math.ceil(p/100*A.length)-1;if(i<0)i=0;if(i>=A.length)i=A.length-1;return A[i]}
+function pctLI(w,p){const A=w.filter(x=>x===x).sort((x,y)=>x-y);if(!A.length)return NaN;const r=(A.length-1)*p/100,i=Math.floor(r),f=r-i;return i+1<A.length?A[i]+f*(A[i+1]-A[i]):A[A.length-1]}
+F('ta.percentile_nearest_rank',['source','length','percentage'],(E,a,s)=>{const w=last(buf(s,E,a[0]),a[1]);return w?pctNR(w,a[2]):NaN},1);
+F('ta.percentile_linear_interpolation',['source','length','percentage'],(E,a,s)=>{const w=last(buf(s,E,a[0]),a[1]);return w?pctLI(w,a[2]):NaN},1);
+function rankDesc(v){const idx=v.map((x,i)=>i).sort((i,j)=>v[j]-v[i]),r=new Array(v.length);let k=0;while(k<idx.length){let j=k;while(j+1<idx.length&&v[idx[j+1]]===v[idx[k]])j++;const av=(k+j)/2+1;for(let q=k;q<=j;q++)r[idx[q]]=av;k=j+1}return r}
+F('ta.rci',['source','length'],(E,a,s)=>{const w=last(buf(s,E,a[0]),a[1]);if(!w||w.some(x=>x!==x))return NaN;const n=w.length,pr=rankDesc(w);let d=0;for(let i=0;i<n;i++){const tr=n-i;d+=(tr-pr[i])**2}return(1-6*d/(n*(n*n-1)))*100},1);
+F('ta.tsi',['source','short_length','long_length'],(E,a,s)=>{if(s.b!==E.bar){s.b=E.bar;s.px=s.cx}s.cx=a[0];const pc=a[0]-s.px;const n1=ema(sub(s,'t2'),E,ema(sub(s,'t1'),E,pc,a[2]),a[1]),d1=ema(sub(s,'t4'),E,ema(sub(s,'t3'),E,Math.abs(pc),a[2]),a[1]);return d1?n1/d1:NaN},1);
+F('ta.sar',['start','inc','max'],(E,a,s)=>{
+  const D=E.D,b=E.bar;if(s.b!==E.bar){s.b=E.bar;s.P=s.C||{r:NaN,mm:NaN,ac:NaN,below:null}}
+  const P=s.P,C={r:P.r,mm:P.mm,ac:P.ac,below:P.below};let first=false;
+  if(b===0){s.C=C;return NaN}
+  if(b===1){if(D.c[1]>D.c[0]){C.below=true;C.mm=D.h[1];C.r=D.l[0]}else{C.below=false;C.mm=D.l[1];C.r=D.h[0]}first=true;C.ac=a[0]}
+  C.r=C.r+C.ac*(C.mm-C.r);
+  if(C.below){if(C.r>D.l[b]){first=true;C.below=false;C.r=Math.max(D.h[b],C.mm);C.mm=D.l[b];C.ac=a[0]}}
+  else{if(C.r<D.h[b]){first=true;C.below=true;C.r=Math.min(D.l[b],C.mm);C.mm=D.h[b];C.ac=a[0]}}
+  if(!first){if(C.below){if(D.h[b]>C.mm){C.mm=D.h[b];C.ac=Math.min(C.ac+a[1],a[2])}}else{if(D.l[b]<C.mm){C.mm=D.l[b];C.ac=Math.min(C.ac+a[1],a[2])}}}
+  if(C.below){C.r=Math.min(C.r,D.l[b-1]);if(b>1)C.r=Math.min(C.r,D.l[b-2])}else{C.r=Math.max(C.r,D.h[b-1]);if(b>1)C.r=Math.max(C.r,D.h[b-2])}
+  s.C=C;return C.r},1);
+F('ta.pivot_point_levels',['type','anchor','developing'],(E,a,s)=>{
+  const D=E.D,b=E.bar;if(s.b!==E.bar){s.b=E.bar;s.P=s.C||{h:NaN,l:NaN,o:NaN,c:NaN,lv:null}}
+  const P=s.P,C={h:P.h,l:P.l,o:P.o,c:P.c,lv:P.lv};
+  const lev=(H,L,O,Cl)=>{const t=String(a[0]||'Traditional'),R=H-L,na=NaN;let p=(H+L+Cl)/3;
+    if(t==='Fibonacci')return[p,p+.382*R,p-.382*R,p+.618*R,p-.618*R,p+R,p-R,na,na,na,na];
+    if(t==='Woodie'){p=(H+L+2*O)/4;return[p,2*p-L,2*p-H,p+R,p-R,H+2*(p-L),L-2*(H-p),H+2*(p-L)+R,L-2*(H-p)-R,na,na]}
+    if(t==='Classic')return[p,2*p-L,2*p-H,p+R,p-R,p+2*R,p-2*R,p+3*R,p-3*R,na,na];
+    if(t==='DM'){const X=Cl<O?H+2*L+Cl:Cl>O?2*H+L+Cl:H+L+2*Cl;return[X/4,X/2-L,X/2-H,na,na,na,na,na,na,na,na]}
+    if(t==='Camarilla'){const r5=L?H/L*Cl:na;return[p,Cl+R*1.1/12,Cl-R*1.1/12,Cl+R*1.1/6,Cl-R*1.1/6,Cl+R*1.1/4,Cl-R*1.1/4,Cl+R*1.1/2,Cl-R*1.1/2,r5,Cl-(r5-Cl)]}
+    return[p,2*p-L,2*p-H,p+R,p-R,2*p+(H-2*L),2*p-(2*H-L),3*p+(H-3*L),3*p-(3*H-L),4*p+(H-4*L),4*p-(4*H-L)]};
+  if(tru(a[1])&&b>0&&C.h===C.h){C.lv=lev(C.h,C.l,D.o[b],C.c);C.h=D.h[b];C.l=D.l[b];C.o=D.o[b]}
+  else if(C.h!==C.h){C.h=D.h[b];C.l=D.l[b];C.o=D.o[b]}else{C.h=Math.max(C.h,D.h[b]);C.l=Math.min(C.l,D.l[b])}
+  C.c=D.c[b];s.C=C;
+  if(a[2]===true)return lev(C.h,C.l,C.o,C.c);
+  return C.lv?C.lv.slice():new Array(11).fill(NaN)},1);
+/* variabili ta.* che hanno memoria */
+F('ta.__accdist',[],(E,a,s)=>{const D=E.D,b=E.bar;if(s.b!==b){s.b=b;s.P=s.C||0}const r=D.h[b]-D.l[b],v=D.v?D.v[b]:0;s.C=s.P+(r?((D.c[b]-D.l[b])-(D.h[b]-D.c[b]))/r*v:0);return s.C},1);
+F('ta.__pvt',[],(E,a,s)=>{const D=E.D,b=E.bar;if(s.b!==b){s.b=b;s.P=s.C||0}s.C=b?s.P+(D.c[b]-D.c[b-1])/D.c[b-1]*(D.v?D.v[b]:0):0;return s.C},1);
+F('ta.__wad',[],(E,a,s)=>{const D=E.D,b=E.bar;if(s.b!==b){s.b=b;s.P=s.C||0}if(!b){s.C=0;return 0}const c=D.c[b],pc=D.c[b-1];s.C=s.P+(c>pc?c-Math.min(D.l[b],pc):c<pc?c-Math.max(D.h[b],pc):0);return s.C},1);
+F('ta.__nvi',[],(E,a,s)=>{const D=E.D,b=E.bar;if(s.b!==b){s.b=b;s.P=s.C===undefined?1:s.C}if(!b){s.C=1;return 1}const v=D.v||[];s.C=v[b]<v[b-1]?s.P+(D.c[b]-D.c[b-1])/D.c[b-1]*s.P:s.P;return s.C},1);
+F('ta.__pvi',[],(E,a,s)=>{const D=E.D,b=E.bar;if(s.b!==b){s.b=b;s.P=s.C===undefined?1:s.C}if(!b){s.C=1;return 1}const v=D.v||[];s.C=v[b]>v[b-1]?s.P+(D.c[b]-D.c[b-1])/D.c[b-1]*s.P:s.P;return s.C},1);
+Object.assign(BV_CALL,{'ta.accdist':['ta.__accdist',[]],'ta.pvt':['ta.__pvt',[]],'ta.wad':['ta.__wad',[]],'ta.nvi':['ta.__nvi',[]],'ta.pvi':['ta.__pvi',[]]});
+Object.assign(BV,{
+  'ta.iii':E=>{const D=E.D,b=E.bar,r=D.h[b]-D.l[b],v=D.v?D.v[b]:0;return r&&v?(2*D.c[b]-D.h[b]-D.l[b])/(r*v):NaN},
+  'ta.wvad':E=>{const D=E.D,b=E.bar,r=D.h[b]-D.l[b];return r?(D.c[b]-D.o[b])/r*(D.v?D.v[b]:0):NaN},
+  /* simbolo e grafico */
+  'syminfo.minmove':()=>1,'syminfo.pricescale':E=>Math.round(Math.pow(10,E.dec)),'syminfo.mincontract':()=>1,'syminfo.main_tickerid':E=>'NEXUS:'+E.sym,
+  'syminfo.country':()=>'','syminfo.sector':()=>'','syminfo.industry':()=>'','syminfo.isin':()=>'','syminfo.current_contract':()=>'','syminfo.expiration_date':()=>NaN,
+  'syminfo.employees':()=>NaN,'syminfo.shareholders':()=>NaN,'syminfo.shares_outstanding_float':()=>NaN,'syminfo.shares_outstanding_total':()=>NaN,
+  'syminfo.recommendations_buy':()=>NaN,'syminfo.recommendations_buy_strong':()=>NaN,'syminfo.recommendations_date':()=>NaN,'syminfo.recommendations_hold':()=>NaN,
+  'syminfo.recommendations_sell':()=>NaN,'syminfo.recommendations_sell_strong':()=>NaN,'syminfo.recommendations_total':()=>NaN,
+  'syminfo.target_price_average':()=>NaN,'syminfo.target_price_date':()=>NaN,'syminfo.target_price_estimates':()=>NaN,'syminfo.target_price_high':()=>NaN,
+  'syminfo.target_price_low':()=>NaN,'syminfo.target_price_median':()=>NaN,
+  'chart.is_kagi':()=>false,'chart.is_linebreak':()=>false,'chart.is_pnf':()=>false,'chart.is_range':()=>false,'chart.is_renko':()=>false,
+  'chart.left_visible_bar_time':E=>E.D.t[0],'chart.right_visible_bar_time':E=>E.D.t[E.n-1],
+  'timeframe.isticks':()=>false,
+  /* sessione: mercati senza pre/post (tutto «regolare») */
+  'session.ismarket':()=>true,'session.ispremarket':()=>false,'session.ispostmarket':()=>false,
+  'session.isfirstbar':E=>{const b=E.bar;return b===0||Math.floor(E.D.t[b]/864e5)!==Math.floor(E.D.t[b-1]/864e5)},
+  'session.isfirstbar_regular':E=>{const b=E.bar;return b===0||Math.floor(E.D.t[b]/864e5)!==Math.floor(E.D.t[b-1]/864e5)},
+  'session.islastbar':E=>{const b=E.bar;return b===E.n-1?false:Math.floor(E.D.t[b]/864e5)!==Math.floor(E.D.t[b+1]/864e5)},
+  'session.islastbar_regular':E=>{const b=E.bar;return b===E.n-1?false:Math.floor(E.D.t[b]/864e5)!==Math.floor(E.D.t[b+1]/864e5)}
+});
+Object.assign(CONST,{'plot.linestyle_solid':'solid','plot.linestyle_dashed':'dashed','plot.linestyle_dotted':'dotted','display.pine_screener':64,
+  'backadjustment.inherit':'inherit','backadjustment.on':'on','backadjustment.off':'off','settlement_as_close.inherit':'inherit','settlement_as_close.on':'on','settlement_as_close.off':'off',
+  'dividends.gross':'gross','dividends.net':'net','earnings.actual':'actual','earnings.estimate':'estimate','earnings.standardized':'standardized','splits.denominator':'denominator','splits.numerator':'numerator',
+  'dividends.future_amount':NaN,'dividends.future_ex_date':NaN,'dividends.future_pay_date':NaN,'earnings.future_eps':NaN,'earnings.future_period_end_time':NaN,'earnings.future_revenue':NaN,'earnings.future_time':NaN,
+  'polyline.all':[]});
+/* ---- simbolo, tempo, timeframe ---- */
+F('syminfo.prefix',['symbol'],(E,a)=>{const x=String(a[0]==null?'':a[0]);const i=x.indexOf(':');return i<0?'':x.slice(0,i)});
+F('syminfo.ticker',['symbol'],(E,a)=>{const x=String(a[0]==null?'':a[0]);const i=x.indexOf(':');return i<0?x:x.slice(i+1)});
+F('weekofyear',['time','timezone'],(E,a)=>{const t=a[0];if(t!==t)return NaN;const d=new Date(t);const s0=Date.UTC(d.getUTCFullYear(),0,1);return Math.ceil(((t-s0)/864e5+new Date(s0).getUTCDay()+1)/7)});
+function tfBucket(tf,ms){tf=tfNorm(tf);const m=/^(\d*)([SDWM]?)$/.exec(tf)||['','1',''];const k=m[1]===''?1:+m[1],u=m[2],d=new Date(ms);
+  if(u==='M'){const mo=d.getUTCFullYear()*12+d.getUTCMonth();return Math.floor(mo/k)}
+  if(u==='W'){const day=Math.floor((ms/864e5+3)/7);return Math.floor(day/k)}
+  if(u==='D'){return Math.floor(ms/864e5/k)}
+  return Math.floor(ms/tfMsOf(tf))}
+F('timeframe.change',['timeframe'],(E,a)=>{const b=E.bar;if(b===0)return true;const tf=a[0]==null?E.tf:a[0];return tfBucket(tf,E.D.t[b])!==tfBucket(tf,E.D.t[b-1])});
+F('str.format_time',['time','format','timezone'],(E,a)=>{const t=a[0];if(t!==t||t==null)return '';const p=tparts(t,a[2]||E.tz),f=String(a[1]==null?"yyyy-MM-dd'T'HH:mm:ssZ":a[1]),P=(n,w)=>String(n).padStart(w,'0');
+  const MN=['January','February','March','April','May','June','July','August','September','October','November','December'],DN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  return f.replace(/'([^']*)'|yyyy|yy|MMMM|MMM|MM|M|dd|d|EEEE|EEE|HH|H|hh|h|mm|m|ss|s|a|Z/g,(x,q)=>q!==undefined?q:x==='yyyy'?P(p.y,4):x==='yy'?P(p.y%100,2):x==='MMMM'?MN[p.mo-1]:x==='MMM'?MN[p.mo-1].slice(0,3):x==='MM'?P(p.mo,2):x==='M'?String(p.mo):x==='dd'?P(p.d,2):x==='d'?String(p.d):x==='EEEE'?DN[p.dw-1]:x==='EEE'?DN[p.dw-1].slice(0,3):x==='HH'?P(p.h,2):x==='H'?String(p.h):x==='hh'?P((p.h%12)||12,2):x==='h'?String((p.h%12)||12):x==='mm'?P(p.mi,2):x==='m'?String(p.mi):x==='ss'?P(p.s,2):x==='s'?String(p.s):x==='a'?(p.h<12?'AM':'PM'):'+0000')});
+/* ---- dati che NexusCharts non ha: rispondono «na» invece di fermare lo script ---- */
+['request.dividends','request.earnings','request.financial','request.economic','request.quandl','request.splits','request.seed','request.footprint'].forEach(n=>F(n,['a','b','c','d','e','f','g'],()=>NaN));
+['AED','ARS','AUD','BDT','BHD','BRL','BTC','CAD','CHF','CLP','CNY','COP','CZK','DKK','EGP','ETH','EUR','GBP','HKD','HUF','IDR','ILS','INR','ISK','JPY','KES','KRW','KWD','LKR','MAD','MXN','MYR','NGN','NOK','NONE','NZD','PEN','PHP','PKR','PLN','QAR','RON','RSD','RUB','SAR','SEK','SGD','THB','TND','TRY','TWD','USD','USDT','VES','VND','ZAR'].forEach(c=>{CONST['currency.'+c]=c});
+['footprint.buy_volume','footprint.delta','footprint.get_row_by_price','footprint.poc','footprint.rows','footprint.sell_volume','footprint.total_volume','footprint.vah','footprint.val','volume_row.buy_volume','volume_row.delta','volume_row.down_price','volume_row.has_buy_imbalance','volume_row.has_sell_imbalance','volume_row.sell_volume','volume_row.total_volume','volume_row.up_price'].forEach(n=>F(n,['id','a','b'],()=>NaN));
+Object.assign(CONST,{'strategy.commission.percent':'percent','strategy.commission.cash_per_order':'cash_per_order','strategy.commission.cash_per_contract':'cash_per_contract',
+  'strategy.direction.all':'all','strategy.direction.long':'long','strategy.direction.short':'short','strategy.oca.none':'none','strategy.oca.cancel':'cancel','strategy.oca.reduce':'reduce'});
+F('request.currency_rate',['from','to','ignore_invalid_currency'],(E,a)=>a[0]===a[1]?1:NaN);
+/* ---- ticker.*: il nostro server ha solo grafici normali ---- */
+F('ticker.new',['prefix','ticker','session','adjustment','backadjustment','settlement_as_close'],(E,a)=>(a[0]?a[0]+':':'')+a[1]);
+F('ticker.modify',['tickerid','session','adjustment','backadjustment','settlement_as_close'],(E,a)=>a[0]);
+F('ticker.standard',['symbol'],(E,a)=>a[0]==null?'NEXUS:'+E.sym:a[0]);
+F('ticker.inherit',['from_tickerid','symbol'],(E,a)=>a[1]);
+['ticker.heikinashi','ticker.renko','ticker.linebreak','ticker.kagi','ticker.pointfigure'].forEach(n=>F(n,['symbol','a','b','c','d','e'],(E,a)=>a[0]));
+/* ---- array ---- */
+F('array.some',['id'],(E,a,s,n)=>chkArr(n,a[0]).some(x=>tru(x)));
+F('array.every',['id'],(E,a,s,n)=>{const A=chkArr(n,a[0]);return A.length>0&&A.every(x=>tru(x))});
+F('array.mode',['id'],(E,a,s,n)=>{const c=new Map();let best=NaN,bn=0;for(const x of chkArr(n,a[0])){if(x!==x)continue;const k=(c.get(x)||0)+1;c.set(x,k);if(k>bn||(k===bn&&x<best)){bn=k;best=x}}return best});
+F('array.variance',['id','biased'],(E,a,s,n)=>{const A=chkArr(n,a[0]).filter(x=>x===x);if(!A.length)return NaN;const m=A.reduce((t,x)=>t+x,0)/A.length;const v=A.reduce((t,x)=>t+(x-m)**2,0);return v/(a[1]===false?A.length-1:A.length)});
+F('array.covariance',['id1','id2','biased'],(E,a,s,n)=>{const X=chkArr(n,a[0]),Y=chkArr(n,a[1]);const k=Math.min(X.length,Y.length);if(!k)return NaN;let mx=0,my=0;for(let i=0;i<k;i++){mx+=X[i];my+=Y[i]}mx/=k;my/=k;let c=0;for(let i=0;i<k;i++)c+=(X[i]-mx)*(Y[i]-my);return c/(a[2]===false?k-1:k)});
+F('array.standardize',['id'],(E,a,s,n)=>{const A=chkArr(n,a[0]);const B=A.filter(x=>x===x);if(!B.length)return A.slice();const m=B.reduce((t,x)=>t+x,0)/B.length;const sd=Math.sqrt(B.reduce((t,x)=>t+(x-m)**2,0)/B.length);return A.map(x=>sd?(x-m)/sd:0)});
+F('array.percentile_nearest_rank',['id','percentage'],(E,a,s,n)=>pctNR(chkArr(n,a[0]),a[1]));
+F('array.percentile_linear_interpolation',['id','percentage'],(E,a,s,n)=>pctLI(chkArr(n,a[0]),a[1]));
+F('array.percentrank',['id','index'],(E,a,s,n)=>{const A=chkArr(n,a[0]),v=A[Math.round(a[1])];if(v===undefined||v!==v)return NaN;let c=0;for(const x of A)if(x<=v)c++;return A.length>1?(c-1)/(A.length-1)*100:0});
+F('array.sort_indices',['id','order'],(E,a,s,n)=>{const A=chkArr(n,a[0]),d=a[1]===-1?-1:1;return A.map((x,i)=>i).sort((i,j)=>typeof A[i]==='string'?d*String(A[i]).localeCompare(A[j]):d*(A[i]-A[j]))});
+function bsr(A,v,mode){let lo=0,hi=A.length-1,f=-1;while(lo<=hi){const m=(lo+hi)>>1;if(A[m]===v){f=m;if(mode===0)return m;if(mode<0)hi=m-1;else lo=m+1}else if(A[m]<v)lo=m+1;else hi=m-1}return mode===0?-1:(f>=0?f:mode<0?lo:hi)}
+F('array.binary_search',['id','val'],(E,a,s,n)=>bsr(chkArr(n,a[0]),a[1],0));
+F('array.binary_search_leftmost',['id','val'],(E,a,s,n)=>bsr(chkArr(n,a[0]),a[1],-1));
+F('array.binary_search_rightmost',['id','val'],(E,a,s,n)=>bsr(chkArr(n,a[0]),a[1],1));
+F('map.put_all',['id','id2'],(E,a)=>{if(a[0]&&a[0].m&&a[1]&&a[1].m)a[1].m.forEach((v,k)=>a[0].m.set(k,v));return NaN});
+/* ---- disegni: chart.point, polyline, setter mancanti ---- */
+F('chart.point.new',['time','index','price'],(E,a)=>({__k:'point',time:a[0],index:a[1],price:a[2]}));
+F('chart.point.from_index',['index','price'],(E,a)=>({__k:'point',time:NaN,index:a[0],price:a[1]}));
+F('chart.point.from_time',['time','price'],(E,a)=>({__k:'point',time:a[0],index:NaN,price:a[1]}));
+F('chart.point.now',['price'],(E,a)=>({__k:'point',time:E.D.t[E.bar],index:E.bar,price:a[0]==null?E.D.c[E.bar]:a[0]}));
+F('chart.point.copy',['id'],(E,a)=>a[0]&&typeof a[0]==='object'?Object.assign({},a[0]):NaN);
+const ptX=(p,xl)=>p&&typeof p==='object'?(xl==='bt'?p.time:p.index):NaN;
+F('box.set_top_left_point',['id','point'],(E,a,s,n)=>{const o=live(n,a[0],'box');if(o&&a[1]){o.l=ptX(a[1],o.xl);o.t=a[1].price}return NaN});
+F('box.set_bottom_right_point',['id','point'],(E,a,s,n)=>{const o=live(n,a[0],'box');if(o&&a[1]){o.r=ptX(a[1],o.xl);o.b=a[1].price}return NaN});
+F('line.set_first_point',['id','point'],(E,a,s,n)=>{const o=live(n,a[0],'line');if(o&&a[1]){o.x1=ptX(a[1],o.xl);o.y1=a[1].price}return NaN});
+F('line.set_second_point',['id','point'],(E,a,s,n)=>{const o=live(n,a[0],'line');if(o&&a[1]){o.x2=ptX(a[1],o.xl);o.y2=a[1].price}return NaN});
+F('label.set_point',['id','point'],(E,a,s,n)=>{const o=live(n,a[0],'label');if(o&&a[1]){o.x=ptX(a[1],o.xl);o.y=a[1].price}return NaN});
+F('box.set_text_formatting',['id','text_formatting'],(E,a,s,n)=>{const o=live(n,a[0],'box');if(o)o.tf=a[1];return NaN});
+F('label.set_text_formatting',['id','text_formatting'],(E,a,s,n)=>{const o=live(n,a[0],'label');if(o)o.tf=a[1];return NaN});
+F('table.cell_set_tooltip',['table_id','column','row','tooltip'],()=>NaN);
+F('table.cell_set_text_font_family',['table_id','column','row','text_font_family'],()=>NaN);
+F('table.cell_set_text_formatting',['table_id','column','row','text_formatting'],()=>NaN);
+F('linefill.get_line1',['id'],(E,a)=>a[0]&&a[0].__k==='linefill'?a[0].l1:NaN);
+F('linefill.get_line2',['id'],(E,a)=>a[0]&&a[0].__k==='linefill'?a[0].l2:NaN);
+F('polyline.new',['points','curved','closed','xloc','line_color','fill_color','line_style','line_width','force_overlay'],(E,a)=>{
+  const xl=dflt(a[3],'bi'),pts=(Array.isArray(a[0])?a[0]:[]).filter(p=>p&&typeof p==='object').map(p=>[ptX(p,xl),p.price]);
+  return mkDraw(E,'polyline',{pts,cu:a[1]===true,cl:a[2]===true,xl,c:dflt(a[4],CONST['color.blue']),fc:dflt(a[5],NaN),st:dflt(a[6],'solid'),w:dflt(a[7],1)})});
+F('polyline.delete',['id'],(E,a,s,n)=>{const o=live(n,a[0],'polyline');if(o){o.del=true;E.lc.polyline--}return NaN});
+
+/* ---- matrix (Pine v5/v6): una matrice è {__k:'matrix',d:[[riga],[riga],…]} ---- */
+const MX=(n,x)=>{if(!x||x.__k!=='matrix')throw err(n,'serve una matrice');return x};
+const mxNew=(r,c,v)=>{r=Math.max(0,Math.round(r||0));c=Math.max(0,Math.round(c||0));const d=[];for(let i=0;i<r;i++)d.push(new Array(c).fill(v===undefined?NaN:v));return{__k:'matrix',d}};
+const mxR=m=>m.d.length,mxC=m=>m.d.length?m.d[0].length:0,mxAll=m=>[].concat(...m.d);
+const mxOf=d=>({__k:'matrix',d});
+function mxMul(A,B){const r=A.length,k=B.length,c=k?B[0].length:0,O=[];for(let i=0;i<r;i++){const row=new Array(c).fill(0);for(let j=0;j<c;j++){let t=0;for(let q=0;q<k;q++)t+=A[i][q]*B[q][j];row[j]=t}O.push(row)}return O}
+function mxInv(A){const n=A.length;if(!n||A[0].length!==n)return null;const M=A.map((r,i)=>r.concat(Array.from({length:n},(_,j)=>i===j?1:0)));
+  for(let c=0;c<n;c++){let p=c;for(let r=c+1;r<n;r++)if(Math.abs(M[r][c])>Math.abs(M[p][c]))p=r;if(Math.abs(M[p][c])<1e-12)return null;[M[c],M[p]]=[M[p],M[c]];const pv=M[c][c];for(let j=0;j<2*n;j++)M[c][j]/=pv;
+    for(let r=0;r<n;r++)if(r!==c){const f=M[r][c];if(f)for(let j=0;j<2*n;j++)M[r][j]-=f*M[c][j]}}return M.map(r=>r.slice(n))}
+function mxDet(A){const n=A.length;if(!n||A[0].length!==n)return NaN;const M=A.map(r=>r.slice());let d=1;for(let c=0;c<n;c++){let p=c;for(let r=c+1;r<n;r++)if(Math.abs(M[r][c])>Math.abs(M[p][c]))p=r;if(Math.abs(M[p][c])<1e-15)return 0;if(p!==c){[M[c],M[p]]=[M[p],M[c]];d=-d}d*=M[c][c];for(let r=c+1;r<n;r++){const f=M[r][c]/M[c][c];for(let j=c;j<n;j++)M[r][j]-=f*M[c][j]}}return d}
+function mxRank(A){const M=A.map(r=>r.slice());const R=M.length,C=R?M[0].length:0;let rk=0;for(let c=0;c<C&&rk<R;c++){let p=rk;for(let r=rk+1;r<R;r++)if(Math.abs(M[r][c])>Math.abs(M[p][c]))p=r;if(Math.abs(M[p][c])<1e-10)continue;[M[rk],M[p]]=[M[p],M[rk]];for(let r=rk+1;r<R;r++){const f=M[r][c]/M[rk][c];for(let j=c;j<C;j++)M[r][j]-=f*M[rk][j]}rk++}return rk}
+function mxT(A){const r=A.length,c=r?A[0].length:0,O=[];for(let j=0;j<c;j++){const row=[];for(let i=0;i<r;i++)row.push(A[i][j]);O.push(row)}return O}
+function mxEig(A){/* Jacobi per matrici simmetriche; altrimenti QR semplice per gli autovalori */
+  const n=A.length;let V=A.map((r,i)=>r.map((_,j)=>i===j?1:0)),M=A.map(r=>r.slice());const sym=A.every((r,i)=>r.every((x,j)=>Math.abs(x-A[j][i])<1e-9));
+  if(sym){for(let it=0;it<100;it++){let p=0,q=1,mx=0;for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)if(Math.abs(M[i][j])>mx){mx=Math.abs(M[i][j]);p=i;q=j}if(mx<1e-12)break;
+      const th=0.5*Math.atan2(2*M[p][q],M[q][q]-M[p][p]),c=Math.cos(th),s=Math.sin(th);
+      for(let k=0;k<n;k++){const a=M[k][p],b=M[k][q];M[k][p]=c*a-s*b;M[k][q]=s*a+c*b}for(let k=0;k<n;k++){const a=M[p][k],b=M[q][k];M[p][k]=c*a-s*b;M[q][k]=s*a+c*b}
+      for(let k=0;k<n;k++){const a=V[k][p],b=V[k][q];V[k][p]=c*a-s*b;V[k][q]=s*a+c*b}}
+    return{vals:M.map((r,i)=>r[i]),vecs:V}}
+  for(let it=0;it<200;it++){const Q=[],R=[];const C=mxT(M);const U=[];for(let j=0;j<n;j++){let v=C[j].slice();for(const u of U){const d=v.reduce((t,x,i)=>t+x*u[i],0);v=v.map((x,i)=>x-d*u[i])}const nm=Math.sqrt(v.reduce((t,x)=>t+x*x,0))||1;U.push(v.map(x=>x/nm))}
+    const Qm=mxT(U),Rm=mxMul(U,M);M=mxMul(Rm,Qm);V=mxMul(V,Qm)}
+  return{vals:M.map((r,i)=>r[i]),vecs:V}}
+F('matrix.new',['rows','columns','initial_value'],(E,a)=>mxNew(a[0],a[1],a[2]));
+F('matrix.rows',['id'],(E,a,s,n)=>mxR(MX(n,a[0])));F('matrix.columns',['id'],(E,a,s,n)=>mxC(MX(n,a[0])));
+F('matrix.elements_count',['id'],(E,a,s,n)=>{const m=MX(n,a[0]);return mxR(m)*mxC(m)});
+F('matrix.get',['id','row','column'],(E,a,s,n)=>{const m=MX(n,a[0]),r=m.d[Math.round(a[1])];if(!r||Math.round(a[2])<0||Math.round(a[2])>=r.length)throw err(n,'indice fuori dalla matrice');return r[Math.round(a[2])]});
+F('matrix.set',['id','row','column','value'],(E,a,s,n)=>{const m=MX(n,a[0]),r=m.d[Math.round(a[1])];if(!r||Math.round(a[2])<0||Math.round(a[2])>=r.length)throw err(n,'indice fuori dalla matrice');r[Math.round(a[2])]=a[3];return NaN});
+F('matrix.row',['id','row'],(E,a,s,n)=>(MX(n,a[0]).d[Math.round(a[1])]||[]).slice());
+F('matrix.col',['id','column'],(E,a,s,n)=>MX(n,a[0]).d.map(r=>r[Math.round(a[1])]));
+F('matrix.add_row',['id','row','array_id'],(E,a,s,n)=>{const m=MX(n,a[0]),c=mxC(m)||(Array.isArray(a[2])?a[2].length:0),i=a[1]==null?mxR(m):Math.round(a[1]);m.d.splice(i,0,Array.isArray(a[2])?a[2].slice():new Array(c).fill(NaN));return NaN});
+F('matrix.add_col',['id','column','array_id'],(E,a,s,n)=>{const m=MX(n,a[0]),j=a[1]==null?mxC(m):Math.round(a[1]);if(!m.d.length&&Array.isArray(a[2]))a[2].forEach(()=>m.d.push([]));m.d.forEach((r,i)=>r.splice(j,0,Array.isArray(a[2])?a[2][i]:NaN));return NaN});
+F('matrix.remove_row',['id','row'],(E,a,s,n)=>{const m=MX(n,a[0]),i=a[1]==null?mxR(m)-1:Math.round(a[1]);return(m.d.splice(i,1)[0])||[]});
+F('matrix.remove_col',['id','column'],(E,a,s,n)=>{const m=MX(n,a[0]),j=a[1]==null?mxC(m)-1:Math.round(a[1]);return m.d.map(r=>r.splice(j,1)[0])});
+F('matrix.copy',['id'],(E,a,s,n)=>mxOf(MX(n,a[0]).d.map(r=>r.slice())));
+F('matrix.fill',['id','value','from_row','to_row','from_column','to_column'],(E,a,s,n)=>{const m=MX(n,a[0]),r0=a[2]==null?0:a[2],r1=a[3]==null?mxR(m):a[3],c0=a[4]==null?0:a[4],c1=a[5]==null?mxC(m):a[5];for(let i=r0;i<r1;i++)for(let j=c0;j<c1;j++)m.d[i][j]=a[1];return NaN});
+F('matrix.submatrix',['id','from_row','to_row','from_column','to_column'],(E,a,s,n)=>{const m=MX(n,a[0]),r0=a[1]==null?0:a[1],r1=a[2]==null?mxR(m):a[2],c0=a[3]==null?0:a[3],c1=a[4]==null?mxC(m):a[4];return mxOf(m.d.slice(r0,r1).map(r=>r.slice(c0,c1)))});
+F('matrix.reshape',['id','rows','columns'],(E,a,s,n)=>{const m=MX(n,a[0]),v=mxAll(m),R=Math.round(a[1]),C=Math.round(a[2]);if(R*C!==v.length)throw err(n,'dimensioni non compatibili');m.d=[];for(let i=0;i<R;i++)m.d.push(v.slice(i*C,(i+1)*C));return NaN});
+F('matrix.reverse',['id'],(E,a,s,n)=>{const m=MX(n,a[0]);m.d.reverse();m.d.forEach(r=>r.reverse());return NaN});
+F('matrix.swap_rows',['id','row1','row2'],(E,a,s,n)=>{const m=MX(n,a[0]);[m.d[a[1]],m.d[a[2]]]=[m.d[a[2]],m.d[a[1]]];return NaN});
+F('matrix.swap_columns',['id','column1','column2'],(E,a,s,n)=>{MX(n,a[0]).d.forEach(r=>{[r[a[1]],r[a[2]]]=[r[a[2]],r[a[1]]]});return NaN});
+F('matrix.concat',['id1','id2'],(E,a,s,n)=>{const m=MX(n,a[0]);MX(n,a[1]).d.forEach(r=>m.d.push(r.slice()));return m});
+F('matrix.sort',['id','column','order'],(E,a,s,n)=>{const m=MX(n,a[0]),j=a[1]==null?0:Math.round(a[1]),o=a[2]===-1?-1:1;m.d.sort((x,y)=>o*(x[j]-y[j]));return NaN});
+F('matrix.transpose',['id'],(E,a,s,n)=>mxOf(mxT(MX(n,a[0]).d)));
+F('matrix.sum',['id1','id2'],(E,a,s,n)=>{const A=MX(n,a[0]).d;return mxOf(A.map((r,i)=>r.map((x,j)=>x+(a[1]&&a[1].__k==='matrix'?a[1].d[i][j]:a[1]))))});
+F('matrix.diff',['id1','id2'],(E,a,s,n)=>{const A=MX(n,a[0]).d;return mxOf(A.map((r,i)=>r.map((x,j)=>x-(a[1]&&a[1].__k==='matrix'?a[1].d[i][j]:a[1]))))});
+F('matrix.mult',['id1','id2'],(E,a,s,n)=>{const A=MX(n,a[0]).d,b=a[1];if(b&&b.__k==='matrix')return mxOf(mxMul(A,b.d));if(Array.isArray(b))return mxMul(A,b.map(x=>[x])).map(r=>r[0]);return mxOf(A.map(r=>r.map(x=>x*b)))});
+F('matrix.pow',['id','power'],(E,a,s,n)=>{let A=MX(n,a[0]).d,R=A.map((r,i)=>r.map((_,j)=>i===j?1:0));for(let k=0;k<Math.round(a[1]);k++)R=mxMul(R,A);return mxOf(R)});
+F('matrix.kron',['id1','id2'],(E,a,s,n)=>{const A=MX(n,a[0]).d,B=MX(n,a[1]).d,O=[];for(const ra of A)for(const rb of B){const row=[];for(const x of ra)for(const y of rb)row.push(x*y);O.push(row)}return mxOf(O)});
+F('matrix.det',['id'],(E,a,s,n)=>mxDet(MX(n,a[0]).d));
+F('matrix.inv',['id'],(E,a,s,n)=>{const I=mxInv(MX(n,a[0]).d);return I?mxOf(I):NaN});
+F('matrix.pinv',['id'],(E,a,s,n)=>{const A=MX(n,a[0]).d,At=mxT(A),I=mxInv(mxMul(At,A));if(I)return mxOf(mxMul(I,At));const I2=mxInv(mxMul(A,At));return I2?mxOf(mxMul(At,I2)):NaN});
+F('matrix.rank',['id'],(E,a,s,n)=>mxRank(MX(n,a[0]).d));
+F('matrix.trace',['id'],(E,a,s,n)=>MX(n,a[0]).d.reduce((t,r,i)=>t+(r[i]||0),0));
+F('matrix.eigenvalues',['id'],(E,a,s,n)=>mxEig(MX(n,a[0]).d).vals);
+F('matrix.eigenvectors',['id'],(E,a,s,n)=>mxOf(mxEig(MX(n,a[0]).d).vecs));
+const mxNum=m=>mxAll(m).filter(x=>typeof x==='number'&&x===x);
+F('matrix.avg',['id'],(E,a,s,n)=>{const v=mxNum(MX(n,a[0]));return v.length?v.reduce((t,x)=>t+x,0)/v.length:NaN});
+F('matrix.max',['id'],(E,a,s,n)=>{const v=mxNum(MX(n,a[0]));return v.length?Math.max(...v):NaN});
+F('matrix.min',['id'],(E,a,s,n)=>{const v=mxNum(MX(n,a[0]));return v.length?Math.min(...v):NaN});
+F('matrix.median',['id'],(E,a,s,n)=>{const v=mxNum(MX(n,a[0])).sort((x,y)=>x-y);if(!v.length)return NaN;const k=v.length>>1;return v.length%2?v[k]:(v[k-1]+v[k])/2});
+F('matrix.mode',['id'],(E,a,s,n)=>{const c=new Map();let best=NaN,bn=0;for(const x of mxNum(MX(n,a[0]))){const k=(c.get(x)||0)+1;c.set(x,k);if(k>bn||(k===bn&&x<best)){bn=k;best=x}}return best});
+const isSq=m=>mxR(m)===mxC(m)&&mxR(m)>0,ALL=(m,f)=>m.d.every((r,i)=>r.every((x,j)=>f(x,i,j)));
+F('matrix.is_square',['id'],(E,a,s,n)=>isSq(MX(n,a[0])));
+F('matrix.is_zero',['id'],(E,a,s,n)=>ALL(MX(n,a[0]),x=>x===0));
+F('matrix.is_binary',['id'],(E,a,s,n)=>ALL(MX(n,a[0]),x=>x===0||x===1));
+F('matrix.is_identity',['id'],(E,a,s,n)=>{const m=MX(n,a[0]);return isSq(m)&&ALL(m,(x,i,j)=>x===(i===j?1:0))});
+F('matrix.is_diagonal',['id'],(E,a,s,n)=>{const m=MX(n,a[0]);return isSq(m)&&ALL(m,(x,i,j)=>i===j||x===0)});
+F('matrix.is_antidiagonal',['id'],(E,a,s,n)=>{const m=MX(n,a[0]),k=mxR(m)-1;return isSq(m)&&ALL(m,(x,i,j)=>i+j===k||x===0)});
+F('matrix.is_symmetric',['id'],(E,a,s,n)=>{const m=MX(n,a[0]);return isSq(m)&&ALL(m,(x,i,j)=>x===m.d[j][i])});
+F('matrix.is_antisymmetric',['id'],(E,a,s,n)=>{const m=MX(n,a[0]);return isSq(m)&&ALL(m,(x,i,j)=>x===-m.d[j][i])});
+F('matrix.is_triangular',['id'],(E,a,s,n)=>{const m=MX(n,a[0]);return isSq(m)&&(ALL(m,(x,i,j)=>j<=i||x===0)||ALL(m,(x,i,j)=>j>=i||x===0))});
+F('matrix.is_stochastic',['id'],(E,a,s,n)=>{const m=MX(n,a[0]);return m.d.every(r=>r.every(x=>x>=0)&&Math.abs(r.reduce((t,x)=>t+x,0)-1)<1e-9)});
+
+/* =====================================================================
+   1.13.0 — simulatore delle strategie (come lo «Strategy Tester» di TradingView, regole del manuale):
+   - gli ordini creati alla chiusura di una candela si eseguono alla candela dopo (mercato = apertura);
+     con process_orders_on_close=true gli ordini a mercato si eseguono alla chiusura della stessa candela;
+   - limit/stop si eseguono quando il prezzo li tocca; dentro la candela il percorso è apertura → estremo più vicino → l'altro → chiusura;
+   - strategy.entry inverte la posizione, rispetta pyramiding; strategy.order no; strategy.exit = take profit / stop loss / trailing;
+   - commissioni (percentuale, per ordine, per contratto), quantità fissa / in denaro / % del capitale.
+   Solo simulazione: nessun ordine vero, nessun broker.
+   ===================================================================== */
+function stS(E){
+  if(E.S)return E.S;
+  const P=E.SP||{};
+  return E.S={cap:P.initial_capital>0?P.initial_capital:1000000,qt:P.default_qty_type||'fixed',qv:P.default_qty_value>0?P.default_qty_value:1,pyr:P.pyramiding>0?P.pyramiding:1,
+    ct:P.commission_type||'percent',cv:P.commission_value>0?P.commission_value:0,poc:P.process_orders_on_close===true,
+    open:[],closed:[],pend:[],exits:new Map(),net:0,gp:0,gl:0,win:0,loss:0,even:0,eqPeak:NaN,maxDD:0,maxDDp:0,eqLow:NaN,maxRU:0,maxRUp:0,
+    held:{all:0,long:0,short:0},allow:'all',firstIdx:0};
+}
+const stMt=E=>Math.pow(10,-E.dec);
+const stPos=S=>S.open.reduce((t,o)=>t+o.dir*o.qty,0);
+function stComm(S,price,qty){return S.ct==='cash_per_order'?S.cv:S.ct==='cash_per_contract'?S.cv*qty:price*qty*S.cv/100}
+function stQty(E,S,price,q){if(q>0)return q;if(S.qt==='cash')return S.qv/price;if(S.qt==='percent_of_equity'){const eq=S.cap+S.net+stOpenPL(E,S,price);return eq*S.qv/100/price}return S.qv}
+function stOpenPL(E,S,px){return S.open.reduce((t,o)=>t+o.dir*o.qty*(px-o.price),0)}
+function stMark(E,S,d,tx,price,qty){E.out.orders.push({bar:E.bar,d,tx,price,qty})}
+function stOpen(E,S,id,dir,qty,price,comment){
+  const c=stComm(S,price,qty);S.net-=c;
+  S.open.push({id,dir,qty,price,bar:E.bar,seg:E.stSeg==null?3:E.stSeg,time:E.D.t[E.bar],comment:comment||'',comm:c,hi:price,lo:price});
+  stMark(E,S,dir,comment||id,price,qty);
+  const p=stPos(S);S.held.all=Math.max(S.held.all,Math.abs(p));if(p>0)S.held.long=Math.max(S.held.long,p);else S.held.short=Math.max(S.held.short,-p);
+}
+function stCloseEntry(E,S,o,qty,price,exitId,comment,quiet){
+  qty=Math.min(qty,o.qty);if(!(qty>0))return;
+  const c=stComm(S,price,qty),ec=o.comm*qty/o.qty,pl=o.dir*qty*(price-o.price)-c-ec;
+  S.net+=o.dir*qty*(price-o.price)-c;/* la commissione d'entrata era già tolta */
+  const tr={id:o.id,dir:o.dir,qty,ep:o.price,eb:o.bar,et:o.time,ec:o.comment,xp:price,xb:E.bar,xt:E.D.t[E.bar],xid:exitId||'',xc:comment||'',pl,comm:c+ec,
+    ru:o.dir>0?(o.hi-o.price)*qty:(o.price-o.lo)*qty,dd:o.dir>0?(o.lo-o.price)*qty:(o.price-o.hi)*qty};
+  S.closed.push(tr);if(pl>0){S.win++;S.gp+=pl}else if(pl<0){S.loss++;S.gl-=pl}else S.even++;
+  o.qty-=qty;o.comm-=ec;if(o.qty<=1e-12)S.open.splice(S.open.indexOf(o),1);
+  if(!quiet)stMark(E,S,0,comment||exitId||'Close',price,qty);
+}
+/* inversione: come su TradingView un solo segno (l'entrata nuova), non anche la chiusura */
+function stCloseDir(E,S,dir,price,exitId,comment){for(const o of S.open.filter(x=>x.dir===dir))stCloseEntry(E,S,o,o.qty,price,exitId,comment,true)}
+/* percorso dentro la candela: apertura → estremo più vicino all'apertura → l'altro → chiusura */
+function stPath(D,b){const o=D.o[b],h=D.h[b],l=D.l[b],c=D.c[b];return Math.abs(o-h)<Math.abs(o-l)?[o,h,l,c]:[o,l,h,c]}
+/* prezzo di esecuzione di un ordine limit/stop su un tratto del percorso (null se non toccato) */
+function stHit(kind,dir,lvl,a,b){
+  const lo=Math.min(a,b),hi=Math.max(a,b);
+  if(kind==='limit'){if(dir>0){if(a<=lvl)return a;return lo<=lvl?lvl:null}else{if(a>=lvl)return a;return hi>=lvl?lvl:null}}
+  if(dir>0){if(a>=lvl)return a;return hi>=lvl?lvl:null}else{if(a<=lvl)return a;return lo<=lvl?lvl:null}
+}
+function stFillEntry(E,S,od,price){
+  const dir=od.dir,pos=stPos(S);
+  if(S.allow!=='all'&&((S.allow==='long'&&dir<0)||(S.allow==='short'&&dir>0))){if(od.kind==='entry'&&pos*dir<0)stCloseDir(E,S,-dir,price,od.id,od.comment);return}
+  if(od.kind==='entry'){
+    if(pos*dir<0)stCloseDir(E,S,-dir,price,od.id,od.comment);
+    else if(S.open.filter(x=>x.dir===dir).length>=S.pyr)return;
+    stOpen(E,S,od.id,dir,stQty(E,S,price,od.qty),price,od.comment);
+  }else{/* strategy.order: riduce prima la posizione opposta (FIFO), il resto apre */
+    let q=stQty(E,S,price,od.qty);
+    for(const o of S.open.filter(x=>x.dir===-dir)){if(q<=0)break;const k=Math.min(q,o.qty);stCloseEntry(E,S,o,k,price,od.id,od.comment);q-=k}
+    if(q>1e-12)stOpen(E,S,od.id,dir,q,price,od.comment);
+  }
+}
+/* esegue gli ordini in attesa e le uscite sulla candela b (prima che lo script giri su b) */
+function stPre(E){
+  const S=E.S;if(!S)return;const D=E.D,b=E.bar,path=stPath(D,b);
+  /* ordini a mercato: all'apertura */
+  E.stSeg=-1;for(const od of S.pend.filter(x=>x.mkt&&x.bar<b)){S.pend.splice(S.pend.indexOf(od),1);stRunMkt(E,S,od,D.o[b])}
+  /* ordini limit/stop e uscite: in ordine lungo il percorso */
+  for(let k=0;k<3;k++){const a=path[k],c=path[k+1];E.stSeg=k;
+    for(const od of S.pend.filter(x=>!x.mkt&&x.bar<b)){
+      let px=null;
+      if(od.stop!=null&&od.limit!=null){if(!od.stopHit){const h=stHit('stop',od.dir,od.stop,a,c);if(h!=null)od.stopHit=true}if(od.stopHit)px=stHit('limit',od.dir,od.limit,a,c)}
+      else if(od.limit!=null)px=stHit('limit',od.dir,od.limit,a,c);else if(od.stop!=null)px=stHit('stop',od.dir,od.stop,a,c);
+      if(px!=null){S.pend.splice(S.pend.indexOf(od),1);stFillEntry(E,S,od,px)}
+    }
+    stExits(E,S,a,c,b,k);
+  }
+  E.stSeg=null;
+  for(const o of S.open){o.hi=Math.max(o.hi,D.h[b]);o.lo=Math.min(o.lo,D.l[b])}
+}
+function stRunMkt(E,S,od,px){
+  if(od.kind==='close'){for(const o of S.open.filter(x=>x.id===od.id)){const q=od.qty>0?Math.min(od.qty,o.qty):od.qp>0?o.qty*od.qp/100:o.qty;stCloseEntry(E,S,o,q,px,od.id,od.comment)}}
+  else if(od.kind==='closeall'){for(const o of S.open.slice())stCloseEntry(E,S,o,o.qty,px,'Close all',od.comment)}
+  else stFillEntry(E,S,od,px);
+}
+function stExits(E,S,a,c,b,k){
+  for(const [id,x] of S.exits){
+    for(const o of S.open.filter(q=>(x.from==null||x.from===''||q.id===x.from)&&(q.bar<b||q.seg<k))){
+      const mt=stMt(E),d=o.dir;
+      const tp=x.limit!=null?x.limit:x.profit!=null?o.price+d*x.profit*mt:null;
+      let sl=x.stop!=null?x.stop:x.loss!=null?o.price-d*x.loss*mt:null;
+      if(x.trailOff!=null&&(x.trailPrice!=null||x.trailPts!=null)){
+        const act=x.trailPrice!=null?x.trailPrice:o.price+d*x.trailPts*mt;
+        o.trOn=o.trOn||(d>0?Math.max(a,c)>=act:Math.min(a,c)<=act);
+        if(o.trOn){const ext=d>0?Math.max(o.hi,a,c):Math.min(o.lo,a,c),ts=ext-d*x.trailOff*mt;sl=sl==null?ts:(d>0?Math.max(sl,ts):Math.min(sl,ts))}
+      }
+      let px=null,why='';
+      /* tra take profit e stop vince quello che il percorso tocca prima */
+      const hs=sl!=null?stHit('stop',-d,sl,a,c):null,ht=tp!=null?stHit('limit',-d,tp,a,c):null;
+      if(hs!=null&&ht!=null){const ds=Math.abs(hs-a),dt=Math.abs(ht-a);if(ds<=dt){px=hs;why='sl'}else{px=ht;why='tp'}}
+      else if(hs!=null){px=hs;why='sl'}else if(ht!=null){px=ht;why='tp'}
+      if(px!=null){const q=x.qty>0?Math.min(x.qty,o.qty):x.qp>0?o.qty*x.qp/100:o.qty;stCloseEntry(E,S,o,q,px,id,why==='tp'?(x.ctp||x.comment):(x.csl||x.comment))}
+    }
+  }
+}
+/* dopo lo script: ordini a mercato alla chiusura (process_orders_on_close o immediately), conti del capitale */
+function stPost(E){
+  const S=E.S;if(!S)return;const D=E.D,b=E.bar;
+  for(const od of S.pend.filter(x=>x.mkt&&x.bar===b&&(S.poc||x.now))){S.pend.splice(S.pend.indexOf(od),1);stRunMkt(E,S,od,D.c[b])}
+  const eq=S.cap+S.net+stOpenPL(E,S,D.c[b]);
+  if(!(eq<=S.eqPeak))S.eqPeak=eq;const dd=S.eqPeak-eq;if(dd>S.maxDD){S.maxDD=dd;S.maxDDp=S.eqPeak?dd/S.eqPeak*100:0}
+  if(!(eq>=S.eqLow))S.eqLow=eq;const ru=eq-S.eqLow;if(ru>S.maxRU){S.maxRU=ru;S.maxRUp=S.eqLow?ru/S.eqLow*100:0}
+  S.eq=eq;
+}
+const stNum=(x,d)=>x==null||x!==x?d:x;
+function stOrder(E,kind,a){
+  const S=stS(E);const dir=a.dir;
+  const od={kind,id:String(a.id),dir,qty:stNum(a.qty,NaN),limit:a.limit==null||a.limit!==a.limit?null:a.limit,stop:a.stop==null||a.stop!==a.stop?null:a.stop,comment:a.comment||'',bar:E.bar};
+  od.mkt=od.limit==null&&od.stop==null;
+  /* stesso id = l'ordine in attesa si aggiorna */
+  const i=S.pend.findIndex(x=>x.id===od.id&&(x.kind==='entry'||x.kind==='order'));if(i>=0)S.pend.splice(i,1);
+  S.pend.push(od);
+}
+F('strategy.entry',['id','direction','qty','limit','stop','oca_name','oca_type','comment','alert_message','disable_alert'],(E,a)=>{stOrder(E,'entry',{id:a[0],dir:a[1]==='short'?-1:1,qty:a[2],limit:a[3],stop:a[4],comment:a[7]});return NaN});
+F('strategy.order',['id','direction','qty','limit','stop','oca_name','oca_type','comment','alert_message','disable_alert'],(E,a)=>{stOrder(E,'order',{id:a[0],dir:a[1]==='short'?-1:1,qty:a[2],limit:a[3],stop:a[4],comment:a[7]});return NaN});
+F('strategy.close',['id','comment','qty','qty_percent','alert_message','immediately','disable_alert'],(E,a)=>{const S=stS(E);if(!S.open.some(o=>o.id===String(a[0])))return NaN;S.pend.push({kind:'close',id:String(a[0]),qty:stNum(a[2],NaN),qp:stNum(a[3],NaN),comment:a[1]||'',mkt:true,now:a[5]===true,bar:E.bar});return NaN});
+F('strategy.close_all',['comment','alert_message','immediately','disable_alert'],(E,a)=>{const S=stS(E);if(!S.open.length)return NaN;S.pend.push({kind:'closeall',id:'',comment:a[0]||'',mkt:true,now:a[2]===true,bar:E.bar});return NaN});
+F('strategy.exit',['id','from_entry','qty','qty_percent','profit','limit','loss','stop','trail_price','trail_points','trail_offset','oca_name','comment','comment_profit','comment_loss','comment_trailing','alert_message','alert_profit','alert_loss','alert_trailing','disable_alert'],(E,a)=>{
+  const S=stS(E),v=x=>x==null||x!==x?null:x;
+  S.exits.set(String(a[0]),{from:a[1]==null?null:String(a[1]),qty:stNum(a[2],NaN),qp:stNum(a[3],NaN),profit:v(a[4]),limit:v(a[5]),loss:v(a[6]),stop:v(a[7]),trailPrice:v(a[8]),trailPts:v(a[9]),trailOff:v(a[10]),comment:a[12]||'',ctp:a[13]||'',csl:a[14]||''});return NaN});
+F('strategy.cancel',['id'],(E,a)=>{const S=stS(E),id=String(a[0]);S.pend=S.pend.filter(x=>x.id!==id);S.exits.delete(id);return NaN});
+F('strategy.cancel_all',[],(E)=>{const S=stS(E);S.pend=[];S.exits.clear();return NaN});
+F('strategy.risk.allow_entry_in',['value'],(E,a)=>{stS(E).allow=a[0]||'all';return NaN});
+['strategy.risk.max_cons_loss_days','strategy.risk.max_drawdown','strategy.risk.max_intraday_filled_orders','strategy.risk.max_intraday_loss','strategy.risk.max_position_size'].forEach(n=>F(n,['count','type','alert_message'],()=>NaN));
+F('strategy.convert_to_account',['value'],(E,a)=>a[0]);F('strategy.convert_to_symbol',['value'],(E,a)=>a[0]);
+F('strategy.default_entry_qty',['fill_price'],(E,a)=>{const S=stS(E);return stQty(E,S,a[0],NaN)});
+/* operazioni chiuse e aperte, numerate da 0 */
+const CT={profit:t=>t.pl,profit_percent:t=>t.pl/(t.ep*t.qty)*100,size:t=>t.dir*t.qty,entry_price:t=>t.ep,exit_price:t=>t.xp,entry_bar_index:t=>t.eb,exit_bar_index:t=>t.xb,entry_time:t=>t.et,exit_time:t=>t.xt,
+  entry_id:t=>t.id,exit_id:t=>t.xid,entry_comment:t=>t.ec,exit_comment:t=>t.xc,commission:t=>t.comm,max_runup:t=>t.ru,max_runup_percent:t=>t.ru/(t.ep*t.qty)*100,max_drawdown:t=>t.dd,max_drawdown_percent:t=>t.dd/(t.ep*t.qty)*100};
+Object.keys(CT).forEach(k=>F('strategy.closedtrades.'+k,['trade_num'],(E,a)=>{const t=stS(E).closed[Math.round(a[0])];return t?CT[k](t):NaN}));
+const OT={profit:(E,o)=>o.dir*o.qty*(E.D.c[E.bar]-o.price),profit_percent:(E,o)=>o.dir*(E.D.c[E.bar]-o.price)/o.price*100,size:(E,o)=>o.dir*o.qty,entry_price:(E,o)=>o.price,entry_bar_index:(E,o)=>o.bar,entry_time:(E,o)=>o.time,
+  entry_id:(E,o)=>o.id,entry_comment:(E,o)=>o.comment,commission:(E,o)=>o.comm,max_runup:(E,o)=>o.dir>0?(o.hi-o.price)*o.qty:(o.price-o.lo)*o.qty,max_runup_percent:(E,o)=>(o.dir>0?(o.hi-o.price):(o.price-o.lo))/o.price*100,
+  max_drawdown:(E,o)=>o.dir>0?(o.lo-o.price)*o.qty:(o.price-o.hi)*o.qty,max_drawdown_percent:(E,o)=>(o.dir>0?(o.lo-o.price):(o.price-o.hi))/o.price*100};
+Object.keys(OT).forEach(k=>F('strategy.opentrades.'+k,['trade_num'],(E,a)=>{const o=stS(E).open[Math.round(a[0])];return o?OT[k](E,o):NaN}));
+const stv=f=>E=>f(stS(E),E);
+Object.assign(BV,{
+  'strategy.position_size':stv(S=>stPos(S)),'strategy.position_avg_price':stv(S=>{const q=S.open.reduce((t,o)=>t+o.qty,0);return q?S.open.reduce((t,o)=>t+o.qty*o.price,0)/q:NaN}),
+  'strategy.position_entry_name':stv(S=>S.open.length?S.open[S.open.length-1].id:''),
+  'strategy.equity':stv((S,E)=>S.cap+S.net+stOpenPL(E,S,E.D.c[E.bar])),'strategy.initial_capital':stv(S=>S.cap),'strategy.account_currency':()=>'USD',
+  'strategy.netprofit':stv(S=>S.net),'strategy.netprofit_percent':stv(S=>S.net/S.cap*100),
+  'strategy.openprofit':stv((S,E)=>stOpenPL(E,S,E.D.c[E.bar])),'strategy.openprofit_percent':stv((S,E)=>stOpenPL(E,S,E.D.c[E.bar])/S.cap*100),
+  'strategy.grossprofit':stv(S=>S.gp),'strategy.grossloss':stv(S=>S.gl),'strategy.grossprofit_percent':stv(S=>S.gp/S.cap*100),'strategy.grossloss_percent':stv(S=>S.gl/S.cap*100),
+  'strategy.closedtrades':stv(S=>S.closed.length),'strategy.opentrades':stv(S=>S.open.length),'strategy.wintrades':stv(S=>S.win),'strategy.losstrades':stv(S=>S.loss),'strategy.eventrades':stv(S=>S.even),
+  'strategy.max_drawdown':stv(S=>S.maxDD),'strategy.max_drawdown_percent':stv(S=>S.maxDDp),'strategy.max_runup':stv(S=>S.maxRU),'strategy.max_runup_percent':stv(S=>S.maxRUp),
+  'strategy.avg_trade':stv(S=>S.closed.length?S.closed.reduce((t,x)=>t+x.pl,0)/S.closed.length:NaN),
+  'strategy.avg_trade_percent':stv(S=>S.closed.length?S.closed.reduce((t,x)=>t+x.pl/(x.ep*x.qty)*100,0)/S.closed.length:NaN),
+  'strategy.avg_winning_trade':stv(S=>S.win?S.gp/S.win:NaN),'strategy.avg_losing_trade':stv(S=>S.loss?S.gl/S.loss:NaN),
+  'strategy.avg_winning_trade_percent':stv(S=>{const w=S.closed.filter(x=>x.pl>0);return w.length?w.reduce((t,x)=>t+x.pl/(x.ep*x.qty)*100,0)/w.length:NaN}),
+  'strategy.avg_losing_trade_percent':stv(S=>{const w=S.closed.filter(x=>x.pl<0);return w.length?w.reduce((t,x)=>t-x.pl/(x.ep*x.qty)*100,0)/w.length:NaN}),
+  'strategy.max_contracts_held_all':stv(S=>S.held.all),'strategy.max_contracts_held_long':stv(S=>S.held.long),'strategy.max_contracts_held_short':stv(S=>S.held.short),
+  'strategy.closedtrades.first_index':stv(S=>S.firstIdx),'strategy.margin_liquidation_price':()=>NaN,
+  'strategy.opentrades.capital_held':stv((S,E)=>S.open.reduce((t,o)=>t+o.qty*o.price,0))
+});
+
 
 /* =====================================================================
    MOTORE PINE — 3) compilazione in funzioni veloci ed esecuzione
@@ -6289,10 +6685,11 @@ const BIN={'+':addv,'-':(a,b)=>num(a)-num(b),'*':(a,b)=>num(a)*num(b),'/':(a,b)=
 
 function Comp(ast){
   this.ast=ast;this.v6=ast.version>=6;
-  this.fns=new Map();this.types=new Map();this.methods=new Map();this.G=new Map();
+  this.fns=new Map();this.types=new Map();this.methods=new Map();this.G=new Map();this.enums=new Map();
   for(const s of ast.body){
     if(s.t==='fn'){if(s.isMethod)this.methods.set(s.name,s);else this.fns.set(s.name,s)}
     else if(s.t==='type')this.types.set(s.name,s);
+    else if(s.t==='enum'){const o={};s.fields.forEach(f=>{o[f.name]={__k:'enum',e:s.name,k:f.name,t:f.title,toString(){return this.t}}});this.enums.set(s.name,o)}
   }
   const g=new Set();this.collect(ast.body,g);[...g].forEach((n,i)=>this.G.set(n,i));
   this.fc=new Map();
@@ -6330,7 +6727,7 @@ cp.block=function(stmts,sc){
 cp.stmt=function(s,sc){
   const ln=s.ln;let f;
   switch(s.t){
-    case 'fn':case 'type':return null;
+    case 'fn':case 'type':case 'enum':return null;
     case 'break':return E=>{E.brk=true;return NaN};
     case 'continue':return E=>{E.cont=true;return NaN};
     case 'expr':f=this.ex(s.e,sc);break;
@@ -6420,6 +6817,12 @@ cp.name=function(e,sc){
   if(this.fns.has(n))throw err(e,'«'+n+'» è una funzione: aggiungi le parentesi');
   /* v4: variabili senza «ta.» (tr, vwap, obv, …) */
   if(this.ast.version<=4&&BV['ta.'+n])return BV['ta.'+n];
+  /* v3/v4: nomi senza gruppo (green, dotted, columns, tickerid, period, n, …) */
+  if(this.ast.version<=4){
+    const V3={ticker:'syminfo.ticker',tickerid:'syminfo.tickerid',period:'timeframe.period',interval:'timeframe.multiplier',isintraday:'timeframe.isintraday',isdaily:'timeframe.isdaily',isweekly:'timeframe.isweekly',ismonthly:'timeframe.ismonthly',isdwm:'timeframe.isdwm',n:'bar_index'};
+    const q=V3[n];if(q&&BV[q])return BV[q];
+    for(const k of ['color.'+n,'plot.style_'+n,'hline.style_'+n,'shape.'+n,'location.'+n,'size.'+n])if(CONST[k]!==undefined){const v=CONST[k];return()=>v}
+  }
   if(this.ast.version<=4&&BV_CALL['ta.'+n]){const[fn,args]=BV_CALL['ta.'+n];return this.call({t:'call',id:e.id,ln:e.ln,f:{t:'name',n:fn},args:args.map(x=>({t:'name',n:x})),kw:{}},sc,fn)}
   throw err(e,'nome sconosciuto «'+n+'»');
 };
@@ -6428,9 +6831,12 @@ cp.mem=function(e,sc){
   if(d!=null){
     const root=d.split('.')[0];
     if(!this.isVar(root,sc)){
+      if(this.enums.has(root)){const v=this.enums.get(root)[d.slice(root.length+1)];if(!v)throw err(e,'campo enum sconosciuto «'+d+'»');return()=>v}
       if(BV_CALL[d]){const[fn,args]=BV_CALL[d];return this.call({t:'call',id:e.id,ln:e.ln,f:{t:'name',n:fn},args:args.map(n=>({t:'name',n})),kw:{}},sc,fn)}
       if(BV[d])return BV[d];
       if(CONST[d]!==undefined){const v=CONST[d];return()=>v}
+      /* v4: label.style_labeldown → label.style_label_down (nomi della v4) */
+      if(this.ast.version<=4){const m=/^label\.style_label(up|down|left|right)$/.exec(d);if(m&&CONST['label.style_label_'+m[1]]!==undefined){const v=CONST['label.style_label_'+m[1]];return()=>v}}
       throw err(e,'nome sconosciuto «'+d+'»');
     }
   }
@@ -6458,11 +6864,14 @@ cp.args=function(e,sc,params){
 cp.call=function(e,sc,forced){
   let d=forced||dotted(e.f);
   /* 1.12.2: Pine v4 (e precedenti) — nomi senza «ta.», «math.», «str.», security(), iff(), input(type=…) come nella guida ufficiale «To Pine Script version 5» */
-  if(d!=null&&!d.includes('.')&&this.ast.version<=4&&!this.isVar(d,sc)&&!this.fns.has(d)){
+  /* funzioni e variabili hanno nomi separati in Pine: «x = x()» chiama la funzione x */
+  if(d!=null&&!d.includes('.')&&this.fns.has(d)&&this.isVar(d,sc))return this.ucall(e,sc,this.fns.get(d),null);
+  if(d!=null&&!d.includes('.')&&this.ast.version<=4&&!this.fns.has(d)){
     if(d==='security')return this.security(e,sc);
+    if(d==='offset'&&e.args.length>=2)return this.hist({t:'idx',o:e.args[0],n:e.args[1],ln:e.ln,id:e.id},sc);
     if(d==='iff'){const c=this.ex(e.args[0],sc),x=this.ex(e.args[1],sc),y=this.ex(e.args[2],sc);return E=>tru(c(E))?x(E):y(E)}
     if(d==='input'){
-      const T={'input.integer':'input.int','input.float':'input.float','input.bool':'input.bool','input.string':'input.string','input.source':'input.source','input.resolution':'input.timeframe','input.session':'input.session','input.color':'input.color'};
+      const T={'input.integer':'input.int','input.float':'input.float','input.bool':'input.bool','input.string':'input.string','input.source':'input.source','input.resolution':'input.timeframe','input.session':'input.session','input.color':'input.color',integer:'input.int',float:'input.float',bool:'input.bool',string:'input.string',source:'input.source',resolution:'input.timeframe',session:'input.session',symbol:'input.string'};
       let tn=e.kw.type?dotted(e.kw.type):(e.args[2]?dotted(e.args[2]):null);
       if(tn&&T[tn]){const kw=Object.assign({},e.kw);delete kw.type;const args=e.args.slice();if(!e.kw.type)args.splice(2,1);
         const m=T[tn],P=INPUT_P[m],e2=Object.assign({},e,{kw,args});
@@ -6470,17 +6879,34 @@ cp.call=function(e,sc,forced){
         if(!e.kw.type&&args.length>2){const v4=['minval','maxval','confirm','step','options'];const rest=args.splice(2);rest.forEach((x,i)=>{const k=v4[i];if(k&&P.includes(k))kw[k]=x})}
         return this.input(e2,sc,m);}
     }
-    const RN={tostring:'str.tostring',tonumber:'str.tonumber',cum:'ta.cum',sum:'math.sum',avg:'math.avg',max:'math.max',min:'math.min',abs:'math.abs',round:'math.round'};
+    const RN={tickerid:'ticker.new',tostring:'str.tostring',tonumber:'str.tonumber',cum:'ta.cum',sum:'math.sum',avg:'math.avg',max:'math.max',min:'math.min',abs:'math.abs',round:'math.round'};
     if(RN[d])d=RN[d];
-    else if(!BF[d])for(const p of ['ta.','math.','str.']){if(BF[p+d]){d=p+d;break}}
+    else if(!BF[d])for(const p of ['ta.','math.','str.','ticker.','request.']){if(BF[p+d]){d=p+d;break}}
   }
   if(d!=null){
     const root=d.split('.')[0];
-    if(!this.isVar(root,sc)){
+    /* 1.13.0: una variabile con lo stesso nome di un gruppo di funzioni (es. «var matrix = matrix.new(…)») non nasconde le funzioni integrate */
+    const shadow=this.isVar(root,sc)&&(d.includes('.')?((BF[d]||d==='request.security'||d==='request.security_lower_tf'||INPUT_P[d])&&NSB.has(root)):!!(BF[d]||INPUT_P[d]));
+    if(!this.isVar(root,sc)||shadow){
       if(!d.includes('.')&&this.fns.has(d))return this.ucall(e,sc,this.fns.get(d),null);
       if(/\.new$/.test(d)&&this.types.has(d.slice(0,-4)))return this.ctor(e,sc,this.types.get(d.slice(0,-4)));
       if(/\.copy$/.test(d)&&this.types.has(d.slice(0,-5))){const a=this.ex(e.args[0],sc);return E=>{const o=a(E);return o&&typeof o==='object'?Object.assign({},o):NaN}}
       if(d==='request.security')return this.security(e,sc);
+      if(d==='request.security_lower_tf')return this.securityLtf(e,sc);
+      if(d==='input.enum'){
+        const dv=e.kw.defval||e.args[0],dd=dv?dotted(dv):null,root=dd?dd.split('.')[0]:null;
+        if(!root||!this.enums.has(root))throw err(e,'input.enum vuole un campo di un enum');
+        const EN=this.enums.get(root),def=EN[dd.slice(root.length+1)];
+        const ov=e.kw.options||e.args[2];
+        const fields=ov&&ov.t==='tuple'?ov.items.map(x=>{const q=dotted(x);return q?EN[q.slice(root.length+1)]:null}).filter(Boolean):Object.values(EN);
+        const lit=v=>({t:'lit',v,ln:e.ln});
+        const kw=Object.assign({},e.kw);delete kw.defval;delete kw.options;
+        const args=e.args.slice();args[0]=lit(def.t);if(args.length>2)args.splice(2,1);
+        kw.options={t:'tuple',items:fields.map(f=>lit(f.t)),ln:e.ln};
+        const f=this.input(Object.assign({},e,{args,kw}),sc,'input.string');
+        const byT=new Map(Object.values(EN).map(v=>[v.t,v]));
+        return E=>byT.get(f(E))||def;
+      }
       if(INPUT_P[d])return this.input(e,sc,d);
       if(/^request\./.test(d))throw err(e,'«'+d+'» non è ancora supportato');
       const B=BF[d];
@@ -6615,6 +7041,36 @@ cp.security=function(e,sc){
   };
 };
 
+/* 1.13.0: request.security_lower_tf — per ogni candela del grafico, l'array dei valori delle candele più piccole che ci stanno dentro */
+cp.securityLtf=function(e,sc){
+  const P=['symbol','timeframe','expression','ignore_invalid_symbol','currency','ignore_invalid_timeframe','calc_bars_count'];
+  const fs=this.args(e,sc,P),tff=fs[1],ef=fs[2],id=e.id;
+  const exN=e.kw.expression||e.args[2],isT=exN&&exN.t==='tuple',tl=isT?exN.items.length:0;
+  if(!ef)throw err(e,'request.security_lower_tf: manca l\'espressione');
+  const empty=()=>isT?Array.from({length:tl},()=>[]):[];
+  return E=>{
+    if(E.sec){const v=ef(E);return isT?v.map(x=>[x]):[v]}
+    const tf=tfNorm(tff?tff(E):'');
+    const key='L'+id+'|'+tf;let R=E.secR.get(key);
+    if(!R){
+      const D=E.secData&&E.secData[tf];
+      if(!D||!D.t||!D.t.length){E.need.add(tf);return empty()}
+      R={vals:[],t:D.t,p:0};
+      const sv={bar:E.bar,D:E.D,n:E.n,C:E.C,tf:E.tf,tfMs:E.tfMs,ln:E.ln};
+      const kc=new Ctx(0);kc.L=E.C.L;
+      E.sec=true;E.D=D;E.n=D.t.length;E.C=kc;E.tf=tf;E.tfMs=tfMsOf(tf);
+      try{for(let b=0;b<E.n;b++){E.bar=b;const v=ef(E);R.vals.push(Array.isArray(v)?v.slice():v)}}
+      finally{E.sec=false;E.bar=sv.bar;E.D=sv.D;E.n=sv.n;E.C=sv.C;E.tf=sv.tf;E.tfMs=sv.tfMs;E.ln=sv.ln}
+      E.secR.set(key,R);
+    }
+    const t=E.D.t[E.bar],end=t+E.tfMs;let j=R.p;
+    while(j<R.t.length&&R.t[j]<t)j++;R.p=j;
+    const out=[];while(j<R.t.length&&R.t[j]<end){out.push(R.vals[j]);j++}
+    if(!isT)return out;
+    const cols=Array.from({length:tl},()=>[]);out.forEach(v=>{for(let k=0;k<tl;k++)cols[k].push(Array.isArray(v)?v[k]:NaN)});return cols;
+  };
+};
+
 /* ---------- interfaccia pubblica ---------- */
 function compile(src){
   NID=1;
@@ -6631,16 +7087,18 @@ function run(prog,data,opts){
     fg:opts.fg?hexc(opts.fg):hexc('#D1D4DC'),bg:opts.bg?hexc(opts.bg):hexc('#000000'),
     G:[],C:new Ctx(0),brk:false,cont:false,sec:false,depth:0,ln:0,pos:0,seq:0,declared:false,
     inp:new Map(),secR:new Map(),secData:opts.sec||{},need:new Set(),opts,
-    max:{box:50,line:50,label:50,table:20,linefill:50},live2:null,old:{box:0,line:0,label:0,table:0,linefill:0},
+    max:{box:50,line:50,label:50,table:20,linefill:50,polyline:50},live2:null,old:{box:0,line:0,label:0,table:0,linefill:0,polyline:0},
     out:{meta:{kind:prog.kind,title:'Script',short:'',overlay:false},inputs:[],plot:new Map(),hline:new Map(),fill:new Map(),shape:[],bg:{},barc:{},
-      box:[],line:[],label:[],table:[],linefill:[],alerts:[],conds:[],condMeta:[],logs:[],orders:[]}};
-  E.lc={box:0,line:0,label:0,table:0,linefill:0};
+      box:[],line:[],label:[],table:[],linefill:[],polyline:[],alerts:[],conds:[],condMeta:[],logs:[],orders:[]}};
+  E.lc={box:0,line:0,label:0,table:0,linefill:0,polyline:0};
   for(let i=0;i<prog.nG;i++)E.G.push(new V());
   let error=null;
   try{
     for(let b=0;b<n;b++){
       E.bar=b;E.brk=E.cont=false;E.depth=0;
+      if(E.S)stPre(E);
       prog.main(E);
+      if(E.S)stPost(E);
       if((b&31)===0&&Date.now()-t0>(opts.maxMs||15000))throw PErr('lo script è troppo lento su questo grafico',E.ln);
     }
   }catch(x){error={msg:x&&x.pine?x.message:('errore interno: '+(x&&x.message||x)),ln:(x&&x.ln)||E.ln||0}}
@@ -6658,6 +7116,7 @@ function run(prog,data,opts){
     tables:O.table.filter(o=>!o.del).map(o=>({pos:o.pos,cols:o.cols,rows:o.rows,bg:cv(o.bg),fc:cv(o.fc),fw:o.fw,brc:cv(o.brc),brw:o.brw,merges:o.merges,
       cells:Object.keys(o.cells).map(k=>{const c=o.cells[k],p=k.split(',');return{c:+p[0],r:+p[1],tx:String(c.tx==null?'':c.tx),w:c.w,h:c.h,tc:cv(c.tc),th:c.th,tv:c.tv,ts:c.ts,bg:cv(c.bg)}})})),
     linefills:O.linefill.filter(o=>!o.del&&o.l1&&o.l2&&!o.l1.del&&!o.l2.del).map(o=>({l1:o.l1,l2:o.l2,c:cv(o.c)})),
+    polylines:O.polyline.filter(o=>!o.del).map(o=>({pts:o.pts,cu:o.cu,cl:o.cl,xl:o.xl,c:cv(o.c),fc:cv(o.fc),st:o.st,w:o.w})),
     orders:O.orders};
   const lmap=new Map();res.lines.forEach(L=>{lmap.set(L._o,L);delete L._o});
   res.linefills=res.linefills.map(f=>({a:lmap.get(f.l1),b:lmap.get(f.l2),c:f.c})).filter(f=>f.a&&f.b);
@@ -6787,6 +7246,8 @@ async function indRunAll(){
       if(indOff(ind)){IR.delete(ind.uid);continue}
       let r=await pineRun(ind.code,D,{inputs:ind.inputs||{},sec:secFor(),fg,bg});
       if(!r)r=EMPTY_RES('motore non disponibile');
+      /* 1.13.0: se il motore non conosce una funzione Pine, lo segnaliamo in automatico: SOLO il nome della funzione, mai lo script */
+      try{if(r.error&&/sconosciut|non (ancora )?(è )?support/.test(r.error.msg||'')){const m=/«([^»]{1,60})»/.exec(r.error.msg);const k='Pine: '+(m?m[1]:'?');window.__nxPineMiss=window.__nxPineMiss||{};if(m&&!window.__nxPineMiss[k]&&window.NXErr){window.__nxPineMiss[k]=1;NXErr(k+' (non supportata)','pine','')}}}catch(e){}
       if(r.need&&r.need.length){
         let got=false;for(const tf of r.need){try{if(await secFetch(tf))got=true}catch(e){}}
         if(got&&cur+'|'+res===want)r=await pineRun(ind.code,D,{inputs:ind.inputs||{},sec:secFor(),fg,bg})||r;
@@ -6947,8 +7408,19 @@ function pcvDraw(){
       /* forme di plotshape / plotchar */
       for(const s of r.shapes){if(s.bar<i0||s.bar>i1)continue;const x=X(s.bar);if(x==null)continue;pcvShape(c,s,x,r,ph,Y)}
       /* segnali delle strategie */
+      const ost=new Map();/* più segni sulla stessa candela: uno sopra l'altro, non sovrapposti */
       for(const o of r.orders){if(o.bar<i0||o.bar>i1)continue;const x=X(o.bar),bb=lastBars[o.bar+off];if(x==null||!bb)continue;
-        const up=o.d>0,y=up?Y(bb.l)+16:Y(bb.h)-16;pcvShape(c,{st:o.d===0?'xcross':up?'arrowup':'arrowdown',c:o.d>0?'#22ab94':o.d<0?'#f23645':'#9598a1',tx:o.tx,tc:o.d>0?'#22ab94':o.d<0?'#f23645':'#9598a1',sz:'small',loc:'absolute',y:NaN},x,r,ph,Y,y)}
+        const up=o.d>0,kk=o.bar+(up?'u':'d'),nn=ost.get(kk)||0;ost.set(kk,nn+1);const y=up?Y(bb.l)+16+nn*30:Y(bb.h)-16-nn*30;pcvShape(c,{st:o.d===0?'xcross':up?'arrowup':'arrowdown',c:o.d>0?'#22ab94':o.d<0?'#f23645':'#9598a1',tx:o.tx,tc:o.d>0?'#22ab94':o.d<0?'#f23645':'#9598a1',sz:'small',loc:'absolute',y:NaN},x,r,ph,Y,y)}
+      /* 1.13.0: polyline (spezzate o curve, chiuse o aperte, con riempimento) */
+      for(const pl of (r.polylines||[])){
+        const P=pl.pts.map(q=>[xOf(q[0],pl.xl),Y(q[1])]).filter(q=>q[0]!=null&&q[1]!=null&&isFinite(q[0])&&isFinite(q[1]));if(P.length<2)continue;
+        c.beginPath();c.moveTo(P[0][0],P[0][1]);
+        if(pl.cu&&P.length>2){for(let i=1;i<P.length-1;i++){const mx=(P[i][0]+P[i+1][0])/2,my=(P[i][1]+P[i+1][1])/2;c.quadraticCurveTo(P[i][0],P[i][1],mx,my)}c.lineTo(P[P.length-1][0],P[P.length-1][1])}
+        else for(let i=1;i<P.length;i++)c.lineTo(P[i][0],P[i][1]);
+        if(pl.cl)c.closePath();
+        if(pl.fc){c.fillStyle=pl.fc;c.fill()}
+        if(pl.c){c.strokeStyle=pl.c;c.lineWidth=pl.w||1;dash(c,pl.st==='dashed'||pl.st==='style_dashed'?'dashed':pl.st==='dotted'||pl.st==='style_dotted'?'dotted':'solid');c.stroke();c.setLineDash([])}
+      }
       /* etichette */
       for(const lb of r.labels){
         if(!isFinite(lb.x))continue;
