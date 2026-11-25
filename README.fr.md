@@ -9,7 +9,7 @@ Une app de graphiques rapide et élégante pour iPhone, Android et ordinateur, a
 
 [English](README.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Français** · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.28.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.28.1-d9a441?style=for-the-badge)](../../releases)
 ![Plateforme](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Ordinateur-web%20app-2962ff?style=for-the-badge)
 ![Langues](https://img.shields.io/badge/langues-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prix](https://img.shields.io/badge/installation-gratuite-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 
 > 📝 Les nouveautés de chaque version sont sur la page [Releases](../../releases).
 
-### 🆕 Nouveautés de la 1.28.0 — Supprimer des scripts depuis Mes scripts
+### 🆕 Nouveautés de la 1.28.1 — Titres dans la légende et page Notifications
+
+- 🏷️ Les titres des indicateurs dans la légende s'affichent en entier même quand les paramètres et les valeurs sont masqués.
+- 🔔 Page Notifications refaite : deux lignes avec les interrupteurs de l'app, pour toutes les notifications et pour celles des alertes.
+- ✨ Cloche dorée quand les notifications sont actives ; explication claire quand l'iPhone les bloque.
+
+### Auparavant, dans la 1.28.0 — Supprimer des scripts depuis Mes scripts
 
 - 🗑️ Appuie longuement sur un script dans Mes scripts (aussi dans les Favoris et la recherche) pour le supprimer, avec une confirmation avant.
 - 🛡️ Deux étapes volontaires : rien n'est supprimé par un toucher accidentel ; un script déjà sur le graphique y reste jusqu'à ce que tu le retires.
@@ -79,11 +85,14 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - ⏩ Les lignes décalées vers l'avant (offset) continuent maintenant après la dernière bougie, comme sur TradingView : par exemple le nuage Ichimoku 26 bougies en avant.
 - 🎨 Les remplissages entre lignes décalées suivent les lignes ; la vue reste sur la dernière bougie réelle.
 
-### Auparavant, dans la 1.26.0 — Arrondi de la moitié vers le haut
+<details>
+<summary>Auparavant, dans la 1.26.0 — Arrondi de la moitié vers le haut</summary>
 
 - 🔢 Les nombres exactement à mi-chemin sont arrondis vers le haut (3971,165 → 3971,17) dans math.round, str.tostring, math.round_to_mintick et dans les prix affichés sur le graphique.
 - 🧮 Plus d'erreurs dues à la façon dont l'ordinateur stocke les décimales (3971,16499…).
 - ✅ Mêmes résultats qu'avant sur tous les scripts de test et sur le contrôle indépendant des calculs.
+
+</details>
 
 <details>
 <summary>Auparavant, dans la 1.25.0 — Fonctions Pine à plusieurs formes</summary>
@@ -100,15 +109,6 @@ Elle est pensée pour les traders qui veulent des **graphiques clairs, des prix 
 - 🌈 Les remplissages en dégradé (valeur et couleur du haut et du bas) sont dessinés comme sur TradingView, avec les couleurs du haut et du bas dans Style ; le RSI les utilise pour le surachat et la survente.
 - 🧓 Anciens scripts Pine v3/v4 : la transparence transp, la transparence par défaut des arrière-plans et remplissages et la condition when des ordres de stratégie sont maintenant appliquées.
 - 🧩 line.new, box.new et label.new avec chart.point, les noms alternatifs officiels des paramètres et l'avis automatique des paramètres non pris en charge.
-
-</details>
-
-<details>
-<summary>Auparavant, dans la 1.23.0 — Remplissages, arrière-plans et panneaux inférieurs</summary>
-
-- 🎨 Style affiche désormais chaque remplissage et couleur d'arrière-plan du script : afficher/masquer et, si le script utilise plusieurs couleurs, chacune se modifie avec sa propre opacité.
-- 📉 Les indicateurs dans les panneaux sous le graphique dessinent maintenant aussi signaux, remplissages, arrière-plans, rectangles, étiquettes et lignes (par exemple la bande du RSI entre 30 et 70).
-- 🔒 Les remplissages et arrière-plans marqués comme non modifiables dans le script restent masqués dans Style, comme sur TradingView.
 
 </details>
 

@@ -9,7 +9,7 @@ Un'app di grafici veloce e bella per iPhone, Android e computer, con un design n
 
 [English](README.md) · **Italiano** · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Versione](https://img.shields.io/badge/versione-v1.28.0-d9a441?style=for-the-badge)](../../releases)
+[![Versione](https://img.shields.io/badge/versione-v1.28.1-d9a441?style=for-the-badge)](../../releases)
 ![Piattaforma](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Computer-web%20app-2962ff?style=for-the-badge)
 ![Lingue](https://img.shields.io/badge/lingue-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Prezzo](https://img.shields.io/badge/installazione-gratis-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 
 > 📝 Le novità di ogni versione sono nella pagina [Releases](../../releases).
 
-### 🆕 Novità della 1.28.0 — Eliminare gli script da I miei script
+### 🆕 Novità della 1.28.1 — Titoli nella legenda e pagina Notifiche
+
+- 🏷️ I titoli degli indicatori nella legenda si vedono interi anche con input e valori nascosti.
+- 🔔 Pagina Notifiche rifatta: due righe con gli interruttori dell'app, per tutte le notifiche e per le notifiche degli alert.
+- ✨ Campanella dorata con le notifiche attive; spiegazione chiara quando iPhone le blocca.
+
+### In precedenza, nella 1.28.0 — Eliminare gli script da I miei script
 
 - 🗑️ Tieni premuto uno script in I miei script (anche nei Preferiti e nella ricerca) per eliminarlo, con la conferma prima.
 - 🛡️ Due passaggi voluti: niente si elimina con un tocco per sbaglio; uno script già sul grafico resta lì finché non lo togli.
@@ -79,11 +85,14 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - ⏩ Le linee spostate in avanti (offset) ora continuano oltre l'ultima candela, come su TradingView: per esempio la nuvola dell'Ichimoku 26 candele avanti.
 - 🎨 I riempimenti tra linee spostate seguono le linee; la vista resta sull'ultima candela vera.
 
-### In precedenza, nella 1.26.0 — Arrotondamento a metà in su
+<details>
+<summary>In precedenza, nella 1.26.0 — Arrotondamento a metà in su</summary>
 
 - 🔢 I numeri esattamente a metà si arrotondano in su (3971,165 → 3971,17) in math.round, str.tostring, math.round_to_mintick e nei prezzi mostrati sul grafico.
 - 🧮 Niente più errori dovuti a come il computer memorizza i decimali (3971,16499…).
 - ✅ Stessi risultati di prima su tutti gli script di prova e sul controllo indipendente dei calcoli.
+
+</details>
 
 <details>
 <summary>In precedenza, nella 1.25.0 — Funzioni Pine con più forme</summary>
@@ -100,15 +109,6 @@ NexusCharts è una **web app** che si installa sulla schermata Home e funziona c
 - 🌈 I riempimenti a sfumatura (valore e colore in alto e in basso) sono disegnati come su TradingView, con i colori in alto e in basso in Stile; l'RSI li usa per ipercomprato e ipervenduto.
 - 🧓 Script vecchi Pine v3/v4: ora valgono la trasparenza transp, la trasparenza di serie di sfondi e riempimenti e la condizione when degli ordini delle strategie.
 - 🧩 line.new, box.new e label.new con chart.point, i nomi alternativi ufficiali dei parametri e l'avviso automatico dei parametri non supportati.
-
-</details>
-
-<details>
-<summary>In precedenza, nella 1.23.0 — Riempimenti, sfondi e riquadri sotto il grafico</summary>
-
-- 🎨 Stile ora elenca ogni riempimento e sfondo colorato dello script: mostra/nascondi e, se lo script usa più colori, ognuno si cambia con la sua trasparenza.
-- 📉 Gli indicatori nei riquadri sotto il grafico ora disegnano anche segnali, riempimenti, sfondi, riquadri, etichette e linee (per esempio la fascia dell'RSI tra 30 e 70).
-- 🔒 Riempimenti e sfondi che lo script segna come non modificabili restano nascosti in Stile, come su TradingView.
 
 </details>
 

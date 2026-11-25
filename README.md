@@ -9,7 +9,7 @@ A fast, beautiful charting app for iPhone, Android and desktop, with a pure-blac
 
 **English** · [Italiano](README.it.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
 
-[![Version](https://img.shields.io/badge/version-v1.28.0-d9a441?style=for-the-badge)](../../releases)
+[![Version](https://img.shields.io/badge/version-v1.28.1-d9a441?style=for-the-badge)](../../releases)
 ![Platform](https://img.shields.io/badge/iPhone%20%7C%20Android%20%7C%20Desktop-web%20app-2962ff?style=for-the-badge)
 ![Languages](https://img.shields.io/badge/languages-IT%20%7C%20EN%20%7C%20ES%20%7C%20FR%20%7C%20DE-22ab94?style=for-the-badge)
 ![Price](https://img.shields.io/badge/install-free-111111?style=for-the-badge)
@@ -67,7 +67,13 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 
 > 📝 What's new in each version: see the [Releases](../../releases) page.
 
-### 🆕 New in 1.28.0 — Delete scripts from My scripts
+### 🆕 New in 1.28.1 — Legend titles and Notifications page
+
+- 🏷️ Indicator titles in the legend are shown in full even when inputs and values are hidden.
+- 🔔 Notifications page redesigned: two rows with the app's switches, for all notifications and for alert notifications.
+- ✨ Golden bell when notifications are on; clear note when iPhone blocks them.
+
+### Previously in 1.28.0 — Delete scripts from My scripts
 
 - 🗑️ Press and hold a script in My scripts (also in Favorites and search) to delete it, with a confirmation first.
 - 🛡️ Two deliberate steps: nothing is deleted by an accidental tap; a script already on the chart stays there until you remove it.
@@ -79,11 +85,14 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - ⏩ Lines shifted forward (offset) now continue past the last candle, as on TradingView: for example the Ichimoku cloud 26 candles ahead.
 - 🎨 Fills between shifted lines follow the lines; the view stays on the latest real candle.
 
-### Previously in 1.26.0 — Rounding half up
+<details>
+<summary>Previously in 1.26.0 — Rounding half up</summary>
 
 - 🔢 Numbers exactly halfway are rounded up (3971.165 → 3971.17) in math.round, str.tostring, math.round_to_mintick and in the prices shown on the chart.
 - 🧮 No more errors caused by how computers store decimals (3971.16499…).
 - ✅ Same results as before on all test scripts and on the independent calculation check.
+
+</details>
 
 <details>
 <summary>Previously in 1.25.0 — Pine functions with several forms</summary>
@@ -100,15 +109,6 @@ It's built for traders who want **clean charts, live prices, indicators and draw
 - 🌈 Gradient fills (top and bottom value and colour) are drawn like on TradingView, with top and bottom colours in Style; the RSI uses them for overbought and oversold.
 - 🧓 Older Pine v3/v4 scripts: transp transparency, default background and fill transparency, and the when condition of strategy orders are now applied.
 - 🧩 line.new, box.new and label.new with chart.point, alternative official parameter names, and automatic notice of unsupported parameters.
-
-</details>
-
-<details>
-<summary>Previously in 1.23.0 — Fills, backgrounds and lower panes</summary>
-
-- 🎨 Style now lists every fill and background colour of a script: show/hide and, when the script uses several colours, each one can be changed with its own opacity.
-- 📉 Indicators in the panes below the chart now draw signals, fills, backgrounds, boxes, labels and lines too (for example the RSI band between 30 and 70).
-- 🔒 Fills and backgrounds marked as not editable in the script stay hidden from Style, as on TradingView.
 
 </details>
 

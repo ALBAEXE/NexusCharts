@@ -1,4 +1,4 @@
-const VERSION='1.28.0';
+const VERSION='1.28.1';
 /* tema salvato sul telefono: scuro (predefinito) o bianco */
 try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 
@@ -14257,7 +14257,7 @@ function cusSrcOpts(self){
     });
   };
   /* legenda: valori dei plot (all'ultima candela o sotto il dito) e input, ognuno si può spegnere */
-  const st=document.createElement('style');st.textContent='.lgr .lgn{flex-shrink:0;max-width:55%}.lgr .lgp{flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.lgr .lgv{margin-left:6px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}.lgr .lgv i{font-style:normal;margin-right:5px}';document.head.appendChild(st);
+  const st=document.createElement('style');st.textContent='.lgr .lgn{flex-shrink:0;max-width:min(62vw,300px)}.lgr .lgp{flex-shrink:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.lgr .lgv{margin-left:6px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}.lgr .lgv i{font-style:normal;margin-right:5px}';document.head.appendChild(st);
   let hov=null;
   const valAt=(r,p,idx)=>{const j=idx-(p.off||0);const v=j>=0&&j<p.vals.length?p.vals[j]:NaN;return v};
   const fill=()=>{document.querySelectorAll('.lgr[data-uid]').forEach(row=>{const ind=IND.find(x=>x.uid===row.dataset.uid);if(!ind)return;const SO=ind.style||{};
@@ -14635,4 +14635,53 @@ function scdt(k,n){const L=SCD_T[lang]||SCD_T.it;const s=L[k]!=null?L[k]:SCD_T.i
   /* sotto la lista «I miei script» un piccolo suggerimento su come eliminare */
   const oList=iList;
   iList=function(b,list,empty){oList(b,list,empty);if(list.length&&list.every(x=>x.cat==='mine')){const n=shEl(b,'inote',scdt('hint'));n.classList.add('scdhint')}};
+})();
+/* =====================================================================
+   1.28.1: pagina Notifiche nel Design 3.0: due righe a pillola con lo stesso interruttore dorato
+   di Impostazioni grafico (notifiche del dispositivo e notifiche degli alert), campanella dorata.
+   ===================================================================== */
+var NT3_T={
+ it:{sec:'Su questo dispositivo',dev:'Notifiche',devsub:'Tutte le notifiche dell’app, su questo dispositivo',wait:'Un attimo…'},
+ en:{sec:'On this device',dev:'Notifications',devsub:'All the app’s notifications, on this device',wait:'One moment…'},
+ es:{sec:'En este dispositivo',dev:'Notificaciones',devsub:'Todas las notificaciones de la app, en este dispositivo',wait:'Un momento…'},
+ fr:{sec:'Sur cet appareil',dev:'Notifications',devsub:'Toutes les notifications de l’app, sur cet appareil',wait:'Un instant…'},
+ de:{sec:'Auf diesem Gerät',dev:'Mitteilungen',devsub:'Alle Mitteilungen der App auf diesem Gerät',wait:'Einen Moment…'}
+};
+function nt3(k){const L=NT3_T[lang]||NT3_T.it;return L[k]!=null?L[k]:NT3_T.it[k]}
+(function(){
+  const st=document.createElement('style');
+  st.textContent='.ntcard.nt3.on i{background:color-mix(in srgb,var(--gold) 16%,transparent);color:var(--gold)}'+
+    '.nt3w{padding-bottom:12px}.nt3w .swrow{display:flex;align-items:center;gap:12px}.nt3w .swrow .nt3t{flex:1;min-width:0}'+
+    '.nt3w .swrow .nt3t b{display:block;font-weight:500;font-size:16px;color:var(--fg)}.nt3w .swrow .nt3t small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.35}'+
+    '.nt3w .swrow{padding-top:12px;padding-bottom:12px;border-radius:28px}.nt3w .swrow.dis{opacity:.55}.nt3w .swrow input[switch]:disabled{cursor:default}'+
+    '.nt3w .pfnote{margin:8px 18px}';
+  document.head.appendChild(st);
+  const row=(wrap,title,sub,on,dis,fn)=>{
+    const r=document.createElement('label');r.className='swrow'+(dis?' dis':'');
+    r.innerHTML='<span class="nt3t"><b></b><small></small></span>';r.querySelector('b').textContent=title;r.querySelector('small').textContent=sub;
+    const i=document.createElement('input');i.type='checkbox';i.setAttribute('switch','');i.checked=!!on;i.disabled=!!dis;i.onchange=()=>fn(i.checked,i,r);
+    r.appendChild(i);wrap.appendChild(r);return r;
+  };
+  renderNotif=function(p){
+    pfSub(p,nt('n'));
+    const card=document.createElement('div');card.className='ntcard nt3';
+    card.innerHTML='<i>'+PIC.bell+'</i><b>…</b><span></span>';card.children[2].textContent=nt('why');p.appendChild(card);
+    const wrap=document.createElement('div');wrap.className='nt3w';p.appendChild(wrap);
+    pushState().then(stt=>{
+      const on=stt==='on';
+      card.classList.toggle('on',on);card.children[1].textContent=on?nt('on'):nt('off');
+      wrap.innerHTML='';
+      shEl(wrap,'sh-l',nt3('sec'));
+      if(stt==='old'||stt==='home'||stt==='denied'){shEl(wrap,'pfnote',nt(stt));return}
+      row(wrap,nt3('dev'),nt3('devsub'),on,false,async(v,i,r)=>{
+        i.disabled=true;r.querySelector('small').textContent=nt3('wait');
+        try{if(v)await pushEnable();else await pushDisable()}catch(e){}
+        try{haptic()}catch(e){}
+        PF.keep=true;renderProfile();
+      });
+      row(wrap,alt('alpush'),on?alt('alpushsub'):alt('alneed'),on&&alPushOn(),!on,v=>{
+        try{localStorage.setItem('tc_alpush',v?'1':'0')}catch(e){}try{haptic()}catch(e){}alSync(0);
+      });
+    }).catch(()=>{});
+  };
 })();

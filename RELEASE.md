@@ -1,10 +1,10 @@
-# v1.28.0 — Delete scripts from My scripts
-### Added
-- Indicators › My scripts: press and hold a script to open a menu with Delete, followed by a confirmation. Also available in Favorites and in search results.
-- A short hint under the list explains how to delete a script.
+# v1.28.1 — Legend titles and Notifications page
+### Fixed
+- Indicator titles in the chart legend are no longer shortened (for example "W..") when inputs and values are hidden; only very long titles are shortened to fit the screen.
 
 ### Changed
-- A deleted script is also removed from Favorites; if it is open in the Script editor, the editor switches to the next script. A copy already on the chart stays until it is removed.
+- Profile › Notifications: the enable/disable button and the alert switch are replaced by two rows with the app's switches (all notifications, alert notifications); the alert row is disabled while notifications are off.
+- The bell uses the app's gold colour when notifications are on.
 
 ### Documentation
-- README updated in 5 languages: new in 1.28.0.
+- README updated in 5 languages: new in 1.28.1.
